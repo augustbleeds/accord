@@ -1,0 +1,380 @@
+[debug] [2017-07-14T19:15:47.589Z] ----------------------------------------------------------------------
+[debug] [2017-07-14T19:15:47.592Z] Command:      /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2017-07-14T19:15:47.592Z] CLI Version:  3.9.1
+[debug] [2017-07-14T19:15:47.592Z] Platform:     darwin
+[debug] [2017-07-14T19:15:47.592Z] Node Version: v6.11.0
+[debug] [2017-07-14T19:15:47.595Z] Time:         Fri Jul 14 2017 12:15:47 GMT-0700 (PDT)
+[debug] [2017-07-14T19:15:47.595Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-07-14T19:15:47.613Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2017-07-14T19:15:47.613Z] > authorizing via signed-in user
+[debug] [2017-07-14T19:15:47.615Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/accord-18bdf  
+ Fri Jul 14 2017 12:15:47 GMT-0700 (PDT)
+[debug] [2017-07-14T19:15:48.066Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:15:48.067Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/accord-18bdf/tokens  
+ Fri Jul 14 2017 12:15:48 GMT-0700 (PDT)
+[debug] [2017-07-14T19:15:48.629Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'accord-18bdf'...
+[info] 
+[info] i  deploying database, functions
+[info] ✔  database: rules ready to deploy.
+[debug] [2017-07-14T19:15:49.123Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "dependencies": {
+    "firebase-admin": "~4.2.1",
+    "firebase-functions": "^0.5.7"
+  },
+  "private": true
+}
+[info] i  functions: ensuring necessary APIs are enabled...
+[info] i  runtimeconfig: ensuring necessary APIs are enabled...
+[debug] [2017-07-14T19:15:49.125Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/cloudfunctions.googleapis.com/projectSettings/accord-18bdf?view=CONSUMER_VIEW  
+ Fri Jul 14 2017 12:15:49 GMT-0700 (PDT)
+[debug] [2017-07-14T19:15:49.125Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/runtimeconfig.googleapis.com/projectSettings/accord-18bdf?view=CONSUMER_VIEW  
+ Fri Jul 14 2017 12:15:49 GMT-0700 (PDT)
+[debug] [2017-07-14T19:15:49.747Z] <<< HTTP RESPONSE 200
+[info] ✔  runtimeconfig: all necessary APIs are enabled
+[debug] [2017-07-14T19:15:49.777Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: all necessary APIs are enabled
+[debug] [2017-07-14T19:15:49.778Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/accord-18bdf  
+ Fri Jul 14 2017 12:15:49 GMT-0700 (PDT)
+[debug] [2017-07-14T19:15:49.778Z] >>> HTTP REQUEST GET https://apikeys.googleapis.com/v1/projects/accord-18bdf/apiKeys  
+ Fri Jul 14 2017 12:15:49 GMT-0700 (PDT)
+[debug] [2017-07-14T19:15:50.145Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:15:50.567Z] <<< HTTP RESPONSE 200
+[info] i  functions: preparing functions directory for uploading...
+[debug] [2017-07-14T19:15:53.516Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/accord-18bdf/configs  
+ Fri Jul 14 2017 12:15:53 GMT-0700 (PDT)
+[debug] [2017-07-14T19:15:53.670Z] <<< HTTP RESPONSE 200
+[info] i  functions: packaged functions (2.93 KB) for uploading
+[debug] [2017-07-14T19:15:56.679Z] >>> HTTP REQUEST GET https://www.googleapis.com/storage/v1/b/staging.accord-18bdf.appspot.com  
+ Fri Jul 14 2017 12:15:56 GMT-0700 (PDT)
+[debug] [2017-07-14T19:15:56.842Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:15:56.844Z] >>> HTTP REQUEST POST https://www.googleapis.com/upload/storage/v1/b/staging.accord-18bdf.appspot.com/o?uploadType=media&name=firebase-functions-source ReadStream {
+  _readableState: 
+   ReadableState {
+     objectMode: false,
+     highWaterMark: 65536,
+     buffer: BufferList { head: [Object], tail: [Object], length: 1 },
+     length: 3002,
+     pipes: null,
+     pipesCount: 0,
+     flowing: null,
+     ended: true,
+     endEmitted: false,
+     reading: false,
+     sync: false,
+     needReadable: false,
+     emittedReadable: true,
+     readableListening: false,
+     resumeScheduled: false,
+     defaultEncoding: 'utf8',
+     ranOut: false,
+     awaitDrain: 0,
+     readingMore: false,
+     decoder: null,
+     encoding: null },
+  readable: true,
+  domain: null,
+  _events: { end: [Function] },
+  _eventsCount: 1,
+  _maxListeners: undefined,
+  path: '/var/folders/9_/yb773fhn0xn8c019rxlq4tsc0000gn/T/firebase-functions-6310TyV7g427n8br.zip',
+  fd: 18,
+  flags: 'r',
+  mode: 438,
+  start: undefined,
+  end: undefined,
+  autoClose: true,
+  pos: undefined,
+  bytesRead: 3002 } 
+ Fri Jul 14 2017 12:15:56 GMT-0700 (PDT)
+[debug] [2017-07-14T19:15:57.189Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: functions folder uploaded successfully
+[info] i  starting release process (may take several minutes)...
+[debug] [2017-07-14T19:15:57.198Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/projects/accord-18bdf/locations/us-central1/functions  
+ Fri Jul 14 2017 12:15:57 GMT-0700 (PDT)
+[debug] [2017-07-14T19:15:57.577Z] <<< HTTP RESPONSE 200
+[info] i  functions: updating function route...
+[debug] [2017-07-14T19:15:57.585Z] Trigger is: 
+[debug] [2017-07-14T19:15:57.587Z] >>> HTTP REQUEST PUT https://cloudfunctions.googleapis.com/v1beta2/projects/accord-18bdf/locations/us-central1/functions/route { sourceArchiveUrl: 'gs://staging.accord-18bdf.appspot.com/firebase-functions-source',
+  name: 'projects/accord-18bdf/locations/us-central1/functions/route',
+  entryPoint: 'route',
+  timeout: '60s',
+  availableMemoryMb: 256,
+  httpsTrigger: {} } 
+ Fri Jul 14 2017 12:15:57 GMT-0700 (PDT)
+[debug] [2017-07-14T19:15:58.027Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:15:58.031Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/projects/accord-18bdf/locations/us-central1/functions  
+ Fri Jul 14 2017 12:15:58 GMT-0700 (PDT)
+[debug] [2017-07-14T19:15:58.032Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:15:58 GMT-0700 (PDT)
+[debug] [2017-07-14T19:15:58.254Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:15:58.387Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:15:58.388Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:16:03.390Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:16:03 GMT-0700 (PDT)
+[debug] [2017-07-14T19:16:03.740Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:16:03.740Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:16:08.744Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:16:08 GMT-0700 (PDT)
+[debug] [2017-07-14T19:16:09.062Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:16:09.063Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:16:14.065Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:16:14 GMT-0700 (PDT)
+[debug] [2017-07-14T19:16:14.602Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:16:14.602Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:16:19.605Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:16:19 GMT-0700 (PDT)
+[debug] [2017-07-14T19:16:19.969Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:16:19.969Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:16:24.974Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:16:24 GMT-0700 (PDT)
+[debug] [2017-07-14T19:16:25.617Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:16:25.632Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:16:30.686Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:16:30 GMT-0700 (PDT)
+[debug] [2017-07-14T19:16:31.105Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:16:31.108Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:16:36.114Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:16:36 GMT-0700 (PDT)
+[debug] [2017-07-14T19:16:36.537Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:16:36.537Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:16:41.543Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:16:41 GMT-0700 (PDT)
+[debug] [2017-07-14T19:16:41.926Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:16:41.931Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:16:46.945Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:16:46 GMT-0700 (PDT)
+[debug] [2017-07-14T19:16:47.279Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:16:47.280Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:16:52.282Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:16:52 GMT-0700 (PDT)
+[debug] [2017-07-14T19:16:52.733Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:16:52.734Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:16:57.737Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:16:57 GMT-0700 (PDT)
+[debug] [2017-07-14T19:16:58.090Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:16:58.090Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:17:03.099Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:17:03 GMT-0700 (PDT)
+[debug] [2017-07-14T19:17:03.486Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:17:03.487Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:17:08.490Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:17:08 GMT-0700 (PDT)
+[debug] [2017-07-14T19:17:08.815Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:17:08.815Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:17:13.819Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:17:13 GMT-0700 (PDT)
+[debug] [2017-07-14T19:17:14.155Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:17:14.155Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:17:19.158Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:17:19 GMT-0700 (PDT)
+[debug] [2017-07-14T19:17:19.465Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:17:19.465Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:17:24.471Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:17:24 GMT-0700 (PDT)
+[debug] [2017-07-14T19:17:24.777Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:17:24.778Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:17:29.780Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:17:29 GMT-0700 (PDT)
+[debug] [2017-07-14T19:17:30.101Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:17:30.101Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:17:35.108Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:17:35 GMT-0700 (PDT)
+[debug] [2017-07-14T19:17:35.445Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:17:35.445Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:17:40.448Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:17:40 GMT-0700 (PDT)
+[debug] [2017-07-14T19:17:40.877Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:17:40.877Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:17:45.881Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:17:45 GMT-0700 (PDT)
+[debug] [2017-07-14T19:17:46.205Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:17:46.205Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:17:51.210Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:17:51 GMT-0700 (PDT)
+[debug] [2017-07-14T19:17:51.351Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:17:51.351Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:17:56.354Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:17:56 GMT-0700 (PDT)
+[debug] [2017-07-14T19:17:56.674Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:17:56.676Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:18:01.680Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:18:01 GMT-0700 (PDT)
+[debug] [2017-07-14T19:18:02.022Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:18:02.023Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:18:07.026Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:18:07 GMT-0700 (PDT)
+[debug] [2017-07-14T19:18:07.189Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:18:07.189Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:18:12.190Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:18:12 GMT-0700 (PDT)
+[debug] [2017-07-14T19:18:12.630Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:18:12.631Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:18:17.636Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:18:17 GMT-0700 (PDT)
+[debug] [2017-07-14T19:18:17.956Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:18:17.957Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:18:22.960Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:18:22 GMT-0700 (PDT)
+[debug] [2017-07-14T19:18:23.300Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:18:23.301Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:18:28.306Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:18:28 GMT-0700 (PDT)
+[debug] [2017-07-14T19:18:28.734Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:18:28.734Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:18:33.740Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:18:33 GMT-0700 (PDT)
+[debug] [2017-07-14T19:18:34.041Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:18:34.041Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:18:39.046Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:18:39 GMT-0700 (PDT)
+[debug] [2017-07-14T19:18:39.290Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:18:39.291Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:18:44.294Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:18:44 GMT-0700 (PDT)
+[debug] [2017-07-14T19:18:44.696Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:18:44.696Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:18:49.698Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:18:49 GMT-0700 (PDT)
+[debug] [2017-07-14T19:18:50.026Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:18:50.027Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:18:55.032Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:18:55 GMT-0700 (PDT)
+[debug] [2017-07-14T19:18:55.455Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:18:55.455Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:19:00.461Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:19:00 GMT-0700 (PDT)
+[debug] [2017-07-14T19:19:00.884Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:19:00.885Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:19:05.890Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:19:05 GMT-0700 (PDT)
+[debug] [2017-07-14T19:19:06.238Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:19:06.238Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:19:11.241Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:19:11 GMT-0700 (PDT)
+[debug] [2017-07-14T19:19:11.382Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:19:11.382Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:19:16.386Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:19:16 GMT-0700 (PDT)
+[debug] [2017-07-14T19:19:16.765Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:19:16.766Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:19:21.769Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:19:21 GMT-0700 (PDT)
+[debug] [2017-07-14T19:19:22.194Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:19:22.195Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:19:27.199Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:19:27 GMT-0700 (PDT)
+[debug] [2017-07-14T19:19:27.520Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:19:27.520Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:19:32.523Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:19:32 GMT-0700 (PDT)
+[debug] [2017-07-14T19:19:32.874Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:19:32.875Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:19:37.881Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:19:37 GMT-0700 (PDT)
+[debug] [2017-07-14T19:19:38.282Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:19:38.283Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:19:43.298Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:19:43 GMT-0700 (PDT)
+[debug] [2017-07-14T19:19:43.603Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:19:43.603Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:19:48.605Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:19:48 GMT-0700 (PDT)
+[debug] [2017-07-14T19:19:48.932Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:19:48.932Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:19:53.938Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:19:53 GMT-0700 (PDT)
+[debug] [2017-07-14T19:19:54.363Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:19:54.363Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:19:59.366Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:19:59 GMT-0700 (PDT)
+[debug] [2017-07-14T19:19:59.793Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:19:59.793Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:20:04.794Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:20:04 GMT-0700 (PDT)
+[debug] [2017-07-14T19:20:05.225Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:20:05.225Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:20:10.230Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:20:10 GMT-0700 (PDT)
+[debug] [2017-07-14T19:20:10.382Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:20:10.382Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:20:15.383Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:20:15 GMT-0700 (PDT)
+[debug] [2017-07-14T19:20:15.774Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:20:15.774Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:20:20.779Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:20:20 GMT-0700 (PDT)
+[debug] [2017-07-14T19:20:21.205Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:20:21.206Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:20:26.210Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:20:26 GMT-0700 (PDT)
+[debug] [2017-07-14T19:20:26.535Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:20:26.535Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:20:31.539Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:20:31 GMT-0700 (PDT)
+[debug] [2017-07-14T19:20:31.858Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:20:31.858Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:20:36.862Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:20:36 GMT-0700 (PDT)
+[debug] [2017-07-14T19:20:37.186Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:20:37.186Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:20:42.192Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:20:42 GMT-0700 (PDT)
+[debug] [2017-07-14T19:20:42.616Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:20:42.618Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:20:47.627Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:20:47 GMT-0700 (PDT)
+[debug] [2017-07-14T19:20:48.172Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:20:48.173Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:20:53.175Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:20:53 GMT-0700 (PDT)
+[debug] [2017-07-14T19:20:53.583Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:20:53.584Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:20:58.585Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:20:58 GMT-0700 (PDT)
+[debug] [2017-07-14T19:20:58.906Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:20:58.906Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:21:03.907Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:21:03 GMT-0700 (PDT)
+[debug] [2017-07-14T19:21:04.246Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:21:04.247Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:21:09.249Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:21:09 GMT-0700 (PDT)
+[debug] [2017-07-14T19:21:09.555Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:21:09.556Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:21:14.560Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:21:14 GMT-0700 (PDT)
+[debug] [2017-07-14T19:21:15.101Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:21:15.101Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:21:20.105Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:21:20 GMT-0700 (PDT)
+[debug] [2017-07-14T19:21:20.427Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:21:20.427Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:21:25.429Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:21:25 GMT-0700 (PDT)
+[debug] [2017-07-14T19:21:25.779Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:21:25.780Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:21:30.783Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:21:30 GMT-0700 (PDT)
+[debug] [2017-07-14T19:21:31.185Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:21:31.185Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:21:36.189Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:21:36 GMT-0700 (PDT)
+[debug] [2017-07-14T19:21:36.512Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:21:36.512Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:21:41.516Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:21:41 GMT-0700 (PDT)
+[debug] [2017-07-14T19:21:41.867Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:21:41.869Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:21:46.874Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:21:46 GMT-0700 (PDT)
+[debug] [2017-07-14T19:21:47.203Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:21:47.204Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
+[debug] [2017-07-14T19:21:52.210Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w  
+ Fri Jul 14 2017 12:21:52 GMT-0700 (PDT)
+[debug] [2017-07-14T19:21:52.785Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-14T19:21:52.785Z] [functions] operation poll: route: update operations/YWNjb3JkLTE4YmRmL3VzLWNlbnRyYWwxL3JvdXRlLzkyX3hPREJZVl8w is not done.
