@@ -3,24 +3,36 @@ import { View, Text, StyleSheet, ListView, Image, Picker } from 'react-native';
 import { Button } from 'react-native-elements';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import ModalDropdown from 'react-native-modal-dropdown';
-const CATEGORY = ['Family', 'Relationship', 'School', 'Depression', 'Anxiety']
+// const CATEGORY = ['Family', 'Relationship', 'School', 'Depression', 'Anxiety']
 
 
 export default class MatchScreen extends Component {
+  constructor(props){
+    super(props);
+
+    this.state = ({
+      language: ''
+    });
+
+  }
   render(){
     return (
       <View style={[styles.page, styles.container]}>
         <View style={styles.container}>
           <Text style={styles.mainText}>
             MATCHING
+            {this.state.language}
           </Text>
-          <View style={styles.container}>
-      
-          </View>
+            <Picker
+              selectedValue={this.state.language}
+              onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
+              <Picker.Item label="Java" value="java" />
+              <Picker.Item label="JavaScript" value="js" />
+            </Picker>
           <Button
             buttonStyle={styles.buttonStyle}
             raised
-            title="Start Finding"
+            title={this.state.language}
             onPress={ () => this.props.navigation.navigate('ChatScreen')}
             >
           </Button>
@@ -32,15 +44,6 @@ export default class MatchScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-  dropdown_3_dropdownTextStyle: {
-    backgroundColor: '#000000',
-    color: '#fff'
-  },
-  dropdown_3_dropdownTextHighlightStyle: {
-    backgroundColor: '#000000',
-    color: '#fff'
-  },
-
   page: {
     flex: 1,
     alignItems: 'center',
