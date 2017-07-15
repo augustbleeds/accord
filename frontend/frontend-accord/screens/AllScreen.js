@@ -8,6 +8,7 @@ import FriendsScreen from './FriendsScreen';
 import HomeScreen from './HomeScreen';
 import MatchScreen from './MatchScreen';
 import FriendsProfileBio from '../components/FriendsProfileBio';
+import ChatScreen from './ChatScreen'
 type Route = {
   key: string,
   icon: string,
@@ -24,7 +25,9 @@ export default class AllScreen extends PureComponent<void, *, State> {
     routes: [
       { key: '1', icon: 'ios-home', title: 'HOME' },
       { key: '2', icon: 'ios-people', title: 'PROFILES'  },
-      { key: '3', icon: 'md-search', title: 'MATCHING'  },
+      { key: '3', icon: 'md-search', title: 'MATCH'  },
+      { key: '4', icon: 'ios-chatbubbles', title: 'CHAT'  },
+
     ],
   };
 
@@ -69,6 +72,14 @@ export default class AllScreen extends PureComponent<void, *, State> {
       case '3':
         return (
           <MatchScreen
+            signedIn={this.props.navigation.state.params.user}
+            state={this.state}
+            style={{ backgroundColor: '#000000' }}
+          />
+        );
+      case '4':
+        return (
+          <ChatScreen
             signedIn={this.props.navigation.state.params.user}
             state={this.state}
             style={{ backgroundColor: '#000000' }}
