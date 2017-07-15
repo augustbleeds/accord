@@ -36,6 +36,7 @@ app.post('/register', (req, res) => {
   // create object for reference
   const newObj = {
     nickname: req.body.name,
+    password: req.body.password,
     gender: req.body.gender,
     email: req.body.email,
     school: req.body.school,
