@@ -5,13 +5,15 @@ var serviceAccount = require("./config.json");
 
 const quokkaURL = 'http://www.traveller.com.au/content/dam/images/g/u/n/q/h/0/image.related.articleLeadwide.620x349.gunpvd.png/1488330286332.png';
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://accord-18bdf.firebaseio.com"
-});
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount),
+//   databaseURL: "https://accord-18bdf.firebaseio.com"
+// });
+
+admin.initializeApp(functions.config().firebase);
 
 const dbRootRef = admin.database().ref();
-
+//const database = fire.database();
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
 //
@@ -22,7 +24,9 @@ const dbRootRef = admin.database().ref();
 
 //User logging in
 app.post('/login', (req, res) => {
-  res.send('Hello');
+  // admin.auth().signInWithEmailAndPassword(req.body.email, req.body.password).catch((error) => {
+  //   res.json({error: error});
+  // });
 });
 
 //User registering information
@@ -60,6 +64,7 @@ app.post('/register', (req, res) => {
 });
 
 app.get('/logout', (req, res) => {
+  console.log('we did logout correctly');
   res.send('Hello3');
 });
 
@@ -122,10 +127,10 @@ app.get('/user/profile/:id', (req, res) => {
 
 //Adds user to database
 app.post('/user/match/:category/:id', (req, res) => {
-  var category = 'Family';
-  var myId = '-Kp25oaf2W35ZAjU7ebZ';
-  // var category = req.params.category;
-  // var myId = req.params.id;
+  // var category = 'Family';
+  // var myId = '-Kp26_r2wh1z3JUytJyb';
+  var category = req.params.category;
+  var myId = req.params.id;
   if (!dbRootRef.child(`/Topic/${category}/${myId}`)) {
     res.json({success: true});
   }
@@ -138,20 +143,46 @@ app.post('/user/match/:category/:id', (req, res) => {
 });
 
 
-// exports.register = function.https.onRequest((request, response) => {
-//   if (req.method === 'POST') {
-//     req.body
-//   }
-// });
-//
-// exports.login = function.https.onRequest((req, res) => {
-//
-// });
-//
-// exports.logout = function.https.onRequest((req, res) => {
-//
-// });
-//
-// exports.user
+exports.matchUsers = functions.database
+  // listen for new users in ANY topic
+  .ref('/Topic/{changedTopic}/{newUser}')
+  .onCreate((event) => {
+    // get all of the children of the topic in question
+    const myTopic = event.params.changedTopic;
+    dbRootRef.child(`/Topic/${myTopic}`).once('value')
+      .then((topicSnap) => {
+        // get all the users {'asdfsadf': true, 'adfasdf', true}
+        const usersObj = topicSnap.val();
+        const keysArr = Object.keys(usersObj);
+        // return if no matches found!
+        if (keysArr.length < 2) {
+          return;
+        }
+        // theses are user ids
+        var firstKey = keysArr[0];
+        var secondKey = keysArr[1];
+        // put two users in the match database!
+        dbRootRef.child(`/Match/${firstKey}`).set(secondKey)
+          .then(() => {
+            console.log('got to the last part!');
+            // second save
+            return dbRootRef.child(`/Match/${secondKey}`).set(firstKey);
+          })
+          .then(() => {
+            // delete
+            var updates = {};
+            updates[`/Topic/${myTopic}/${firstKey}`] = null;
+            updates[`/Topic/${myTopic}/${secondKey}`] = null;
+            return dbRootRef.update(updates);
+          })
+          .then(() => console.log(`Two users with id ${firstKey} and ${secondKey} were matched! :) `))
+          .catch((err) => console.log(err))
+      })
+  });
+  // .ref('/Topic/{changedTopic}/debbie')
+  // .onCreate((event) => {
+  //   console.log('we made it');
+  //   console.log(event.data.val());
+  // });
 
 exports.route = functions.https.onRequest(app);
