@@ -1,16 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
-import { TabNavigator, StackNavigator } from 'react-navigation';
+import {DrawerNavigator } from 'react-navigation';
 
 import AuthScreen from './screens/AuthScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
 import LoginScreen from './screens/LoginScreen';
 import AllScreen from './screens/AllScreen';
-
-// import MapScreen from './screens/MapScreen';
-// import DeckScreen from './screens/DeckScreen';
-// import ReviewScreen from './screens/ReviewScreen';
-// import SettingsScreen from './screens/SettingsScreen';
+import ChatScreen from './screens/ChatScreen';
+import FriendsScreen from './screens/FriendsScreen';
+import HomeScreen from './screens/HomeScreen';
 
 const screen={
     width: Dimensions.get('window').width,
@@ -21,30 +19,19 @@ const screen={
 export default class App extends React.Component {
 
   render() {
-    const MainNavigator = TabNavigator({
+    const MainNavigator = DrawerNavigator({
       Welcome: { screen: WelcomeScreen },
       Auth: { screen: AuthScreen },
       Login: { screen: LoginScreen },
       AllScreen: {screen: AllScreen},
+      ChatScreen: {screen: ChatScreen}
     }, {
   tabBarOptions: {
     showLabel: false,
     inactiveBackgroundColor: '#000000',
-    activeBackgroundColor: '#000000'
+    activeBackgroundColor: '#000000',
+    showLabel: false
   },
-
-      // main: {
-      //   screen: TabNavigator({
-      //     map: { screen: MapScreen},
-      //     deck: { screen: DeckScreen},
-      //     review: {
-      //       screen: StackNavigator({
-      //         review: { screen: ReviewScreen},
-      //         settings: { screen: SettingsScreen}
-      //       })
-      //     }
-      //   })
-      // }
     });
 
     return (

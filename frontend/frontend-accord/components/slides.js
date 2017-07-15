@@ -8,9 +8,14 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 class slideStyles extends Component {
 
+  doneBtnHandle = () => {
+
+  }
     render() {
       return (
-        <AppIntro style={{showDoneButton: false ,showSkipButton: false}}>
+        <AppIntro style={{showDoneButton: false ,showSkipButton: false}}
+          onDoneBtnClick={this.doneBtnHandle}
+          >
         <View style={[styles.slide,{ backgroundColor: '#000000' }]}>
           <Image style={{width:400 , heigth: 70, bottom: 65, alignSelf: 'auto'}} source={require('../assets/icons/icon2.png')} />
           <View level={10}><Text style={styles.Maintext}>Welcome To Accord</Text></View>

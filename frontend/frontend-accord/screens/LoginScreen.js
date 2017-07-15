@@ -15,13 +15,35 @@ class LoginScreen extends Component {
   constructor(props){
     super(props);
     this.state = {
-      username: '',
+      email: '',
       password: '',
-      email: ''
     }
   }
   onRegisterComplete = () => {
     this.props.navigation.navigate('Welcome');
+  }
+
+  loginSubmit() {
+    fetch('https://us-central1-accord-18bdf.cloudfunctions.net/route/login', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        email: this.state.email,
+        password: this.state.password
+      })
+    })
+    .then((response) => response.json())
+    .then((responseJson) => {
+      if(responseJson !== null) {
+        this.props.navigation.navigate('AllScreen')
+        console.log(responseJson);
+      }
+    })
+    .catch((err) => {
+      console.log('error', err)
+    });
   }
 
   render() {
@@ -31,7 +53,7 @@ class LoginScreen extends Component {
         <Text style={styles.textBig}>Login</Text>
           <TextInput
             style={{height: 40, paddingTop: 10, textAlign: "center", color: '#fff', fontFamily: 'HelveticaNeue',}}
-            placeholder="Email Address"
+            placeholder="Enter Email"
             placeholderTextColor="#808080"
             onChangeText={(text) => this.setState({email: text})}
           />
@@ -44,7 +66,7 @@ class LoginScreen extends Component {
           />
             <Button
               buttonStyle={styles.buttonStyle}
-              onPress={ () =>   this.props.navigation.navigate('AllScreen')}
+              onPress={ () => this.loginSubmit()}
               title="Log In"
             />
 

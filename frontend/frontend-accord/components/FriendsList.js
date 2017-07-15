@@ -18,32 +18,44 @@ export default class FriendsList extends Component {
   _root: Object;
 
   _onPressProfile = () => {
-    // alert('hi');
-    <FriendsProfileBio />
+    alert('HELLO')
+    return(
 
+      <Text>
+        HIHIHIHI
+      </Text>
+    )
   }
-
   _genRows = () => {
     const data = this.state.data.slice(0);
-    const itemsLength = data.length;
+    fetch('https://us-central1-accord-18bdf.cloudfunctions.net/route/user/friends/test@test')
+    .then((response) => response.json())
+    .then((responseJson) => {
+        console.log(responseJson);
+        //alert(responseJson);
+        console.log("DS" , data);
+        for (var i = 0; i < (Object.keys(responseJson)).length; i++) {
+          data.push(Object.keys(responseJson)[i])
+        }
+        console.log("after" , data);
 
-    if (itemsLength >= 1000) {
-      return;
-    }
+        this.setState({
+          data,
+          dataSource: this.state.dataSource.cloneWithRows(data),
+      });
 
-    for (let i = 0; i < 100; i++) {
-      data.push(itemsLength + i);
-    }
 
-    this.setState({
-      data,
-      dataSource: this.state.dataSource.cloneWithRows(data),
-    });
+   })
+   .catch((err) => {
+     console.log('error', err)
+   });
+
+
   };
 
   _renderRow = index => { //render our data
     return (
-      <TouchableOpacity onPress={this._onPressProfile}>
+      <TouchableOpacity onPress={() => this._onPressProfile()}>
         <View style={styles.row}>
           <Text style={styles.text}>{index}</Text>
         </View>
@@ -62,9 +74,10 @@ export default class FriendsList extends Component {
         contentContainerStyle={styles.container}
         dataSource={this.state.dataSource}
         renderRow={this._renderRow}
-        onEndReached={this._genRows} //this will get us more data
+        // onEndReached={this._genRows} //this will get us more data
         ref={el => (this._root = el)}
       />
+
     );
   }
 }

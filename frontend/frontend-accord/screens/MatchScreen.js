@@ -1,38 +1,53 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ListView, Image } from 'react-native';
-import { Button } from 'react-native-elements'
-export default function MatchScreen ({ state, style }: *) {
-  return (
-    <View style={[styles.page, styles.container]}>
-      <View style={styles.container}>
-        <Text style={styles.mainText}>
-          MATCHING
-        </Text>
-        <Button
-          buttonStyle={styles.button}
-          raised
-          title="You Will Only Have 2 Matches Per Day"
-          >
-        </Button>
-        <Button
-          buttonStyle={styles.buttonStyle}
-          raised
-          title="Start Finding"
-          >
-        </Button>
+import { View, Text, StyleSheet, ListView, Image, Picker } from 'react-native';
+import { Button } from 'react-native-elements';
+import { TabNavigator, StackNavigator } from 'react-navigation';
+import ModalDropdown from 'react-native-modal-dropdown';
+const CATEGORY = ['Family', 'Relationship', 'School', 'Depression', 'Anxiety']
+
+
+export default class MatchScreen extends Component {
+  render(){
+    return (
+      <View style={[styles.page, styles.container]}>
+        <View style={styles.container}>
+          <Text style={styles.mainText}>
+            MATCHING
+          </Text>
+          <View style={styles.container}>
+      
+          </View>
+          <Button
+            buttonStyle={styles.buttonStyle}
+            raised
+            title="Start Finding"
+            onPress={ () => this.props.navigation.navigate('ChatScreen')}
+            >
+          </Button>
+        </View>
       </View>
-    </View>
-  );
+    );
+  }
+
 }
 
 const styles = StyleSheet.create({
+  dropdown_3_dropdownTextStyle: {
+    backgroundColor: '#000000',
+    color: '#fff'
+  },
+  dropdown_3_dropdownTextHighlightStyle: {
+    backgroundColor: '#000000',
+    color: '#fff'
+  },
+
   page: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
   container: {
-    backgroundColor:'#000000',
+    backgroundColor:'#fff',
     borderRadius: 3,
   },
 
