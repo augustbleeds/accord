@@ -15,6 +15,34 @@ export default class MatchScreen extends Component {
     });
 
   }
+
+  onMatchComplete() {
+    this.props.navigation.navigate('ChatScreen');
+  }
+  fetchMatch() {
+    console.log('asdfasdfasdf');
+    console.log(this.state.language);
+    console.log(this.props.signedIn);
+
+    fetch('https://us-central1-accord-18bdf.cloudfunctions.net/route/user/match/' + this.state.language + '/' + this.props.signedIn.split('.')[0], {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    .then((response) => response.json())
+    .then((responseJson) => {
+      console.log(responseJson)
+      if(responseJson.success === true) {
+        //this.props.addUser(this.props.email);
+        console.log('hihihi');
+
+      }
+    })
+    .catch((err) => {
+      console.log('error', err)
+    });
+  }
   render(){
     return (
       <View style={[styles.page, styles.container]}>
@@ -26,14 +54,17 @@ export default class MatchScreen extends Component {
             <Picker
               selectedValue={this.state.language}
               onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
-              <Picker.Item label="Java" value="java" />
-              <Picker.Item label="JavaScript" value="js" />
+              <Picker.Item label="Depression" value="Depression" />
+              <Picker.Item label="Anxiety" value="Anxiety" />
+              <Picker.Item label="Family Issues" value="Family Issues" />
+              <Picker.Item label="Relationship" value="Relationship" />
+              <Picker.Item label="School" value="School" />
             </Picker>
           <Button
             buttonStyle={styles.buttonStyle}
             raised
-            title={this.state.language}
-            onPress={ () => this.props.navigation.navigate('ChatScreen')}
+            title='Match!'
+            onPress={ () => this.fetchMatch()}
             >
           </Button>
         </View>

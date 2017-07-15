@@ -25,7 +25,7 @@ class LoginScreen extends Component {
   }
 
   loginSubmit() {
-    if (this.state.email) {
+    if (this.state.email && this.state.password) {
       fetch('https://us-central1-accord-18bdf.cloudfunctions.net/route/login', {
         method: 'POST',
         headers: {
