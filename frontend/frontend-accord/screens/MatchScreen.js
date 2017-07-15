@@ -3,9 +3,24 @@ import { Alert, View, Text, StyleSheet, ListView, Image, Picker } from 'react-na
 import { Button } from 'react-native-elements';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import ModalDropdown from 'react-native-modal-dropdown';
+import * as firebase from 'firebase';
 // const CATEGORY = ['Family', 'Relationship', 'School', 'Depression', 'Anxiety']
-
+var config = {
+   apiKey: "AIzaSyDkhtl4JKhb_1aHL3ookaq0iSRsXmW1Hcg",
+   authDomain: "accord-18bdf.firebaseapp.com",
+   databaseURL: "https://accord-18bdf.firebaseio.com",
+   projectId: "accord-18bdf",
+   storageBucket: "accord-18bdf.appspot.com",
+   messagingSenderId: "986125110855"
+ };
+firebase.initializeApp(config);
+var dbRootRef = firebase.database().ref();
 const backEnd = 'https://us-central1-accord-18bdf.cloudfunctions.net/route/user/match';
+
+// dbRootRef.child('Match/test')
+//   .on('child_added', data => {
+//     Alert.alert('the child was added');
+//   });
 
 export default class MatchScreen extends Component {
   constructor(props){
@@ -36,9 +51,24 @@ export default class MatchScreen extends Component {
     .then((responseJson) => {
       console.log(responseJson)
       if(responseJson.success === true) {
-        //this.props.addUser(this.props.email);
-        // console.log('hihihi');
         Alert.alert('You will be notified when there is a match! :)');
+        // listen for when this user is matched!
+        var listenPath = this.props.signedIn.split('.')[0];
+        console.log('listen is', listenPath);
+        firebase.database().ref(`/Match/${listenPath}`).on('value', (data) => {
+            if(!data.val()){
+              return;
+            }
+            console.log('hello dude');
+            // set up sendBird stuff
+            Alert.alert(`You are matched with ${data.val()}`);
+            this.setState({matchedUser: data.val()});
+            // remove it from the database
+            dbRootRef.child(`/Match/${listenPath}`).remove();
+            // detach listeners
+            dbRootRef.child(`/Match/${listenPath}`).off();
+          });
+        // dbRootRef.child(`/hello`).set(true);
       }
     })
     .catch((err) => {
