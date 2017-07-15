@@ -13,6 +13,11 @@ class WelcomeScreen extends Component {
   onSlidesComplete = () => {
     this.props.navigation.navigate('Auth');
   }
+
+  onLoginComplete = () => {
+    this.props.navigation.navigate('Login');
+
+  }
   // async componentWillMount() {
   //   let token = await AsyncStorage.getItem('fb_token');
   //
@@ -33,6 +38,7 @@ class WelcomeScreen extends Component {
       <Slides
         data={SLIDE_DATA}
         onSlidesComplete={this.onSlidesComplete}
+        onLoginComplete={this.onLoginComplete}
       />
     )
   }

@@ -11,7 +11,7 @@ import { TabNavigator, StackNavigator } from 'react-navigation';
 
 import { Button } from 'react-native-elements'
 
-class AuthScreen extends Component {
+class LoginScreen extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -27,18 +27,13 @@ class AuthScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.textBig}>Let's Get Started!</Text>
+        <Image style={{width:400 , heigth: 70, bottom: 65, alignSelf: 'auto'}} source={require('../assets/icons/icon2.png')} />
+        <Text style={styles.textBig}>Login</Text>
           <TextInput
             style={{height: 40, paddingTop: 10, textAlign: "center", color: '#fff', fontFamily: 'HelveticaNeue',}}
             placeholder="Email Address"
             placeholderTextColor="#808080"
             onChangeText={(text) => this.setState({email: text})}
-          />
-          <TextInput
-            style={{height: 40, paddingTop: 10, textAlign: "center", color: '#fff', fontFamily: 'HelveticaNeue',}}
-            placeholder="Accord username"
-            placeholderTextColor="#808080"
-            onChangeText={(text) => this.setState({username: text})}
           />
           <TextInput
             style={{height: 40, paddingTop: 10, textAlign: "center", color: '#fff', fontFamily: 'HelveticaNeue',}}
@@ -49,8 +44,8 @@ class AuthScreen extends Component {
           />
             <Button
               buttonStyle={styles.buttonStyle}
-              onPress={ () =>   this.props.navigation.navigate('Login')}
-              title="Sign Me Up!"
+              onPress={ () =>   this.props.navigation.navigate('AllScreen')}
+              title="Log In"
             />
 
       </View>
@@ -70,7 +65,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10,
     color: '#fff',
-    fontFamily: 'HelveticaNeue-BoldItalic',
+    fontFamily: 'HelveticaNeue',
 
   },
   buttonStyle: {
@@ -79,4 +74,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default AuthScreen;
+export default LoginScreen;

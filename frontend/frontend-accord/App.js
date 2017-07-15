@@ -4,6 +4,9 @@ import { TabNavigator, StackNavigator } from 'react-navigation';
 
 import AuthScreen from './screens/AuthScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
+import LoginScreen from './screens/LoginScreen';
+import AllScreen from './screens/AllScreen';
+
 // import MapScreen from './screens/MapScreen';
 // import DeckScreen from './screens/DeckScreen';
 // import ReviewScreen from './screens/ReviewScreen';
@@ -21,12 +24,15 @@ export default class App extends React.Component {
     const MainNavigator = TabNavigator({
       Welcome: { screen: WelcomeScreen },
       Auth: { screen: AuthScreen },
+      Login: { screen: LoginScreen },
+      AllScreen: {screen: AllScreen},
     }, {
   tabBarOptions: {
     showLabel: false,
     inactiveBackgroundColor: '#000000',
     activeBackgroundColor: '#000000'
   },
+
       // main: {
       //   screen: TabNavigator({
       //     map: { screen: MapScreen},

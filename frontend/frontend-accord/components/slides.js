@@ -12,27 +12,27 @@ class slideStyles extends Component {
       return (
         <AppIntro style={{showDoneButton: false ,showSkipButton: false}}>
         <View style={[styles.slide,{ backgroundColor: '#000000' }]}>
-          <Image style={{width:115 , heigth: 70, marginBottom: 15}} source={require('../assets/icons/logo1.png')} />
+          <Image style={{width:400 , heigth: 70, bottom: 65, alignSelf: 'auto'}} source={require('../assets/icons/icon2.png')} />
           <View level={10}><Text style={styles.Maintext}>Welcome To Accord</Text></View>
           <View level={15}><Text style={styles.secondText}>Swipe Right to Learn More</Text></View>
         </View>
         <View style={[styles.slide, { backgroundColor: '#000000' }]}>
-          <View level={-10}><Text style={styles.Maintext}>About Accord</Text></View>
+          <View level={-10}><Text style={styles.Maintext}>Account Protection</Text></View>
           <View level={5}><Text style={styles.secondText}>some description</Text></View>
         </View>
         <View style={[styles.slide,{ backgroundColor: '#000000' }]}>
           <View level={8}><Text style={styles.Maintext}>Start Now!</Text></View>
           <Button
-            title="Register!"
+            title="Sign Up!"
             raised
-            buttonStyle={styles.buttonStyle}
+            buttonStyle={styles.buttonSignUpStyle}
             onPress={this.props.onSlidesComplete}
           />
           <Button
             title="Log In!"
             raised
-            buttonStyle={styles.buttonStyle}
-            onPress={this.props.onSlidesComplete}
+            buttonStyle={styles.buttonLogInStyle}
+            onPress={this.props.onLoginComplete}
           />
         </View>
       </AppIntro>
@@ -49,21 +49,26 @@ class slideStyles extends Component {
       showDoneButton: false,
       showSkipButton: false
     },
+
     Maintext: {
       fontSize: 30,
+      fontFamily: 'HelveticaNeue-BoldItalic',
       color: '#fff',
-      fontWeight:'bold'
     },
 
     secondText: {
       fontSize: 15,
+      fontFamily: 'HelveticaNeue',
       color: '#fff'
     },
-
-    buttonStyle: {
-      backgroundColor: '#0288D1',
+    buttonLogInStyle: {
+      backgroundColor: '#6adaa8',
       marginTop: 15
-    }
+    },
+    buttonSignUpStyle: {
+      backgroundColor: '#6adaa8',
+      marginTop: 15
+    },
   };
 
   export default slideStyles;
