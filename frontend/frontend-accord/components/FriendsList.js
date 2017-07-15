@@ -1,15 +1,19 @@
 import React, {Component } from 'react';
-import { ListView, View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { Image, ListView, View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import FriendsProfileBio from './FriendsProfileBio';
 import { List, ListItem } from 'react-native-elements'
 
 export default class FriendsList extends Component {
-  state = {
-    data: [],
-    dataSource: new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2,
-    }),
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      data: [],
+      dataSource: new ListView.DataSource({
+        rowHasChanged: (r1, r2) => r1 !== r2,
+      }),
+    };
+  }
 
   componentWillMount() {
     this._genRows();
@@ -28,14 +32,14 @@ export default class FriendsList extends Component {
   }
   _genRows = () => {
     const data = this.state.data.slice(0);
-    fetch('https://us-central1-accord-18bdf.cloudfunctions.net/route/user/friends/test@test')
+    fetch('https://us-central1-accord-18bdf.cloudfunctions.net/route/user/friends/' + this.props.signedIn)
     .then((response) => response.json())
     .then((responseJson) => {
         console.log(responseJson);
         //alert(responseJson);
         console.log("DS" , data);
-        for (var i = 0; i < (Object.keys(responseJson)).length; i++) {
-          data.push(Object.keys(responseJson)[i])
+        for (var i = 0; i < responseJson.length; i++) {
+          data.push(responseJson[i].nickname);
         }
         console.log("after" , data);
 

@@ -61,6 +61,7 @@ export default class AllScreen extends PureComponent<void, *, State> {
       case '2':
         return (
           <FriendsScreen
+            signedIn={this.props.navigation.state.params.user}
             state={this.state}
             style={{ backgroundColor: '#000000' }}
           />
@@ -68,6 +69,7 @@ export default class AllScreen extends PureComponent<void, *, State> {
       case '3':
         return (
           <MatchScreen
+            signedIn={this.props.navigation.state.params.user}
             state={this.state}
             style={{ backgroundColor: '#000000' }}
           />
@@ -78,6 +80,7 @@ export default class AllScreen extends PureComponent<void, *, State> {
   };
 
   render() {
+    console.log('PROPS', this.props.navigation.state.params.user);
     return (
       <TabViewAnimated
         style={[styles.container, this.props.style]}

@@ -8,7 +8,8 @@ import {	StyleSheet,
 TextInput,
 Text,} from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
-
+// import {connect} from 'react-redux';
+// import addingUser from '../actions/index';
 import { Button } from 'react-native-elements'
 
 class LoginScreen extends Component {
@@ -24,26 +25,29 @@ class LoginScreen extends Component {
   }
 
   loginSubmit() {
-    fetch('https://us-central1-accord-18bdf.cloudfunctions.net/route/login', {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        email: this.state.email,
-        password: this.state.password
+    if (this.state.email) {
+      fetch('https://us-central1-accord-18bdf.cloudfunctions.net/route/login', {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          email: this.state.email,
+          password: this.state.password
+        })
       })
-    })
-    .then((response) => response.json())
-    .then((responseJson) => {
-      if(responseJson !== null) {
-        this.props.navigation.navigate('AllScreen')
-        console.log(responseJson);
-      }
-    })
-    .catch((err) => {
-      console.log('error', err)
-    });
+      .then((response) => response.json())
+      .then((responseJson) => {
+        if(responseJson !== null) {
+          //this.props.addUser(this.props.email);
+          this.props.navigation.navigate('AllScreen', {user: this.state.email})
+          console.log(responseJson);
+        }
+      })
+      .catch((err) => {
+        console.log('error', err)
+      });
+    }
   }
 
   render() {
@@ -96,4 +100,20 @@ const styles = StyleSheet.create({
   }
 });
 
+// const mapStateToProps = (state) => {
+//   return {
+//     email: state.user_reducer
+//   }
+// };
+//
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     addUser: (email) => dispatch(addUser(email))
+//   }
+// };
+
 export default LoginScreen;
+// export default connect(
+//   mapStateToProps,
+//   mapDispatchToProps
+// )(LoginScreen);
