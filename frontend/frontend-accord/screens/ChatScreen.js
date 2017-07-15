@@ -12,8 +12,8 @@ import { TabNavigator, StackNavigator } from 'react-navigation';
 import { Button } from 'react-native-elements'
 
 class ChatScreen extends Component {
-
   render() {
+    console.log('THISPROPS', this.props);
     return (
       <View style={styles.container}>
         <Image style={{width:400 , heigth: 70, bottom: 65, alignSelf: 'auto'}} source={require('../assets/icons/icon2.png')} />

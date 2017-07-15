@@ -8,7 +8,9 @@ import FriendsScreen from './FriendsScreen';
 import HomeScreen from './HomeScreen';
 import MatchScreen from './MatchScreen';
 import FriendsProfileBio from '../components/FriendsProfileBio';
-import ChatScreen from './ChatScreen'
+import ChatScreen from './ChatScreen';
+import { TabNavigator, StackNavigator } from 'react-navigation';
+
 type Route = {
   key: string,
   icon: string,
@@ -52,12 +54,14 @@ export default class AllScreen extends PureComponent<void, *, State> {
     );
   };
 
+
   _renderScene = ({ route }) => {
     switch (route.key) {
       case '1':
         return (
           <HomeScreen
             state={this.state}
+            navigator={this.props.navigation}
             style={{ backgroundColor: '#000000' }}
           />
         );
@@ -65,6 +69,7 @@ export default class AllScreen extends PureComponent<void, *, State> {
         return (
           <FriendsScreen
             signedIn={this.props.navigation.state.params.user}
+            navigator={this.props.navigation}
             state={this.state}
             style={{ backgroundColor: '#000000' }}
           />
@@ -73,6 +78,7 @@ export default class AllScreen extends PureComponent<void, *, State> {
         return (
           <MatchScreen
             signedIn={this.props.navigation.state.params.user}
+            navigator={this.props.navigation}
             state={this.state}
             style={{ backgroundColor: '#000000' }}
           />
@@ -81,6 +87,7 @@ export default class AllScreen extends PureComponent<void, *, State> {
         return (
           <ChatScreen
             signedIn={this.props.navigation.state.params.user}
+            navigator={this.props.navigation}
             state={this.state}
             style={{ backgroundColor: '#000000' }}
           />
@@ -99,6 +106,7 @@ export default class AllScreen extends PureComponent<void, *, State> {
         renderScene={this._renderScene}
         renderHeader={this._renderHeader}
         onRequestChangeTab={this._handleChangeTab}
+
       />
     );
   }

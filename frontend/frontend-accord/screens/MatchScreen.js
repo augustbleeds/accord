@@ -63,6 +63,9 @@ export default class MatchScreen extends Component {
             // set up sendBird stuff
             Alert.alert(`You are matched with ${data.val()}`);
             this.setState({matchedUser: data.val()});
+            console.log('this is this.props ' ,this.props);
+            this.props.navigator.navigate('ChatScreen', {username1: listenPath, username2: this.state.matchedUser});
+            console.log('state is', this.state);
             // remove it from the database
             dbRootRef.child(`/Match/${listenPath}`).remove();
             // detach listeners
