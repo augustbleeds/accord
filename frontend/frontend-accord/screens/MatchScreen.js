@@ -36,7 +36,7 @@ export default class MatchScreen extends Component {
       if(responseJson.success === true) {
         //this.props.addUser(this.props.email);
         console.log('hihihi');
-
+        alert('You will be notified when there is a match! :)');
       }
     })
     .catch((err) => {
