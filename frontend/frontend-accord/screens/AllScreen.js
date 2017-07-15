@@ -26,7 +26,7 @@ export default class AllScreen extends PureComponent<void, *, State> {
     index: 0,
     routes: [
       { key: '1', icon: 'ios-home', title: 'HOME' },
-      { key: '2', icon: 'ios-people', title: 'PROFILES'  },
+      { key: '2', icon: 'ios-people', title: 'PROFILE'  },
       { key: '3', icon: 'md-search', title: 'MATCH'  },
       { key: '4', icon: 'ios-chatbubbles', title: 'CHAT'  },
 

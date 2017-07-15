@@ -22,8 +22,8 @@ class slideStyles extends Component {
           <View level={15}><Text style={styles.secondText}>Swipe Right to Learn More</Text></View>
         </View>
         <View style={[styles.slide, { backgroundColor: '#000000' }]}>
-          <View level={-10}><Text style={styles.Maintext}>Account Protection</Text></View>
-          <View level={5}><Text style={styles.secondText}>some description</Text></View>
+          <View level={-10}><Text style={styles.Maintext}>About Accord</Text></View>
+          <View level={5}><Text style={styles.secondText}>Accord is designed to help you share and be emotionally healthy</Text></View>
         </View>
         <View style={[styles.slide,{ backgroundColor: '#000000' }]}>
           <View level={8}><Text style={styles.Maintext}>Start Now!</Text></View>
@@ -62,9 +62,10 @@ class slideStyles extends Component {
     },
 
     secondText: {
-      fontSize: 15,
+      fontSize: 20,
       fontFamily: 'HelveticaNeue',
-      color: '#fff'
+      color: '#fff',
+      textAlign: 'center'
     },
     buttonLogInStyle: {
       backgroundColor: '#6adaa8',
