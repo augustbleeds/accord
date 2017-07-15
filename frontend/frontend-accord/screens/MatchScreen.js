@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ListView, Image, Picker } from 'react-native';
+import { Alert, View, Text, StyleSheet, ListView, Image, Picker } from 'react-native';
 import { Button } from 'react-native-elements';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import ModalDropdown from 'react-native-modal-dropdown';
 // const CATEGORY = ['Family', 'Relationship', 'School', 'Depression', 'Anxiety']
 
+const backEnd = 'https://us-central1-accord-18bdf.cloudfunctions.net/route/user/match';
 
 export default class MatchScreen extends Component {
   constructor(props){
@@ -23,8 +24,9 @@ export default class MatchScreen extends Component {
     console.log('asdfasdfasdf');
     console.log(this.state.language);
     console.log(this.props.signedIn);
-
-    fetch('https://us-central1-accord-18bdf.cloudfunctions.net/route/user/match/' + this.state.language + '/' + this.props.signedIn.split('.')[0], {
+    const endPoint = `${backEnd}/${this.state.language}/${this.props.signedIn.split('.')[0]}`;
+    console.log('endpoint is', endPoint);
+    fetch(endPoint, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
@@ -35,8 +37,8 @@ export default class MatchScreen extends Component {
       console.log(responseJson)
       if(responseJson.success === true) {
         //this.props.addUser(this.props.email);
-        console.log('hihihi');
-        alert('You will be notified when there is a match! :)');
+        // console.log('hihihi');
+        Alert.alert('You will be notified when there is a match! :)');
       }
     })
     .catch((err) => {
@@ -63,7 +65,7 @@ export default class MatchScreen extends Component {
           <Button
             buttonStyle={styles.buttonStyle}
             raised
-            title='Match!'
+            title={this.state.language}
             onPress={ () => this.fetchMatch()}
             >
           </Button>
