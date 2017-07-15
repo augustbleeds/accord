@@ -2,6 +2,7 @@ const functions = require('firebase-functions');
 const app = require('express')();
 const admin = require('firebase-admin');
 var serviceAccount = require("./config.json");
+//const messaging = firebase.messaging();
 
 const quokkaURL = 'http://www.traveller.com.au/content/dam/images/g/u/n/q/h/0/image.related.articleLeadwide.620x349.gunpvd.png/1488330286332.png';
 
@@ -27,25 +28,34 @@ app.post('/login', (req, res) => {
   // admin.auth().signInWithEmailAndPassword(req.body.email, req.body.password).catch((error) => {
   //   res.json({error: error});
   // });
+  //var pass = req.body.password
+  // dbRootRef.child(`/User/${req.body.email.split('.')[0]}`).once('value')
+  //   .then((userSnap) => {res.json(userSnap.val())})
+  //   .catch((err) => {res.json({error: err})})
+  dbRootRef.child('/User/test@test').once('value')
+    .then((userSnap) => {res.json(userSnap.val())})
+    .catch((err) => {res.json({error: err})})
 });
 
 //User registering information
 app.post('/register', (req, res) => {
   // create a new User reference
-  const newUserRef = dbRootRef.child('User').push();
-  // create object for reference
   const newObj = {
-    nickname: req.body.name,
+    nickname: req.body.nickname,
     password: req.body.password,
     gender: req.body.gender,
     email: req.body.email,
     school: req.body.school,
     searching: null,
-    desc: req.body.description,
+    desc: req.body.desc,
     friends: null,
-    img: quokkaURL,
-    _id: newUserRef.key,
-  }
+    img: quokkaURL
+  };
+  dbRootRef.child(`/User/${req.body.email.split('.')[0]}`).set(newObj)
+    .then(() => {res.json(newObj)})
+    .catch((err) => res.send('ERROR'))
+  //const newUserRef = dbRootRef.child('User').push();
+  // create object for reference
   console.log('HIT REGISTER')
   // const newObj = {
   //   nickname: 'aug',
@@ -59,9 +69,9 @@ app.post('/register', (req, res) => {
   //   _id: newUserRef.key,
   // }
 
-  newUserRef.set(newObj)
-  .then(() => {res.json(newObj)})
-  .catch((err) => res.send('ERROR'))
+  // newUserRef.set(newObj)
+  // .then(() => {res.json(newObj)})
+  // .catch((err) => res.send('ERROR'))
 });
 
 app.get('/logout', (req, res) => {
@@ -75,9 +85,32 @@ app.get('/user/friends/:id', (req, res) => {
   var currId = req.params.id;
   //var currId = '-Kp25oaf2W35ZAjU7ebZ';
   dbRootRef.child(`/User/${currId}/friends`).once('value')
-    .then((friendsSnap) => {
-      // i got the friend's id (this is an object)
-      res.json(friendsSnap.val())
+    .then((friendEmailsSnap) => {
+      var email_id = friendEmailsSnap.val();
+      var emails = Object.keys(email_id);
+      // var objToReturn = {};
+
+      var FriendsPromise = emails.map(email => (dbRootRef.child(`/User/${email}`).once('value')));
+      Promise.all(FriendsPromise)
+        .then(friendsSnap => {
+          var friendsObj = friendsSnap.map(friendSnap => (friendSnap.val()));
+          res.send(friendsObj);
+        })
+
+      // for (var i = 0; i < emails.length; i++) {
+      //   dbRootRef.child(`/User/${emails[i]}`).once('value')
+      //     .then((userSnap) => {
+      //       var userObj = userSnap.val();
+      //       objToReturn[emails[i]] = {
+      //         img: userObj.img,
+      //         nickname: userObj.nickname
+      //       };
+      //       // res.json(objToReturn);
+      //     })
+      // }
+      // // i got the friend's id (this is an object)
+      // //res.json(friendsSnap.val())
+      // res.json(objToReturn);
     })
     // i need to get friend's imgs
 });
