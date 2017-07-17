@@ -39,8 +39,8 @@ class LoginScreen extends Component {
       .then((response) => response.json())
       .then((responseJson) => {
         if(responseJson !== null) {
-          //this.props.addUser(this.props.email);
-          this.props.navigation.navigate('AllScreen', {user: this.state.email})
+					console.log('LOGGGGING IN', responseJson)
+          this.props.navigation.navigate('AllScreen', {user: this.state.email, userObj: responseJson})
           console.log(responseJson);
         }
       })

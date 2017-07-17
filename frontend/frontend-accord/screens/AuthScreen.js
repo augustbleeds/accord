@@ -27,6 +27,10 @@ class AuthScreen extends Component {
     this.props.navigation.navigate('Welcome');
   }
 
+	gobackSubmit() {
+		//this.props.navigation.navigate('')
+	}
+
   registerSubmit() {
     console.log("HIHIHI");
     fetch('https://us-central1-accord-18bdf.cloudfunctions.net/route/register', {
@@ -104,6 +108,11 @@ class AuthScreen extends Component {
               title="Sign Me Up!"
             />
 
+						<Button
+              buttonStyle={styles.buttonStyle}
+              onPress={ () =>  this.gobackSubmit()}
+              title="Go back"
+            />
       </View>
     )
   }

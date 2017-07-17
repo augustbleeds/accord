@@ -6,15 +6,17 @@ import AppIntro from 'react-native-app-intro';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-class slideStyles extends Component {
+export default class slideStyles extends Component {
 
   doneBtnHandle = () => {
 
   }
     render() {
       return (
-        <AppIntro style={{showDoneButton: false ,showSkipButton: false}}
+        <AppIntro
           onDoneBtnClick={this.doneBtnHandle}
+          showSkipButton={false}
+          showDoneButton={false}
           >
         <View style={[styles.slide,{ backgroundColor: '#000000' }]}>
           <Image style={{width:400 , heigth: 70, bottom: 65, alignSelf: 'auto'}} source={require('../assets/icons/icon2.png')} />
@@ -76,5 +78,3 @@ class slideStyles extends Component {
       marginTop: 15
     },
   };
-
-  export default slideStyles;

@@ -1,8 +1,11 @@
 import React, {Component } from 'react';
-import { Modal, Image, ListView, View, Text, StyleSheet, TouchableHighlight, TouchableOpacity, Alert } from 'react-native';
+import { Modal, Image, ListView, View, Dimensions, Text, StyleSheet, TouchableHighlight, TouchableOpacity, Alert } from 'react-native';
 import FriendsProfileBio from './FriendsProfileBio';
 import { List, ListItem, Button } from 'react-native-elements'
 const _ = require('underscore');
+
+const SCREEN_WIDTH = Dimensions.get('window').width;
+const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 export default class FriendsList extends Component {
   constructor(props) {
@@ -83,6 +86,7 @@ export default class FriendsList extends Component {
   render() {
     return (
       <View>
+      <Text style={{color: 'rgba(0, 0, 0, .4)', alignItems: 'center'}}>Friends</Text>
       <ListView
         {...this.props}
         removeClippedSubviews={false}
@@ -92,21 +96,22 @@ export default class FriendsList extends Component {
         // onEndReached={this._genRows} //this will get us more data
         ref={el => (this._root = el)}
       />
-        <Modal style={styles.row}
+        <Modal style={styles.modal}
         animationType={"slide"}
         transparent={false}
         visible={this.state.visible}
         onRequestClose={() => this.setState({visible: false})}
         >
-          <View style={[{flex: 1, justifyContent: 'center', alignItems: 'center'}, styles.row]}>
-           <View>
+          <View style={{flex: 1, justifyContent: 'space-between', alignItems: 'center'}}>
+           <View style={{justifyContent: 'space-between'}}>
+             <Text>Profile of {this.state.currentFriendProf.nickname}</Text>
              <Image style={{width:150 , height: 200, top: 65, alignSelf: 'auto'}} source={{uri: this.state.currentFriendProf.img}} />
              <Text style={styles.text}>Nickname: {this.state.currentFriendProf.nickname}</Text>
              <Text style={styles.text}>School: {this.state.currentFriendProf.school}</Text>
              <Text style={styles.text}>Description: {this.state.currentFriendProf.desc}</Text>
              <Text style={styles.text}>Gender: {this.state.currentFriendProf.gender}</Text>
              <Button
-               title="Exit"
+               title="Close"
                onPress={() => this.setModalVisible(!this.state.visible)}>
              </Button>
            </View>
@@ -121,6 +126,16 @@ export default class FriendsList extends Component {
 const styles = StyleSheet.create({
   container: {
     padding: 8,
+  },
+  modal: {
+    height: SCREEN_HEIGHT,
+    width: SCREEN_WIDTH,
+    //margin: 8,
+    //padding: 16,
+    //borderRadius: 4,
+    //backgroundColor: '#6adaa8',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   row: {
     margin: 8,

@@ -1,7 +1,7 @@
 import type { NavigationState } from 'react-native-tab-view/types';
 
 import React, { PureComponent } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { TabViewAnimated, TabBar } from 'react-native-tab-view';
 import FriendsScreen from './FriendsScreen';
@@ -25,10 +25,10 @@ export default class AllScreen extends PureComponent<void, *, State> {
   state: State = {
     index: 0,
     routes: [
-      { key: '1', icon: 'ios-home', title: 'HOME' },
-      { key: '2', icon: 'ios-people', title: 'PROFILE'  },
-      { key: '3', icon: 'md-search', title: 'MATCH'  },
-      { key: '4', icon: 'ios-chatbubbles', title: 'CHAT'  },
+      { key: '1', icon: 'ios-home', title: 'Home' },
+      { key: '2', icon: 'ios-people', title: 'Profile'  },
+      { key: '3', icon: 'md-search', title: 'Match'  },
+      { key: '4', icon: 'ios-chatbubbles', title: 'Chat'  },
 
     ],
   };
@@ -69,6 +69,7 @@ export default class AllScreen extends PureComponent<void, *, State> {
         return (
           <FriendsScreen
             signedIn={this.props.navigation.state.params.user}
+            signedinuserObject={this.props.navigation.state.params.userObj}
             navigator={this.props.navigation}
             state={this.state}
             style={{ backgroundColor: '#000000' }}

@@ -5,15 +5,15 @@ export default function HomeScreen ({ state, style }: *) {
   return (
     <View style={[styles.page, styles.container]}>
       <View style={styles.container}>
-        <Image style={{width:400 , heigth: 70, bottom: 65, alignSelf: 'auto'}} source={require('../assets/icons/icon2.png')} />
+        <Image style={{width:300, bottom: 1, alignSelf: 'auto'}} source={require('../assets/icons/icon2.png')} />
         <Text style={styles.mainText}>
-          WELCOME TO ACCORD
+          WELCOME
         </Text>
         <Text style={styles.text}>
           About Accord...Resources...
         </Text>
         <Text style={styles.swipe}>
-          Swipe Right to Start...
+          Swipe Right to Start!
         </Text>
       </View>
     </View>

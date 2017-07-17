@@ -91,8 +91,8 @@ class ChatScreen extends Component {
     const data = this.state.data.slice(0);
     const itemsLength = data.length;
 
-    for (var i = 0; i < data.length; i++) {
-      data.push(allMessages[i]);
+    for (var i = 0; i < this.state.allMessages.length; i++) {
+      data.push(this.state.allMessages[i]);
     }
 
     this.setState({

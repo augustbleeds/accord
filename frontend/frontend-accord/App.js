@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import {DrawerNavigator } from 'react-navigation';
-
+import slideStyles from './components/slides'
 import AuthScreen from './screens/AuthScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
 import LoginScreen from './screens/LoginScreen';
@@ -32,6 +32,10 @@ export default class App extends React.Component {
     activeBackgroundColor: '#000000',
     showLabel: false
   },
+  navigationOptions: {
+  drawerLockMode: 'locked-closed'
+  }
+
     });
 
     return (

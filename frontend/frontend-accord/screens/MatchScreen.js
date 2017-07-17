@@ -85,11 +85,11 @@ export default class MatchScreen extends Component {
         <View style={styles.container}>
           <Text style={styles.mainText}>
             MATCHING
-            {this.state.language}
           </Text>
             <Picker
               selectedValue={this.state.language}
               onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
+              <Picker.Item label="Select one" value="" />
               <Picker.Item label="Depression" value="Depression" />
               <Picker.Item label="Anxiety" value="Anxiety" />
               <Picker.Item label="Family Issues" value="Family Issues" />
@@ -99,7 +99,7 @@ export default class MatchScreen extends Component {
           <Button
             buttonStyle={styles.buttonStyle}
             raised
-            title={this.state.language}
+            title='MATCH'
             onPress={ () => this.fetchMatch()}
             >
           </Button>
@@ -122,10 +122,13 @@ const styles = StyleSheet.create({
   },
 
   mainText: {
-    color: '#fff',
-    fontSize: 30,
+    // color: '#fff',
+    // fontSize: 30,
+    // textAlign: 'center',
+    fontSize: 36,
     textAlign: 'center',
-    marginBottom: 10
+    color: '#fff',
+    fontFamily: 'HelveticaNeue',
   },
   text: {
     color: '#fff',

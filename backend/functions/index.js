@@ -29,12 +29,12 @@ app.post('/login', (req, res) => {
   //   res.json({error: error});
   // });
   //var pass = req.body.password
-  // dbRootRef.child(`/User/${req.body.email.split('.')[0]}`).once('value')
-  //   .then((userSnap) => {res.json(userSnap.val())})
-  //   .catch((err) => {res.json({error: err})})
-  dbRootRef.child('/User/test@test').once('value')
+  dbRootRef.child(`/User/${req.body.email.split('.')[0]}`).once('value')
     .then((userSnap) => {res.json(userSnap.val())})
     .catch((err) => {res.json({error: err})})
+  // dbRootRef.child('/User/test@test').once('value')
+  //   .then((userSnap) => {res.json(userSnap.val())})
+  //   .catch((err) => {res.json({error: err})})
 });
 
 //User registering information
