@@ -19,13 +19,59 @@ export default class slideStyles extends Component {
           showDoneButton={false}
           >
         <View style={[styles.slide,{ backgroundColor: '#000000' }]}>
-          <Image style={{width:400 , heigth: 70, bottom: 65, alignSelf: 'auto'}} source={require('../assets/icons/icon2.png')} />
+          <Image style={{width:260 , heigth: 20, bottom: 30, alignSelf: 'auto'}} source={require('../assets/icons/icon2.png')} />
           <View level={10}><Text style={styles.Maintext}>Welcome To Accord</Text></View>
-          <View level={15}><Text style={styles.secondText}>Swipe Right to Learn More</Text></View>
+          <View level={15}><Text style={styles.secondText}>Swipe to Learn More</Text></View>
+          <Button
+            title="Sign Up!"
+            raised
+            buttonStyle={styles.buttonSignUpStyle}
+            onPress={this.props.onSlidesComplete}
+          />
+          <Button
+            title="Log In!"
+            raised
+            buttonStyle={styles.buttonLogInStyle}
+            onPress={this.props.onLoginComplete}
+          />
         </View>
         <View style={[styles.slide, { backgroundColor: '#000000' }]}>
-          <View level={-10}><Text style={styles.Maintext}>About Accord</Text></View>
-          <View level={5}><Text style={styles.secondText}>Accord is designed to help you share and be emotionally healthy</Text></View>
+          <View level={-10}><Text style={styles.Maintext}>Safe and Secure</Text></View>
+          <View level={5}><Text style={styles.secondText}>Accord is designed
+            to help you share your story and be emotionally healthy in a safe and
+            secure environment.
+          </Text></View>
+          <Button
+            title="Sign Up!"
+            raised
+            buttonStyle={styles.buttonSignUpStyle}
+            onPress={this.props.onSlidesComplete}
+          />
+          <Button
+            title="Log In!"
+            raised
+            buttonStyle={styles.buttonLogInStyle}
+            onPress={this.props.onLoginComplete}
+          />
+        </View>
+        <View style={[styles.slide, { backgroundColor: '#000000' }]}>
+          <View level={-10}><Text style={styles.Maintext}>Voice your Story</Text></View>
+          <View level={5}><Text style={styles.secondText}>
+            These are people who are waiting to help you. They probably have gone through
+            the same things you are going through. They can help.
+          </Text></View>
+          <Button
+            title="Sign Up!"
+            raised
+            buttonStyle={styles.buttonSignUpStyle}
+            onPress={this.props.onSlidesComplete}
+          />
+          <Button
+            title="Log In!"
+            raised
+            buttonStyle={styles.buttonLogInStyle}
+            onPress={this.props.onLoginComplete}
+          />
         </View>
         <View style={[styles.slide,{ backgroundColor: '#000000' }]}>
           <View level={8}><Text style={styles.Maintext}>Start Now!</Text></View>
@@ -58,16 +104,17 @@ export default class slideStyles extends Component {
     },
 
     Maintext: {
-      fontSize: 30,
+      fontSize: 25,
       fontFamily: 'HelveticaNeue-BoldItalic',
       color: '#fff',
     },
 
     secondText: {
-      fontSize: 20,
+      fontSize: 15,
       fontFamily: 'HelveticaNeue',
       color: '#fff',
-      textAlign: 'center'
+      textAlign: 'center',
+      padding: 20
     },
     buttonLogInStyle: {
       backgroundColor: '#6adaa8',

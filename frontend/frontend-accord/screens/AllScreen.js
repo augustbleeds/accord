@@ -1,7 +1,7 @@
 import type { NavigationState } from 'react-native-tab-view/types';
 
 import React, { PureComponent } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { TabViewAnimated, TabBar } from 'react-native-tab-view';
 import FriendsScreen from './FriendsScreen';
@@ -10,6 +10,8 @@ import MatchScreen from './MatchScreen';
 import FriendsProfileBio from '../components/FriendsProfileBio';
 import ChatScreen from './ChatScreen';
 import { TabNavigator, StackNavigator } from 'react-navigation';
+const SCREEN_WIDTH = Dimensions.get('window').width;
+const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 type Route = {
   key: string,
@@ -28,7 +30,7 @@ export default class AllScreen extends PureComponent<void, *, State> {
       { key: '1', icon: 'ios-home', title: 'Home' },
       { key: '2', icon: 'ios-people', title: 'Profile'  },
       { key: '3', icon: 'md-search', title: 'Match'  },
-      { key: '4', icon: 'ios-chatbubbles', title: 'Chat'  },
+      // { key: '4', icon: 'ios-chatbubbles', title: 'Chat'  },
 
     ],
   };
@@ -40,7 +42,7 @@ export default class AllScreen extends PureComponent<void, *, State> {
   };
 
   _renderIcon = ({ route }) => {
-    return <Ionicons name={route.icon} size={24} color="white" />;
+    return <Ionicons name={route.icon} size={20} color="white" />;
   };
 
   _renderHeader = props => {
@@ -50,6 +52,7 @@ export default class AllScreen extends PureComponent<void, *, State> {
         indicatorStyle={styles.indicator}
         renderIcon={this._renderIcon}
         style={styles.tabbar}
+        tabStyle={{size: 10}}
       />
     );
   };
@@ -84,15 +87,15 @@ export default class AllScreen extends PureComponent<void, *, State> {
             style={{ backgroundColor: '#000000' }}
           />
         );
-      case '4':
-        return (
-          <ChatScreen
-            signedIn={this.props.navigation.state.params.user}
-            navigator={this.props.navigation}
-            state={this.state}
-            style={{ backgroundColor: '#000000' }}
-          />
-        );
+      // case '4':
+      //   return (
+      //     <ChatScreen
+      //       signedIn={this.props.navigation.state.params.user}
+      //       navigator={this.props.navigation}
+      //       state={this.state}
+      //       style={{ backgroundColor: '#000000' }}
+      //     />
+      //   );
       default:
         return null;
     }
@@ -117,9 +120,12 @@ export default class AllScreen extends PureComponent<void, *, State> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: SCREEN_HEIGHT,
+    width: SCREEN_WIDTH,
   },
   tabbar: {
   backgroundColor: '#6adaa8',
+  paddingTop: 15,
   elevation: 4,
   shadowColor: 'black',
   shadowOpacity: 0.1,

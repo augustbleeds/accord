@@ -10,9 +10,9 @@ export default class UserProfile extends Component {
   render() {
     console.log('HELLO THEREERERERE', this.props.signedinuserObject)
     return (
-      <View style={[{flex: 1, justifyContent: 'space-between', alignItems: 'center'}, styles.profile]}>
+      <View style={[{flex: 1, justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#000'}, styles.profile]}>
         <Image style={{width:150 , height: 100, top: 1, alignSelf: 'auto'}} source={{uri: this.props.signedinuserObject.img}} />
-        <Text style={{fontWeight: 'bold', textAlign: 'center', color: '#0000ff'}}>Signed in as: {this.props.signedIn}</Text>
+        <Text style={{fontWeight: 'bold', textAlign: 'center', color: '#6adaa8'}}>Signed in as: {this.props.signedIn}</Text>
         <Text style={styles.text}>Nickname: {this.props.signedinuserObject.nickname}</Text>
         <Text style={styles.text}>School: {this.props.signedinuserObject.school}</Text>
         <Text style={styles.text}>Gender: {this.props.signedinuserObject.gender}</Text>
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   text: {
-    color: 'rgba(0, 0, 0, .4)',
+    color: '#ffffff',
     fontWeight: 'bold',
     textAlign: 'center',
   },

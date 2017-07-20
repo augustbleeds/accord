@@ -83,11 +83,13 @@ export default class MatchScreen extends Component {
     return (
       <View style={[styles.page, styles.container]}>
         <View style={styles.container}>
-          <Text style={styles.mainText}>
-            MATCHING
+          <Text style={{fontFamily: 'HelveticaNeue-Bold', fontSize: 35, color: '#ffffff', justifyContent: 'center', alignItems: 'center'}}>
+            Find a Match
           </Text>
             <Picker
+              style={styles.picker}
               selectedValue={this.state.language}
+              itemStyle={styles.itemPicker}
               onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
               <Picker.Item label="Select one" value="" />
               <Picker.Item label="Depression" value="Depression" />
@@ -117,15 +119,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   container: {
-    backgroundColor:'#fff',
+    backgroundColor:'#000000',
     borderRadius: 3,
   },
-
+  picker: {
+    flex: 1,
+    color: '#ffffff'
+  },
+  itemPicker: {
+    color: '#ffffff'
+  },
   mainText: {
     // color: '#fff',
     // fontSize: 30,
     // textAlign: 'center',
-    fontSize: 36,
+    fontSize: 20,
     textAlign: 'center',
     color: '#fff',
     fontFamily: 'HelveticaNeue',

@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
   },
   profile: {
     flex: 2.3,
+    backgroundColor: '#000'
     // alignItems: 'flex-end',
     // justifyContent: 'flex-end',
   },

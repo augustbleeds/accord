@@ -53,7 +53,7 @@ class LoginScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image style={{width:400 , heigth: 70, bottom: 65, alignSelf: 'auto'}} source={require('../assets/icons/icon2.png')} />
+        <Image style={{width:280 , heigth: 70, bottom: 65, alignSelf: 'auto'}} source={require('../assets/icons/icon2.png')} />
         <Text style={styles.textBig}>Login</Text>
           <TextInput
             style={{height: 40, paddingTop: 10, textAlign: "center", color: '#fff', fontFamily: 'HelveticaNeue',}}

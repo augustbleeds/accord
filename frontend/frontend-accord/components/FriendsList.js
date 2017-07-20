@@ -86,7 +86,7 @@ export default class FriendsList extends Component {
   render() {
     return (
       <View>
-      <Text style={{color: 'rgba(0, 0, 0, .4)', alignItems: 'center'}}>Friends</Text>
+      <Text style={{color: '#fffff', alignItems: 'center'}}>Friends</Text>
       <ListView
         {...this.props}
         removeClippedSubviews={false}
