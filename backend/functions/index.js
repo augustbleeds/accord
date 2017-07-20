@@ -29,8 +29,13 @@ app.post('/login', (req, res) => {
   //   res.json({error: error});
   // });
   //var pass = req.body.password
-  dbRootRef.child(`/User/${req.body.email.split('.')[0]}`).once('value')
-    .then((userSnap) => {res.json(userSnap.val())})
+  var email = req.body.email.split('.')[0];
+  console.log(`Email user wants to login is ${JSON.stringify(email)}`);
+  dbRootRef.child(`/User/${email}`).once('value')
+    .then((userSnap) => {
+      console.log(`User Snap for ${req.body.email} is ${JSON.stringify(userSnap.val())}`);
+      res.json(userSnap.val())
+    })
     .catch((err) => {res.json({error: err})})
   // dbRootRef.child('/User/test@test').once('value')
   //   .then((userSnap) => {res.json(userSnap.val())})
@@ -79,14 +84,17 @@ app.get('/logout', (req, res) => {
   res.send('Hello3');
 });
 
-//Finding all friends of the current user
+//Finding an array of objects friends of the current user
 app.get('/user/friends/:id', (req, res) => {
   console.log('GETTING FRIENDS');
   var currId = req.params.id;
-  //var currId = '-Kp25oaf2W35ZAjU7ebZ';
   dbRootRef.child(`/User/${currId}/friends`).once('value')
     .then((friendEmailsSnap) => {
       var email_id = friendEmailsSnap.val();
+      if(!email_id){
+        res.json([]);
+        return;
+      }
       var emails = Object.keys(email_id);
       // var objToReturn = {};
 
@@ -94,7 +102,7 @@ app.get('/user/friends/:id', (req, res) => {
       Promise.all(FriendsPromise)
         .then(friendsSnap => {
           var friendsObj = friendsSnap.map(friendSnap => (friendSnap.val()));
-          res.send(friendsObj);
+          res.json(friendsObj);
         })
 
       // for (var i = 0; i < emails.length; i++) {

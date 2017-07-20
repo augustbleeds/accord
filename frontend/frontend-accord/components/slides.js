@@ -23,10 +23,11 @@ export default class slideStyles extends Component {
           <View level={10}><Text style={styles.Maintext}>Welcome To Accord</Text></View>
           <View level={15}><Text style={styles.secondText}>Swipe to Learn More</Text></View>
           <Button
-            title="Sign Up"
+            title="Sign Upp"
             raised
             buttonStyle={styles.buttonSignUpStyle}
-            onPress={this.props.onSlidesComplete}
+            onPress={() => {console.log('pressed');
+            this.props.onSlidesComplete()}}
           />
           <Button
             title="Log In"
@@ -36,7 +37,7 @@ export default class slideStyles extends Component {
           />
         </View>
         <View style={[styles.slide, { backgroundColor: '#000000' }]}>
-          <Image style={styles.imgStyle} source={require('../assets/icons/lock.png')} />
+          <Image resizeMode="cover" style={styles.imgStyle} source={require('../assets/icons/lock.png')} />
           <View level={-10}><Text style={styles.Maintext}>Safe and Secure</Text></View>
           <View level={5}><Text style={styles.secondText}>Accord is designed
             to help you share your story and be emotionally healthy in a safe and
@@ -56,7 +57,7 @@ export default class slideStyles extends Component {
           />
         </View>
         <View style={[styles.slide, { backgroundColor: '#000000' }]}>
-          <Image style={styles.imgStyle2} source={require('../assets/icons/talk.png')} />
+          <Image resizeMode="cover" style={styles.imgStyle2} source={require('../assets/icons/talk.png')} />
           <View level={-10}><Text style={styles.Maintext}>Voice your Story</Text></View>
           <View level={5}><Text style={styles.secondText}>
             These are people who are waiting to help you. They probably have gone through
@@ -76,7 +77,7 @@ export default class slideStyles extends Component {
           />
         </View>
         <View style={[styles.slide,{ backgroundColor: '#000000' }]}>
-          <Image style={styles.imgStyle3} source={require('../assets/icons/com.png')} />
+          <Image resizeMode="cover" style={styles.imgStyle3} source={require('../assets/icons/com.png')} />
           <View level={8}><Text style={[styles.Maintext, {bottom: 15}]}>Start Now!</Text></View>
           <Button
             title="Sign Up"
@@ -102,8 +103,8 @@ export default class slideStyles extends Component {
       justifyContent: 'center',
       alignItems: 'center',
       width: SCREEN_WIDTH,
-      showDoneButton: false,
-      showSkipButton: false
+      // showDoneButton: false,
+      // showSkipButton: false
     },
 
     Maintext: {
@@ -117,8 +118,7 @@ export default class slideStyles extends Component {
       justifyContent: 'flex-start',
       alignItems: 'center',
       bottom: 12,
-      resizeMode: "cover",
-      resizeMode: "contain",
+      // resizeMode: "cover",
       width: 220,
       height: 220,
     },
@@ -129,8 +129,7 @@ export default class slideStyles extends Component {
       alignItems: 'center',
       left: 10,
       bottom: 13,
-      resizeMode: "cover",
-      resizeMode: "contain",
+      // resizeMode: "cover",
       width: 230,
       height: 230,
     },
@@ -139,8 +138,7 @@ export default class slideStyles extends Component {
       // display: 'block',
       justifyContent: 'flex-start',
       alignItems: 'center',
-      resizeMode: "cover",
-      resizeMode: "contain",
+      // resizeMode: "cover",
       bottom: 14,
       width: 270,
       height: 270,

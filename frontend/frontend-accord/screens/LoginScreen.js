@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
-import {	StyleSheet,
+import {
+	StyleSheet,
 	KeyboardAvoidingView,
 	View,
 	ActivityIndicator,
 	TouchableOpacity,
 	Image,
-TextInput,
-Text,} from 'react-native';
+	TextInput,
+	Text,
+	Alert} from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 // import {connect} from 'react-redux';
 // import addingUser from '../actions/index';
@@ -30,36 +32,40 @@ class LoginScreen extends Component {
 
   loginSubmit() {
 		console.log('hello dude logging in...');
-		console.log('email', this.state.email);
+		console.log('email', this.state.email)
 		console.log('password', this.state.password);
-    if (this.state.email && this.state.password) {
-			console.log('email and password privdeid');
-      fetch('https://us-central1-accord-18bdf.cloudfunctions.net/route/login', {
-        method: 'POST',
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          email: this.state.email,
-          password: this.state.password
-        })
+		if(!this.state.email || !this.state.password){
+			Alert.alert('Please fill in your email and password!');
+			return;
+		}
+    fetch('https://us-central1-accord-18bdf.cloudfunctions.net/route/login', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        email: this.state.email,
+        password: this.state.password
       })
-      .then((response) => {
-				console.log('response from gcf is', response);
-				return response.json();
-			})
-      .then((responseJson) => {
-				console.log('response json is', responseJson);
-        if(responseJson !== null) {
-					console.log('LOGGGGING IN', responseJson)
-          this.props.navigation.navigate('AllScreen', {user: this.state.email, userObj: responseJson})
-          console.log(responseJson);
-        }
-      })
-      .catch((err) => {
-        console.log('error', err)
-      });
-    }
+    })
+    .then((response) => {
+			console.log('response from gcf is', response);
+			return response.json();
+		})
+    .then((responseJson) => {
+			console.log('response json is', responseJson);
+			if(responseJson == null){
+				Alert.alert('Username or Password is incorrect. Please try again!');
+			}
+      if(responseJson !== null) {
+				console.log('LOGGGGING IN', responseJson)
+        this.props.navigation.navigate('AllScreen', {user: this.state.email, userObj: responseJson})
+        console.log(responseJson);
+      }
+    })
+    .catch((err) => {
+      console.log('error', err)
+    });
   }
 
   render() {
