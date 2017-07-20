@@ -56,6 +56,7 @@ export default class MatchScreen extends Component {
         // listen for when this user is matched!
         var listenPath = this.props.signedIn.split('.')[0];
         console.log('listen is', listenPath);
+        firebase.database().ref('/blahj').set(true);
         firebase.database().ref(`/Match/${listenPath}`).on('value', (data) => {
             if(!data.val()){
               return;
@@ -83,7 +84,9 @@ export default class MatchScreen extends Component {
     return (
       <View style={[styles.page, styles.container]}>
         <View style={styles.container}>
-          <Text style={{fontFamily: 'HelveticaNeue-Bold', fontSize: 35, color: '#ffffff', justifyContent: 'center', alignItems: 'center'}}>
+          <Text style={{fontSize: 35, color: '#ffffff', justifyContent: 'center', alignItems: 'center',
+            // fontFamily: 'HelveticaNeue-Bold'
+          }}>
             Find a Match
           </Text>
             <Picker
@@ -136,7 +139,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     color: '#fff',
-    fontFamily: 'HelveticaNeue',
+    // fontFamily: 'HelveticaNeue',
   },
   text: {
     color: '#fff',

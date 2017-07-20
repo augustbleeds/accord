@@ -19,7 +19,7 @@ export default class slideStyles extends Component {
           showDoneButton={false}
           >
         <View style={[styles.slide,{ backgroundColor: '#000000' }]}>
-          <Image style={{width:260 , heigth: 20, bottom: 30, alignSelf: 'auto'}} source={require('../assets/icons/icon2.png')} />
+          <Image style={{width:260, bottom: 30, alignSelf: 'auto'}} source={require('../assets/icons/icon2.png')} />
           <View level={10}><Text style={styles.Maintext}>Welcome To Accord</Text></View>
           <View level={15}><Text style={styles.secondText}>Swipe to Learn More</Text></View>
           <Button
@@ -108,12 +108,12 @@ export default class slideStyles extends Component {
 
     Maintext: {
       fontSize: 25,
-      fontFamily: 'HelveticaNeue-BoldItalic',
+      // fontFamily: 'HelveticaNeue-BoldItalic',
       color: '#fff',
     },
 
     imgStyle: {
-      display: 'block',
+      // display: 'block',
       justifyContent: 'flex-start',
       alignItems: 'center',
       bottom: 12,
@@ -124,7 +124,7 @@ export default class slideStyles extends Component {
     },
 
     imgStyle2: {
-      display: 'block',
+      // display: 'block',fontFamily: 'HelveticaNeue-Bold',
       justifyContent: 'flex-start',
       alignItems: 'center',
       left: 10,
@@ -136,7 +136,7 @@ export default class slideStyles extends Component {
     },
 
     imgStyle3: {
-      display: 'block',
+      // display: 'block',
       justifyContent: 'flex-start',
       alignItems: 'center',
       resizeMode: "cover",
@@ -148,7 +148,7 @@ export default class slideStyles extends Component {
 
     secondText: {
       fontSize: 15,
-      fontFamily: 'HelveticaNeue',
+      // fontFamily: 'HelveticaNeue',
       color: '#808080',
       textAlign: 'center',
       padding: 20

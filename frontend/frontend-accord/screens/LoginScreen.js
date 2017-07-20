@@ -53,16 +53,20 @@ class LoginScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image style={{width:280 , heigth: 70, bottom: 65, alignSelf: 'auto'}} source={require('../assets/icons/icon2.png')} />
+        <Image style={{width:280 , height: 70, bottom: 65, alignSelf: 'auto'}} source={require('../assets/icons/icon2.png')} />
         <Text style={styles.textBig}>Login</Text>
           <TextInput
-            style={{height: 40, paddingTop: 10, textAlign: "center", color: '#fff', fontFamily: 'HelveticaNeue',}}
+            style={{height: 40, paddingTop: 10, textAlign: "center", color: '#fff',
+						// fontFamily: 'HelveticaNeue',
+					}}
             placeholder="Enter Email"
             placeholderTextColor="#808080"
             onChangeText={(text) => this.setState({email: text})}
           />
           <TextInput
-            style={{height: 40, paddingTop: 10, textAlign: "center", color: '#fff', fontFamily: 'HelveticaNeue',}}
+            style={{height: 40, paddingTop: 10, textAlign: "center", color: '#fff',
+						//  fontFamily: 'HelveticaNeue',
+					 }}
             placeholder="password"
             placeholderTextColor="#808080"
             secureTextEntry={true}
@@ -91,7 +95,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10,
     color: '#fff',
-    fontFamily: 'HelveticaNeue',
+    // fontFamily: 'HelveticaNeue',
 
   },
   buttonStyle: {

@@ -117,7 +117,9 @@ class ChatScreen extends Component {
       <View style={styles.container}>
         <Text style={styles.textBig}>ChatRoom</Text>
           <TextInput
-            style={{height: 40, paddingTop: 10, textAlign: "center", color: '#fff', fontFamily: 'HelveticaNeue',}}
+            style={{height: 40, paddingTop: 10, textAlign: "center", color: '#fff',
+						// fontFamily: 'HelveticaNeue',
+					}}
             placeholder="Enter Message"
             placeholderTextColor="#808080"
             onChangeText={(text) => this.setState({message: text})}
@@ -154,8 +156,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10,
     color: '#fff',
-    fontFamily: 'HelveticaNeue',
-
+    // fontFamily: 'HelveticaNeue',
   },
   buttonStyle: {
     backgroundColor: '#6adaa8',

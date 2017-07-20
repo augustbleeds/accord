@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10,
     color: '#fff',
-    fontFamily: 'HelveticaNeue-BoldItalic',
+    // fontFamily: 'HelveticaNeue-BoldItalic',
 
   },
   buttonStyle: {

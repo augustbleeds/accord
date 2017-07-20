@@ -36,14 +36,14 @@ const styles = StyleSheet.create({
     fontSize: 30,
     textAlign: 'center',
     marginBottom: 10,
-    fontFamily: 'HelveticaNeue-BoldItalic',
+    // fontFamily: 'HelveticaNeue-BoldItalic',
   },
   text: {
     color: '#fff',
     textAlign: 'center',
     marginVertical: 8,
     marginHorizontal: 16,
-    fontFamily: 'HelveticaNeue'
+    // fontFamily: 'HelveticaNeue'
   },
   swipe: {
     color: '#808080',

@@ -31,13 +31,13 @@ class FriendsProfileBio extends Component {
 
     Maintext: {
       fontSize: 30,
-      fontFamily: 'HelveticaNeue-BoldItalic',
+      // fontFamily: 'HelveticaNeue-BoldItalic',
       color: '#fff',
     },
 
     secondText: {
       fontSize: 15,
-      fontFamily: 'HelveticaNeue',
+      // fontFamily: 'HelveticaNeue',
       color: '#fff'
     },
     buttonLogInStyle: {
