@@ -24,8 +24,16 @@ class LoginScreen extends Component {
     this.props.navigation.navigate('Welcome');
   }
 
+	goBackSubmit() {
+		this.props.navigation.navigate('Welcome');
+	}
+
   loginSubmit() {
+		console.log('hello dude logging in...');
+		console.log('email', this.state.email);
+		console.log('password', this.state.password);
     if (this.state.email && this.state.password) {
+			console.log('email and password privdeid');
       fetch('https://us-central1-accord-18bdf.cloudfunctions.net/route/login', {
         method: 'POST',
         headers: {
@@ -36,8 +44,12 @@ class LoginScreen extends Component {
           password: this.state.password
         })
       })
-      .then((response) => response.json())
+      .then((response) => {
+				console.log('response from gcf is', response);
+				return response.json();
+			})
       .then((responseJson) => {
+				console.log('response json is', responseJson);
         if(responseJson !== null) {
 					console.log('LOGGGGING IN', responseJson)
           this.props.navigation.navigate('AllScreen', {user: this.state.email, userObj: responseJson})
@@ -77,6 +89,11 @@ class LoginScreen extends Component {
               onPress={ () => this.loginSubmit()}
               title="Log In"
             />
+						<Button
+							buttonStyle={styles.buttonStyle}
+							onPress={ () => this.goBackSubmit()}
+							title="Go Back"
+						/>
 
       </View>
     )

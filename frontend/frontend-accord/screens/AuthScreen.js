@@ -28,7 +28,7 @@ class AuthScreen extends Component {
   }
 
 	gobackSubmit() {
-		//this.props.navigation.navigate('')
+		this.props.navigation.navigate('Welcome');
 	}
 
   registerSubmit() {
