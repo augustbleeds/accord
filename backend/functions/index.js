@@ -94,6 +94,10 @@ app.get('/user/friends/:id', (req, res) => {
     })
 });
 
+/**
+ * Add two friends by their email Ids. It's a mutual relationship
+ * @type {POST}
+ */
 //When 2 people add each other as friends
 app.post('/user/add', (req, res) => {
   console.log('getting 2 friends')
@@ -112,7 +116,10 @@ app.post('/user/add', (req, res) => {
     })
 });
 
-//Finds profile of user
+/**
+ * Finds profile of current user
+ * @type {GET}
+ */
 app.get('/user/profile/:id', (req, res) => {
   var currId = req.params.id;
   dbRootRef.child(`/User/${currId}`).once('value')
@@ -130,18 +137,21 @@ app.get('/user/profile/:id', (req, res) => {
     });
 });
 
-//Adds user to database
+/**
+ * Add user with :id to :category
+ * @type {POST}
+ */
 app.post('/user/match/:category/:id', (req, res) => {
-  // var category = 'Family';
-  // var myId = '-Kp26_r2wh1z3JUytJyb';
   var category = req.params.category;
   var myId = req.params.id;
   if (!dbRootRef.child(`/Topic/${category}/${myId}`)) {
+    console.log(`User ${myId} was not put in category ${category}`);
     res.json({success: true});
   }
   else {
     dbRootRef.child(`/Topic/${category}/${myId}`).set(true)
       .then((snapshot) => {
+        console.log(`User ${myId} was put in category ${category}`);
         res.send({success: true});
       })
   }
@@ -186,10 +196,5 @@ exports.matchUsers = functions.database
           .catch((err) => console.log(err))
       })
   });
-  // .ref('/Topic/{changedTopic}/debbie')
-  // .onCreate((event) => {
-  //   console.log('we made it');
-  //   console.log(event.data.val());
-  // });
 
 exports.route = functions.https.onRequest(app);
