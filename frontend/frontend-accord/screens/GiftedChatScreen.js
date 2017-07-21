@@ -16,8 +16,14 @@ class ChatScreen extends Component {
 
   constructor(props){
     super(props);
-		this.state = {messages: []};
+		this.state = {
+			messages: [],
+			currentUser: this.props.navigation.state.params.userObj
+		};
+		console.log('CURRENT USER', this.state.currentUser)
   }
+
+
 
 	componentWillMount() {
     this.setState({

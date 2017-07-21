@@ -34,8 +34,10 @@ export default class MatchScreen extends Component {
   }
 
   onMatchComplete() {
-    this.props.navigation.navigate('ChatScreen');
+    console.log('USEROBJECT', this.props.signedinuserObject);
+    this.props.navigation.navigate('ChatScreen', {userObj: this.props.signedinuserObject});
   }
+
   fetchMatch() {
     console.log('asdfasdfasdf');
     console.log(this.state.language);
@@ -66,7 +68,13 @@ export default class MatchScreen extends Component {
             Alert.alert(`You are matched with ${data.val()}`);
             this.setState({matchedUser: data.val()});
             console.log('this is this.props ' ,this.props);
-            this.props.navigator.navigate('ChatScreen', {username1: listenPath, username2: this.state.matchedUser});
+            this.props.navigator.navigate('ChatScreen', {
+              username1: listenPath,
+              username2: this.state.matchedUser,
+              userObj: this.props.signedinuserObject
+            });
+            console.log('this is USEROBJECT ' ,this.props.signedinuserObject);
+
             console.log('state is', this.state);
             // remove it from the database
             dbRootRef.child(`/Match/${listenPath}`).remove();
