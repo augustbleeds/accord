@@ -54,7 +54,7 @@ class LoginScreen extends Component {
 		})
     .then((responseJson) => {
 			console.log('response json is', responseJson);
-			if(responseJson == null){
+			if(responseJson === null){
 				Alert.alert('Username or Password is incorrect. Please try again!');
 			}
       if(responseJson !== null) {

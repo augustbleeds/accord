@@ -1,6 +1,8 @@
 
 import React, {Component} from 'react';
-import {	StyleSheet,
+import {
+	Alert,
+	StyleSheet,
 	KeyboardAvoidingView,
 	View,
 	ActivityIndicator,
@@ -53,7 +55,9 @@ class AuthScreen extends Component {
       if(responseJson !== null) {
         this.props.navigation.navigate('Login')
         console.log(responseJson);
-      }
+      }else{
+				Alert.alert('Something went wrong, please try again.');
+			}
     })
     .catch((err) => {
       alert("ERRRRR")
