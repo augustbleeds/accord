@@ -23,7 +23,7 @@ export default class slideStyles extends Component {
           <View level={10}><Text style={styles.Maintext}>Welcome To Accord</Text></View>
           <View level={15}><Text style={styles.secondText}>Swipe to Learn More</Text></View>
           <Button
-            title="Sign Upp"
+            title="Sign Up"
             raised
             buttonStyle={styles.buttonSignUpStyle}
             onPress={() => {console.log('pressed');

@@ -1,3 +1,4 @@
+
 import React, {Component} from 'react';
 import {	StyleSheet,
 	KeyboardAvoidingView,
@@ -65,38 +66,50 @@ class AuthScreen extends Component {
       <View style={styles.container}>
         <Text style={styles.textBig}>Let's Get Started!</Text>
           <TextInput
-            style={{height: 40, paddingTop: 10, textAlign: "center", color: '#fff', fontFamily: 'HelveticaNeue',}}
+            style={{height: 40, paddingTop: 10, textAlign: "center", color: '#fff',
+						//  fontFamily: 'HelveticaNeue',
+					 }}
             placeholder="Email Address"
             placeholderTextColor="#808080"
             onChangeText={(text) => this.setState({email: text})}
           />
           <TextInput
-            style={{height: 40, paddingTop: 10, textAlign: "center", color: '#fff', fontFamily: 'HelveticaNeue',}}
+            style={{height: 40, paddingTop: 10, textAlign: "center", color: '#fff',
+						// fontFamily: 'HelveticaNeue',
+					}}
             placeholder="Accord nickname"
             placeholderTextColor="#808080"
             onChangeText={(text) => this.setState({nickname: text})}
           />
           <TextInput
-            style={{height: 40, paddingTop: 10, textAlign: "center", color: '#fff', fontFamily: 'HelveticaNeue',}}
+            style={{height: 40, paddingTop: 10, textAlign: "center", color: '#fff',
+						// fontFamily: 'HelveticaNeue',
+					}}
             placeholder="Enter Password"
             placeholderTextColor="#808080"
             secureTextEntry={true}
             onChangeText={(text) => this.setState({password: text})}
           />
           <TextInput
-            style={{height: 40, paddingTop: 10, textAlign: "center", color: '#fff', fontFamily: 'HelveticaNeue',}}
+            style={{height: 40, paddingTop: 10, textAlign: "center", color: '#fff',
+						// fontFamily: 'HelveticaNeue',
+					}}
             placeholder="Enter Your School"
             placeholderTextColor="#808080"
             onChangeText={(text) => this.setState({school: text})}
           />
           <TextInput
-            style={{height: 40, paddingTop: 10, textAlign: "center", color: '#fff', fontFamily: 'HelveticaNeue',}}
+            style={{height: 40, paddingTop: 10, textAlign: "center", color: '#fff',
+						// fontFamily: 'HelveticaNeue',
+					}}
             placeholder="Gender"
             placeholderTextColor="#808080"
             onChangeText={(text) => this.setState({gender: text})}
           />
           <TextInput
-            style={{height: 40, paddingTop: 10, textAlign: "center", color: '#fff', fontFamily: 'HelveticaNeue',}}
+            style={{height: 40, paddingTop: 10, textAlign: "center", color: '#fff',
+						// fontFamily: 'HelveticaNeue',
+					}}
             placeholder="Description"
             placeholderTextColor="#808080"
             onChangeText={(text) => this.setState({desc: text})}
