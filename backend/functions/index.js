@@ -4,9 +4,7 @@ const admin = require('firebase-admin');
 var serviceAccount = require("./config.json");
 
 const quokkaURL = 'http://www.traveller.com.au/content/dam/images/g/u/n/q/h/0/image.related.articleLeadwide.620x349.gunpvd.png/1488330286332.png';
-
 admin.initializeApp(functions.config().firebase);
-
 const dbRootRef = admin.database().ref();
 
 /**
@@ -159,7 +157,8 @@ app.post('/user/match/:category/:id', (req, res) => {
 });
 
 /**
- * Database listener
+ * Match 2 users
+ * @type {DATABASE TRIGGER}
  */
 exports.matchUsers = functions.database
   // listen for new users in ANY topic
@@ -169,7 +168,7 @@ exports.matchUsers = functions.database
     const myTopic = event.params.changedTopic;
     dbRootRef.child(`/Topic/${myTopic}`).once('value')
       .then((topicSnap) => {
-        // get all the users {'asdfsadf': true, 'adfasdf', true}
+        // get all the users {'match1@aa.edu': true, 'match2@bb.edu', true}
         const usersObj = topicSnap.val();
         const keysArr = Object.keys(usersObj);
         // return if no matches found!
@@ -179,7 +178,7 @@ exports.matchUsers = functions.database
         // theses are user ids
         var firstKey = keysArr[0];
         var secondKey = keysArr[1];
-        // put two users in the match database!
+        // put two users in the match database! (as match1@aa : match2@bb)
         dbRootRef.child(`/Match/${firstKey}`).set(secondKey)
           .then(() => {
             console.log('got to the last part!');
@@ -187,7 +186,7 @@ exports.matchUsers = functions.database
             return dbRootRef.child(`/Match/${secondKey}`).set(firstKey);
           })
           .then(() => {
-            // delete
+            // delete users from the topic category because they've been matched.
             var updates = {};
             updates[`/Topic/${myTopic}/${firstKey}`] = null;
             updates[`/Topic/${myTopic}/${secondKey}`] = null;
