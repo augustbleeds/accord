@@ -139,22 +139,23 @@ app.get('/user/profile/:id', (req, res) => {
 
 /**
  * Add user with :id to :category
+ *  TODO: add a limit of one match at a time
  * @type {POST}
  */
 app.post('/user/match/:category/:id', (req, res) => {
   var category = req.params.category;
   var myId = req.params.id;
-  if (!dbRootRef.child(`/Topic/${category}/${myId}`)) {
-    console.log(`User ${myId} was not put in category ${category}`);
-    res.json({success: true});
-  }
-  else {
-    dbRootRef.child(`/Topic/${category}/${myId}`).set(true)
-      .then((snapshot) => {
-        console.log(`User ${myId} was put in category ${category}`);
-        res.send({success: true});
-      })
-  }
+  var tempRef = dbRootRef.child(`/Topic/${category}/${myId}`);
+  console.log(`The condition is : ${tempRef}`);
+  dbRootRef.child(`/Topic/${category}/${myId}`).set(true)
+    .then((snapshot) => {
+      console.log(`User ${myId} was put in category ${category}`);
+      res.send({success: true});
+    })
+    .catch((err) => {
+      console.log(`Error putting user ${myId} in category ${category}`);
+      res.json(null);
+    });
 });
 
 /**
