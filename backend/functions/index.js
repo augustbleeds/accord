@@ -70,28 +70,28 @@ app.get('/user/friends/:id', (req, res) => {
   console.log('GETTING FRIENDS');
   var currId = req.params.id;
   dbRootRef.child(`/User/${currId}/friends`).once('value')
-    .then((friendEmailsSnap) => {
-      // TODO: object of emails....figure out if email_ids have the .edu in them.
-      var emailsObj = friendEmailsSnap.val();
-      // send back empty array
-      if(!emailsObj){
-        res.json([]);
-        return;
-      }
-      var emailsArr = Object.keys(emailsObj);
-      var FriendsPromise = emailsArr.map(email => (dbRootRef.child(`/User/${email}`).once('value')));
-
-      Promise.all(FriendsPromise)
-        .then(friendsSnap => {
-          var friendsObj = friendsSnap.map(friendSnap => (friendSnap.val()));
-          // send back array of objects
-          res.json(friendsObj);
-        })
-    })
-    .catch((err)-> {
-      console.log("error getting friends");
-      res.json(null);
-    })
+  .then((friendEmailsSnap) => {
+    // TODO: object of emails....figure out if email_ids have the .edu in them.
+    var emailsObj = friendEmailsSnap.val();
+    // send back empty array
+    if(!emailsObj){
+      res.json([]);
+      return;
+    }
+    var emailsArr = Object.keys(emailsObj);
+    var FriendsPromise = emailsArr.map(email => (dbRootRef.child(`/User/${email}`).once('value')));
+    // return promise for array of friend objects
+    return Promise.all(FriendsPromise);
+  })
+  .then(friendsSnap => {
+    var friendsObj = friendsSnap.map(friendSnap => (friendSnap.val()));
+    // send back array of objects
+    res.json(friendsObj);
+  })
+  .catch((err) => {
+    console.log("error getting friends");
+    res.json(null);
+  });
 });
 
 /**
