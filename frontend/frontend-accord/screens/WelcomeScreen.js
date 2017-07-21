@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {View, Text } from 'react-native';
 import Slides from '../components/slides';
+import Swipers from '../components/swiper';
 import _ from 'lodash';
 import {AppLoading} from 'expo';
 const SLIDE_DATA = [
@@ -35,11 +36,15 @@ class WelcomeScreen extends Component {
     //   return<AppLoading />;
     // }
     return(
-      <Slides
-        data={SLIDE_DATA}
-        onSlidesComplete={this.onSlidesComplete}
-        onLoginComplete={this.onLoginComplete}
-      />
+      // <Slides
+      //   data={SLIDE_DATA}
+      //   onSlidesComplete={this.onSlidesComplete}
+      //   onLoginComplete={this.onLoginComplete}
+      // />
+      <Swipers
+          onSlidesComplete={this.onSlidesComplete}
+          onLoginComplete={this.onLoginComplete}
+       />
     )
   }
 }
