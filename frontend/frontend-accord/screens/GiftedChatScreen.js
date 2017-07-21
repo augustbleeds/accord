@@ -11,6 +11,7 @@ Text,} from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import { List, ListItem, Button } from 'react-native-elements';
 import { GiftedChat } from 'react-native-gifted-chat';
+import chatBackend from '../chatBackend.js';
 
 class ChatScreen extends Component {
 
@@ -18,28 +19,11 @@ class ChatScreen extends Component {
     super(props);
 		this.state = {
 			messages: [],
-			currentUser: this.props.navigation.state.params.userObj
+			currentUser: this.props.navigation.state.params.userObj,
+			matchedUserId: this.props.navigation.state.params.username2,
+			currentUserId: this.props.navigation.state.params.username1,
 		};
-		console.log('CURRENT USER', this.state.currentUser)
-  }
 
-
-
-	componentWillMount() {
-    this.setState({
-      messages: [
-        {
-          _id: 1,
-          text: 'Hello developer',
-          createdAt: new Date(),
-          user: {
-            _id: 2,
-            name: 'React Native',
-            avatar: 'https://facebook.github.io/react/img/logo_og.png',
-          },
-        },
-      ],
-    });
   }
 
 	onSend(messages) {
@@ -48,13 +32,28 @@ class ChatScreen extends Component {
     }));
   }
 
+	componentDidMount(){
+		console.log("OUR STATE IS: ", this.state);
+		chatBackend.loadMessages( (message) => {
+			this.setState((previousState) => {
+				return {
+					messages: GiftedChat.append(previousState.messages, message)
+				}
+			})}, this.state.currentUserId, this.state.matchedUserId, this.state.currentUser.nickname);
+	}
+
+	componentWillUnMount(){
+		chatBackend.closeChat();
+	}
+
   render() {
     return (
 			<GiftedChat
 				messages={this.state.messages}
-				onSend={(messages) => this.onSend(messages)}
+				onSend={(messages) => chatBackend.sendMessage(messages, this.state.matchedUserId, this.state.currentUserId)}
 				user={{
-					_id: 1,
+					_id: this.state.currentUserId,
+					name: this.state.currentUser.nickname,
 				}}
 			/>
     )
