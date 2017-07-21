@@ -27,6 +27,9 @@ class ChatScreen extends Component {
 
   }
 
+	// static navigationOptions = {
+	// 	title: 'Home'
+	// }
 
 
 	onSend(messages) {
@@ -34,10 +37,6 @@ class ChatScreen extends Component {
       messages: GiftedChat.append(previousState.messages, messages),
     }));
   }
-
-	// setUpFriendPending() {
-	//
-	// }
 
 	componentDidMount(){
 		chatBackend.setUpFriendPending(this.state.currentUserId, this.state.matchedUserId);
@@ -79,8 +78,17 @@ class ChatScreen extends Component {
 	);
 }
 
+// const navigator = StackNavigator({
+// 	Chat: {screen: ChatScreen}
+// })
+
   render() {
     return (
+				<View style={{flex: 1}}>
+					<View style={{flex: 1, flexDirection: 'row'}}>
+					<Button title={'Leave'} buttonStyle={{flex: 1, marginTop: 20}}></Button>
+					<Button title={'Connect'} buttonStyle={{flex: 1, marginTop: 20}}></Button>
+				</View>
 				<GiftedChat
 					messages={this.state.messages}
 					onSend={(messages) => chatBackend.sendMessage(messages, this.state.matchedUserId, this.state.currentUserId)}
@@ -89,10 +97,17 @@ class ChatScreen extends Component {
 						name: this.state.currentUser.nickname,
 					}}
 				/>
+			</View>
     )
   }
 
 }
+
+// const stackNav = StackNavigator({
+// 	ChatScreen: {
+// 		screen: ChatScreen
+// 	}
+// })
 
 
 export default ChatScreen;
