@@ -4,18 +4,22 @@ class chatBackend {
   messagesRef = null;
   // initialize Firebase Backend
   constructor() {
-    // firebase.initializeApp({
-    //      apiKey: "AIzaSyDkhtl4JKhb_1aHL3ookaq0iSRsXmW1Hcg",
-    //      authDomain: "accord-18bdf.firebaseapp.com",
-    //      databaseURL: "https://accord-18bdf.firebaseio.com",
-    //      projectId: "accord-18bdf",
-    //      storageBucket: "accord-18bdf.appspot.com",
-    //      messagingSenderId: "986125110855"
-    // });
+    // console.log('AUGUSTUS WAS NOT HERE');
   }
 
   generateMessageId(myUserId, matchedUserId){
     return (myUserId < matchedUserId) ? (`${myUserId}${matchedUserId}`) : (`${matchedUserId}${myUserId}`);
+  }
+  setUpFriendPending(myUserId, matchedUserId) {
+    //this.generateMessageId(myUserId, matchedUserId);
+    firebase.database().ref(`/FriendPending`)
+    .push()
+    .set(
+      {
+        myUserId: 'waiting',
+        matchedUserId: 'waiting'
+      }
+    );
   }
   // retrieve the messages from the Backend
   // userID IS email (ex: bob@gmail)
