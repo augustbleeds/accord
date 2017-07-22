@@ -12,7 +12,7 @@ export default class swiperStyles extends Component {
       <Swiper>
         <View style={[styles.slide,{ backgroundColor: '#000000' }]}>
           <Image style={{width:260, bottom: 30, alignSelf: 'auto'}} source={require('../assets/icons/icon2.png')} />
-          <View level={10}><Text style={styles.Maintext}>Welcome To Accord</Text></View>
+          <View level={10}><Text style={styles.Maintext}>Welcome</Text></View>
           <View level={15}><Text style={styles.secondText}>Swipe to Learn More</Text></View>
           <Button
             title="Sign Up"
@@ -32,7 +32,7 @@ export default class swiperStyles extends Component {
           <Image resizeMode="cover" style={styles.imgStyle} source={require('../assets/icons/lock.png')} />
           <View level={-10}><Text style={styles.Maintext}>Safe and Secure</Text></View>
           <View level={5}><Text style={styles.secondText}>Accord is designed
-            to help you share your story and be emotionally healthy in a safe and
+            to help you connect with other students going through similar life events. Share in a safe and
             secure environment.
           </Text></View>
           <Button
@@ -52,8 +52,8 @@ export default class swiperStyles extends Component {
           <Image resizeMode="cover" style={styles.imgStyle2} source={require('../assets/icons/talk.png')} />
           <View level={-10}><Text style={styles.Maintext}>Voice your Story</Text></View>
           <View level={5}><Text style={styles.secondText}>
-            These are people who are waiting to help you. They probably have gone through
-            the same things you are going through. They can help.
+            We believe that authenticity is cool, real, and emotionally healthy.
+            It deserves a higher priority in our lives and should be built into the way we connect with others.
           </Text></View>
           <Button
             title="Sign Up"
