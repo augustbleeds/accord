@@ -9,7 +9,11 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 export default class swiperStyles extends Component {
   render(){
     return (
-      <Swiper>
+      <View style={{flex: 1}}>
+      <View style={{flex: 11}}>
+      <Swiper
+        dot={<View style={{backgroundColor: 'rgba(0,0,0,.2)', width: 5, height: 5, borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 65}} />}
+        >
         <View style={[styles.slide,{ backgroundColor: '#000000' }]}>
           <Image style={{width:260, bottom: 30, alignSelf: 'auto'}} source={require('../assets/icons/icon2.png')} />
           <View level={10}><Text style={styles.Maintext}>Welcome</Text></View>
@@ -85,6 +89,10 @@ export default class swiperStyles extends Component {
           />
         </View>
       </Swiper>
+    </View>
+    <View style={{backgroundColor: 'skyblue', flex:1}}>
+    </View>
+    </View>
     );
   }
 }
