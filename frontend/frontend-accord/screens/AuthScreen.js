@@ -8,8 +8,10 @@ import {
 	ActivityIndicator,
 	TouchableOpacity,
 	Image,
-TextInput,
-Text,} from 'react-native';
+	TextInput,
+	Text,
+	ScrollView,
+} from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 
 import { Button } from 'react-native-elements'
@@ -69,56 +71,44 @@ class AuthScreen extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.textBig}>Let's Get Started!</Text>
+					<ScrollView>
           <TextInput
-            style={{height: 40, paddingTop: 10, textAlign: "center", color: '#fff',
-						//  fontFamily: 'HelveticaNeue',
-					 }}
+            style={{height: 40, textAlign: "center", color: '#fff'}}
             placeholder="Email Address"
             placeholderTextColor="#808080"
             onChangeText={(text) => this.setState({email: text})}
           />
           <TextInput
-            style={{height: 40, paddingTop: 10, textAlign: "center", color: '#fff',
-						// fontFamily: 'HelveticaNeue',
-					}}
+            style={{height: 40, textAlign: "center", color: '#fff'}}
             placeholder="Accord nickname"
             placeholderTextColor="#808080"
             onChangeText={(text) => this.setState({nickname: text})}
           />
           <TextInput
-            style={{height: 40, paddingTop: 10, textAlign: "center", color: '#fff',
-						// fontFamily: 'HelveticaNeue',
-					}}
+            style={{height: 40, textAlign: "center", color: '#fff'}}
             placeholder="Enter Password"
             placeholderTextColor="#808080"
             secureTextEntry={true}
             onChangeText={(text) => this.setState({password: text})}
           />
           <TextInput
-            style={{height: 40, paddingTop: 10, textAlign: "center", color: '#fff',
-						// fontFamily: 'HelveticaNeue',
-					}}
+            style={{height: 40, textAlign: "center", color: '#fff'}}
             placeholder="Enter Your School"
             placeholderTextColor="#808080"
             onChangeText={(text) => this.setState({school: text})}
           />
           <TextInput
-            style={{height: 40, paddingTop: 10, textAlign: "center", color: '#fff',
-						// fontFamily: 'HelveticaNeue',
-					}}
+            style={{height: 40, textAlign: "center", color: '#fff'}}
             placeholder="Gender"
             placeholderTextColor="#808080"
             onChangeText={(text) => this.setState({gender: text})}
           />
           <TextInput
-            style={{height: 40, paddingTop: 10, textAlign: "center", color: '#fff',
-						// fontFamily: 'HelveticaNeue',
-					}}
+            style={{height: 40, textAlign: "center", color: '#fff'}}
             placeholder="Description"
             placeholderTextColor="#808080"
             onChangeText={(text) => this.setState({desc: text})}
           />
-
             <Button
               buttonStyle={styles.buttonStyle}
               onPress={ () =>  this.registerSubmit()}
@@ -130,6 +120,7 @@ class AuthScreen extends Component {
               onPress={ () =>  this.gobackSubmit()}
               title="Go back"
             />
+					</ScrollView>
       </View>
     )
   }
@@ -141,6 +132,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#000000',
+		paddingTop: 20,
   },
   textBig: {
     fontSize: 36,

@@ -76,17 +76,13 @@ class LoginScreen extends Component {
         <Text style={styles.textBig}>Login</Text>
 				<ScrollView>
           <TextInput
-            style={{height: 40, paddingTop: 10, textAlign: "center", color: '#fff',
-						// fontFamily: 'HelveticaNeue',
-					}}
+            style={{height: 40, paddingTop: 10, textAlign: "center", color: '#fff'}}
             placeholder="Enter Email"
             placeholderTextColor="#808080"
             onChangeText={(text) => this.setState({email: text})}
           />
           <TextInput
-            style={{height: 40, paddingTop: 10, textAlign: "center", color: '#fff',
-						//  fontFamily: 'HelveticaNeue',
-					 }}
+            style={{height: 40, paddingTop: 10, textAlign: "center", color: '#fff'}}
             placeholder="password"
             placeholderTextColor="#808080"
             secureTextEntry={true}
