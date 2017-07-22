@@ -25,6 +25,7 @@ export default class MatchScreen extends Component {
 
     this.state = ({
       topic: '',
+      matchedUser: '',
     });
 
   }
