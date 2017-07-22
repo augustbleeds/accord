@@ -18,17 +18,13 @@ firebase.initializeApp(config);
 var dbRootRef = firebase.database().ref();
 const backEnd = 'https://us-central1-accord-18bdf.cloudfunctions.net/route/user/match';
 
-// dbRootRef.child('Match/test')
-//   .on('child_added', data => {
-//     Alert.alert('the child was added');
-//   });
 
 export default class MatchScreen extends Component {
   constructor(props){
     super(props);
 
     this.state = ({
-      language: ''
+      topic: '',
     });
 
   }
@@ -40,9 +36,9 @@ export default class MatchScreen extends Component {
 
   fetchMatch() {
     console.log('asdfasdfasdf');
-    console.log(this.state.language);
+    console.log(this.state.topic);
     console.log(this.props.signedIn);
-    const endPoint = `${backEnd}/${this.state.language}/${this.props.signedIn.split('.')[0]}`;
+    const endPoint = `${backEnd}/${this.state.topic}/${this.props.signedIn.split('.')[0]}`;
     console.log('endpoint is', endPoint);
     fetch(endPoint, {
       method: 'POST',
@@ -99,9 +95,9 @@ export default class MatchScreen extends Component {
           </Text>
             <Picker
               style={styles.picker}
-              selectedValue={this.state.language}
+              selectedValue={this.state.topic}
               itemStyle={styles.itemPicker}
-              onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
+              onValueChange={(itemValue, itemIndex) => this.setState({topic: itemValue})}>
               <Picker.Item label="Select one" value="" />
               <Picker.Item label="Depression" value="Depression" />
               <Picker.Item label="Anxiety" value="Anxiety" />
