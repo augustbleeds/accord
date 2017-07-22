@@ -9,10 +9,10 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 class Enter extends Component {
   render(){
     return(
-      <View style={{backgroundColor: "#6ADAA8", flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}}>
+      <View style={{backgroundColor: "black", flex: 1, flexDirection: 'row'}}>
       <TouchableOpacity
         onPress={() => this.props.onSlidesComplete()}
-        style={{color: 'white'}}
+        style={{backgroundColor: "#6ADAA8", flex: 1, borderRightWidth: 1, color: 'white', justifyContent: 'center', alignItems: 'center'}}
         >
         <Text style={{color: 'white'}}>
           Sign Up
@@ -20,7 +20,7 @@ class Enter extends Component {
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => this.props.onLoginComplete()}
-        style={{color: 'white'}}
+        style={{backgroundColor: "#6ADAA8", flex: 1, borderLeftWidth: 1, color: 'white', justifyContent: 'center', alignItems: 'center'}}
         >
         <Text style={{color: 'white'}}>
           Log In
@@ -35,11 +35,10 @@ export default class swiperStyles extends Component {
   render(){
     return (
       <View style={{flex: 1}}>
-      <View style={{flex: 11}}>
+      <View style={{flex: 13}}>
       <Swiper
         dot={<View style={{backgroundColor: 'gray', width: 5, height: 5, borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 50}} />}
         activeDot={<View style={{backgroundColor: 'white', width: 5, height: 5, borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 50}} />}
-        // dot={<View style={{backgroundColor: 'rgba(0,70,0,.2)', width: 5, height: 5, borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 75}} />}
         >
         <View style={[styles.slide,{ backgroundColor: '#000000' }]}>
           <Image style={{width:260, bottom: 30, alignSelf: 'auto'}} source={require('../assets/icons/icon2.png')} />
