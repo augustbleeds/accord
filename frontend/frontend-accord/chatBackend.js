@@ -20,13 +20,14 @@ class chatBackend {
 
   onLeaveOrConnect(myUserId, matchedUserId, action, navigation) {
     if(action === 'LEAVE') {
+      console.log('LEAVE ME ALONE: ', action)
       firebase.database().ref(`/FriendPending/${this.generateMessageId(myUserId, matchedUserId)}/${myUserId}`)
       .set('LEAVE')
     } else {
       firebase.database().ref(`/FriendPending/${this.generateMessageId(myUserId, matchedUserId)}/${myUserId}`)
       .set('CONNECT')
-      navigation.navigate('AllScreen');
     }
+    navigation.navigate('AllScreen');
   }
   // retrieve the messages from the Backend
   // userID IS email (ex: bob@gmail)
