@@ -11,15 +11,23 @@ class chatBackend {
     return (myUserId < matchedUserId) ? (`${myUserId}${matchedUserId}`) : (`${matchedUserId}${myUserId}`);
   }
   setUpFriendPending(myUserId, matchedUserId) {
-    //this.generateMessageId(myUserId, matchedUserId);
-    firebase.database().ref(`/FriendPending`)
-    .push()
-    .set(
-      {
-        myUserId: 'waiting',
-        matchedUserId: 'waiting'
-      }
-    );
+    var pendingObject = {};
+    pendingObject[myUserId] = 'WAITING';
+    pendingObject[matchedUserId] = 'WAITING';
+    firebase.database().ref(`/FriendPending/${this.generateMessageId(myUserId, matchedUserId)}`)
+    .set(pendingObject);
+  }
+
+  onLeaveOrConnect(myUserId, matchedUserId, action, navigation) {
+    if(action === 'LEAVE') {
+      console.log('LEAVE ME ALONE: ', action)
+      firebase.database().ref(`/FriendPending/${this.generateMessageId(myUserId, matchedUserId)}/${myUserId}`)
+      .set('LEAVE')
+    } else {
+      firebase.database().ref(`/FriendPending/${this.generateMessageId(myUserId, matchedUserId)}/${myUserId}`)
+      .set('CONNECT')
+    }
+    navigation.navigate('AllScreen');
   }
   // retrieve the messages from the Backend
   // userID IS email (ex: bob@gmail)

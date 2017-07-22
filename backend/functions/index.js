@@ -2,7 +2,7 @@ const functions = require('firebase-functions');
 const app = require('express')();
 const admin = require('firebase-admin');
 var serviceAccount = require("./config.json");
-
+const axios = require('axios')
 const quokkaURL = 'http://www.traveller.com.au/content/dam/images/g/u/n/q/h/0/image.related.articleLeadwide.620x349.gunpvd.png/1488330286332.png';
 admin.initializeApp(functions.config().firebase);
 const dbRootRef = admin.database().ref();
@@ -71,10 +71,12 @@ app.get('/user/friends/:id', (req, res) => {
   .then((friendEmailsSnap) => {
     // TODO: object of emails....figure out if email_ids have the .edu in them.
     var emailsObj = friendEmailsSnap.val();
+    console.log('emailsObj is', JSON.stringify(emailsObj));
     // send back empty array
     if(!emailsObj){
+      console.log('inside of the if condition');
       res.json([]);
-      return;
+      return null;
     }
     var emailsArr = Object.keys(emailsObj);
     var FriendsPromise = emailsArr.map(email => (dbRootRef.child(`/User/${email}`).once('value')));
@@ -82,13 +84,18 @@ app.get('/user/friends/:id', (req, res) => {
     return Promise.all(FriendsPromise);
   })
   .then(friendsSnap => {
+    if(!friendsSnap){
+      return;
+    }
     var friendsObj = friendsSnap.map(friendSnap => (friendSnap.val()));
     // send back array of objects
     res.json(friendsObj);
+    return;
   })
   .catch((err) => {
-    console.log("error getting friends");
+    console.log("error getting friends", err);
     res.json(null);
+    return;
   });
 });
 
@@ -196,5 +203,62 @@ exports.matchUsers = functions.database
           .catch((err) => console.log(err))
       })
   });
+
+  function helperDeletePending(pairsofUsers){
+    var updates = {};
+    updates[`/FriendPending/${pairsofUsers}`] = null;
+    return dbRootRef.update(updates);
+  }
+
+  function helperAddFriends(myId, friendId) {
+    var updates = {};
+    updates[`/User/${myId}/friends/${friendId}`] = quokkaURL;
+    updates[`/User/${friendId}/friends/${myId}`] = quokkaURL;
+
+    return dbRootRef.update(updates);
+  }
+
+
+  /**
+   * 2 users becoming friends
+   * @type {DATABASE TRIGGER}
+   */
+   exports.makeFriends = functions.database
+   .ref('/FriendPending/{pairUsers}')
+   .onWrite(event => {
+     const pairsofUsers = event.params.pairUsers;
+     dbRootRef.child(`/FriendPending/${pairsofUsers}`).once('value')
+     .then(function(pairsSnap) {
+       var pairs = pairsSnap.val();
+       var objKeys = Object.keys(pairs);
+       var first = objKeys[0];
+       var second = objKeys[1];
+       // if there was a leave then connect sequence
+       if(!second){
+         helperDeletePending(pairsofUsers);
+         return;
+       }
+       console.log(`PENDING FRIEND DB TRIGGER firstUser: ${first}, secondUser: ${second}`);
+       if (pairs[first] === 'LEAVE' || pairs[second] === 'LEAVE') {
+         return helperDeletePending(pairsofUsers);
+       }else if (pairs[first] === 'CONNECT' && pairs[second] === 'CONNECT') {
+         helperAddFriends(first, second)
+          .then((snapshot) => {
+            console.log(`added friends! ${first} and ${second}`);
+            return helperDeletePending(pairsofUsers);
+          })
+          .catch((err) => {
+            console.log('error adding friends', err);
+          });
+      } else {
+        return;
+      }
+     })
+     .catch(err => {
+       console.log('error ', err);
+     });
+   });
+
+
 
 exports.route = functions.https.onRequest(app);

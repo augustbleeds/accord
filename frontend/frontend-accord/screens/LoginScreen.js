@@ -8,6 +8,7 @@ import {
 	Image,
 	TextInput,
 	Text,
+	ScrollView,
 	Alert} from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 // import {connect} from 'react-redux';
@@ -73,6 +74,7 @@ class LoginScreen extends Component {
       <View style={styles.container}>
         <Image style={{width:280 , height: 70, bottom: 65, alignSelf: 'auto'}} source={require('../assets/icons/icon2.png')} />
         <Text style={styles.textBig}>Login</Text>
+				<ScrollView>
           <TextInput
             style={{height: 40, paddingTop: 10, textAlign: "center", color: '#fff',
 						// fontFamily: 'HelveticaNeue',
@@ -100,7 +102,7 @@ class LoginScreen extends Component {
 							onPress={ () => this.goBackSubmit()}
 							title="Go Back"
 						/>
-
+					</ScrollView>
       </View>
     )
   }
