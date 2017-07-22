@@ -3,6 +3,7 @@ import { Modal, Image, ListView, View, Dimensions, Text, StyleSheet, TouchableHi
 import FriendsProfileBio from './FriendsProfileBio';
 import { List, ListItem, Button } from 'react-native-elements'
 const _ = require('underscore');
+import firebase from 'firebase';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -21,6 +22,10 @@ export default class FriendsList extends Component {
     };
   }
 
+  componentDidMount() {
+    console.log('FRIENDS LIST MOUNTED AGAIN');
+  }
+
   componentWillMount() {
     this._genRows();
   }
@@ -31,10 +36,10 @@ export default class FriendsList extends Component {
     //alert('HELLO')
     this.setState({visible: true});
   }
-  _genRows = () => {
-    console.log('FRIENDSLIST', this.props.signedIn)
-    const data = this.state.data.slice(0);
-    fetch('https://us-central1-accord-18bdf.cloudfunctions.net/route/user/friends/' + this.props.signedIn.split('.')[0])
+
+  _fetchFriendList(myUserId){
+    const data = [];
+    fetch('https://us-central1-accord-18bdf.cloudfunctions.net/route/user/friends/' + myUserId)
     .then((response) => response.json())
     .then((responseJson) => {
         console.log(responseJson);
@@ -44,19 +49,26 @@ export default class FriendsList extends Component {
           data.push(responseJson[i]);
         }
         console.log("after" , data);
-
         this.setState({
           data,
           dataSource: this.state.dataSource.cloneWithRows(data),
       });
-
-
    })
    .catch((err) => {
      console.log('error', err)
    });
+  }
 
-
+  _genRows = () => {
+    console.log('FRIENDSLIST', this.props.signedIn)
+    var myUserId = this.props.signedIn.split('.')[0];
+    this._fetchFriendList(myUserId);
+    var self = this;
+    console.log(`listening forrrrr /User/${myUserId}/friends`);
+   firebase.database().ref(`/User/${myUserId}/friends`).on('value', function(friendsSnap){
+      console.log('child_changed in FriendsList listening for', friendsSnap.val() );
+      self._fetchFriendList(myUserId);
+   });
   };
 
   setModalVisible(visible) {

@@ -2,26 +2,32 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, ListView } from 'react-native';
 import FriendsList from '../components/FriendsList';
 import UserProfile from '../components/UserProfile';
-export default function FriendsScreen ({signedIn, signedinuserObject}) {
-    console.log('FRIENDSSCREEN', signedIn)
-    return (
-      <View style={styles.outside}>
-      <View style={[styles.page, styles.container]}>
-      {/* <View style={styles.container}> */}
+export default class FriendsScreen extends Component {
+
+    componentDidMount(){
+      console.log('THE FRIEND SCREEN MOUNTED');
+    }
+
+    render(){
+      return (
+        <View style={styles.outside}>
+          <View style={[styles.page, styles.container]}>
+            {/* <View style={styles.container}> */}
             <FriendsList
-              signedIn={signedIn}
+              signedIn={this.props.signedIn}
               ref={el => (this._first = el)}
               style={[styles.list, { backgroundColor: '#000' }]}
-             />
-      </View>
-      <View style={styles.profile}>
-        <UserProfile
-          signedIn={signedIn}
-          signedinuserObject={signedinuserObject}
-          />
-      </View>
-    </View>
-    );
+            />
+          </View>
+          <View style={styles.profile}>
+            <UserProfile
+              signedIn={this.props.signedIn}
+              signedinuserObject={this.props.signedinuserObject}
+            />
+          </View>
+        </View>
+      );
+    }
 }
 
 const styles = StyleSheet.create({
