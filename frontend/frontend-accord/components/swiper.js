@@ -37,6 +37,7 @@ export default class swiperStyles extends Component {
       <View style={{flex: 1}}>
       <View style={{flex: 11}}>
       <Swiper
+        dot={<View style={{backgroundColor: 'gray', width: 5, height: 5, borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 50}} />}
         activeDot={<View style={{backgroundColor: 'white', width: 5, height: 5, borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 50}} />}
         // dot={<View style={{backgroundColor: 'rgba(0,70,0,.2)', width: 5, height: 5, borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 75}} />}
         >
