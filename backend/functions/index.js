@@ -197,4 +197,48 @@ exports.matchUsers = functions.database
       })
   });
 
+  function helperDeletePending(pairsofUsers){
+    var updates = {};
+    updates[`/FriendPending/${pairsofUsers}`] = null;
+    return dbRootRef.update(updates);
+  }
+
+  /**
+   * 2 users becoming friends
+   * @type {DATABASE TRIGGER}
+   */
+   exports.makeFriends = functions.database
+   .ref('/FriendPending/{pairUsers}')
+   .onUpdate(function(pairsSnap) {
+     const pairsofUsers = event.params.pairUsers;
+     var pairs = pairsSnap.val();
+     var objKeys = Object.keys(pairs);
+     var first = objKeys[0];
+     var second = objKeys[1];
+     if (pairs[first] === 'LEAVE' || pairs[second] === 'LEAVE') {
+       return helperDeletePending(pairsofUsers);
+     }else if (pairs[first] === 'CONNECT' && pairs[second] === 'CONNECT') {
+       fetch('https://us-central1-accord-18bdf.cloudfunctions.net/route/user/add', {
+         method: 'POST',
+         headers: {
+           "Content-Type": "application/json"
+         },
+         body: JSON.stringify({
+           myId: first,
+           friendId: second
+         })
+       })
+       .then((resp) => resp.json())
+       .then((responseJson) => {
+         if (responseJson.success) {
+           return helperDeletePending(pairsofUsers)
+         }
+       })
+       .catch(err => console.log(`Error: assigning users`));
+     } else{
+       return;
+     }
+   });
+
+
 exports.route = functions.https.onRequest(app);
