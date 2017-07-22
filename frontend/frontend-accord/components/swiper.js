@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Image, View, Text, ScrollView, Dimensions, StyleSheet, Alert} from 'react-native';
+import { TouchableOpacity, Button, Image, View, Text, ScrollView, Dimensions, StyleSheet, Alert} from 'react-native';
 // import { Button } from 'react-native-elements';
 import Swiper from 'react-native-swiper';
 
@@ -10,17 +10,22 @@ class Enter extends Component {
   render(){
     return(
       <View style={{backgroundColor: "#6ADAA8", flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}}>
-      <Button
-        title="Sign Up"
-        color = "white"
-        onPress={() => {console.log('pressed');
-        this.props.onSlidesComplete()}}
-      />
-      <Button
-        title="Log In"
-        color = "white"
-        onPress={this.props.onLoginComplete}
-      />
+      <TouchableOpacity
+        onPress={() => this.props.onSlidesComplete()}
+        style={{color: 'white'}}
+        >
+        <Text style={{color: 'white'}}>
+          Sign Up
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => this.props.onLoginComplete()}
+        style={{color: 'white'}}
+        >
+        <Text style={{color: 'white'}}>
+          Log In
+        </Text>
+      </TouchableOpacity>
     </View>
     );
   }
