@@ -78,36 +78,35 @@ class ChatScreen extends Component {
 	);
 }
 
-// const navigator = StackNavigator({
-// 	Chat: {screen: ChatScreen}
-// })
-
   render() {
     return (
-				<View style={{flex: 1}}>
-					<View style={{flex: 1, flexDirection: 'row'}}>
-					<Button title={'Leave'} buttonStyle={{flex: 1, marginTop: 20}}></Button>
-					<Button title={'Connect'} buttonStyle={{flex: 1, marginTop: 20}}></Button>
+			<View style={{flex: 1}}>
+				<View style={{flex: 1, flexDirection: 'row', backgroundColor: 'gray'}}>
+					<Button
+						title={'Leave'}
+						onPress={() => chatBackend.onLeaveOrConnect(this.state.currentUserId, this.state.matchedUserId, 'LEAVE', this.props.navigation)}
+						buttonStyle={{backgroundColor: 'red', marginTop: 20, flex: 1}}>
+						</Button>
+					<Button
+						onPress={() => chatBackend.onLeaveOrConnect(this.state.currentUserId, this.state.matchedUserId, 'CONNECT', this.props.navigation)}
+						title={'Connect'}
+						buttonStyle={{backgroundColor: '#6adaa8', marginTop: 20, flex: 1}}></Button>
 				</View>
-				<GiftedChat
-					messages={this.state.messages}
-					onSend={(messages) => chatBackend.sendMessage(messages, this.state.matchedUserId, this.state.currentUserId)}
-					user={{
-						_id: this.state.currentUserId,
-						name: this.state.currentUser.nickname,
-					}}
-				/>
+				<View style={{flex: 10}}>
+					<GiftedChat
+						messages={this.state.messages}
+						onSend={(messages) => chatBackend.sendMessage(messages, this.state.matchedUserId, this.state.currentUserId)}
+						user={{
+							_id: this.state.currentUserId,
+							name: this.state.currentUser.nickname,
+						}}
+					/>
+				</View>
 			</View>
     )
   }
 
 }
-
-// const stackNav = StackNavigator({
-// 	ChatScreen: {
-// 		screen: ChatScreen
-// 	}
-// })
 
 
 export default ChatScreen;
