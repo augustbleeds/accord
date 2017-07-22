@@ -1,35 +1,35 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, Button, Image, View, Text, ScrollView, Dimensions, StyleSheet, Alert} from 'react-native';
-// import { Button } from 'react-native-elements';
+import EnterButtons from './EnterButtons'
 import Swiper from 'react-native-swiper';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-class Enter extends Component {
-  render(){
-    return(
-      <View style={{backgroundColor: "black", flex: 1, flexDirection: 'row'}}>
-      <TouchableOpacity
-        onPress={() => this.props.onSlidesComplete()}
-        style={{backgroundColor: "#6ADAA8", flex: 1, borderRightWidth: 1, color: 'white', justifyContent: 'center', alignItems: 'center'}}
-        >
-        <Text style={{color: 'white'}}>
-          Sign Up
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => this.props.onLoginComplete()}
-        style={{backgroundColor: "#6ADAA8", flex: 1, borderLeftWidth: 1, color: 'white', justifyContent: 'center', alignItems: 'center'}}
-        >
-        <Text style={{color: 'white'}}>
-          Log In
-        </Text>
-      </TouchableOpacity>
-    </View>
-    );
-  }
-}
+// class Enter extends Component {
+//   render(){
+//     return(
+//       <View style={{backgroundColor: "black", flex: 1, flexDirection: 'row'}}>
+//       <TouchableOpacity
+//         onPress={() => this.props.onSlidesComplete()}
+//         style={{backgroundColor: "#6ADAA8", flex: 1, borderRightWidth: 1, color: 'white', justifyContent: 'center', alignItems: 'center'}}
+//         >
+//         <Text style={{color: 'white'}}>
+//           Sign Up
+//         </Text>
+//       </TouchableOpacity>
+//       <TouchableOpacity
+//         onPress={() => this.props.onLoginComplete()}
+//         style={{backgroundColor: "#6ADAA8", flex: 1, borderLeftWidth: 1, color: 'white', justifyContent: 'center', alignItems: 'center'}}
+//         >
+//         <Text style={{color: 'white'}}>
+//           Log In
+//         </Text>
+//       </TouchableOpacity>
+//     </View>
+//     );
+//   }
+// }
 
 export default class swiperStyles extends Component {
   render(){
@@ -67,7 +67,7 @@ export default class swiperStyles extends Component {
         </View>
       </Swiper>
     </View>
-    <Enter
+    <EnterButtons
       onSlidesComplete={() => this.props.onSlidesComplete()}
       onLoginComplete={() => this.props.onLoginComplete()}
     />
