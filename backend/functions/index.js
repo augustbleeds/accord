@@ -223,13 +223,53 @@ exports.matchUsers = functions.database
    * 2 users becoming friends
    * @type {DATABASE TRIGGER}
    */
-   exports.makeFriends = functions.database
+   exports.makeFriends1 = functions.database
    .ref('/FriendPending/{pairUsers}')
-   .onWrite(event => {
+   .onCreate(event => {
      const pairsofUsers = event.params.pairUsers;
      dbRootRef.child(`/FriendPending/${pairsofUsers}`).once('value')
      .then(function(pairsSnap) {
+       console.log('hit my line 232');
        var pairs = pairsSnap.val();
+       console.log('pairs is', pairs);
+       var objKeys = Object.keys(pairs);
+       var first = objKeys[0];
+       var second = objKeys[1];
+       // if there was a leave then connect sequence
+       if(!second){
+         helperDeletePending(pairsofUsers);
+         return;
+       }
+       console.log(`PENDING FRIEND DB TRIGGER firstUser: ${first}, secondUser: ${second}`);
+       if (pairs[first] === 'LEAVE' || pairs[second] === 'LEAVE') {
+         return helperDeletePending(pairsofUsers);
+       }else if (pairs[first] === 'CONNECT' && pairs[second] === 'CONNECT') {
+         helperAddFriends(first, second)
+          .then((snapshot) => {
+            console.log(`added friends! ${first} and ${second}`);
+            return helperDeletePending(pairsofUsers);
+          })
+          .catch((err) => {
+            console.log('error adding friends', err);
+          });
+      } else {
+        return;
+      }
+     })
+     .catch(err => {
+       console.log('error ', err);
+     });
+   });
+
+   exports.makeFriends2 = functions.database
+   .ref('/FriendPending/{pairUsers}')
+   .onUpdate(event => {
+     const pairsofUsers = event.params.pairUsers;
+     dbRootRef.child(`/FriendPending/${pairsofUsers}`).once('value')
+     .then(function(pairsSnap) {
+       console.log('hit my line 232');
+       var pairs = pairsSnap.val();
+       console.log('pairs is', pairs);
        var objKeys = Object.keys(pairs);
        var first = objKeys[0];
        var second = objKeys[1];
