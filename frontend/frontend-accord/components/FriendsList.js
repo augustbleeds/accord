@@ -105,7 +105,6 @@ export default class FriendsList extends Component {
         contentContainerStyle={styles.container}
         dataSource={this.state.dataSource}
         renderRow={this._renderRow}
-        // onEndReached={this._genRows} //this will get us more data
         ref={el => (this._root = el)}
       />
         <Modal style={styles.modal}
@@ -114,15 +113,15 @@ export default class FriendsList extends Component {
         visible={this.state.visible}
         onRequestClose={() => this.setState({visible: false})}
         >
-          <View style={{flex: 1, justifyContent: 'space-between', alignItems: 'center'}}>
-           <View style={{justifyContent: 'space-between'}}>
-             <Text>Profile of {this.state.currentFriendProf.nickname}</Text>
-             <Image style={{width:150 , height: 200, top: 65, alignSelf: 'auto'}} source={{uri: this.state.currentFriendProf.img}} />
+          <View style={{flex: 1, justifyContent: 'space-around', alignItems: 'center', backgroundColor: "#000000"}}>
+           <View style={{flex: 1, justifyContent: 'space-around', alignItems: 'center'}}>
+             <Text style={styles.profileText}>Profile of {this.state.currentFriendProf.nickname}</Text>
+             <Image style={{width:200 , height: 200, borderRadius: 100}} source={{uri: this.state.currentFriendProf.img}} />
              <Text style={styles.text}>Nickname: {this.state.currentFriendProf.nickname}</Text>
              <Text style={styles.text}>School: {this.state.currentFriendProf.school}</Text>
              <Text style={styles.text}>Description: {this.state.currentFriendProf.desc}</Text>
              <Text style={styles.text}>Gender: {this.state.currentFriendProf.gender}</Text>
-             <Button
+             <Button buttonStyle={{backgroundColor: '#6adaa8'}}
                title="Close"
                onPress={() => this.setModalVisible(!this.state.visible)}>
              </Button>
@@ -142,12 +141,16 @@ const styles = StyleSheet.create({
   modal: {
     height: SCREEN_HEIGHT,
     width: SCREEN_WIDTH,
-    //margin: 8,
-    //padding: 16,
-    //borderRadius: 4,
-    //backgroundColor: '#6adaa8',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+
+  profileText:{
+    color: '#6adaa8',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    paddingTop: 20,
+    fontSize: 30
   },
   row: {
     margin: 8,
@@ -158,9 +161,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   text: {
-    color: 'rgba(0, 0, 0, .4)',
+    color: 'white',
     fontWeight: 'bold',
     textAlign: 'center',
-
   },
 });
