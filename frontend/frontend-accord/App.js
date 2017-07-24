@@ -6,7 +6,6 @@ import AuthScreen from './screens/AuthScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
 import LoginScreen from './screens/LoginScreen';
 import AllScreen from './screens/AllScreen';
-import ChatScreen from './screens/ChatScreen';
 import GiftedChatScreen from './screens/GiftedChatScreen';
 import FriendsScreen from './screens/FriendsScreen';
 import HomeScreen from './screens/HomeScreen';
