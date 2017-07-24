@@ -11,14 +11,15 @@ import {
 	ScrollView,
 	Alert} from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
-// import {connect} from 'react-redux';
-// import addingUser from '../actions/index';
 import { Button } from 'react-native-elements';
 
+
 // import createStore from redux, the reducer, and Provider for connection react-redux
-import { Provider } from 'react-redux';
+import { connect, Provider } from 'react-redux';
 import { createStore } from 'redux';
 import mainReducer from '../reducers/mainReducer';
+
+import { loadUserInfo } from '../actions/index';
 
 // create the store
 const store = createStore(mainReducer);
@@ -129,20 +130,20 @@ const styles = StyleSheet.create({
   }
 });
 
-// const mapStateToProps = (state) => {
-//   return {
-//     email: state.user_reducer
-//   }
-// };
-//
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     addUser: (email) => dispatch(addUser(email))
-//   }
-// };
+const mapStateToProps = ({user}) => {
+	return {user};
+};
 
-export default LoginScreen;
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(LoginScreen);
+const mapDispatchToProps = (dispatch) => {
+	return {
+		addUser: (email, password) => {
+			return loadUserInfo(email, password);
+		}
+	}
+}
+
+// export default LoginScreen;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoginScreen);
