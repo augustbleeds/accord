@@ -88,7 +88,7 @@ export default class MatchScreen extends Component {
   render(){
     return (
       <View style={[styles.page, styles.container]}>
-            <Image resizeMode="cover" style={styles.imgStyle3} source={require('../assets/icons/com.png')} />
+            <Image resizeMode="contain" style={styles.imgStyle3} source={require('../assets/icons/com.png')} />
             <Text style={{fontSize: 35, color: '#ffffff'}}>
               Find a Match
             </Text>
@@ -128,7 +128,6 @@ const styles = StyleSheet.create({
     borderRadius: 3,
   },
   picker: {
-    height: 120,
     width: 150,
     color: '#ffffff'
   },
@@ -153,8 +152,8 @@ const styles = StyleSheet.create({
 
   imgStyle3: {
     bottom: 14,
-    width: 180,
-    height: 180,
+    width: 230,
+    height: 230,
   },
 
   swipe: {
