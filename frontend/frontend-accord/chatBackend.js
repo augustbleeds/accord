@@ -31,7 +31,8 @@ class chatBackend {
   }
   // retrieve the messages from the Backend
   // userID IS email (ex: bob@gmail)
-  loadMessages(callback, myUserId, matchedUserId, nickname) {
+  // friends nickname
+  loadMessages(callback, myUserId, matchedUserId, myNickname, friendNickname) {
     this.messagesRef = firebase.database().ref(`/Message/${this.generateMessageId(myUserId, matchedUserId)}`);
     this.messagesRef.off();
     const onReceive = (data) => {
@@ -42,7 +43,7 @@ class chatBackend {
         createdAt: new Date(message.createdAt),
         user: {
           _id: message.from,
-          name: nickname,
+          name: (message.from === myUserId) ? myNickname : friendNickname, 
         },
       });
     };

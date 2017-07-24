@@ -19,6 +19,7 @@ class FriendsChatScreen extends Component {
     super(props);
 		this.state = {
 			messages: [],
+			friendUser: this.props.navigation.state.params.friendObj,
 			currentUser: this.props.navigation.state.params.userObj,
 			matchedUserId: this.props.navigation.state.params.username2,
 			currentUserId: this.props.navigation.state.params.username1,
@@ -48,7 +49,7 @@ class FriendsChatScreen extends Component {
 				return {
 					messages: GiftedChat.append(previousState.messages, message)
 				}
-			})}, this.state.currentUserId, this.state.matchedUserId, this.state.currentUser.nickname);
+			})}, this.state.currentUserId, this.state.matchedUserId, this.state.currentUser.nickname, this.state.friendUser.nickname);
 	}
 
 	componentWillUnMount(){
@@ -95,7 +96,7 @@ class FriendsChatScreen extends Component {
 				<View style={{flex: 13}}>
 					<GiftedChat
 						messages={this.state.messages}
-						onSend={(messages) => chatBackend.sendMessage(messages, this.state.matchedUserId, this.state.currentUserId)}
+						onSend={(messages) => chatBackend.sendMessage(messages, this.state.matchedUserId, this.state.currentUserId, )}
 						user={{
 							_id: this.state.currentUserId,
 							name: this.state.currentUser.nickname,

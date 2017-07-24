@@ -131,7 +131,12 @@ export default class FriendsList extends Component {
                onPress={() => {this.setModalVisible(!this.state.visible);
                  console.log('PRESSED CLCKED');
                  console.log('props is', this.props)
-                 this.props.navigator.navigate('FriendsChatScreen', {username1: this.props.signedIn.split('.')[0], username2: this.state.currentFriendId, userObj: this.props.signedinuserObject})
+                 this.props.navigator.navigate('FriendsChatScreen', {
+                   username1: this.props.signedIn.split('.')[0],
+                   username2: this.state.currentFriendId,
+                   userObj: this.props.signedinuserObject,
+                    friendObj: this.state.currentFriendProf,
+                  })
 
                } }
                style={{backgroundColor: "#6ADAA8", flex: 1, borderRightWidth: 1, color: 'white', justifyContent: 'center', alignItems: 'center'}}
