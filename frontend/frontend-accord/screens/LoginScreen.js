@@ -13,7 +13,15 @@ import {
 import { TabNavigator, StackNavigator } from 'react-navigation';
 // import {connect} from 'react-redux';
 // import addingUser from '../actions/index';
-import { Button } from 'react-native-elements'
+import { Button } from 'react-native-elements';
+
+// import createStore from redux, the reducer, and Provider for connection react-redux
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import mainReducer from '../reducers/mainReducer';
+
+// create the store
+const store = createStore(mainReducer);
 
 class LoginScreen extends Component {
   constructor(props){
