@@ -24,6 +24,8 @@
     "react-native-swiper": "^1.5.4",
     "react-native-tab-view": "0.0.67",
     "react-navigation": "^1.0.0-beta.11",
+    "react-redux": "^5.0.5",
+    "redux": "^3.7.2",
     "sendbird": "^3.0.35",
     "underscore": "^1.8.3",
     "watchman": "^0.1.8"

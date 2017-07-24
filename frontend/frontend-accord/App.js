@@ -11,6 +11,11 @@ import FriendsScreen from './screens/FriendsScreen';
 import HomeScreen from './screens/HomeScreen';
 import FriendsChatScreen from './screens/FriendsChatScreen';
 
+// import createStore from redux, the reducer, and Provider for connection react-redux
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import mainReducer from './reducers/mainReducer';
+
 const screen={
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height
