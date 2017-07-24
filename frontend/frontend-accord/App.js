@@ -11,6 +11,12 @@ import FriendsScreen from './screens/FriendsScreen';
 import HomeScreen from './screens/HomeScreen';
 import FriendsChatScreen from './screens/FriendsChatScreen';
 
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import mainReducer from './reducers/mainReducer';
+
+const store = createStore(mainReducer);
+
 const screen={
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height
@@ -41,9 +47,11 @@ export default class App extends React.Component {
     });
 
     return (
-      <View style={styles.container}>
-        <MainNavigator />
-      </View>
+      <Provider store={store}>
+        <View style={styles.container}>
+          <MainNavigator />
+        </View>
+      </Provider>
     );
   }
 }

@@ -15,14 +15,9 @@ import { Button } from 'react-native-elements';
 
 
 // import createStore from redux, the reducer, and Provider for connection react-redux
-import { connect, Provider } from 'react-redux';
-import { createStore } from 'redux';
-import mainReducer from '../reducers/mainReducer';
-
+import { connect } from 'react-redux';
 import { loadUserInfo } from '../actions/index';
 
-// create the store
-const store = createStore(mainReducer);
 
 class LoginScreen extends Component {
   constructor(props){
@@ -73,7 +68,6 @@ class LoginScreen extends Component {
 
   render() {
     return (
-			<Provider store={store}>
       <View style={styles.container}>
         <Image style={{width:280 , height: 70, bottom: 65, alignSelf: 'auto'}} source={require('../assets/icons/icon2.png')} />
         <Text style={styles.textBig}>Login</Text>
@@ -103,10 +97,11 @@ class LoginScreen extends Component {
 						/>
 					</ScrollView>
       </View>
-		</Provider>
     )
   }
 }
+
+
 
 const styles = StyleSheet.create({
   container: {
