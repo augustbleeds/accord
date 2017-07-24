@@ -40,8 +40,6 @@ class FriendsChatScreen extends Component {
   }
 
 	componentDidMount(){
-    console.log('HI FRIENDSCHATSCREEN')
-		chatBackend.setUpFriendPending(this.state.currentUserId, this.state.matchedUserId);
 		console.log('allie said this will work again!');
 		console.log("OUR STATE IS: ", this.state);
 		chatBackend.loadMessages( (message) => {
