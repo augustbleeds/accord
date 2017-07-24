@@ -8,7 +8,6 @@ import FriendsScreen from './FriendsScreen';
 import HomeScreen from './HomeScreen';
 import MatchScreen from './MatchScreen';
 import FriendsProfileBio from '../components/FriendsProfileBio';
-import ChatScreen from './ChatScreen';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -30,8 +29,6 @@ export default class AllScreen extends PureComponent<void, *, State> {
       { key: '1', icon: 'ios-home', title: 'Home' },
       { key: '2', icon: 'ios-people', title: 'Profile'  },
       { key: '3', icon: 'md-search', title: 'Match'  },
-      // { key: '4', icon: 'ios-chatbubbles', title: 'Chat'  },
-
     ],
   };
 
@@ -88,22 +85,12 @@ export default class AllScreen extends PureComponent<void, *, State> {
             style={{ backgroundColor: '#000000' }}
           />
         );
-      // case '4':
-      //   return (
-      //     <ChatScreen
-      //       signedIn={this.props.navigation.state.params.user}
-      //       navigator={this.props.navigation}
-      //       state={this.state}
-      //       style={{ backgroundColor: '#000000' }}
-      //     />
-      //   );
       default:
         return null;
     }
   };
 
   render() {
-    console.log('PROPS', this.props.navigation.state.params.user);
     return (
       <TabViewAnimated
         style={[styles.container, this.props.style]}

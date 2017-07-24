@@ -36,11 +36,6 @@ class WelcomeScreen extends Component {
     //   return<AppLoading />;
     // }
     return(
-      // <Slides
-      //   data={SLIDE_DATA}
-      //   onSlidesComplete={this.onSlidesComplete}
-      //   onLoginComplete={this.onLoginComplete}
-      // />
       <Swipers
           onSlidesComplete={this.onSlidesComplete}
           onLoginComplete={this.onLoginComplete}

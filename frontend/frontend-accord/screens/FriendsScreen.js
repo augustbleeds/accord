@@ -12,7 +12,6 @@ export default class FriendsScreen extends Component {
       return (
         <View style={styles.outside}>
           <View style={[styles.page, styles.container]}>
-            {/* <View style={styles.container}> */}
             <FriendsList
               signedIn={this.props.signedIn}
               signedinuserObject={this.props.signedinuserObject}

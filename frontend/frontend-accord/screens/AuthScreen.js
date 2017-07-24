@@ -37,7 +37,6 @@ class AuthScreen extends Component {
 	}
 
   registerSubmit() {
-    console.log("HIHIHI");
     fetch('https://us-central1-accord-18bdf.cloudfunctions.net/route/register', {
       method: 'POST',
       headers: {
@@ -139,8 +138,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10,
     color: '#fff',
-    // fontFamily: 'HelveticaNeue-BoldItalic',
-
   },
   buttonStyle: {
     backgroundColor: '#6adaa8',
