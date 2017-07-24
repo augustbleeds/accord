@@ -1,8 +1,9 @@
 import {combineReducers} from 'redux';
-import addUser from './user_reducer';
+import user from './userReducer';
+import navigator from './navigatorReducer';
 
 const mainReducer = combineReducers({
-  addUser: addUser
+  user, navigator
 });
 
 export default mainReducer;
