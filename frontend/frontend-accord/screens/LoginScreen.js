@@ -72,6 +72,7 @@ class LoginScreen extends Component {
 
   render() {
     return (
+			<Provider store={store}>
       <View style={styles.container}>
         <Image style={{width:280 , height: 70, bottom: 65, alignSelf: 'auto'}} source={require('../assets/icons/icon2.png')} />
         <Text style={styles.textBig}>Login</Text>
@@ -101,6 +102,7 @@ class LoginScreen extends Component {
 						/>
 					</ScrollView>
       </View>
+		</Provider>
     )
   }
 }
