@@ -10,6 +10,7 @@ import ChatScreen from './screens/ChatScreen';
 import GiftedChatScreen from './screens/GiftedChatScreen';
 import FriendsScreen from './screens/FriendsScreen';
 import HomeScreen from './screens/HomeScreen';
+import FriendsChatScreen from './screens/FriendsChatScreen';
 
 const screen={
     width: Dimensions.get('window').width,
@@ -25,7 +26,8 @@ export default class App extends React.Component {
       Auth: { screen: AuthScreen },
       Login: { screen: LoginScreen },
       AllScreen: {screen: AllScreen},
-      ChatScreen: {screen: GiftedChatScreen}
+      ChatScreen: {screen: GiftedChatScreen},
+      FriendsChatScreen: {screen: FriendsChatScreen}
     }, {
   tabBarOptions: {
     showLabel: false,

@@ -13,8 +13,8 @@ export default class FriendsList extends Component {
     super(props);
     this.state = {
       visible: false,
-      email: '',
       currentFriendProf: {},
+      currentFriendId: '',
       data: [],
       dataSource: new ListView.DataSource({
         rowHasChanged: (r1, r2) => r1 !== r2,
@@ -79,7 +79,7 @@ export default class FriendsList extends Component {
     console.log('all the data is ', this.state.data);
     const profile = _.findWhere(this.state.data, {nickname: nickname});
     console.log('profile is', profile);
-    this.setState({currentFriendProf: profile});
+    this.setState({currentFriendProf: profile, currentFriendId: profile.email.split('.')[0]});
     this._onPressProfile();
   }
 
@@ -108,25 +108,48 @@ export default class FriendsList extends Component {
         ref={el => (this._root = el)}
       />
         <Modal style={styles.modal}
+        // navigator = {this.props.navigator}
+        // myUserId = {this.props.signedIn.split('.')[0]}
+        // friendUserId = {this.state.currentFriendId}
+        // userObj = {this.props.signedinuserObject}
         animationType={"slide"}
         transparent={false}
         visible={this.state.visible}
         onRequestClose={() => this.setState({visible: false})}
         >
-          <View style={{flex: 1, justifyContent: 'space-around', alignItems: 'center', backgroundColor: "#000000"}}>
-           <View style={{flex: 1, justifyContent: 'space-around', alignItems: 'center'}}>
+          <View style={{flex: 1, backgroundColor: "#000000"}}>
+          <View style={{flex: 13, justifyContent: 'space-around', alignItems: 'center', backgroundColor: "#000000"}}>
              <Text style={styles.profileText}>Profile of {this.state.currentFriendProf.nickname}</Text>
              <Image style={{width:200 , height: 200, borderRadius: 100}} source={{uri: this.state.currentFriendProf.img}} />
              <Text style={styles.text}>Nickname: {this.state.currentFriendProf.nickname}</Text>
              <Text style={styles.text}>School: {this.state.currentFriendProf.school}</Text>
              <Text style={styles.text}>Description: {this.state.currentFriendProf.desc}</Text>
              <Text style={styles.text}>Gender: {this.state.currentFriendProf.gender}</Text>
-             <Button buttonStyle={{backgroundColor: '#6adaa8'}}
-               title="Close"
-               onPress={() => this.setModalVisible(!this.state.visible)}>
-             </Button>
            </View>
-          </View>
+             <View style={{flex: 1, flexDirection: 'row'}}>
+             <TouchableOpacity
+               onPress={() => {this.setModalVisible(!this.state.visible);
+                 console.log('PRESSED CLCKED');
+                 console.log('props is', this.props)
+                 this.props.navigator.navigate('FriendsChatScreen', {username1: this.props.signedIn.split('.')[0], username2: this.state.currentFriendId, userObj: this.props.signedinuserObject})
+
+               } }
+               style={{backgroundColor: "#6ADAA8", flex: 1, borderRightWidth: 1, color: 'white', justifyContent: 'center', alignItems: 'center'}}
+               >
+               <Text style={{color: 'white'}}>
+                 Chat
+               </Text>
+             </TouchableOpacity>
+             <TouchableOpacity
+               onPress={() => this.setModalVisible(!this.state.visible)}
+               style={{backgroundColor: "red", flex: 1, borderLeftWidth: 1, color: 'white', justifyContent: 'center', alignItems: 'center'}}
+               >
+               <Text style={{color: 'white'}}>
+                 Close
+               </Text>
+             </TouchableOpacity>
+           </View>
+           </View>
       </Modal>
 
     </View>
