@@ -32,9 +32,6 @@ class LoginScreen extends Component {
 	}
 
   loginSubmit() {
-		console.log('hello dude logging in...');
-		console.log('email', this.state.email)
-		console.log('password', this.state.password);
 		if(!this.state.email || !this.state.password){
 			Alert.alert('Please fill in your email and password!');
 			return;
@@ -50,18 +47,14 @@ class LoginScreen extends Component {
       })
     })
     .then((response) => {
-			console.log('response from gcf is', response);
 			return response.json();
 		})
     .then((responseJson) => {
-			console.log('response json is', responseJson);
 			if(responseJson === null){
 				Alert.alert('Username or Password is incorrect. Please try again!');
 			}
       if(responseJson !== null) {
-				console.log('LOGGGGING IN', responseJson)
         this.props.navigation.navigate('AllScreen', {user: this.state.email, userObj: responseJson})
-        console.log(responseJson);
       }
     })
     .catch((err) => {

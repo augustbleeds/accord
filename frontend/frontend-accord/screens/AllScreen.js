@@ -30,8 +30,6 @@ export default class AllScreen extends PureComponent<void, *, State> {
       { key: '1', icon: 'ios-home', title: 'Home' },
       { key: '2', icon: 'ios-people', title: 'Profile'  },
       { key: '3', icon: 'md-search', title: 'Match'  },
-      // { key: '4', icon: 'ios-chatbubbles', title: 'Chat'  },
-
     ],
   };
 
@@ -88,22 +86,12 @@ export default class AllScreen extends PureComponent<void, *, State> {
             style={{ backgroundColor: '#000000' }}
           />
         );
-      // case '4':
-      //   return (
-      //     <ChatScreen
-      //       signedIn={this.props.navigation.state.params.user}
-      //       navigator={this.props.navigation}
-      //       state={this.state}
-      //       style={{ backgroundColor: '#000000' }}
-      //     />
-      //   );
       default:
         return null;
     }
   };
 
   render() {
-    console.log('PROPS', this.props.navigation.state.params.user);
     return (
       <TabViewAnimated
         style={[styles.container, this.props.style]}

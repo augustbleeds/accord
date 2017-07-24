@@ -30,11 +30,6 @@ export default class MatchScreen extends Component {
 
   }
 
-  onMatchComplete() {
-    console.log('USEROBJECT', this.props.signedinuserObject);
-    this.props.navigation.navigate('ChatScreen', {userObj: this.props.signedinuserObject});
-  }
-
   fetchMatch() {
     console.log('asdfasdfasdf');
     console.log(this.state.topic);
