@@ -85,7 +85,7 @@ class FriendsChatScreen extends Component {
 			<View style={{flex: 1}}>
         <View style={{backgroundColor: "black", flex: 1, flexDirection: 'row'}}>
           <TouchableOpacity
-            onPress={() => this.props.onLoginComplete()}
+            onPress={() => this.props.navigator.navigate('AllScrren')}
             style={{backgroundColor: "#6ADAA8", flex: 1, borderLeftWidth: 1, color: 'white', justifyContent: 'center', alignItems: 'center'}}
             >
               <Text style={{color: 'white'}}>

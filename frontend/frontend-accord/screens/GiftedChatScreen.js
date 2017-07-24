@@ -81,18 +81,25 @@ class ChatScreen extends Component {
   render() {
     return (
 			<View style={{flex: 1}}>
-				<View style={{flex: 1, flexDirection: 'row', backgroundColor: 'gray'}}>
-					<Button
-						title={'Leave'}
-						onPress={() => chatBackend.onLeaveOrConnect(this.state.currentUserId, this.state.matchedUserId, 'LEAVE', this.props.navigation)}
-						buttonStyle={{backgroundColor: 'red', marginTop: 20, flex: 1}}>
-						</Button>
-					<Button
-						onPress={() => chatBackend.onLeaveOrConnect(this.state.currentUserId, this.state.matchedUserId, 'CONNECT', this.props.navigation)}
-						title={'Connect'}
-						buttonStyle={{backgroundColor: '#6adaa8', marginTop: 20, flex: 1}}></Button>
-				</View>
-				<View style={{flex: 10}}>
+				<View style={{backgroundColor: "black", flex: 1, marginTop: 20, flexDirection: 'row'}}>
+				<TouchableOpacity
+					onPress={() => chatBackend.onLeaveOrConnect(this.state.currentUserId, this.state.matchedUserId, 'LEAVE', this.props.navigation)}
+					style={{backgroundColor: "red", flex: 1, borderRightWidth: 1, color: 'white', justifyContent: 'center', alignItems: 'center'}}
+					>
+					<Text style={{color: 'white'}}>
+						Leave
+					</Text>
+				</TouchableOpacity>
+				<TouchableOpacity
+					onPress={() => chatBackend.onLeaveOrConnect(this.state.currentUserId, this.state.matchedUserId, 'CONNECT', this.props.navigation)}
+					style={{backgroundColor: "#6ADAA8", flex: 1, borderLeftWidth: 1, color: 'white', justifyContent: 'center', alignItems: 'center'}}
+					>
+					<Text style={{color: 'white'}}>
+						Connect
+					</Text>
+				</TouchableOpacity>
+			</View>
+				<View style={{flex: 13}}>
 					<GiftedChat
 						messages={this.state.messages}
 						onSend={(messages) => chatBackend.sendMessage(messages, this.state.matchedUserId, this.state.currentUserId)}

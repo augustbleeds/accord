@@ -88,24 +88,22 @@ export default class MatchScreen extends Component {
   render(){
     return (
       <View style={[styles.page, styles.container]}>
-        <View style={styles.container}>
-          <Text style={{fontSize: 35, color: '#ffffff', justifyContent: 'center', alignItems: 'center',
-            // fontFamily: 'HelveticaNeue-Bold'
-          }}>
-            Find a Match
-          </Text>
-            <Picker
-              style={styles.picker}
-              selectedValue={this.state.topic}
-              itemStyle={styles.itemPicker}
-              onValueChange={(itemValue, itemIndex) => this.setState({topic: itemValue})}>
-              <Picker.Item label="Select one" value="" />
-              <Picker.Item label="Depression" value="Depression" />
-              <Picker.Item label="Anxiety" value="Anxiety" />
-              <Picker.Item label="Family Issues" value="Family Issues" />
-              <Picker.Item label="Relationship" value="Relationship" />
-              <Picker.Item label="School" value="School" />
-            </Picker>
+            <Image resizeMode="cover" style={styles.imgStyle3} source={require('../assets/icons/com.png')} />
+            <Text style={{fontSize: 35, color: '#ffffff'}}>
+              Find a Match
+            </Text>
+              <Picker
+                style={styles.picker}
+                selectedValue={this.state.topic}
+                itemStyle={styles.itemPicker}
+                onValueChange={(itemValue, itemIndex) => this.setState({topic: itemValue})}>
+                <Picker.Item label="Select one" value="" />
+                <Picker.Item label="Depression" value="Depression" />
+                <Picker.Item label="Anxiety" value="Anxiety" />
+                <Picker.Item label="Family Issues" value="Family Issues" />
+                <Picker.Item label="Relationship" value="Relationship" />
+                <Picker.Item label="School" value="School" />
+              </Picker>
           <Button
             buttonStyle={styles.buttonStyle}
             raised
@@ -113,7 +111,6 @@ export default class MatchScreen extends Component {
             onPress={ () => this.fetchMatch()}
             >
           </Button>
-        </View>
       </View>
     );
   }
@@ -131,7 +128,8 @@ const styles = StyleSheet.create({
     borderRadius: 3,
   },
   picker: {
-    flex: 1,
+    height: 120,
+    width: 150,
     color: '#ffffff'
   },
   itemPicker: {
@@ -152,6 +150,13 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     marginHorizontal: 16,
   },
+
+  imgStyle3: {
+    bottom: 14,
+    width: 180,
+    height: 180,
+  },
+
   swipe: {
     color: '#808080',
     textAlign: 'center',
@@ -163,6 +168,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#6adaa8',
     marginTop: 15,
     borderRadius: 10,
+    marginBottom: 15,
 
   },
 });

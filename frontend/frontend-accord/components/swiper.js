@@ -62,7 +62,6 @@ export default class swiperStyles extends Component {
           </Text></View>
         </View>
         <View style={[styles.slide,{ backgroundColor: '#000000' }]}>
-          <Image resizeMode="cover" style={styles.imgStyle3} source={require('../assets/icons/com.png')} />
           <View level={8}><Text style={[styles.Maintext, {bottom: 15}]}>Start Now!</Text></View>
         </View>
       </Swiper>
@@ -111,16 +110,6 @@ const styles = {
     // resizeMode: "cover",
     width: 230,
     height: 230,
-  },
-
-  imgStyle3: {
-    // display: 'block',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    // resizeMode: "cover",
-    bottom: 14,
-    width: 270,
-    height: 270,
   },
 
   secondText: {

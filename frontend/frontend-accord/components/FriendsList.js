@@ -136,6 +136,7 @@ export default class FriendsList extends Component {
                    username2: this.state.currentFriendId,
                    userObj: this.props.signedinuserObject,
                     friendObj: this.state.currentFriendProf,
+                    navigator: this.props.navigator
                   })
 
                } }
