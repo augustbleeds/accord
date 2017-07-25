@@ -15,10 +15,7 @@ export default class FriendsScreen extends Component {
             />
           </View>
           <View style={styles.profile}>
-            <UserProfile
-              signedIn={this.props.signedIn}
-              signedinuserObject={this.props.signedinuserObject}
-            />
+            <UserProfile/>
           </View>
         </View>
       );
