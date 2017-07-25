@@ -53,7 +53,6 @@ class FriendsList extends Component {
   }
 
   _genRows = () => {
-    // var myUserId = this.props.signedIn.split('.')[0];
     var myUserId = this.props.user.email.split('.')[0];
     this._fetchFriendList(myUserId);
     var self = this;
@@ -66,11 +65,10 @@ class FriendsList extends Component {
     this.setState({visible: visible});
   }
 
+  // change the state of the current Friend
   whenAvatarClicked(nickname){
     const profile = _.findWhere(this.state.data, {nickname: nickname});
     this.props.loadFriend(profile);
-    console.log('blah blah blah');
-    this.setState({currentFriendProf: profile, currentFriendId: profile.email.split('.')[0]});
     this._onPressProfile();
   }
 
@@ -119,10 +117,8 @@ class FriendsList extends Component {
                  this.props.navigator.navigate('FriendsChatScreen', {
                    username1: this.props.user.email.split('.')[0],
                    username2: this.props.currentFriend.email.split('.')[0],
-                  //  username2: this.state.currentFriendId,
                    userObj: this.props.user,
                    friendObj: this.props.currentFriend,
-                  //  friendObj: this.state.currentFriendProf,
                    navigator: this.props.navigator
                   })}}
                style={{backgroundColor: "#6ADAA8", flex: 1, borderRightWidth: 1, color: 'white', justifyContent: 'center', alignItems: 'center'}}
