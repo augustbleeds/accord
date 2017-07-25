@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
-import {DrawerNavigator, StackNavigator, TabNavigator } from 'react-navigation';
+import {StackNavigator} from 'react-navigation';
 import slideStyles from './components/slides'
 import AuthScreen from './screens/AuthScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
@@ -10,6 +10,7 @@ import GiftedChatScreen from './screens/GiftedChatScreen';
 import FriendsScreen from './screens/FriendsScreen';
 import HomeScreen from './screens/HomeScreen';
 import FriendsChatScreen from './screens/FriendsChatScreen';
+import SettingsScreen from './screens/SettingsScreen';
 
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
@@ -32,7 +33,8 @@ export default class App extends React.Component {
       Login: { screen: LoginScreen },
       AllScreen: {screen: AllScreen},
       ChatScreen: {screen: GiftedChatScreen},
-      FriendsChatScreen: {screen: FriendsChatScreen}
+      FriendsChatScreen: {screen: FriendsChatScreen},
+      SettingsScreen: {screen: SettingsScreen},
     }, {
     headerMode: 'none',
     });
