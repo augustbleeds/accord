@@ -1,8 +1,9 @@
 import React, {Component } from 'react';
-import { Modal, Image, ListView, View, Text, StyleSheet, TouchableHighlight, TouchableOpacity, Alert } from 'react-native';
+import { Modal, Image, ListView, View, Text, StyleSheet, TouchableHighlight, TouchableOpacity, Alert,Dimensions } from 'react-native';
 import { List, ListItem, Button } from 'react-native-elements';
 import { connect } from 'react-redux';
-
+const SCREEN_WIDTH = Dimensions.get('window').width;
+const SCREEN_HEIGHT = Dimensions.get('window').height;
 class UserProfile extends Component {
   constructor(props) {
     super(props);
@@ -26,7 +27,7 @@ const styles = StyleSheet.create({
   profile: {
     justifyContent: 'space-between',
     alignItems: 'center',
-    flex: 2,
+    width: SCREEN_WIDTH * 0.7,
   },
   text: {
     color: '#ffffff',

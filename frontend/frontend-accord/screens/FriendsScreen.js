@@ -25,8 +25,11 @@ export default class FriendsScreen extends Component {
 
 const styles = StyleSheet.create({
   outside : {
+    display: 'flex',
     flex: 1,
     flexDirection: 'row',
     backgroundColor: 'black',
+    justifyContent: 'flex-start',
+    flexWrap: 'wrap'
   },
 });
