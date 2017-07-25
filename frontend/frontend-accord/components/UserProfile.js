@@ -1,8 +1,9 @@
 import React, {Component } from 'react';
 import { Modal, Image, ListView, View, Text, StyleSheet, TouchableHighlight, TouchableOpacity, Alert } from 'react-native';
-import { List, ListItem, Button } from 'react-native-elements'
+import { List, ListItem, Button } from 'react-native-elements';
+import { connect } from 'react-redux';
 
-export default class UserProfile extends Component {
+class UserProfile extends Component {
   constructor(props) {
     super(props);
   }
@@ -27,11 +28,9 @@ const styles = StyleSheet.create({
     padding: 8,
   },
   profile: {
-    // alignSelf: 'center',
     margin: 8,
     padding: 16,
     alignItems: 'center',
-    //justifyContent: 'center',
     flex: 1,
   },
   text: {
@@ -40,3 +39,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
+
+const mapStateToProps = ({ user }) => {
+	return { user };
+};
+
+export default connect(mapStateToProps, null)(UserProfile);
