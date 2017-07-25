@@ -4,27 +4,18 @@ import FriendsList from '../components/FriendsList';
 import UserProfile from '../components/UserProfile';
 export default class FriendsScreen extends Component {
 
-    componentDidMount(){
-      console.log('THE FRIEND SCREEN MOUNTED');
-    }
-
     render(){
       return (
         <View style={styles.outside}>
           <View style={[styles.page, styles.container]}>
             <FriendsList
-              signedIn={this.props.signedIn}
-              signedinuserObject={this.props.signedinuserObject}
               navigator={this.props.navigator}
               ref={el => (this._first = el)}
               style={[styles.list, { backgroundColor: '#000' }]}
             />
           </View>
           <View style={styles.profile}>
-            <UserProfile
-              signedIn={this.props.signedIn}
-              signedinuserObject={this.props.signedinuserObject}
-            />
+            <UserProfile/>
           </View>
         </View>
       );
@@ -37,9 +28,7 @@ const styles = StyleSheet.create({
   },
   outside : {
     flex: 1,
-    flexDirection: 'row'
-    // alignItems: 'flex-start',
-    // justifyContent: 'flex-start',
+    flexDirection: 'row',
   },
   page: {
     flex: 1.3,
@@ -52,9 +41,7 @@ const styles = StyleSheet.create({
   },
   profile: {
     flex: 2.3,
-    backgroundColor: '#000'
-    // alignItems: 'flex-end',
-    // justifyContent: 'flex-end',
+    backgroundColor: '#000',
   },
   text: {
     color: '#fff',

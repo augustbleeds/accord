@@ -4,8 +4,8 @@ import { Button } from 'react-native-elements';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import ModalDropdown from 'react-native-modal-dropdown';
 import * as firebase from 'firebase';
+import { connect } from 'react-redux';
 
-// const CATEGORY = ['Family', 'Relationship', 'School', 'Depression', 'Anxiety']
 var config = {
    apiKey: "AIzaSyDkhtl4JKhb_1aHL3ookaq0iSRsXmW1Hcg",
    authDomain: "accord-18bdf.firebaseapp.com",
@@ -18,24 +18,17 @@ firebase.initializeApp(config);
 var dbRootRef = firebase.database().ref();
 const backEnd = 'https://us-central1-accord-18bdf.cloudfunctions.net/route/user/match';
 
-
-export default class MatchScreen extends Component {
+class MatchScreen extends Component {
   constructor(props){
     super(props);
-
     this.state = ({
       topic: '',
       matchedUser: '',
     });
-
   }
 
   fetchMatch() {
-    console.log('asdfasdfasdf');
-    console.log(this.state.topic);
-    console.log(this.props.signedIn);
-    const endPoint = `${backEnd}/${this.state.topic}/${this.props.signedIn.split('.')[0]}`;
-    console.log('endpoint is', endPoint);
+    const endPoint = `${backEnd}/${this.state.topic}/${this.props.user.email.split('.')[0]}`;
     fetch(endPoint, {
       method: 'POST',
       headers: {
@@ -48,32 +41,23 @@ export default class MatchScreen extends Component {
       if(responseJson.success === true) {
         Alert.alert('You will be notified when there is a match! :)');
         // listen for when this user is matched!
-        var listenPath = this.props.signedIn.split('.')[0];
-        console.log('listen is', listenPath);
-        firebase.database().ref('/blahj').set(true);
-        firebase.database().ref(`/Match/${listenPath}`).on('value', (data) => {
+        var myUserId = this.props.user.email.split('.')[0];
+        firebase.database().ref(`/Match/${myUserId}`).on('value', (data) => {
             if(!data.val()){
               return;
             }
-            console.log('hello dude');
-            // set up sendBird stuff
             Alert.alert(`You are matched with ${data.val()}`);
             this.setState({matchedUser: data.val()});
-            console.log('this is this.props ' ,this.props);
             this.props.navigator.navigate('ChatScreen', {
-              username1: listenPath,
+              username1: myUserId,
               username2: this.state.matchedUser,
-              userObj: this.props.signedinuserObject
+              userObj: this.props.user,
             });
-            console.log('this is USEROBJECT ' ,this.props.signedinuserObject);
-
-            console.log('state is', this.state);
             // remove it from the database
-            dbRootRef.child(`/Match/${listenPath}`).remove();
+            dbRootRef.child(`/Match/${myUserId}`).remove();
             // detach listeners
-            dbRootRef.child(`/Match/${listenPath}`).off();
+            dbRootRef.child(`/Match/${myUserId}`).off();
           });
-        // dbRootRef.child(`/hello`).set(true);
       }
     })
     .catch((err) => {
@@ -103,7 +87,7 @@ export default class MatchScreen extends Component {
             buttonStyle={styles.buttonStyle}
             raised
             title='MATCH'
-            onPress={ () => this.fetchMatch()}
+            onPress={ () => {console.log('Topic is', this.state.topic);this.fetchMatch()}}
             >
           </Button>
       </View>
@@ -130,13 +114,9 @@ const styles = StyleSheet.create({
     color: '#ffffff'
   },
   mainText: {
-    // color: '#fff',
-    // fontSize: 30,
-    // textAlign: 'center',
     fontSize: 20,
     textAlign: 'center',
     color: '#fff',
-    // fontFamily: 'HelveticaNeue',
   },
   text: {
     color: '#fff',
@@ -166,3 +146,9 @@ const styles = StyleSheet.create({
 
   },
 });
+
+const mapStateToProps = ({ user }) => {
+	return { user };
+};
+
+export default connect(mapStateToProps, null)(MatchScreen);

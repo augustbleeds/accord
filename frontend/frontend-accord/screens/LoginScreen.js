@@ -11,9 +11,12 @@ import {
 	ScrollView,
 	Alert} from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
-// import {connect} from 'react-redux';
-// import addingUser from '../actions/index';
-import { Button } from 'react-native-elements'
+import { Button } from 'react-native-elements';
+
+// import createStore from redux, the reducer, and Provider for connection react-redux
+import { connect } from 'react-redux';
+import { loadUserInfo } from '../actions/index';
+
 
 class LoginScreen extends Component {
   constructor(props){
@@ -31,36 +34,26 @@ class LoginScreen extends Component {
 		this.props.navigation.navigate('Welcome');
 	}
 
-  loginSubmit() {
-		if(!this.state.email || !this.state.password){
+	loginSubmit() {
+		var self = this;
+		if(!self.state.email || !self.state.password){
 			Alert.alert('Please fill in your email and password!');
 			return;
 		}
-    fetch('https://us-central1-accord-18bdf.cloudfunctions.net/route/login', {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        email: this.state.email,
-        password: this.state.password
-      })
-    })
-    .then((response) => {
-			return response.json();
-		})
-    .then((responseJson) => {
-			if(responseJson === null){
+		self.props.addUser(self.state.email, self.state.password)
+		.then(() => {
+			console.log('props is', self.props);
+			if(self.props.user === null){
 				Alert.alert('Username or Password is incorrect. Please try again!');
+			}else{
+				console.log('navigating!...');
+				self.props.navigation.navigate('AllScreen');
 			}
-      if(responseJson !== null) {
-        this.props.navigation.navigate('AllScreen', {user: this.state.email, userObj: responseJson})
-      }
-    })
-    .catch((err) => {
-      console.log('error', err)
-    });
-  }
+		})
+		.catch((err) => {
+			console.log('Error logging in :', err);
+		});
+	}
 
   render() {
     return (
@@ -97,6 +90,8 @@ class LoginScreen extends Component {
   }
 }
 
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -109,8 +104,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10,
     color: '#fff',
-    // fontFamily: 'HelveticaNeue',
-
   },
   buttonStyle: {
     backgroundColor: '#6adaa8',
@@ -119,20 +112,19 @@ const styles = StyleSheet.create({
   }
 });
 
-// const mapStateToProps = (state) => {
-//   return {
-//     email: state.user_reducer
-//   }
-// };
-//
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     addUser: (email) => dispatch(addUser(email))
-//   }
-// };
+const mapStateToProps = ({user}) => {
+	return {user};
+};
 
-export default LoginScreen;
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(LoginScreen);
+const mapDispatchToProps = (dispatch) => {
+	return {
+		addUser: (email, password) => {
+			return loadUserInfo(dispatch, email, password);
+		}
+	};
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoginScreen);
