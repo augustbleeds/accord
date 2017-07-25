@@ -68,6 +68,8 @@ class FriendsList extends Component {
 
   whenAvatarClicked(nickname){
     const profile = _.findWhere(this.state.data, {nickname: nickname});
+    this.props.loadFriend(profile);
+    console.log('blah blah blah');
     this.setState({currentFriendProf: profile, currentFriendId: profile.email.split('.')[0]});
     this._onPressProfile();
   }
@@ -115,16 +117,14 @@ class FriendsList extends Component {
              <TouchableOpacity
                onPress={() => {this.setModalVisible(!this.state.visible);
                  this.props.navigator.navigate('FriendsChatScreen', {
-                  //  username1: this.props.signedIn.split('.')[0],
-                  username1: this.props.user.email.split('.')[0],
-                   username2: this.state.currentFriendId,
-                  //  userObj: this.props.signedinuserObject,
-                  userObj: this.props.user,
-                    friendObj: this.state.currentFriendProf,
-                    navigator: this.props.navigator
-                  })
-
-               } }
+                   username1: this.props.user.email.split('.')[0],
+                   username2: this.props.currentFriend.email.split('.')[0],
+                  //  username2: this.state.currentFriendId,
+                   userObj: this.props.user,
+                   friendObj: this.props.currentFriend,
+                  //  friendObj: this.state.currentFriendProf,
+                   navigator: this.props.navigator
+                  })}}
                style={{backgroundColor: "#6ADAA8", flex: 1, borderRightWidth: 1, color: 'white', justifyContent: 'center', alignItems: 'center'}}
                >
                <Text style={{color: 'white'}}>
