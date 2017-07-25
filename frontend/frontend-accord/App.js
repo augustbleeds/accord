@@ -37,7 +37,10 @@ export default class App extends React.Component {
       SettingsScreen: {screen: SettingsScreen},
     }, {
     headerMode: 'none',
-    });
+    navigationOptions: ({navigation}) => ({
+      gesturesEnabled: false,
+    })
+  });
 
     return (
       <Provider store={store}>
