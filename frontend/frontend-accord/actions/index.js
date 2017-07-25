@@ -1,4 +1,4 @@
-// action creator
+// action creators
 function loadUserInfo(dispatch, email, password) {
   return fetch('https://us-central1-accord-18bdf.cloudfunctions.net/route/login', {
     method: 'POST',
@@ -15,9 +15,13 @@ function loadUserInfo(dispatch, email, password) {
   })
   .then((userJson) => {
     console.log('dispatching...');
-    dispatch({ type: 'LOAD_USER', payload: userJson})
-    console.log('hi hi hi');
+    dispatch({ type: 'LOAD_USER', payload: userJson});
   })
 }
 
-export {loadUserInfo};
+
+function loadCurrentFriendInfo(dispatch, currentFriendJson){
+  dispatch({ type: 'LOAD_FRIEND', payload: currentFriendJson });
+}
+
+export { loadUserInfo, loadCurrentFriendInfo };

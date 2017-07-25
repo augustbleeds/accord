@@ -5,11 +5,12 @@ import { List, ListItem, Button } from 'react-native-elements'
 const _ = require('underscore');
 import firebase from 'firebase';
 import { connect } from 'react-redux';
+import { loadCurrentFriendInfo } from '../actions/index';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-export default class FriendsList extends Component {
+class FriendsList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -175,3 +176,17 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
+
+const mapStateToProps = ({ user, currentFriend }) => {
+	return { user, currentFriend };
+};
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		loadFriend: (currentFriendJson) => {
+			loadCurrentFriendInfo(dispatch, currentFriendJson);
+		}
+	};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FriendsList);

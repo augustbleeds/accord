@@ -119,7 +119,6 @@ const mapStateToProps = ({user}) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		addUser: (email, password) => {
-			console.log('adding user...');
 			return loadUserInfo(dispatch, email, password);
 		}
 	};
