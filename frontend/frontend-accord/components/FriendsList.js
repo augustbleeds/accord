@@ -22,10 +22,6 @@ export default class FriendsList extends Component {
     };
   }
 
-  componentDidMount() {
-    console.log('FRIENDS LIST MOUNTED AGAIN');
-  }
-
   componentWillMount() {
     this._genRows();
   }
@@ -33,7 +29,6 @@ export default class FriendsList extends Component {
   _root: Object;
 
   _onPressProfile = () => {
-    //alert('HELLO')
     this.setState({visible: true});
   }
 
@@ -42,13 +37,9 @@ export default class FriendsList extends Component {
     fetch('https://us-central1-accord-18bdf.cloudfunctions.net/route/user/friends/' + myUserId)
     .then((response) => response.json())
     .then((responseJson) => {
-        console.log(responseJson);
-        //alert(responseJson);
-        console.log("DS" , data);
         for (var i = 0; i < responseJson.length; i++) {
           data.push(responseJson[i]);
         }
-        console.log("after" , data);
         this.setState({
           data,
           dataSource: this.state.dataSource.cloneWithRows(data),
@@ -60,13 +51,10 @@ export default class FriendsList extends Component {
   }
 
   _genRows = () => {
-    console.log('FRIENDSLIST', this.props.signedIn)
     var myUserId = this.props.signedIn.split('.')[0];
     this._fetchFriendList(myUserId);
     var self = this;
-    console.log(`listening forrrrr /User/${myUserId}/friends`);
    firebase.database().ref(`/User/${myUserId}/friends`).on('value', function(friendsSnap){
-      console.log('child_changed in FriendsList listening for', friendsSnap.val() );
       self._fetchFriendList(myUserId);
    });
   };
@@ -76,9 +64,7 @@ export default class FriendsList extends Component {
   }
 
   whenAvatarClicked(nickname){
-    console.log('all the data is ', this.state.data);
     const profile = _.findWhere(this.state.data, {nickname: nickname});
-    console.log('profile is', profile);
     this.setState({currentFriendProf: profile, currentFriendId: profile.email.split('.')[0]});
     this._onPressProfile();
   }
@@ -108,10 +94,6 @@ export default class FriendsList extends Component {
         ref={el => (this._root = el)}
       />
         <Modal style={styles.modal}
-        // navigator = {this.props.navigator}
-        // myUserId = {this.props.signedIn.split('.')[0]}
-        // friendUserId = {this.state.currentFriendId}
-        // userObj = {this.props.signedinuserObject}
         animationType={"slide"}
         transparent={false}
         visible={this.state.visible}
@@ -129,8 +111,6 @@ export default class FriendsList extends Component {
              <View style={{flex: 1, flexDirection: 'row'}}>
              <TouchableOpacity
                onPress={() => {this.setModalVisible(!this.state.visible);
-                 console.log('PRESSED CLCKED');
-                 console.log('props is', this.props)
                  this.props.navigator.navigate('FriendsChatScreen', {
                    username1: this.props.signedIn.split('.')[0],
                    username2: this.state.currentFriendId,
@@ -157,7 +137,6 @@ export default class FriendsList extends Component {
            </View>
            </View>
       </Modal>
-
     </View>
     );
   }
