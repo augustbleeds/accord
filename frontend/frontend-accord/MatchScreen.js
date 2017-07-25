@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, View, Text, StyleSheet, ListView, Image, Picker } from 'react-native';
+import { Alert, View, Text, StyleSheet, ListView, Image, Picker, TextInput } from 'react-native';
 import { Button } from 'react-native-elements';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import ModalDropdown from 'react-native-modal-dropdown';
@@ -92,11 +92,17 @@ export default class MatchScreen extends Component {
     return (
       <View style={[styles.page, styles.container]}>
         <View style={styles.container}>
-          <Text style={{fontSize: 35, color: '#ffffff', justifyContent: 'center', alignItems: 'center',
+          <TextInput
+            multiline = {true},
+            numberOfLines = {4},
+            placeholder='enter something here'
+          >
+          </TextInput>
+          {/* <Text style={{fontSize: 35, color: '#ffffff', justifyContent: 'center', alignItems: 'center',
             // fontFamily: 'HelveticaNeue-Bold'
           }}>
             Find a Match
-          </Text>
+          </Text> */}
             <Picker
               style={styles.picker}
               selectedValue={this.state.language}
