@@ -4,6 +4,9 @@ import Slides from '../components/slides';
 import Swipers from '../components/swiper';
 import _ from 'lodash';
 import {AppLoading} from 'expo';
+import { connect } from 'react-redux';
+import { loadStoredUserInfo } from '../actions/index';
+
 const SLIDE_DATA = [
   {text: 'Welcome to Accord', color: '#000000', image: '../assets/icons/logo1'},
   {text: 'Some text here...', color: '#000000'},
@@ -21,10 +24,10 @@ class WelcomeScreen extends Component {
   }
 
   componentDidMount() {
-    console.log("Debbie was here!")
     AsyncStorage.getItem('user')
     .then((result) => {
       if (result) {
+        this.props.addStoredUser(JSON.parse(result));
         this.props.navigation.navigate('AllScreen');
       }else{
         console.log('debbo was wrong >:(');
@@ -36,9 +39,6 @@ class WelcomeScreen extends Component {
   }
 
   render() {
-    // if(_.isNull(this.state.token)) {
-    //   return<AppLoading />;
-    // }
     return(
       <Swipers
           onSlidesComplete={this.onSlidesComplete}
@@ -48,4 +48,16 @@ class WelcomeScreen extends Component {
   }
 }
 
-export default WelcomeScreen;
+const mapStateToProps = ({user}) => {
+	return {user};
+};
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		addStoredUser: (userJson) => {
+			return loadStoredUserInfo(dispatch, userJson);
+		}
+	};
+};
+
+export default connect(mapStateToProps, null)(WelcomeScreen);
