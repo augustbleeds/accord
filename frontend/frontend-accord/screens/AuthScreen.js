@@ -13,8 +13,8 @@ import {
 	ScrollView,
 } from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
-
-import { Button } from 'react-native-elements'
+import { Button } from 'react-native-elements';
+import * as firebase from 'firebase';
 
 class AuthScreen extends Component {
   constructor(props){
@@ -37,34 +37,37 @@ class AuthScreen extends Component {
 	}
 
   registerSubmit() {
-    fetch('https://us-central1-accord-18bdf.cloudfunctions.net/route/register', {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        nickname: this.state.nickname,
-        password: this.state.password,
-        gender: this.state.gender,
-        email: this.state.email,
-        school: this.state.school,
-        desc: this.state.desc,
-      })
-    })
-    .then((response) => response.json())
-    .then((responseJson) => {
-      if(responseJson !== null) {
-        this.props.navigation.navigate('Login')
-        console.log(responseJson);
-      }else{
+		firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+		.then(() => {
+			return fetch('https://us-central1-accord-18bdf.cloudfunctions.net/route/register', {
+				method: 'POST',
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify({
+					nickname: this.state.nickname,
+					password: this.state.password,
+					gender: this.state.gender,
+					email: this.state.email,
+					school: this.state.school,
+					desc: this.state.desc,
+				})
+			})
+		})
+		.then((response) => response.json())
+		.then((responseJson) => {
+			if(responseJson !== null) {
+				this.props.navigation.navigate('Login')
+				console.log(responseJson);
+			}else{
 				Alert.alert('Something went wrong, please try again.');
 			}
-    })
-    .catch((err) => {
-      alert("ERRRRR")
-      console.log('error', err)
-    });
-  }
+		})
+		.catch((err) => {
+			alert("ERRRRR", err)
+			console.log('error', err)
+		});
+	}
 
   render() {
     return (
