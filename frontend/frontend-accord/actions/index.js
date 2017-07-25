@@ -14,8 +14,9 @@ function loadUserInfo(dispatch, email, password) {
     return response.json();
   })
   .then((userJson) => {
-    console.log('dispatching...');
-    dispatch({ type: 'LOAD_USER', payload: userJson});
+    if(userJson){
+      dispatch({ type: 'LOAD_USER', payload: userJson});
+    }
   })
 }
 

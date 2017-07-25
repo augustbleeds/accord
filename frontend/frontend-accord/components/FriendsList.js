@@ -22,7 +22,7 @@ class FriendsList extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this._genRows();
   }
 
