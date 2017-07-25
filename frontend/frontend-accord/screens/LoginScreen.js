@@ -47,7 +47,7 @@ class LoginScreen extends Component {
 				Alert.alert('Username or Password is incorrect. Please try again!');
 			}else{
 				console.log('navigating!...');
-				self.props.navigation.navigate('AllScreen', {user: self.props.user.email, userObj: self.props.user});
+				self.props.navigation.navigate('AllScreen');
 			}
 		})
 		.catch((err) => {

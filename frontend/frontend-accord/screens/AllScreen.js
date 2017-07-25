@@ -76,8 +76,6 @@ export default class AllScreen extends PureComponent<void, *, State> {
       case '3':
         return (
           <MatchScreen
-            signedIn={this.props.navigation.state.params.user}
-            signedinuserObject={this.props.navigation.state.params.userObj}
             navigator={this.props.navigation}
             state={this.state}
             style={{ backgroundColor: '#000000' }}

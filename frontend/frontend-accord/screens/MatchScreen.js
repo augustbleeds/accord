@@ -28,7 +28,7 @@ class MatchScreen extends Component {
   }
 
   fetchMatch() {
-    const endPoint = `${backEnd}/${this.state.topic}/${this.props.signedIn.split('.')[0]}`;
+    const endPoint = `${backEnd}/${this.state.topic}/${this.props.user.email.split('.')[0]}`;
     fetch(endPoint, {
       method: 'POST',
       headers: {
@@ -41,7 +41,7 @@ class MatchScreen extends Component {
       if(responseJson.success === true) {
         Alert.alert('You will be notified when there is a match! :)');
         // listen for when this user is matched!
-        var myUserId = this.props.signedIn.split('.')[0];
+        var myUserId = this.props.user.email.split('.')[0];
         firebase.database().ref(`/Match/${myUserId}`).on('value', (data) => {
             if(!data.val()){
               return;
@@ -51,7 +51,7 @@ class MatchScreen extends Component {
             this.props.navigator.navigate('ChatScreen', {
               username1: myUserId,
               username2: this.state.matchedUser,
-              userObj: this.props.signedinuserObject
+              userObj: this.props.user,
             });
             // remove it from the database
             dbRootRef.child(`/Match/${myUserId}`).remove();
