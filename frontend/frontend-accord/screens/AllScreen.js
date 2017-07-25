@@ -7,6 +7,7 @@ import { TabViewAnimated, TabBar } from 'react-native-tab-view';
 import FriendsScreen from './FriendsScreen';
 import HomeScreen from './HomeScreen';
 import MatchScreen from './MatchScreen';
+import SettingsScreen from './SettingsScreen'
 import FriendsProfileBio from '../components/FriendsProfileBio';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -26,9 +27,10 @@ export default class AllScreen extends PureComponent<void, *, State> {
   state: State = {
     index: 0,
     routes: [
-      { key: '1', icon: 'ios-home', title: 'Home' },
-      { key: '2', icon: 'ios-people', title: 'Profile'  },
-      { key: '3', icon: 'md-search', title: 'Match'  },
+      { key: '1', icon: 'ios-people', title: 'Profile'  },
+      { key: '2', icon: 'md-search', title: 'Match'  },
+      { key: '3', icon: 'md-settings', title: 'Settings' },
+
     ],
   };
 
@@ -58,24 +60,25 @@ export default class AllScreen extends PureComponent<void, *, State> {
   _renderScene = ({ route }) => {
     switch (route.key) {
       case '1':
-        return (
-          <HomeScreen
-            state={this.state}
-            navigator={this.props.navigation}
-            style={{ backgroundColor: '#000000' }}
-          />
-        );
+      return (
+        <FriendsScreen
+          state={this.state}
+          navigator={this.props.navigation}
+          style={{ backgroundColor: '#000000' }}
+        />
+      );
+
       case '2':
-        return (
-          <FriendsScreen
-            navigator={this.props.navigation}
-            state={this.state}
-            style={{ backgroundColor: '#000000' }}
-          />
-        );
+      return (
+        <MatchScreen
+          navigator={this.props.navigation}
+          state={this.state}
+          style={{ backgroundColor: '#000000' }}
+        />
+      );
       case '3':
         return (
-          <MatchScreen
+          <SettingsScreen
             navigator={this.props.navigation}
             state={this.state}
             style={{ backgroundColor: '#000000' }}
