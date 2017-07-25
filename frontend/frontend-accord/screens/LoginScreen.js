@@ -9,6 +9,7 @@ import {
 	TextInput,
 	Text,
 	ScrollView,
+	AsyncStorage,
 	Alert} from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import { Button } from 'react-native-elements';
@@ -26,6 +27,7 @@ class LoginScreen extends Component {
       password: '',
     }
   }
+
   onRegisterComplete = () => {
     this.props.navigation.navigate('Welcome');
   }
@@ -47,8 +49,11 @@ class LoginScreen extends Component {
 				Alert.alert('Username or Password is incorrect. Please try again!');
 			}else{
 				console.log('navigating!...');
-				self.props.navigation.navigate('AllScreen');
+				return AsyncStorage.setItem('user', JSON.stringify(self.props.user));
 			}
+		})
+		.then(() => {
+			this.props.navigation.navigate('AllScreen');
 		})
 		.catch((err) => {
 			console.log('Error logging in :', err);

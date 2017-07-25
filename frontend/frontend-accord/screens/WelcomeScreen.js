@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text } from 'react-native';
+import {View, Text, AsyncStorage } from 'react-native';
 import Slides from '../components/slides';
 import Swipers from '../components/swiper';
 import _ from 'lodash';
@@ -19,17 +19,21 @@ class WelcomeScreen extends Component {
     this.props.navigation.navigate('Login');
 
   }
-  // async componentWillMount() {
-  //   let token = await AsyncStorage.getItem('fb_token');
-  //
-  //   if(token) {
-  //     this.props.navigation.navigae('map');
-  //     this.setState({ token });
-  //
-  //   } else {
-  //     this.setState({ token: false });
-  //   }
-  // }
+
+  componentDidMount() {
+    console.log("Debbie was here!")
+    AsyncStorage.getItem('user')
+    .then((result) => {
+      if (result) {
+        this.props.navigation.navigate('AllScreen');
+      }else{
+        console.log('debbo was wrong >:(');
+      }
+    })
+    .catch((err) => {
+      console.log('error w/ AsyncStorage', err);
+    })
+  }
 
   render() {
     // if(_.isNull(this.state.token)) {
