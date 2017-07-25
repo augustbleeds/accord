@@ -4,6 +4,7 @@ import { Button } from 'react-native-elements';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import ModalDropdown from 'react-native-modal-dropdown';
 import * as firebase from 'firebase';
+import { connect } from 'react-redux';
 
 var config = {
    apiKey: "AIzaSyDkhtl4JKhb_1aHL3ookaq0iSRsXmW1Hcg",
@@ -17,7 +18,7 @@ firebase.initializeApp(config);
 var dbRootRef = firebase.database().ref();
 const backEnd = 'https://us-central1-accord-18bdf.cloudfunctions.net/route/user/match';
 
-export default class MatchScreen extends Component {
+class MatchScreen extends Component {
   constructor(props){
     super(props);
     this.state = ({
@@ -145,3 +146,9 @@ const styles = StyleSheet.create({
 
   },
 });
+
+const mapStateToProps = ({ user }) => {
+	return { user };
+};
+
+export default connect(mapStateToProps, null)(MatchScreen);
