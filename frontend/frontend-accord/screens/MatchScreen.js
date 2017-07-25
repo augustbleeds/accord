@@ -31,11 +31,7 @@ export default class MatchScreen extends Component {
   }
 
   fetchMatch() {
-    console.log('asdfasdfasdf');
-    console.log(this.state.topic);
-    console.log(this.props.signedIn);
     const endPoint = `${backEnd}/${this.state.topic}/${this.props.signedIn.split('.')[0]}`;
-    console.log('endpoint is', endPoint);
     fetch(endPoint, {
       method: 'POST',
       headers: {
@@ -49,7 +45,6 @@ export default class MatchScreen extends Component {
         Alert.alert('You will be notified when there is a match! :)');
         // listen for when this user is matched!
         var listenPath = this.props.signedIn.split('.')[0];
-        console.log('listen is', listenPath);
         firebase.database().ref('/blahj').set(true);
         firebase.database().ref(`/Match/${listenPath}`).on('value', (data) => {
             if(!data.val()){
@@ -59,21 +54,16 @@ export default class MatchScreen extends Component {
             // set up sendBird stuff
             Alert.alert(`You are matched with ${data.val()}`);
             this.setState({matchedUser: data.val()});
-            console.log('this is this.props ' ,this.props);
             this.props.navigator.navigate('ChatScreen', {
               username1: listenPath,
               username2: this.state.matchedUser,
               userObj: this.props.signedinuserObject
             });
-            console.log('this is USEROBJECT ' ,this.props.signedinuserObject);
-
-            console.log('state is', this.state);
             // remove it from the database
             dbRootRef.child(`/Match/${listenPath}`).remove();
             // detach listeners
             dbRootRef.child(`/Match/${listenPath}`).off();
           });
-        // dbRootRef.child(`/hello`).set(true);
       }
     })
     .catch((err) => {
@@ -103,7 +93,7 @@ export default class MatchScreen extends Component {
             buttonStyle={styles.buttonStyle}
             raised
             title='MATCH'
-            onPress={ () => this.fetchMatch()}
+            onPress={ () => {console.log('Topic is', this.state.topic);this.fetchMatch()}}
             >
           </Button>
       </View>
@@ -130,13 +120,9 @@ const styles = StyleSheet.create({
     color: '#ffffff'
   },
   mainText: {
-    // color: '#fff',
-    // fontSize: 30,
-    // textAlign: 'center',
     fontSize: 20,
     textAlign: 'center',
     color: '#fff',
-    // fontFamily: 'HelveticaNeue',
   },
   text: {
     color: '#fff',
