@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
-import {View, Text } from 'react-native';
+import {View, Text, AsyncStorage } from 'react-native';
 import Slides from '../components/slides';
 import Swipers from '../components/swiper';
 import _ from 'lodash';
 import {AppLoading} from 'expo';
+import { connect } from 'react-redux';
+import { loadStoredUserInfo } from '../actions/index';
+
 const SLIDE_DATA = [
   {text: 'Welcome to Accord', color: '#000000', image: '../assets/icons/logo1'},
   {text: 'Some text here...', color: '#000000'},
@@ -19,22 +22,27 @@ class WelcomeScreen extends Component {
     this.props.navigation.navigate('Login');
 
   }
-  // async componentWillMount() {
-  //   let token = await AsyncStorage.getItem('fb_token');
-  //
-  //   if(token) {
-  //     this.props.navigation.navigae('map');
-  //     this.setState({ token });
-  //
-  //   } else {
-  //     this.setState({ token: false });
-  //   }
-  // }
+
+  componentDidMount() {
+    // TODO: add if statement here to check if reducer already has something on initial login
+    if(!this.props.user){
+      AsyncStorage.getItem('user')
+      .then((result) => {
+        console.log('When WelcomeScreen mounts result is', result);
+        if (result) {
+          this.props.addStoredUser(JSON.parse(result));
+          this.props.navigation.navigate('AllScreen');
+        }else{
+          console.log('debbo was wrong >:(');
+        }
+      })
+      .catch((err) => {
+        console.log('error w/ AsyncStorage', err);
+      })
+    }
+  }
 
   render() {
-    // if(_.isNull(this.state.token)) {
-    //   return<AppLoading />;
-    // }
     return(
       <Swipers
           onSlidesComplete={this.onSlidesComplete}
@@ -44,4 +52,16 @@ class WelcomeScreen extends Component {
   }
 }
 
-export default WelcomeScreen;
+const mapStateToProps = ({user}) => {
+	return {user};
+};
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		addStoredUser: (userJson) => {
+			return loadStoredUserInfo(dispatch, userJson);
+		}
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(WelcomeScreen);

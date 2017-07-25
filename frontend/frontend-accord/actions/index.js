@@ -19,9 +19,13 @@ function loadUserInfo(dispatch, email, password) {
   })
 }
 
+function loadStoredUserInfo(dispatch, userJson) {
+  dispatch({ type: 'LOAD_USER', payload: userJson});
+}
+
 
 function loadCurrentFriendInfo(dispatch, currentFriendJson){
   dispatch({ type: 'LOAD_FRIEND', payload: currentFriendJson });
 }
 
-export { loadUserInfo, loadCurrentFriendInfo };
+export { loadUserInfo, loadCurrentFriendInfo, loadStoredUserInfo };
