@@ -23,6 +23,7 @@ class SettingsScreen extends Component {
     super(props);
   }
 
+	// set the async back to null, userReducer should be cleared
 	SignOut() {
 		firebase.auth().signOut()
 			.then(() => {

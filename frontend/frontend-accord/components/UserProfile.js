@@ -10,7 +10,7 @@ class UserProfile extends Component {
 
   render() {
     return (
-      <View style={[{flex: 1, justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#000'}, styles.profile]}>
+      <View style={styles.profile}>
         <Image style={{borderRadius: 75, width:150 , height: 150, top: 1, alignSelf: 'auto'}} source={{uri: this.props.user.img}} />
         <Text style={{fontWeight: 'bold', textAlign: 'center', color: '#6adaa8'}}>Signed in as: {this.props.user.email}</Text>
         <Text style={styles.text}>Nickname: {this.props.user.nickname}</Text>
@@ -23,14 +23,10 @@ class UserProfile extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 8,
-  },
   profile: {
-    margin: 8,
-    padding: 16,
+    justifyContent: 'space-between',
     alignItems: 'center',
-    flex: 1,
+    flex: 2,
   },
   text: {
     color: '#ffffff',

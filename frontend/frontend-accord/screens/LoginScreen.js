@@ -36,6 +36,7 @@ class LoginScreen extends Component {
 		this.props.navigation.navigate('Welcome');
 	}
 
+	// set async storage and the reducer once upon login, and navigate to AllScreen 
 	loginSubmit() {
 		var self = this;
 		if(!self.state.email || !self.state.password){
