@@ -10,35 +10,26 @@ export default class FriendsScreen extends Component {
             <FriendsList
               navigator={this.props.navigator}
               ref={el => (this._first = el)}
-              style={[styles.list, { backgroundColor: '#000' }]}
             />
-          <View style={styles.profile}>
             <UserProfile/>
-          </View>
+            {/* <View style={{flex: 1, backgroundColor: 'blue'}}>
+
+            </View>
+            <View style={{flex: 3, backgroundColor: 'red'}}>
+
+            </View> */}
         </View>
       );
     }
 }
 
 const styles = StyleSheet.create({
-  list: {
-    backgroundColor: '#6adaa8',
-  },
   outside : {
+    display: 'flex',
     flex: 1,
     flexDirection: 'row',
-  },
-  friendsBar: {
-    flex: 2,
-  },
-  profile: {
-    flex: 2,
-    backgroundColor: '#000',
-  },
-  text: {
-    color: '#fff',
-    textAlign: 'center',
-    marginVertical: 8,
-    marginHorizontal: 16,
+    backgroundColor: 'black',
+    justifyContent: 'flex-start',
+    flexWrap: 'wrap'
   },
 });

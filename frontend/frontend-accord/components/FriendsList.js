@@ -84,7 +84,7 @@ class FriendsList extends Component {
 
   render() {
     return (
-      <View>
+      <View style={{width: SCREEN_WIDTH * 0.3}}>
       <ListView
         {...this.props}
         removeClippedSubviews={false}
@@ -142,7 +142,8 @@ class FriendsList extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 8,
+    flex: 1,
+
   },
   modal: {
     height: SCREEN_HEIGHT,

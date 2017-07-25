@@ -24,8 +24,9 @@ class WelcomeScreen extends Component {
   }
 
   componentDidMount() {
+    // why did we have this???
     // TODO: add if statement here to check if reducer already has something on initial login
-    if(!this.props.user){
+    if(JSON.stringify(this.props.user) === '{}'){
       AsyncStorage.getItem('user')
       .then((result) => {
         console.log('When WelcomeScreen mounts result is', result);
