@@ -9,8 +9,6 @@ export default class FriendsScreen extends Component {
         <View style={styles.outside}>
           <View style={[styles.page, styles.container]}>
             <FriendsList
-              signedIn={this.props.signedIn}
-              signedinuserObject={this.props.signedinuserObject}
               navigator={this.props.navigator}
               ref={el => (this._first = el)}
               style={[styles.list, { backgroundColor: '#000' }]}

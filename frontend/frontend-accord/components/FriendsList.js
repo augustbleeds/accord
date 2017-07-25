@@ -15,8 +15,6 @@ class FriendsList extends Component {
     super(props);
     this.state = {
       visible: false,
-      currentFriendProf: {},
-      currentFriendId: '',
       data: [],
       dataSource: new ListView.DataSource({
         rowHasChanged: (r1, r2) => r1 !== r2,
