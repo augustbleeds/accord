@@ -1,5 +1,5 @@
 // action creator
-function loadUserInfo(email, password) {
+function loadUserInfo(dispatch, email, password) {
   return fetch('https://us-central1-accord-18bdf.cloudfunctions.net/route/login', {
     method: 'POST',
     headers: {
@@ -14,7 +14,9 @@ function loadUserInfo(email, password) {
     return response.json();
   })
   .then((userJson) => {
+    console.log('dispatching...');
     dispatch({ type: 'LOAD_USER', payload: userJson})
+    console.log('hi hi hi');
   })
 }
 

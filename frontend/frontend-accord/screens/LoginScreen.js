@@ -35,36 +35,26 @@ class LoginScreen extends Component {
 		this.props.navigation.navigate('Welcome');
 	}
 
-  loginSubmit() {
-		if(!this.state.email || !this.state.password){
+	loginSubmit() {
+		var self = this;
+		if(!self.state.email || !self.state.password){
 			Alert.alert('Please fill in your email and password!');
 			return;
 		}
-    fetch('https://us-central1-accord-18bdf.cloudfunctions.net/route/login', {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        email: this.state.email,
-        password: this.state.password
-      })
-    })
-    .then((response) => {
-			return response.json();
-		})
-    .then((responseJson) => {
-			if(responseJson === null){
+		self.props.addUser(self.state.email, self.state.password)
+		.then(() => {
+			console.log('props is', self.props);
+			if(self.props.user === null){
 				Alert.alert('Username or Password is incorrect. Please try again!');
+			}else{
+				console.log('navigating!...');
+				self.props.navigation.navigate('AllScreen');
 			}
-      if(responseJson !== null) {
-        this.props.navigation.navigate('AllScreen', {user: this.state.email, userObj: responseJson})
-      }
-    })
-    .catch((err) => {
-      console.log('error', err)
-    });
-  }
+		})
+		.catch((err) => {
+			console.log('Error logging in :', err);
+		});
+	}
 
   render() {
     return (
@@ -132,9 +122,10 @@ const mapStateToProps = ({user}) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		addUser: (email, password) => {
-			return loadUserInfo(email, password);
+			console.log('adding user...');
+			return loadUserInfo(dispatch, email, password);
 		}
-	}
+	};
 }
 
 // export default LoginScreen;
