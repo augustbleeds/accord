@@ -22,7 +22,7 @@ class FriendsList extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this._genRows();
   }
 
@@ -85,7 +85,6 @@ class FriendsList extends Component {
   render() {
     return (
       <View>
-      <Text style={{color: '#fffff', alignItems: 'center'}}>Friends</Text>
       <ListView
         {...this.props}
         removeClippedSubviews={false}
