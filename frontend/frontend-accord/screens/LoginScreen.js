@@ -48,11 +48,11 @@ class LoginScreen extends Component {
 			if(self.props.user === null){
 				Alert.alert('Username or Password is incorrect. Please try again!');
 			}else{
-				console.log('navigating!...');
 				return AsyncStorage.setItem('user', JSON.stringify(self.props.user));
 			}
 		})
 		.then(() => {
+			console.log('AsynStorage succesfully set in LoginScreen!...');
 			this.props.navigation.navigate('AllScreen');
 		})
 		.catch((err) => {

@@ -24,18 +24,22 @@ class WelcomeScreen extends Component {
   }
 
   componentDidMount() {
-    AsyncStorage.getItem('user')
-    .then((result) => {
-      if (result) {
-        this.props.addStoredUser(JSON.parse(result));
-        this.props.navigation.navigate('AllScreen');
-      }else{
-        console.log('debbo was wrong >:(');
-      }
-    })
-    .catch((err) => {
-      console.log('error w/ AsyncStorage', err);
-    })
+    // TODO: add if statement here to check if reducer already has something on initial login
+    if(!this.props.user){
+      AsyncStorage.getItem('user')
+      .then((result) => {
+        console.log('When WelcomeScreen mounts result is', result);
+        if (result) {
+          this.props.addStoredUser(JSON.parse(result));
+          this.props.navigation.navigate('AllScreen');
+        }else{
+          console.log('debbo was wrong >:(');
+        }
+      })
+      .catch((err) => {
+        console.log('error w/ AsyncStorage', err);
+      })
+    }
   }
 
   render() {
@@ -60,4 +64,4 @@ const mapDispatchToProps = (dispatch) => {
 	};
 };
 
-export default connect(mapStateToProps, null)(WelcomeScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(WelcomeScreen);
