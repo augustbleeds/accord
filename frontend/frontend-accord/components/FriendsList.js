@@ -4,6 +4,7 @@ import FriendsProfileBio from './FriendsProfileBio';
 import { List, ListItem, Button } from 'react-native-elements'
 const _ = require('underscore');
 import firebase from 'firebase';
+import { connect } from 'react-redux';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;

@@ -13,7 +13,6 @@ import {
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import { Button } from 'react-native-elements';
 
-
 // import createStore from redux, the reducer, and Provider for connection react-redux
 import { connect } from 'react-redux';
 import { loadUserInfo } from '../actions/index';
@@ -105,8 +104,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10,
     color: '#fff',
-    // fontFamily: 'HelveticaNeue',
-
   },
   buttonStyle: {
     backgroundColor: '#6adaa8',
@@ -128,7 +125,6 @@ const mapDispatchToProps = (dispatch) => {
 	};
 }
 
-// export default LoginScreen;
 export default connect(
   mapStateToProps,
   mapDispatchToProps
