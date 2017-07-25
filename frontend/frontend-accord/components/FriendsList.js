@@ -53,7 +53,8 @@ class FriendsList extends Component {
   }
 
   _genRows = () => {
-    var myUserId = this.props.signedIn.split('.')[0];
+    // var myUserId = this.props.signedIn.split('.')[0];
+    var myUserId = this.props.user.email.split('.')[0];
     this._fetchFriendList(myUserId);
     var self = this;
    firebase.database().ref(`/User/${myUserId}/friends`).on('value', function(friendsSnap){
@@ -114,9 +115,11 @@ class FriendsList extends Component {
              <TouchableOpacity
                onPress={() => {this.setModalVisible(!this.state.visible);
                  this.props.navigator.navigate('FriendsChatScreen', {
-                   username1: this.props.signedIn.split('.')[0],
+                  //  username1: this.props.signedIn.split('.')[0],
+                  username1: this.props.user.email.split('.')[0],
                    username2: this.state.currentFriendId,
-                   userObj: this.props.signedinuserObject,
+                  //  userObj: this.props.signedinuserObject,
+                  userObj: this.props.user,
                     friendObj: this.state.currentFriendProf,
                     navigator: this.props.navigator
                   })
