@@ -106,12 +106,12 @@ class FriendsList extends Component {
         >
           <View style={{flex: 1, backgroundColor: "#000000"}}>
           <View style={{flex: 13, justifyContent: 'space-around', alignItems: 'center', backgroundColor: "#000000"}}>
-             <Text style={styles.profileText}>Profile of {this.state.currentFriendProf.nickname}</Text>
-             <Image style={{width:200 , height: 200, borderRadius: 100}} source={{uri: this.state.currentFriendProf.img}} />
-             <Text style={styles.text}>Nickname: {this.state.currentFriendProf.nickname}</Text>
-             <Text style={styles.text}>School: {this.state.currentFriendProf.school}</Text>
-             <Text style={styles.text}>Description: {this.state.currentFriendProf.desc}</Text>
-             <Text style={styles.text}>Gender: {this.state.currentFriendProf.gender}</Text>
+             <Text style={styles.profileText}>Profile of {this.props.currentFriend.nickname}</Text>
+             <Image style={{width:200 , height: 200, borderRadius: 100}} source={{uri: this.props.currentFriend.img}} />
+             <Text style={styles.text}>Nickname: {this.props.currentFriend.nickname}</Text>
+             <Text style={styles.text}>School: {this.props.currentFriend.school}</Text>
+             <Text style={styles.text}>Description: {this.props.currentFriend.desc}</Text>
+             <Text style={styles.text}>Gender: {this.props.currentFriend.gender}</Text>
            </View>
              <View style={{flex: 1, flexDirection: 'row'}}>
              <TouchableOpacity
