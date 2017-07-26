@@ -21,7 +21,8 @@ class WelcomeScreen extends Component {
       AsyncStorage.getItem('user')
       .then((result) => {
         // result will be null by default (different than the state)
-        if (result) {
+        // TODO: where do we setItem to null?
+        if (JSON.parse(result)) {
           this.props.addStoredUser(JSON.parse(result));
           this.props.navigation.navigate('AllScreen');
         }

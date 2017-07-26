@@ -27,6 +27,7 @@
     "react-redux": "^5.0.5",
     "redux": "^3.7.2",
     "sendbird": "^3.0.35",
+    "tcomb-form-native": "~0.5.3",
     "underscore": "^1.8.3",
     "watchman": "^0.1.8"
   }

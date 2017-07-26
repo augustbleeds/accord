@@ -1,56 +1,92 @@
-import React, {Component} from 'react';
-import {
-	Alert,
-	StyleSheet,
-	KeyboardAvoidingView,
-	View,
-	ActivityIndicator,
-	TouchableOpacity,
-	Image,
-	TextInput,
-	Text,
-	ScrollView,
-} from 'react-native';
-import { TabNavigator, StackNavigator } from 'react-navigation';
-import { Button } from 'react-native-elements';
+'use strict';
+import React, { Component } from 'react';
+import { ScrollView, Alert, AppRegistry, StyleSheet, Text, View, TouchableHighlight } from 'react-native';
+var t = require('tcomb-form-native');
 import * as firebase from 'firebase';
 
-class AuthScreen extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      nickname: '',
-      password: '',
-      email: '',
-      gender: '',
-      school: '',
-      desc: ''
+var Form = t.form.Form;
+
+const Email = t.refinement(t.String, email => {
+  const reg = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/; //or any other regexp
+  return reg.test(email);
+});
+
+const StrongPassword = t.refinement(t.String, password => {
+  return password.length >= 6;
+});
+
+
+// here we are: define your domain model
+var Person = t.struct({
+  nickname: t.String,              // a required string
+  email: Email,
+  gender: t.String,
+  school: t.String,
+  description: t.String,
+  password: StrongPassword,
+});
+
+// style the form
+
+
+var textbox: {
+
+  // the style applied wihtout errors
+  normal: {
+    color: '#000000',
+    fontSize: 17,
+    height: 36,
+    padding: 7,
+    borderRadius: 4,
+    borderColor: '#cccccc', // <= relevant style here
+    borderWidth: 1,
+    marginBottom: 5
+  },
+
+  // the style applied when a validation error occours
+  error: {
+    color: '#000000',
+    fontSize: 17,
+    height: 36,
+    padding: 7,
+    borderRadius: 4,
+    borderColor: '#a94442', // <= relevant style here
+    borderWidth: 1,
+    marginBottom: 5
+  }
+
+}
+
+// t.form.Form.stylesheet.textbox = textbox;
+
+var options = {
+  fields: {
+    email : {
+      error: 'Insert a valid .edu email address'
+    },
+    password: {
+      password: true,
+      secureTextEntry: true,
+      error: 'Insert a password greater than 6 characters'
     }
   }
-  onRegisterComplete = () => {
-    this.props.navigation.navigate('Welcome');
+};
+
+
+class AwesomeProject extends Component {
+  constructor(props){
+    super(props);
   }
 
-	gobackSubmit() {
-		this.props.navigation.navigate('Welcome');
-	}
-
-  registerSubmit() {
-		firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+  registerSubmit({nickname, email, gender, school, description, password}) {
+		firebase.auth().createUserWithEmailAndPassword(email, password)
 		.then(() => {
 			return fetch('https://us-central1-accord-18bdf.cloudfunctions.net/route/register', {
 				method: 'POST',
 				headers: {
 					"Content-Type": "application/json"
 				},
-				body: JSON.stringify({
-					nickname: this.state.nickname,
-					password: this.state.password,
-					gender: this.state.gender,
-					email: this.state.email,
-					school: this.state.school,
-					desc: this.state.desc,
-				})
+				body: JSON.stringify({nickname, password, gender, email, school, desc: description})
 			})
 		})
 		.then((response) => response.json())
@@ -63,89 +99,72 @@ class AuthScreen extends Component {
 			}
 		})
 		.catch((err) => {
-			alert("ERRRRR");
-			console.log('error', err);
+      // err.code ==== auth/email-already-in-use
+      Alert.alert(err.message);
 		});
 	}
 
+
+  onPress() {
+    console.log('navigation exists :O', this.props.navigation)
+    Alert.alert('pressed button');
+    // call getValue() to get the values of the form
+    var value = this.form.getValue();
+    if (value) { // if validation fails, value will be null
+      // Alert.alert('value:' + JSON.stringify(value.email));
+      // console.log(value); // value here is an instance of Person
+      this.registerSubmit(value);
+    }
+  }
+
   render() {
     return (
+      <ScrollView>
       <View style={styles.container}>
-        <Text style={styles.textBig}>Let's Get Started!</Text>
-					<ScrollView>
-          <TextInput
-            style={{height: 40, textAlign: "center", color: '#fff'}}
-            placeholder="Email Address"
-            placeholderTextColor="#808080"
-            onChangeText={(text) => this.setState({email: text})}
-          />
-          <TextInput
-            style={{height: 40, textAlign: "center", color: '#fff'}}
-            placeholder="Accord nickname"
-            placeholderTextColor="#808080"
-            onChangeText={(text) => this.setState({nickname: text})}
-          />
-          <TextInput
-            style={{height: 40, textAlign: "center", color: '#fff'}}
-            placeholder="Enter Password"
-            placeholderTextColor="#808080"
-            secureTextEntry={true}
-            onChangeText={(text) => this.setState({password: text})}
-          />
-          <TextInput
-            style={{height: 40, textAlign: "center", color: '#fff'}}
-            placeholder="Enter Your School"
-            placeholderTextColor="#808080"
-            onChangeText={(text) => this.setState({school: text})}
-          />
-          <TextInput
-            style={{height: 40, textAlign: "center", color: '#fff'}}
-            placeholder="Gender"
-            placeholderTextColor="#808080"
-            onChangeText={(text) => this.setState({gender: text})}
-          />
-          <TextInput
-            style={{height: 40, textAlign: "center", color: '#fff'}}
-            placeholder="Description"
-            placeholderTextColor="#808080"
-            onChangeText={(text) => this.setState({desc: text})}
-          />
-            <Button
-              buttonStyle={styles.buttonStyle}
-              onPress={ () =>  this.registerSubmit()}
-              title="Sign Me Up!"
-            />
-
-						<Button
-              buttonStyle={styles.buttonStyle}
-              onPress={ () =>  this.gobackSubmit()}
-              title="Go back"
-            />
-					</ScrollView>
+        <Text> Hi </Text>
+        <Form
+          ref={(form) => {this.form = form}}
+          type={Person}
+          options={options}
+        />
+        <TouchableHighlight style={styles.button} onPress={() => this.onPress()} underlayColor='#99d9f4'>
+          <Text style={styles.buttonText}>Save</Text>
+        </TouchableHighlight>
       </View>
-    )
+    </ScrollView>
+    );
   }
+
 }
 
-const styles = StyleSheet.create({
+var styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#000000',
-		paddingTop: 20,
+    marginTop: 50,
+    padding: 20,
+    backgroundColor: 'white',
   },
-  textBig: {
-    fontSize: 36,
-    textAlign: 'center',
-    margin: 10,
-    color: '#fff',
+  title: {
+    fontSize: 30,
+    alignSelf: 'center',
+    marginBottom: 30,
+    color: '#6adaa8',
   },
-  buttonStyle: {
-    backgroundColor: '#6adaa8',
-    marginTop: 15,
-		borderRadius: 10,
+  buttonText: {
+    fontSize: 18,
+    color: 'white',
+    alignSelf: 'center'
+  },
+  button: {
+    height: 36,
+    backgroundColor: '#48BBEC',
+    borderColor: '#48BBEC',
+    borderWidth: 1,
+    borderRadius: 8,
+    marginBottom: 10,
+    alignSelf: 'stretch',
+    justifyContent: 'center'
   }
 });
 
-export default AuthScreen;
+export default AwesomeProject;
