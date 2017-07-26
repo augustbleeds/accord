@@ -83,7 +83,7 @@ class ChatScreen extends Component {
 				<View style={{backgroundColor: "white", flex: 1, marginTop: 20, flexDirection: 'row'}}>
 				<TouchableOpacity
 					onPress={() => chatBackend.onLeaveOrConnect(this.state.currentUserId, this.state.matchedUserId, 'LEAVE', this.props.navigation)}
-					style={{backgroundColor: "red", flex: 1, borderRightWidth: 1, color: 'white', justifyContent: 'center', alignItems: 'center'}}
+					style={{backgroundColor: "red", flex: 1, borderColor: 'white', borderRightWidth: 1, color: 'white', justifyContent: 'center', alignItems: 'center'}}
 					>
 					<Text style={{color: 'white'}}>
 						Leave
@@ -91,7 +91,7 @@ class ChatScreen extends Component {
 				</TouchableOpacity>
 				<TouchableOpacity
 					onPress={() => chatBackend.onLeaveOrConnect(this.state.currentUserId, this.state.matchedUserId, 'CONNECT', this.props.navigation)}
-					style={{backgroundColor: "#6ADAA8", flex: 1, borderLeftWidth: 1, color: 'white', justifyContent: 'center', alignItems: 'center'}}
+					style={{backgroundColor: "#6ADAA8", flex: 1, borderColor: 'white', borderLeftWidth: 1, color: 'white', justifyContent: 'center', alignItems: 'center'}}
 					>
 					<Text style={{color: 'white'}}>
 						Connect
