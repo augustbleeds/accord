@@ -5,13 +5,22 @@ var t = require('tcomb-form-native');
 
 var Form = t.form.Form;
 
+const Email = t.refinement(t.String, email => {
+  const reg = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/; //or any other regexp
+  return reg.test(email);
+});
+
+// const StrongPassword = t.refinement(t.String, password => {
+// });
+
 // here we are: define your domain model
 var Person = t.struct({
   nickname: t.String,              // a required string
-  surname: t.maybe(t.String),  // an optional string
+  email: Email,
+  gender: t.String,
+  school: t.String,
+  description: t.String,
   password: t.String,
-  age: t.Number,               // a required number
-  rememberMe: t.Boolean        // a boolean
 });
 
 var options = {
@@ -27,8 +36,9 @@ var options = {
 class AwesomeProject extends Component {
 
   onPress() {
+    console.log('form is this when pressed', this.form);
     // call getValue() to get the values of the form
-    var value = this.refs.form.getValue();
+    var value = this.form.getValue();
     if (value) { // if validation fails, value will be null
       console.log(value); // value here is an instance of Person
     }
@@ -39,11 +49,11 @@ class AwesomeProject extends Component {
       <View style={styles.container}>
         {/* display */}
         <Form
-          ref="form"
+          ref={(form) => {this.form = form}}
           type={Person}
           options={options}
         />
-        <TouchableHighlight style={styles.button} onPress={this.onPress} underlayColor='#99d9f4'>
+        <TouchableHighlight style={styles.button} onPress={() => this.onPress()} underlayColor='#99d9f4'>
           <Text style={styles.buttonText}>Save</Text>
         </TouchableHighlight>
       </View>
