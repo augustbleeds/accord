@@ -12,12 +12,6 @@ export default class FriendsScreen extends Component {
               ref={el => (this._first = el)}
             />
             <UserProfile/>
-            {/* <View style={{flex: 1, backgroundColor: 'blue'}}>
-
-            </View>
-            <View style={{flex: 3, backgroundColor: 'red'}}>
-
-            </View> */}
         </View>
       );
     }

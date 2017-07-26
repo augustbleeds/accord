@@ -40,8 +40,6 @@ class FriendsChatScreen extends Component {
   }
 
 	componentDidMount(){
-		console.log('allie said this will work again!');
-		console.log("OUR STATE IS: ", this.state);
 		chatBackend.loadMessages( (message) => {
 			this.setState((previousState) => {
 				return {
@@ -81,7 +79,7 @@ class FriendsChatScreen extends Component {
   render() {
     return (
 			<View style={{flex: 1}}>
-        <View style={{backgroundColor: "black", flex: 1, flexDirection: 'row'}}>
+        <View style={{backgroundColor: "white", flex: 1, flexDirection: 'row'}}>
           <TouchableOpacity
             onPress={() => this.props.navigation.navigate('AllScreen')}
             style={{backgroundColor: "#6ADAA8", flex: 1, borderLeftWidth: 1, color: 'white', justifyContent: 'center', alignItems: 'center'}}

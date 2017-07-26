@@ -14,6 +14,7 @@ function loadUserInfo(dispatch, email, password) {
     return response.json();
   })
   .then((userJson) => {
+    // if the response is an object (if response is null, no action will be dispatched)
     if(userJson){
       dispatch({ type: 'LOAD_USER', payload: userJson});
     }

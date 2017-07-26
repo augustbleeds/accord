@@ -1,7 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import { StyleSheet, View, Dimensions } from 'react-native';
 import {StackNavigator} from 'react-navigation';
-import slideStyles from './components/slides'
 import AuthScreen from './screens/AuthScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
 import LoginScreen from './screens/LoginScreen';
@@ -52,18 +51,9 @@ export default class App extends React.Component {
   }
 }
 
-const styles=StyleSheet.create({
-    container:{
-        flex:1,
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: 'black',
     },
-    scrollwrap:{
-        backgroundColor:'#f3f3f3',
-    },
-    wrapper:{
-    },
-    slider:{
-        backgroundColor:'#97cae5',
-        width:screen.width,
-        height:screen.width/2,
-    },
-})
+});

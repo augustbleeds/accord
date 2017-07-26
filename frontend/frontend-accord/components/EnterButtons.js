@@ -6,7 +6,7 @@ export default class Enter extends Component {
     return(
       <View style={{backgroundColor: "black", flex: 1, flexDirection: 'row'}}>
       <TouchableOpacity
-        onPress={() => this.props.onSlidesComplete()}
+        onPress={() => this.props.goToSignUp()}
         style={{backgroundColor: "#6ADAA8", flex: 1, borderRightWidth: 1, color: 'white', justifyContent: 'center', alignItems: 'center'}}
         >
         <Text style={{color: 'white'}}>
@@ -14,7 +14,7 @@ export default class Enter extends Component {
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => this.props.onLoginComplete()}
+        onPress={() => this.props.goToLogIn()}
         style={{backgroundColor: "#6ADAA8", flex: 1, borderLeftWidth: 1, color: 'white', justifyContent: 'center', alignItems: 'center'}}
         >
         <Text style={{color: 'white'}}>
