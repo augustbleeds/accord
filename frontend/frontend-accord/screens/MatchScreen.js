@@ -5,6 +5,8 @@ import { TabNavigator, StackNavigator } from 'react-navigation';
 import ModalDropdown from 'react-native-modal-dropdown';
 import * as firebase from 'firebase';
 import { connect } from 'react-redux';
+import setUpPushNotifications from '../services/push_notifications';
+import Expo, {Notifications} from 'expo';
 
 var config = {
    apiKey: "AIzaSyDkhtl4JKhb_1aHL3ookaq0iSRsXmW1Hcg",
@@ -26,6 +28,14 @@ class MatchScreen extends Component {
       matchedUser: '',
       blurb: '',
     });
+  }
+
+  componentDidMount(){
+    setUpPushNotifications(this.props.user.email.split('.')[0]);
+    Notifications.addListener((notification) => {
+      // where we redirect them to the chatscreen
+    })
+
   }
 
   fetchMatch() {

@@ -14,7 +14,6 @@ class WelcomeScreen extends Component {
   }
 
   componentDidMount() {
-    // TODO: answer why did we have this???
     // add if statement here to check if reducer already has something on initial login
     // if user is not initialized in the store, then g
     if(JSON.stringify(this.props.user) === '{}'){
@@ -31,6 +30,8 @@ class WelcomeScreen extends Component {
         console.log('error w/ AsyncStorage', err);
       })
     }
+
+
   }
 
   render() {
