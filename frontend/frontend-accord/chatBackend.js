@@ -34,6 +34,7 @@ class chatBackend {
   // friends nickname
   loadMessages(callback, myUserId, matchedUserId, myNickname, friendNickname) {
     this.messagesRef = firebase.database().ref(`/Message/${this.generateMessageId(myUserId, matchedUserId)}`);
+    console.log('jay told me to put this here', this.messagesRef);
     this.messagesRef.off();
     const onReceive = (data) => {
       const message = data.val();
@@ -43,17 +44,27 @@ class chatBackend {
         createdAt: new Date(message.createdAt),
         user: {
           _id: message.from,
-          name: (message.from === myUserId) ? myNickname : friendNickname, 
+          name: (message.from === myUserId) ? myNickname : friendNickname,
         },
       });
     };
-    //either order by child or order by key
+    //LISTENS FOR MESSAGES: either order by child or order by key
     this.messagesRef.orderByChild('createdAt').on('child_added', onReceive)
+  }
+
+  sendBlurbMessage(message, matchedUserId, myUserId){
+    this.messagesRef = firebase.database().ref(`/Message/${this.generateMessageId(myUserId, matchedUserId)}`);
+    var newMessage = {
+      to: matchedUserId,
+      from: myUserId,
+      text: 'BLURB: ' + message,
+      createdAt: firebase.database.ServerValue.TIMESTAMP,
+    }
+    this.messagesRef.push(newMessage);
   }
 
   // send the message to the Backend
   sendMessage(message, matchedUserId, myUserId) {
-    console.log('Message to be send to firebase is: ', message);
     for (let i = 0; i < message.length; i++) {
       var newMessage = {
         to: matchedUserId,
@@ -61,7 +72,6 @@ class chatBackend {
         text: message[i].text,
         createdAt: firebase.database.ServerValue.TIMESTAMP,
       }
-      console.log('new message is ....', newMessage);
       this.messagesRef.push(newMessage);
     }
   }

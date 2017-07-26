@@ -39,15 +39,14 @@ class ChatScreen extends Component {
   }
 
 	componentDidMount(){
-		chatBackend.setUpFriendPending(this.state.currentUserId, this.state.matchedUserId);
-		console.log('allie said this will work again!');
-		console.log("OUR STATE IS: ", this.state);
+		chatBackend.sendBlurbMessage(this.props.navigation.state.params.blurb, this.state.matchedUserId, this.state.currentUserId);
 		chatBackend.loadMessages( (message) => {
 			this.setState((previousState) => {
 				return {
 					messages: GiftedChat.append(previousState.messages, message)
 				}
 			})}, this.state.currentUserId, this.state.matchedUserId, this.state.currentUser.nickname);
+		chatBackend.setUpFriendPending(this.state.currentUserId, this.state.matchedUserId);
 	}
 
 	componentWillUnMount(){
