@@ -16,7 +16,7 @@ const Email = t.refinement(t.String, email => {
 // here we are: define your domain model
 var Person = t.struct({
   nickname: t.String,              // a required string
-  email: t.String,
+  email: Email,
   gender: t.String,
   school: t.String,
   description: t.String,
@@ -25,6 +25,9 @@ var Person = t.struct({
 
 var options = {
   fields: {
+    email : {
+      error: 'Insert a valid .edu '
+    },
     password: {
       password: true,
       secureTextEntry: true
@@ -36,9 +39,9 @@ var options = {
 class AwesomeProject extends Component {
 
   onPress() {
-    Alert.alert('pressed button');
-    console.log('form is this when pressed', this.form);
     Alert.alert('after form');
+    Alert.alert('pressed button');
+
     // call getValue() to get the values of the form
     var value = this.form.getValue();
     if (value) { // if validation fails, value will be null
