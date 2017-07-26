@@ -64,8 +64,8 @@ class AuthScreen extends Component {
 			}
 		})
 		.catch((err) => {
-			alert("ERRRRR", err)
-			console.log('error', err)
+			alert("ERRRRR");
+			console.log('error', err);
 		});
 	}
 
