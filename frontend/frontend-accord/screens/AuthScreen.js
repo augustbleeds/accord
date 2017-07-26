@@ -1,7 +1,8 @@
 'use strict';
 import React, { Component } from 'react';
-import { Alert, AppRegistry, StyleSheet, Text, View, TouchableHighlight } from 'react-native';
+import { ScrollView, Alert, AppRegistry, StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 var t = require('tcomb-form-native');
+import * as firebase from 'firebase';
 
 var Form = t.form.Form;
 
@@ -10,8 +11,10 @@ const Email = t.refinement(t.String, email => {
   return reg.test(email);
 });
 
-// const StrongPassword = t.refinement(t.String, password =>
-// });
+const StrongPassword = t.refinement(t.String, password => {
+  return password.length >= 6;
+});
+
 
 // here we are: define your domain model
 var Person = t.struct({
@@ -20,39 +23,72 @@ var Person = t.struct({
   gender: t.String,
   school: t.String,
   description: t.String,
-  password: t.String,
+  password: StrongPassword,
 });
 
 var options = {
   fields: {
     email : {
-      error: 'Insert a valid .edu '
+      error: 'Insert a valid .edu email address'
     },
     password: {
       password: true,
-      secureTextEntry: true
+      secureTextEntry: true,
+      error: 'Insert a password greater than 6 characters'
     }
   }
 };
 
 
 class AwesomeProject extends Component {
+  constructor(props){
+    super(props);
+  }
+
+  registerSubmit({nickname, email, gender, school, description, password}) {
+		firebase.auth().createUserWithEmailAndPassword(email, password)
+		.then(() => {
+			return fetch('https://us-central1-accord-18bdf.cloudfunctions.net/route/register', {
+				method: 'POST',
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify({nickname, password, gender, email, school, desc: description})
+			})
+		})
+		.then((response) => response.json())
+		.then((responseJson) => {
+			if(responseJson !== null) {
+				this.props.navigation.navigate('Login')
+				console.log(responseJson);
+			}else{
+				Alert.alert('Something went wrong, please try again.');
+			}
+		})
+		.catch((err) => {
+      // err.code ==== auth/email-already-in-use
+      Alert.alert(err.message);
+		});
+	}
+
 
   onPress() {
-    Alert.alert('after form');
+    console.log('navigation exists :O', this.props.navigation)
     Alert.alert('pressed button');
-
     // call getValue() to get the values of the form
     var value = this.form.getValue();
     if (value) { // if validation fails, value will be null
-      console.log(value); // value here is an instance of Person
+      // Alert.alert('value:' + JSON.stringify(value.email));
+      // console.log(value); // value here is an instance of Person
+      this.registerSubmit(value);
     }
   }
 
   render() {
     return (
+      <ScrollView>
       <View style={styles.container}>
-        {/* display */}
+        <Text> Hi </Text>
         <Form
           ref={(form) => {this.form = form}}
           type={Person}
@@ -62,6 +98,7 @@ class AwesomeProject extends Component {
           <Text style={styles.buttonText}>Save</Text>
         </TouchableHighlight>
       </View>
+    </ScrollView>
     );
   }
 
@@ -72,12 +109,13 @@ var styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 50,
     padding: 20,
-    backgroundColor: '#ffffff',
+    backgroundColor: 'white',
   },
   title: {
     fontSize: 30,
     alignSelf: 'center',
-    marginBottom: 30
+    marginBottom: 30,
+    color: '#6adaa8',
   },
   buttonText: {
     fontSize: 18,
