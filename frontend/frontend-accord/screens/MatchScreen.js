@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, View, Text, StyleSheet, ListView, Image, Picker } from 'react-native';
+import { Alert, View, Text, StyleSheet, ListView, Image, Picker, TextInput } from 'react-native';
 import { Button } from 'react-native-elements';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import ModalDropdown from 'react-native-modal-dropdown';
@@ -24,6 +24,7 @@ class MatchScreen extends Component {
     this.state = ({
       topic: '',
       matchedUser: '',
+      blurb: '',
     });
   }
 
@@ -52,6 +53,7 @@ class MatchScreen extends Component {
               username1: myUserId,
               username2: this.state.matchedUser,
               userObj: this.props.user,
+              blurb: this.state.blurb,
             });
             // remove it from the database
             dbRootRef.child(`/Match/${myUserId}`).remove();
@@ -68,9 +70,18 @@ class MatchScreen extends Component {
     return (
       <View style={[styles.page, styles.container]}>
             <Image resizeMode="contain" style={styles.imgStyle3} source={require('../assets/icons/com.png')} />
-            <Text style={{fontSize: 35, color: '#ffffff'}}>
-              Find a Match
-            </Text>
+            <View style={{color:'white',  borderRadius: 20, borderColor: '#6adaa8'}}>
+              <TextInput
+                multiline = {true}
+                numberOfLines = {4}
+                maxLength = {100}
+                value = {this.state.blurb}
+                onChangeText={(text) => {this.setState({blurb: text})}}
+                placeholder='Write a short blurb here!'
+                style={{backgroundColor:"#6adaa8", height: 60, width: 150, fontSize: 15}}
+              >
+              </TextInput>
+            </View>
               <Picker
                 style={styles.picker}
                 selectedValue={this.state.topic}
@@ -87,7 +98,7 @@ class MatchScreen extends Component {
             buttonStyle={styles.buttonStyle}
             raised
             title='MATCH'
-            onPress={ () => {console.log('Topic is', this.state.topic);this.fetchMatch()}}
+            onPress={ () => {this.fetchMatch()}}
             >
           </Button>
       </View>
