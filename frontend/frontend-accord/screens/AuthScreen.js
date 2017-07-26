@@ -1,6 +1,6 @@
 'use strict';
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Text, View, TouchableHighlight } from 'react-native';
+import { Alert, AppRegistry, StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 var t = require('tcomb-form-native');
 
 var Form = t.form.Form;
@@ -10,13 +10,13 @@ const Email = t.refinement(t.String, email => {
   return reg.test(email);
 });
 
-// const StrongPassword = t.refinement(t.String, password => {
+// const StrongPassword = t.refinement(t.String, password =>
 // });
 
 // here we are: define your domain model
 var Person = t.struct({
   nickname: t.String,              // a required string
-  email: Email,
+  email: t.String,
   gender: t.String,
   school: t.String,
   description: t.String,
@@ -36,7 +36,9 @@ var options = {
 class AwesomeProject extends Component {
 
   onPress() {
+    Alert.alert('pressed button');
     console.log('form is this when pressed', this.form);
+    Alert.alert('after form');
     // call getValue() to get the values of the form
     var value = this.form.getValue();
     if (value) { // if validation fails, value will be null
