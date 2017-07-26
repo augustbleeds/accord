@@ -45,14 +45,12 @@ class LoginScreen extends Component {
 		}
 		self.props.addUser(self.state.email, self.state.password)
 		.then(() => {
-			console.log('props is', self.props);
 			if(JSON.stringify(self.props.user) === '{}' ){
 				Alert.alert('Username or Password is incorrect. Please try again!');
 				return;
 			}else{
 				return AsyncStorage.setItem('user', JSON.stringify(self.props.user))
 				.then(() => {
-					console.log('AsynStorage succesfully set in LoginScreen!...');
 					this.props.navigation.navigate('AllScreen');
 				})
 			}

@@ -30,7 +30,6 @@ export default class AllScreen extends PureComponent<void, *, State> {
       { key: '1', icon: 'ios-people', title: 'Profile'  },
       { key: '2', icon: 'md-search', title: 'Match'  },
       { key: '3', icon: 'md-settings', title: 'Settings' },
-
     ],
   };
 
@@ -56,7 +55,7 @@ export default class AllScreen extends PureComponent<void, *, State> {
     );
   };
 
-
+  // state props has nothing to do with redux and everything to do with react-native-tab-view
   _renderScene = ({ route }) => {
     switch (route.key) {
       case '1':
@@ -97,7 +96,6 @@ export default class AllScreen extends PureComponent<void, *, State> {
         renderScene={this._renderScene}
         renderHeader={this._renderHeader}
         onRequestChangeTab={this._handleChangeTab}
-
       />
     );
   }
