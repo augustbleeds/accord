@@ -1,26 +1,16 @@
 import React, {Component} from 'react';
-import {View, Text, AsyncStorage } from 'react-native';
-import Slides from '../components/slides';
+import { Text, AsyncStorage } from 'react-native';
 import Swipers from '../components/swiper';
-import _ from 'lodash';
-import {AppLoading} from 'expo';
 import { connect } from 'react-redux';
 import { loadStoredUserInfo } from '../actions/index';
 
-const SLIDE_DATA = [
-  {text: 'Welcome to Accord', color: '#000000', image: '../assets/icons/logo1'},
-  {text: 'Some text here...', color: '#000000'},
-  {text: 'Start Chatting!', color: '#000000'}
-]
 class WelcomeScreen extends Component {
-  // state = {token: null}
   onSlidesComplete = () => {
     this.props.navigation.navigate('Auth');
   }
 
   onLoginComplete = () => {
     this.props.navigation.navigate('Login');
-
   }
 
   componentDidMount() {

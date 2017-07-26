@@ -14,7 +14,7 @@ import {
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import { Button } from 'react-native-elements';
 
-// import createStore from redux, the reducer, and Provider for connection react-redux
+// the reducer, and Provider for connection react-redux
 import { connect } from 'react-redux';
 import { loadUserInfo } from '../actions/index';
 
@@ -36,7 +36,7 @@ class LoginScreen extends Component {
 		this.props.navigation.navigate('Welcome');
 	}
 
-	// set async storage and the reducer once upon login, and navigate to AllScreen 
+	// set async storage and the reducer once upon login, and navigate to AllScreen
 	loginSubmit() {
 		var self = this;
 		if(!self.state.email || !self.state.password){
