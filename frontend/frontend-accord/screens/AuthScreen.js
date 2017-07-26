@@ -26,6 +26,39 @@ var Person = t.struct({
   password: StrongPassword,
 });
 
+// style the form
+
+
+var textbox: {
+
+  // the style applied wihtout errors
+  normal: {
+    color: '#000000',
+    fontSize: 17,
+    height: 36,
+    padding: 7,
+    borderRadius: 4,
+    borderColor: '#cccccc', // <= relevant style here
+    borderWidth: 1,
+    marginBottom: 5
+  },
+
+  // the style applied when a validation error occours
+  error: {
+    color: '#000000',
+    fontSize: 17,
+    height: 36,
+    padding: 7,
+    borderRadius: 4,
+    borderColor: '#a94442', // <= relevant style here
+    borderWidth: 1,
+    marginBottom: 5
+  }
+
+}
+
+// t.form.Form.stylesheet.textbox = textbox;
+
 var options = {
   fields: {
     email : {
