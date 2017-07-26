@@ -24,17 +24,16 @@ class WelcomeScreen extends Component {
   }
 
   componentDidMount() {
-    // why did we have this???
-    // TODO: add if statement here to check if reducer already has something on initial login
+    // TODO: answer why did we have this???
+    // add if statement here to check if reducer already has something on initial login
+    // if user is not initialized in the store, then g
     if(JSON.stringify(this.props.user) === '{}'){
       AsyncStorage.getItem('user')
       .then((result) => {
-        console.log('When WelcomeScreen mounts result is', result);
+        // result will be null by default (different than the state)
         if (result) {
           this.props.addStoredUser(JSON.parse(result));
           this.props.navigation.navigate('AllScreen');
-        }else{
-          console.log('debbo was wrong >:(');
         }
       })
       .catch((err) => {

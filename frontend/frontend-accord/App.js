@@ -52,18 +52,8 @@ export default class App extends React.Component {
   }
 }
 
-const styles=StyleSheet.create({
-    container:{
-        flex:1,
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
     },
-    scrollwrap:{
-        backgroundColor:'#f3f3f3',
-    },
-    wrapper:{
-    },
-    slider:{
-        backgroundColor:'#97cae5',
-        width:screen.width,
-        height:screen.width/2,
-    },
-})
+});
