@@ -5,11 +5,11 @@ import { connect } from 'react-redux';
 import { loadStoredUserInfo } from '../actions/index';
 
 class WelcomeScreen extends Component {
-  onSlidesComplete = () => {
+  goToSignUp = () => {
     this.props.navigation.navigate('Auth');
   }
 
-  onLoginComplete = () => {
+  goToLogIn = () => {
     this.props.navigation.navigate('Login');
   }
 
@@ -35,8 +35,8 @@ class WelcomeScreen extends Component {
   render() {
     return(
       <Swipers
-          onSlidesComplete={this.onSlidesComplete}
-          onLoginComplete={this.onLoginComplete}
+          goToSignUp={this.goToSignUp}
+          goToLogIn={this.goToLogIn}
        />
     )
   }
