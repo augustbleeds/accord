@@ -7,13 +7,22 @@ var Form = t.form.Form;
 
 // here we are: define your domain model
 var Person = t.struct({
-  name: t.String,              // a required string
+  nickname: t.String,              // a required string
   surname: t.maybe(t.String),  // an optional string
+  password: t.String,
   age: t.Number,               // a required number
   rememberMe: t.Boolean        // a boolean
 });
 
-var options = {}; // optional rendering options (see documentation)
+var options = {
+  fields: {
+    password: {
+      password: true,
+      secureTextEntry: true
+    }
+  }
+};
+
 
 class AwesomeProject extends Component {
 
