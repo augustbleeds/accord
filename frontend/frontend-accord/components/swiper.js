@@ -5,15 +5,14 @@ import Swiper from 'react-native-swiper';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
-/*
-<TitleScreen
- */
+
 export default class swiperStyles extends Component {
   render(){
     return (
       <View style={{flex: 1}}>
       <View style={{flex: 13}}>
       <Swiper
+        loop={false}
         dot={<View style={{backgroundColor: 'gray', width: 5, height: 5, borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 50}} />}
         activeDot={<View style={{backgroundColor: 'white', width: 5, height: 5, borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 50}} />}
         >
