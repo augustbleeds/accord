@@ -63,7 +63,7 @@ class chatBackend {
     var newMessage = {
       to: matchedUserId,
       from: myUserId,
-      text: 'Accord: My short blurb is ... ' + message,
+      text: 'via Accord: My short blurb is ... ' + message,
       createdAt: firebase.database.ServerValue.TIMESTAMP,
     }
     this.messagesRef.push(newMessage);
@@ -74,7 +74,7 @@ class chatBackend {
     var newMessage = {
       to: matchedUserId,
       from: myUserId,
-      text: 'Accord: It was a pleasure talking to you. I have left the room.',
+      text: 'via Accord: It was a pleasure talking to you. I have left the room.',
       createdAt: firebase.database.ServerValue.TIMESTAMP,
     }
     this.messagesRef.push(newMessage);
