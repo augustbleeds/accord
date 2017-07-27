@@ -82,6 +82,30 @@ class FriendsList extends Component {
 
   scrollTo = (...args: any) => this._root.scrollTo(...args);
 
+  generateMessageId(myUserId, matchedUserId){
+    return (myUserId < matchedUserId) ? (`${myUserId}${matchedUserId}`) : (`${matchedUserId}${myUserId}`);
+  }
+
+  async deleteFriend(){
+    console.log('Delete Friend pressed');
+    var myUserId = this.props.user.email.split('.')[0];
+    var matchedUserId = this.props.currentFriend.email.split('.')[0];
+    var updates = {};
+    var str1 = `/User/${myUserId}/friends/${matchedUserId}`;
+    var str2 = `/User/${matchedUserId}/friends/${myUserId}`;
+    var str3 = `/Message/${this.generateMessageId(myUserId, matchedUserId)}`;
+    console.log(str1);
+    console.log(str2);
+    console.log(str3);
+    // delete from each others lists
+    updates[str1] = null;
+    updates[str2] = null;
+    // delete messages
+    updates[str3] = null;
+    await firebase.database().ref().update(updates);
+
+  }
+
   render() {
     return (
       <View style={{width: SCREEN_WIDTH * 0.3}}>
@@ -99,7 +123,17 @@ class FriendsList extends Component {
         visible={this.state.visible}
         onRequestClose={() => this.setState({visible: false})}
         >
-          <View style={{flex: 1, backgroundColor: "#000000"}}>
+          <View style={{flex: 1, justifyContent: 'center', backgroundColor: "#000000"}}>
+            <View style={{marginTop: 20, flex: 1}}>
+              <TouchableOpacity
+                onPress={() => {this.deletFriend()}}
+                style={{flex: 1, backgroundColor: "red", color: 'white', justifyContent: 'center', alignItems: 'center'}}
+                >
+                <Text style={{color: 'white'}}>
+                  Delete Friend
+                </Text>
+              </TouchableOpacity>
+            </View>
           <View style={{flex: 13, justifyContent: 'space-around', alignItems: 'center', backgroundColor: "#000000"}}>
              <Text style={styles.profileText}>Profile of {this.props.currentFriend.nickname}</Text>
              <Image style={{width:200 , height: 200, borderRadius: 100}} source={{uri: this.props.currentFriend.img}} />
