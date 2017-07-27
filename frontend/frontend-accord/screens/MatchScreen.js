@@ -7,18 +7,22 @@ import * as firebase from 'firebase';
 import { connect } from 'react-redux';
 import setUpPushNotifications from '../services/push_notifications';
 import Expo, {Notifications} from 'expo';
+import listenForMatch from '../listenForMatch';
 
-var config = {
-   apiKey: "AIzaSyDkhtl4JKhb_1aHL3ookaq0iSRsXmW1Hcg",
-   authDomain: "accord-18bdf.firebaseapp.com",
-   databaseURL: "https://accord-18bdf.firebaseio.com",
-   projectId: "accord-18bdf",
-   storageBucket: "accord-18bdf.appspot.com",
-   messagingSenderId: "986125110855"
- };
-firebase.initializeApp(config);
+
+// var config = {
+//    apiKey: "AIzaSyDkhtl4JKhb_1aHL3ookaq0iSRsXmW1Hcg",
+//    authDomain: "accord-18bdf.firebaseapp.com",
+//    databaseURL: "https://accord-18bdf.firebaseio.com",
+//    projectId: "accord-18bdf",
+//    storageBucket: "accord-18bdf.appspot.com",
+//    messagingSenderId: "986125110855"
+//  };
+// firebase.initializeApp(config);
 var dbRootRef = firebase.database().ref();
 const backEnd = 'https://us-central1-accord-18bdf.cloudfunctions.net/route/user/match';
+
+
 
 class MatchScreen extends Component {
   constructor(props){
@@ -44,7 +48,7 @@ class MatchScreen extends Component {
   listenMatch() {
 
     // set Async for homescreen
-    AsyncStorage.setItem('matchedUserInfo',
+    AsyncStorage.setItem('matchedUser',
     JSON.stringify({
       matchedUser: this.state.matchedUser,
       blurb: this.state.blurb
@@ -84,7 +88,8 @@ class MatchScreen extends Component {
     .then((responseJson) => {
       if(responseJson.success === true) {
         Alert.alert('You will be notified when there is a match! :)');
-        this.listenMatch();
+        AsyncStorage.setItem('matchListen', JSON.stringify({ myUserId: this.state.myUserId, blurb: this.state.blurb }));
+        listenForMatch(this.state.myUserId, this.state.blurb, this.props.user, this.props.navigator);
       }
     })
     .catch((err) => {

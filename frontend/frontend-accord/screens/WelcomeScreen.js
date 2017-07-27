@@ -3,6 +3,7 @@ import { Text, AsyncStorage } from 'react-native';
 import Swipers from '../components/swiper';
 import { connect } from 'react-redux';
 import { loadStoredUserInfo } from '../actions/index';
+import listenForMatch from '../listenForMatch';
 
 class WelcomeScreen extends Component {
   goToSignUp = () => {
@@ -18,12 +19,24 @@ class WelcomeScreen extends Component {
     if(JSON.stringify(this.props.user) === '{}'){
       AsyncStorage.getItem('user')
       .then((result) => {
+        console.log('user in asyncstorage is', JSON.parse(result));
         // result will be null by default (different than the state)
-        // TODO: where do we setItem to null?
         if (JSON.parse(result)) {
           this.props.addStoredUser(JSON.parse(result));
-          this.props.navigation.navigate('AllScreen');
+          return AsyncStorage.getItem('matchListen');
         }
+        return null;
+      })
+      .then((result) => {
+        console.log('result of matchListen is', result);
+        // if matchedUser is null or doesn't exist
+        if(!result || !JSON.parse(result)){
+          this.props.navigation.navigate('AllScreen');
+          return;
+        }
+
+        var matchedUserInfo = JSON.parse(result);
+        listenForMatch(matchedUserInfo.myUserId, matchedUserInfo.blurb, this.props.user, this.props.navigation);
       })
       .catch((err) => {
         console.log('error w/ AsyncStorage', err);
