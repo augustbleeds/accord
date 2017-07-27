@@ -45,37 +45,6 @@ class MatchScreen extends Component {
 
   }
 
-  listenMatch() {
-
-    // set Async for homescreen
-    AsyncStorage.setItem('matchedUser',
-    JSON.stringify({
-      matchedUser: this.state.matchedUser,
-      blurb: this.state.blurb
-    }));
-
-    // listen for when this user is matched!
-    firebase.database().ref(`/Match/${this.state.myUserId}`).on('value', (data) => {
-      if(!data.val()){
-        return;
-      }
-      console.log('WE ARE IN THE MATCHSTICK');
-      Alert.alert(`You are matched with ${data.val()}`);
-      this.setState({matchedUser: data.val()});
-
-      this.props.navigator.navigate('ChatScreen', {
-        username1: this.state.myUserId,
-        username2: this.state.matchedUser,
-        userObj: this.props.user,
-        blurb: this.state.blurb,
-      });
-      // remove it from the database
-      dbRootRef.child(`/Match/${this.state.myUserId}`).remove();
-      // detach listeners
-      dbRootRef.child(`/Match/${this.state.myUserId}`).off();
-    });
-  }
-
   fetchMatch() {
     const endPoint = `${backEnd}/${this.state.topic}/${this.state.myUserId}`;
     fetch(endPoint, {
@@ -87,7 +56,7 @@ class MatchScreen extends Component {
     .then((response) => response.json())
     .then((responseJson) => {
       if(responseJson.success === true) {
-        Alert.alert('You will be notified when there is a match! :)');
+        Alert.alert('You will be notified when there is a match!');
         AsyncStorage.setItem('matchListen', JSON.stringify({ myUserId: this.state.myUserId, blurb: this.state.blurb }));
         listenForMatch(this.state.myUserId, this.state.blurb, this.props.user, this.props.navigator);
       }
@@ -108,7 +77,7 @@ class MatchScreen extends Component {
                 maxLength = {100}
                 value = {this.state.blurb}
                 onChangeText={(text) => {this.setState({blurb: text})}}
-                placeholder='Write a short blurb here!'
+                placeholder="Write a short blurb here about why you're here (ex: I had a terrible day because ...)"
                 style={{backgroundColor:"#6adaa8", height: 60, width: 150, fontSize: 15}}
               >
               </TextInput>

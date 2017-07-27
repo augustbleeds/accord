@@ -16,13 +16,13 @@ var dbRootRef = firebase.database().ref();
 
 export default function listenForMatch(myUserId, blurb, userObj, navigator) {
   // set Async for homescreen
+  console.log('listenForMatch was called!');
 
   // listen for when this user is matched!
   firebase.database().ref(`/Match/${myUserId}`).on('value', (data) => {
     if(!data.val()){
       return;
     }
-    console.log('WE ARE IN THE MATCHSTICK');
     Alert.alert(`You are matched with ${data.val()}`);
 
     navigator.navigate('ChatScreen', {
