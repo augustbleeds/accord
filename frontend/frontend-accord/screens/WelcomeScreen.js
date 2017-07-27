@@ -3,6 +3,7 @@ import { Text, AsyncStorage } from 'react-native';
 import Swipers from '../components/swiper';
 import { connect } from 'react-redux';
 import { loadStoredUserInfo } from '../actions/index';
+import listenForMatch from '../listenForMatch';
 
 class WelcomeScreen extends Component {
   goToSignUp = () => {
@@ -13,23 +14,38 @@ class WelcomeScreen extends Component {
     this.props.navigation.navigate('Login');
   }
 
-  componentDidMount() {
-    // TODO: answer why did we have this???
-    // add if statement here to check if reducer already has something on initial login
-    // if user is not initialized in the store, then g
-    if(JSON.stringify(this.props.user) === '{}'){
-      AsyncStorage.getItem('user')
-      .then((result) => {
-        // result will be null by default (different than the state)
-        // TODO: where do we setItem to null?
-        if (JSON.parse(result)) {
-          this.props.addStoredUser(JSON.parse(result));
-          this.props.navigation.navigate('AllScreen');
+  /**
+   * [componentDidMount gets user info and or storedMatchData from AsyncStorage
+   *  and redirects the user to the appropriate page ]
+   * @return nothing
+   */
+
+  async componentDidMount(){
+    try{
+      if(JSON.stringify(this.props.user) === '{}'){
+
+        const storedUser = await AsyncStorage.getItem('user');
+        const storedMatchData = await AsyncStorage.getItem('matchListen');
+
+        console.log('storedUser is', storedUser);
+        console.log('storedmatchData is', storedMatchData);
+
+        if(storedUser){
+          console.log('in the thingy');
+          this.props.addStoredUser(JSON.parse(storedUser));
+
+          if(!storedMatchData){
+            this.props.navigation.navigate('AllScreen');
+            return;
+          }
+
+          var matchedUserInfo = JSON.parse(storedMatchData);
+          listenForMatch(matchedUserInfo.myUserId, matchedUserInfo.blurb, this.props.user, this.props.navigation);
         }
-      })
-      .catch((err) => {
-        console.log('error w/ AsyncStorage', err);
-      })
+      }
+
+    } catch(e) {
+      console.log('Error in mount', e);
     }
   }
 

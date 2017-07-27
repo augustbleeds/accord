@@ -15,6 +15,17 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import mainReducer from './reducers/mainReducer';
 
+// import firebase from 'firebase';
+// var config = {
+//    apiKey: "AIzaSyDkhtl4JKhb_1aHL3ookaq0iSRsXmW1Hcg",
+//    authDomain: "accord-18bdf.firebaseapp.com",
+//    databaseURL: "https://accord-18bdf.firebaseio.com",
+//    projectId: "accord-18bdf",
+//    storageBucket: "accord-18bdf.appspot.com",
+//    messagingSenderId: "986125110855"
+//  };
+// firebase.initializeApp(config);
+
 const store = createStore(mainReducer);
 
 const screen={

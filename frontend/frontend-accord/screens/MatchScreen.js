@@ -1,22 +1,20 @@
 import React, { Component } from 'react';
-import { Alert, View, Text, StyleSheet, ListView, Image, Picker, TextInput } from 'react-native';
+import {AsyncStorage, Alert, View, Text, StyleSheet, ListView, Image, Picker, TextInput } from 'react-native';
 import { Button } from 'react-native-elements';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import ModalDropdown from 'react-native-modal-dropdown';
 import * as firebase from 'firebase';
 import { connect } from 'react-redux';
+import setUpPushNotifications from '../services/push_notifications';
+import Expo, {Notifications} from 'expo';
+import listenForMatch from '../listenForMatch';
 
-var config = {
-   apiKey: "AIzaSyDkhtl4JKhb_1aHL3ookaq0iSRsXmW1Hcg",
-   authDomain: "accord-18bdf.firebaseapp.com",
-   databaseURL: "https://accord-18bdf.firebaseio.com",
-   projectId: "accord-18bdf",
-   storageBucket: "accord-18bdf.appspot.com",
-   messagingSenderId: "986125110855"
- };
-firebase.initializeApp(config);
+
+// config setup used to be here but has been moved to listenForMatch
 var dbRootRef = firebase.database().ref();
 const backEnd = 'https://us-central1-accord-18bdf.cloudfunctions.net/route/user/match';
+
+
 
 class MatchScreen extends Component {
   constructor(props){
@@ -25,11 +23,20 @@ class MatchScreen extends Component {
       topic: '',
       matchedUser: '',
       blurb: '',
+      myUserId: this.props.user.email.split('.')[0],
     });
   }
 
+  componentDidMount(){
+    setUpPushNotifications(this.props.user.email.split('.')[0]);
+    Notifications.addListener((notification) => {
+      // where we redirect them to the chatscreen
+    });
+
+  }
+
   fetchMatch() {
-    const endPoint = `${backEnd}/${this.state.topic}/${this.props.user.email.split('.')[0]}`;
+    const endPoint = `${backEnd}/${this.state.topic}/${this.state.myUserId}`;
     fetch(endPoint, {
       method: 'POST',
       headers: {
@@ -38,34 +45,17 @@ class MatchScreen extends Component {
     })
     .then((response) => response.json())
     .then((responseJson) => {
-      console.log(responseJson)
       if(responseJson.success === true) {
-        Alert.alert('You will be notified when there is a match! :)');
-        // listen for when this user is matched!
-        var myUserId = this.props.user.email.split('.')[0];
-        firebase.database().ref(`/Match/${myUserId}`).on('value', (data) => {
-            if(!data.val()){
-              return;
-            }
-            Alert.alert(`You are matched with ${data.val()}`);
-            this.setState({matchedUser: data.val()});
-            this.props.navigator.navigate('ChatScreen', {
-              username1: myUserId,
-              username2: this.state.matchedUser,
-              userObj: this.props.user,
-              blurb: this.state.blurb,
-            });
-            // remove it from the database
-            dbRootRef.child(`/Match/${myUserId}`).remove();
-            // detach listeners
-            dbRootRef.child(`/Match/${myUserId}`).off();
-          });
+        Alert.alert('You will be notified when there is a match!');
+        AsyncStorage.setItem('matchListen', JSON.stringify({ myUserId: this.state.myUserId, blurb: this.state.blurb }));
+        listenForMatch(this.state.myUserId, this.state.blurb, this.props.user, this.props.navigator);
       }
     })
     .catch((err) => {
       console.log('error', err)
     });
   }
+
   render(){
     return (
       <View style={[styles.page, styles.container]}>
@@ -77,7 +67,7 @@ class MatchScreen extends Component {
                 maxLength = {100}
                 value = {this.state.blurb}
                 onChangeText={(text) => {this.setState({blurb: text})}}
-                placeholder='Write a short blurb here!'
+                placeholder="Write a short blurb here about why you're here (ex: I had a terrible day because ...)"
                 style={{backgroundColor:"#6adaa8", height: 60, width: 150, fontSize: 15}}
               >
               </TextInput>
