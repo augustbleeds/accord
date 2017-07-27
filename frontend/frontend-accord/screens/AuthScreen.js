@@ -1,8 +1,10 @@
 'use strict';
 import React, { Component } from 'react';
 import { ScrollView, Alert, AppRegistry, StyleSheet, Text, View, TouchableHighlight } from 'react-native';
-var t = require('tcomb-form-native');
+// var t = require('tcomb-form-native');
+import t from '../style/authStyle';
 import * as firebase from 'firebase';
+import stylesheet from '../style/authStyle';
 
 var Form = t.form.Form;
 
@@ -27,35 +29,6 @@ var Person = t.struct({
 });
 
 // style the form
-
-
-var textbox: {
-
-  // the style applied wihtout errors
-  normal: {
-    color: '#000000',
-    fontSize: 17,
-    height: 36,
-    padding: 7,
-    borderRadius: 4,
-    borderColor: '#cccccc', // <= relevant style here
-    borderWidth: 1,
-    marginBottom: 5
-  },
-
-  // the style applied when a validation error occours
-  error: {
-    color: '#000000',
-    fontSize: 17,
-    height: 36,
-    padding: 7,
-    borderRadius: 4,
-    borderColor: '#a94442', // <= relevant style here
-    borderWidth: 1,
-    marginBottom: 5
-  }
-
-}
 
 // t.form.Form.stylesheet.textbox = textbox;
 
