@@ -63,7 +63,7 @@ class chatBackend {
     var newMessage = {
       to: matchedUserId,
       from: myUserId,
-      text: 'Short blurb: ' + message,
+      text: 'Accord: My short blurb is ... ' + message,
       createdAt: firebase.database.ServerValue.TIMESTAMP,
     }
     this.messagesRef.push(newMessage);
