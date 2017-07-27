@@ -53,36 +53,36 @@ class MatchScreen extends Component {
       if(responseJson.success === true) {
         Alert.alert('You will be notified when there is a match! :)');
 
-        AsyncStorage.setItem('callback', JSON.stringify({
-          callback: () => {
-            firebase.database().ref(`/Match/${this.state.myUserId}`).on('value', (data) => {
-              if(!data.val()){
-                return;
-              }
-              console.log('WE ARE IN THE MATCHSTICK');
-              Alert.alert(`You are matched with ${data.val()}`);
-              this.setState({matchedUser: data.val()});
-              // set Async for homescreen
-              // AsyncStorage.setItem('matchedUserInfo',
-              // JSON.stringify({
-              //   matchedUser: this.state.matchedUser,
-              //   blurb: this.state.blurb
-              // }));
-
-
-              this.props.navigator.navigate('ChatScreen', {
-                username1: this.state.myUserId,
-                username2: this.state.matchedUser,
-                userObj: this.props.user,
-                blurb: this.state.blurb,
-              });
-              // remove it from the database
-              dbRootRef.child(`/Match/${this.state.myUserId}`).remove();
-              // detach listeners
-              dbRootRef.child(`/Match/${this.state.myUserId}`).off();
-            });
-          }
-        }))
+        // AsyncStorage.setItem('callback', JSON.stringify({
+        //   callback: () => {
+        //     firebase.database().ref(`/Match/${this.state.myUserId}`).on('value', (data) => {
+        //       if(!data.val()){
+        //         return;
+        //       }
+        //       console.log('WE ARE IN THE MATCHSTICK');
+        //       Alert.alert(`You are matched with ${data.val()}`);
+        //       this.setState({matchedUser: data.val()});
+        //       // set Async for homescreen
+        //       // AsyncStorage.setItem('matchedUserInfo',
+        //       // JSON.stringify({
+        //       //   matchedUser: this.state.matchedUser,
+        //       //   blurb: this.state.blurb
+        //       // }));
+        //
+        //
+        //       this.props.navigator.navigate('ChatScreen', {
+        //         username1: this.state.myUserId,
+        //         username2: this.state.matchedUser,
+        //         userObj: this.props.user,
+        //         blurb: this.state.blurb,
+        //       });
+        //       // remove it from the database
+        //       dbRootRef.child(`/Match/${this.state.myUserId}`).remove();
+        //       // detach listeners
+        //       dbRootRef.child(`/Match/${this.state.myUserId}`).off();
+        //     });
+        //   }
+        // }))
         // listen for when this user is matched!
         firebase.database().ref(`/Match/${this.state.myUserId}`).on('value', (data) => {
           if(!data.val()){
