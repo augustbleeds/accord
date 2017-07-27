@@ -6,9 +6,6 @@ const axios = require('axios')
 const quokkaURL = 'http://www.traveller.com.au/content/dam/images/g/u/n/q/h/0/image.related.articleLeadwide.620x349.gunpvd.png/1488330286332.png';
 admin.initializeApp(functions.config().firebase);
 const dbRootRef = admin.database().ref();
-const Expo = require('exponent-server-sdk');
-
-
 
 /**
  * Responds to a login request.
@@ -166,24 +163,6 @@ app.post('/user/match/:category/:id', (req, res) => {
     });
 });
 
-let expo = new Expo();
-
-function sendPush(pushToken) {
-  console.log('we are in sendPush function');
-    expo.sendPushNotificationsAsync([{
-      // The push token for the app user to whom you want to send the notification
-      to: pushToken,
-      sound: 'default',
-      body: 'Accord: You have been matched with someone awesome. Open your app!',
-    }])
-    .then(() => {
-      console.log('success for pushing notifications');
-    })
-    .catch((err) => {
-      console.log('error for pushing notifications', err);
-    })
-}
-
 /**
  * Match 2 users
  * @type {DATABASE TRIGGER}
@@ -220,22 +199,7 @@ exports.matchUsers = functions.database
             updates[`/Topic/${myTopic}/${secondKey}`] = null;
             return dbRootRef.update(updates);
           })
-          .then(() => {
-            return dbRootRef.child(`/User/${firstKey}/pushToken`).once('value');
-          })
-          .then((pushToken1) => {
-            console.log('in first then');
-            if(pushToken1){
-              sendPush(pushToken1.val());
-            }
-            return dbRootRef.child(`/User/${secondKey}/pushToken`).once('value');
-          })
-          .then((pushToken2) => {
-            console.log('in second then');
-            if(pushToken2){
-              sendPush(pushToken2.val())
-            }
-          })
+          .then(() => console.log(`Two users with id ${firstKey} and ${secondKey} were matched! :) `))
           .catch((err) => console.log(err))
       })
   });

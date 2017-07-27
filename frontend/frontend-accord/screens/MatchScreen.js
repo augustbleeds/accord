@@ -49,7 +49,6 @@ class MatchScreen extends Component {
     })
     .then((response) => response.json())
     .then((responseJson) => {
-      console.log(responseJson)
       if(responseJson.success === true) {
         Alert.alert('You will be notified when there is a match! :)');
         // listen for when this user is matched!
@@ -60,6 +59,11 @@ class MatchScreen extends Component {
             }
             Alert.alert(`You are matched with ${data.val()}`);
             this.setState({matchedUser: data.val()});
+            // set Async for homescreen
+            // AsyncStorage.setItem('matchedUser', this.state.matchedUser)
+            //   .then()
+
+
             this.props.navigator.navigate('ChatScreen', {
               username1: myUserId,
               username2: this.state.matchedUser,
