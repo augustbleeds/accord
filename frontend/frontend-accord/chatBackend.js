@@ -20,9 +20,15 @@ class chatBackend {
 
   onLeaveOrConnect(myUserId, matchedUserId, action, navigation) {
     if(action === 'LEAVE') {
-      console.log('LEAVE ME ALONE: ', action)
       firebase.database().ref(`/FriendPending/${this.generateMessageId(myUserId, matchedUserId)}/${myUserId}`)
       .set('LEAVE')
+      .then(() => {
+        this.sendExitMessage(matchedUserId, myUserId);
+      })
+      .catch(() => {
+        console.log('error leaving the chat...');
+      });
+
     } else {
       firebase.database().ref(`/FriendPending/${this.generateMessageId(myUserId, matchedUserId)}/${myUserId}`)
       .set('CONNECT')
@@ -57,7 +63,18 @@ class chatBackend {
     var newMessage = {
       to: matchedUserId,
       from: myUserId,
-      text: 'BLURB: ' + message,
+      text: 'via Accord: My short blurb is ... ' + message,
+      createdAt: firebase.database.ServerValue.TIMESTAMP,
+    }
+    this.messagesRef.push(newMessage);
+  }
+
+  sendExitMessage(matchedUserId, myUserId){
+    this.messagesRef = firebase.database().ref(`/Message/${this.generateMessageId(myUserId, matchedUserId)}`);
+    var newMessage = {
+      to: matchedUserId,
+      from: myUserId,
+      text: 'via Accord: It was a pleasure talking to you. I have left the room.',
       createdAt: firebase.database.ServerValue.TIMESTAMP,
     }
     this.messagesRef.push(newMessage);

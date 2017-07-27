@@ -27,7 +27,7 @@ class SettingsScreen extends Component {
 	SignOut() {
 		firebase.auth().signOut()
 			.then(() => {
-				return AsyncStorage.removeItem('user');
+				return AsyncStorage.setItem('user', JSON.stringify(null))
 			})
 			.then(() => {
 				this.props.navigator.navigate('Welcome');
