@@ -103,6 +103,7 @@ class FriendsList extends Component {
     // delete messages
     updates[str3] = null;
     await firebase.database().ref().update(updates);
+    this.setModalVisible(!this.state.visible)
 
   }
 
@@ -126,7 +127,7 @@ class FriendsList extends Component {
           <View style={{flex: 1, justifyContent: 'center', backgroundColor: "#000000"}}>
             <View style={{marginTop: 20, flex: 1}}>
               <TouchableOpacity
-                onPress={() => {this.deletFriend()}}
+                onPress={() => {this.deleteFriend()}}
                 style={{flex: 1, backgroundColor: "red", color: 'white', justifyContent: 'center', alignItems: 'center'}}
                 >
                 <Text style={{color: 'white'}}>
