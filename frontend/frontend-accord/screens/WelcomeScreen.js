@@ -14,34 +14,39 @@ class WelcomeScreen extends Component {
     this.props.navigation.navigate('Login');
   }
 
-  componentDidMount() {
-    // if user is not initialized in the reducer, get from the store
-    if(JSON.stringify(this.props.user) === '{}'){
-      AsyncStorage.getItem('user')
-      .then((storedUser) => {
+  /**
+   * [componentDidMount gets user info and or storedMatchData from AsyncStorage
+   *  and redirects the user to the appropriate page ]
+   * @return nothing
+   */
+
+  async componentDidMount(){
+    try{
+      if(JSON.stringify(this.props.user) === '{}'){
+
+        const storedUser = await AsyncStorage.getItem('user');
+        const storedMatchData = await AsyncStorage.getItem('matchListen');
+
         console.log('storedUser is', storedUser);
-        if(!storedUser){
-          return null;
-        }
-        this.props.addStoredUser(JSON.parse(storedUser));
-          return AsyncStorage.getItem('matchListen');
-      })
-      .then((storedMatchData) => {
         console.log('storedmatchData is', storedMatchData);
-        // if matchedUser is null or doesn't exist
-        if(!result){
-          this.props.navigation.navigate('AllScreen');
-          return;
+
+        if(storedUser){
+          console.log('in the thingy');
+          this.props.addStoredUser(JSON.parse(storedUser));
+
+          if(!storedMatchData){
+            this.props.navigation.navigate('AllScreen');
+            return;
+          }
+
+          var matchedUserInfo = JSON.parse(storedMatchData);
+          listenForMatch(matchedUserInfo.myUserId, matchedUserInfo.blurb, this.props.user, this.props.navigation);
         }
-        var matchedUserInfo = JSON.parse(storedMatchData);
-        listenForMatch(matchedUserInfo.myUserId, matchedUserInfo.blurb, this.props.user, this.props.navigation);
-      })
-      .catch((err) => {
-        console.log('error w/ AsyncStorage', err);
-      })
+      }
+
+    } catch(e) {
+      console.log('Error in mount', e);
     }
-
-
   }
 
   render() {

@@ -14,7 +14,7 @@ export default async (userId) => {
     const { status } = await Permissions.askAsync(Permissions.REMOTE_NOTIFICATIONS);
     finalStatus = status;
   }
-  console.log('Final status is', status);
+  console.log('Final status is', finalStatus);
 
   if(finalStatus !== 'granted'){
     console.log('Permissions not granted');
@@ -23,7 +23,7 @@ export default async (userId) => {
 
   console.log('Permission granted: generating a token now');
   let token = await Notifications.getExponentPushTokenAsync();
-  
+
   // PUT the token in our DB so we have it for good.
   await firebase.database().ref(`/User/${userId}/pushToken`).set(token);
   await AsyncStorage.setItem('pushtoken', token);

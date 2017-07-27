@@ -92,7 +92,7 @@ class AwesomeProject extends Component {
 
   render() {
     return (
-      <ScrollView style={{flex: 1, backgroundColor: 'black'}}>
+      <ScrollView contentContainerStyle={{flex: 1, backgroundColor: 'black'}}>
       <View style={styles.container}>
         <Form
           ref={(form) => {this.form = form}}
