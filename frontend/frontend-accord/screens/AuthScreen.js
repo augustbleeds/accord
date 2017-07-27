@@ -105,61 +105,61 @@ class AwesomeProject extends Component {
 
   render() {
     return (
-      <KeyboardAwareScrollView
-          style={{ backgroundColor: '#fcf6e3' }}
+      <View style={{flex: 1}}>
+        <View style={{flex: 13}}>
+        <KeyboardAwareScrollView
+          style={{ backgroundColor: '#fcf6e3', flex: 14}}
           resetScrollToCoords={{ x: 0, y: 0 }}
           contentContainerStyle={styles.container}
           scrollEnabled={true}
-      >
-      <View
-        style={styles.container}
-        >
-          <View style={{ marginTop: 35, backgroundColor: 'transparent'}}>
-            <View>
+          >
+            <View style={{ marginTop: 35, backgroundColor: 'transparent'}}>
               <Image
                 source={require('../assets/icons/icon2.png')}
                 style={{width: 280, height: 70, alignSelf:'center'}}
                 rezieMode='contain'
                 >
                 </Image>
+              </View>
+              <Form
+                ref={(form) => {this.form = form}}
+                type={Person}
+                options={options}
+              />
+            </KeyboardAwareScrollView>
             </View>
-      </View>
-        <Form
-          ref={(form) => {this.form = form}}
-          type={Person}
-          options={options}
-        />
-          <TouchableHighlight
-            rezieMode='contain'
-            style={styles.button}
-            onPress={() => this.onPress()}
-            underlayColor='#99d9f4'>
-            <Text
-              style={styles.buttonText}
-              rezieMode='contain'
-              >Sign Up</Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            style={styles.button}
-            rezieMode='contain'
-            onPress={() => this.onGoBack()}
-            underlayColor='#99d9f4'>
-            <Text
-              style={styles.buttonText}
-              rezieMode='contain'
-              >Go Back</Text>
-          </TouchableHighlight>
-    </View>
-  </KeyboardAwareScrollView>
-    );
-  }
+            <View style={{flex: 1}}>
+              <TouchableHighlight
+                rezieMode='contain'
+                style={styles.button}
+                onPress={() => this.onPress()}
+                underlayColor='#99d9f4'>
+                <Text
+                  style={styles.buttonText}
+                  rezieMode='contain'
+                  >Sign Up</Text>
+                </TouchableHighlight>
+                <TouchableHighlight
+                  style={styles.button}
+                  rezieMode='contain'
+                  onPress={() => this.onGoBack()}
+                  underlayColor='#99d9f4'>
+                  <Text
+                    style={styles.buttonText}
+                    rezieMode='contain'
+                    >Go Back</Text>
+                  </TouchableHighlight>
+                </View>
+              </View>
+            );
+          }
 
-}
+        }
 
 var styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
-    flex: 1,
+    flex: 13,
     padding: 20,
     backgroundColor: '#fcf6e3',
   },
@@ -177,14 +177,14 @@ var styles = StyleSheet.create({
     })
   },
   button: {
-    height: 36,
+    // height: 36,
     backgroundColor: '#6adaa8',
     borderColor: '#6adaa8',
     borderWidth: 1,
-    width:120,
-    borderRadius: 15,
-    marginBottom: 10,
-    marginLeft: SCREEN_WIDTH / 3,
+    // width:120,
+    // borderRadius: 15,
+    // marginBottom: 10,
+    // marginLeft: SCREEN_WIDTH / 3,
   }
 });
 

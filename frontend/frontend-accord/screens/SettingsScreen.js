@@ -17,7 +17,7 @@ import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { loadUserInfo } from '../actions/index';
 import * as firebase from 'firebase';
-
+const image = require('../assets/icons/sadToGo.jpg');
 
 class SettingsScreen extends Component {
   constructor(props){
@@ -41,6 +41,7 @@ class SettingsScreen extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
+
 				<Button
 					buttonStyle={styles.buttonStyle}
 					onPress={ () => this.SignOut()}

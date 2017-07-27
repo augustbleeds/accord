@@ -77,9 +77,9 @@ class MatchScreen extends Component {
                 maxLength = {100}
                 value = {this.state.blurb}
                 onChangeText={(text) => {this.setState({blurb: text})}}
-                placeholder='Write a short blurb here!'
-                placeholderTextColor="gray"
-                style={{backgroundColor:"black", height: 60, width: 150, fontSize: 15, color: 'white'}}
+                placeholder='...Write a short blurb here!'
+                placeholderTextColor="#FFC67C"
+                style={{backgroundColor:"#fcf6e3", height: 60, width: 150, fontSize: 15, color: '#FFC67C'}}
               >
               </TextInput>
             </View>
@@ -97,7 +97,6 @@ class MatchScreen extends Component {
               </Picker>
           <Button
             buttonStyle={styles.buttonStyle}
-            raised
             title='MATCH'
             onPress={ () => {this.fetchMatch()}}
             >
@@ -123,7 +122,7 @@ const styles = StyleSheet.create({
     color: '#ffffff',
   },
   itemPicker: {
-    color: '#ffffff'
+    color: '#6adaa8'
   },
   mainText: {
     fontSize: 20,
