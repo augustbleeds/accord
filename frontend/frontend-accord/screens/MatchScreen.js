@@ -27,6 +27,7 @@ class MatchScreen extends Component {
       topic: '',
       matchedUser: '',
       blurb: '',
+      myUserId: this.props.user.email.split('.')[0],
     });
   }
 
@@ -40,7 +41,7 @@ class MatchScreen extends Component {
   }
 
   fetchMatch() {
-    const endPoint = `${backEnd}/${this.state.topic}/${this.props.user.email.split('.')[0]}`;
+    const endPoint = `${backEnd}/${this.state.topic}/${this.state.myUserId}`;
     fetch(endPoint, {
       method: 'POST',
       headers: {
@@ -52,8 +53,7 @@ class MatchScreen extends Component {
       if(responseJson.success === true) {
         Alert.alert('You will be notified when there is a match! :)');
         // listen for when this user is matched!
-        var myUserId = this.props.user.email.split('.')[0];
-        firebase.database().ref(`/Match/${myUserId}`).on('value', (data) => {
+        firebase.database().ref(`/Match/${this.state.myUserId}`).on('value', (data) => {
             if(!data.val()){
               return;
             }
@@ -61,19 +61,18 @@ class MatchScreen extends Component {
             this.setState({matchedUser: data.val()});
             // set Async for homescreen
             // AsyncStorage.setItem('matchedUser', this.state.matchedUser)
-            //   .then()
 
 
             this.props.navigator.navigate('ChatScreen', {
-              username1: myUserId,
+              username1: this.state.myUserId,
               username2: this.state.matchedUser,
               userObj: this.props.user,
               blurb: this.state.blurb,
             });
             // remove it from the database
-            dbRootRef.child(`/Match/${myUserId}`).remove();
+            dbRootRef.child(`/Match/${this.state.myUserId}`).remove();
             // detach listeners
-            dbRootRef.child(`/Match/${myUserId}`).off();
+            dbRootRef.child(`/Match/${this.state.myUserId}`).off();
           });
       }
     })
@@ -81,6 +80,7 @@ class MatchScreen extends Component {
       console.log('error', err)
     });
   }
+
   render(){
     return (
       <View style={[styles.page, styles.container]}>
