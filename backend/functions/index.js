@@ -6,7 +6,7 @@ const axios = require('axios')
 const quokkaURL = 'http://www.traveller.com.au/content/dam/images/g/u/n/q/h/0/image.related.articleLeadwide.620x349.gunpvd.png/1488330286332.png';
 admin.initializeApp(functions.config().firebase);
 const dbRootRef = admin.database().ref();
-import Expo from 'exponent-server-sdk';
+const Expo = require('exponent-server-sdk');
 
 
 
@@ -166,20 +166,22 @@ app.post('/user/match/:category/:id', (req, res) => {
     });
 });
 
-let expo = Expo();
+let expo = new Expo();
 
-async function sendPush(pushToken) {
-  try {
-    let receipts = await expo.sendPushNotificationsAsync([{
+function sendPush(pushToken) {
+  console.log('we are in sendPush function');
+    expo.sendPushNotificationsAsync([{
       // The push token for the app user to whom you want to send the notification
       to: pushToken,
       sound: 'default',
       body: 'Accord: You have been matched with someone awesome. Open your app!',
-    }]);
-    console.log(receipts);
-  } catch (error) {
-    console.error(error);
-  }
+    }])
+    .then(() => {
+      console.log('success for pushing notifications');
+    })
+    .catch((err) => {
+      console.log('error for pushing notifications', err);
+    })
 }
 
 /**
@@ -219,17 +221,20 @@ exports.matchUsers = functions.database
             return dbRootRef.update(updates);
           })
           .then(() => {
-            console.log('Send push tokens to both users');
-            // send push notifications
-            let pushToken1 = await dbRootRef.child(`/User/${firstKey}/pushToken`).once('value')
-            let pushToken2 = await dbRootRef.child(`/User/${secondKey}/pushToken`).once('value')
+            return dbRootRef.child(`/User/${firstKey}/pushToken`).once('value');
+          })
+          .then((pushToken1) => {
+            console.log('in first then');
             if(pushToken1){
               sendPush(pushToken1.val());
             }
+            return dbRootRef.child(`/User/${secondKey}/pushToken`).once('value');
+          })
+          .then((pushToken2) => {
+            console.log('in second then');
             if(pushToken2){
-              sendPush(pushToken2.val());
+              sendPush(pushToken2.val())
             }
-            console.log(`Two users with id ${firstKey} and ${secondKey} were matched! :) `)
           })
           .catch((err) => console.log(err))
       })
