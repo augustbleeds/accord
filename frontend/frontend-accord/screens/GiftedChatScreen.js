@@ -6,6 +6,7 @@ import {	StyleSheet,
 	ActivityIndicator,
 	TouchableOpacity,
 	Image,
+	AsyncStorage,
 TextInput,
 Text,} from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
@@ -39,6 +40,7 @@ class ChatScreen extends Component {
   }
 
 	componentDidMount(){
+		AsyncStorage.removeItem('matchListen');
 		chatBackend.sendBlurbMessage(this.props.navigation.state.params.blurb, this.state.matchedUserId, this.state.currentUserId);
 		chatBackend.loadMessages( (message) => {
 			this.setState((previousState) => {

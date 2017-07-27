@@ -30,7 +30,7 @@ class WelcomeScreen extends Component {
       .then((result) => {
         console.log('result of matchListen is', result);
         // if matchedUser is null or doesn't exist
-        if(!result || !JSON.parse(result)){
+        if(!result){
           this.props.navigation.navigate('AllScreen');
           return;
         }
