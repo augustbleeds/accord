@@ -92,9 +92,8 @@ class AwesomeProject extends Component {
 
   render() {
     return (
-      <ScrollView>
+      <ScrollView style={{flex: 1, backgroundColor: 'black'}}>
       <View style={styles.container}>
-        <Text> Hi </Text>
         <Form
           ref={(form) => {this.form = form}}
           type={Person}
@@ -114,14 +113,9 @@ var styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     marginTop: 50,
+    flex: 1,
     padding: 20,
-    backgroundColor: 'white',
-  },
-  title: {
-    fontSize: 30,
-    alignSelf: 'center',
-    marginBottom: 30,
-    color: '#6adaa8',
+    backgroundColor: 'black',
   },
   buttonText: {
     fontSize: 18,
@@ -130,8 +124,8 @@ var styles = StyleSheet.create({
   },
   button: {
     height: 36,
-    backgroundColor: '#48BBEC',
-    borderColor: '#48BBEC',
+    backgroundColor: '#6adaa8',
+    borderColor: '#6adaa8',
     borderWidth: 1,
     borderRadius: 8,
     marginBottom: 10,

@@ -4,11 +4,11 @@ var templates = require('tcomb-form-native/lib/templates/bootstrap');
 
 // define a stylesheet (see lib/stylesheets/bootstrap for an example)
 // var stylesheet = {...};
-var LABEL_COLOR = '#000000';
-var INPUT_COLOR = 'green';
+var LABEL_COLOR = 'white';
+var INPUT_COLOR = 'white';
 var ERROR_COLOR = '#a94442';
 var HELP_COLOR = '#999999';
-var BORDER_COLOR = '#cccccc';
+var BORDER_COLOR = 'white';
 var DISABLED_COLOR = '#777777';
 var DISABLED_BACKGROUND_COLOR = '#eeeeee';
 var FONT_SIZE = 17;
@@ -75,7 +75,7 @@ var stylesheet = Object.freeze({
       borderRadius: 4,
       borderColor: BORDER_COLOR,
       borderWidth: 1,
-      marginBottom: 5
+      marginBottom: 5,
     },
     // the style applied when a validation error occours
     error: {
