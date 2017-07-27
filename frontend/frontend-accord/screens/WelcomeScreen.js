@@ -14,8 +14,7 @@ class WelcomeScreen extends Component {
   }
 
   componentDidMount() {
-    // add if statement here to check if reducer already has something on initial login
-    // if user is not initialized in the store, then g
+    // if user is not initialized in the reducer, get from the store
     if(JSON.stringify(this.props.user) === '{}'){
       AsyncStorage.getItem('user')
       .then((result) => {
