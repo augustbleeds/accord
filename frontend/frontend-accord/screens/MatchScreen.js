@@ -78,7 +78,8 @@ class MatchScreen extends Component {
                 value = {this.state.blurb}
                 onChangeText={(text) => {this.setState({blurb: text})}}
                 placeholder='Write a short blurb here!'
-                style={{backgroundColor:"#6adaa8", height: 60, width: 150, fontSize: 15}}
+                placeholderTextColor="gray"
+                style={{backgroundColor:"black", height: 60, width: 150, fontSize: 15, color: 'white'}}
               >
               </TextInput>
             </View>
@@ -114,12 +115,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   container: {
-    backgroundColor:'#000000',
+    backgroundColor:'#fcf6e3',
     borderRadius: 3,
   },
   picker: {
     width: 150,
-    color: '#ffffff'
+    color: '#ffffff',
   },
   itemPicker: {
     color: '#ffffff'
@@ -130,7 +131,7 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   text: {
-    color: '#fff',
+    color: 'white',
     textAlign: 'center',
     marginVertical: 8,
     marginHorizontal: 16,
@@ -140,14 +141,6 @@ const styles = StyleSheet.create({
     bottom: 14,
     width: 230,
     height: 230,
-  },
-
-  swipe: {
-    color: '#808080',
-    textAlign: 'center',
-    fontSize: 12,
-    marginVertical: 8,
-    marginHorizontal: 16,
   },
   buttonStyle: {
     backgroundColor: '#6adaa8',

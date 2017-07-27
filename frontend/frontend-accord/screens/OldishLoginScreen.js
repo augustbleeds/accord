@@ -13,7 +13,7 @@ import {
 	Alert} from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import { Button } from 'react-native-elements';
-
+const backgroundImg = require('../assets/icons/backgroundimg.png')
 // the reducer, and Provider for connection react-redux
 import { connect } from 'react-redux';
 import { loadUserInfo } from '../actions/index';
@@ -63,7 +63,14 @@ class LoginScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image style={{width:280 , height: 70, bottom: 65, alignSelf: 'auto'}} source={require('../assets/icons/icon2.png')} />
+        <Image
+          source={backgroundImg}
+          style={{flex:1, paddingTop: 30, width: null, height: null}}
+          rezieMode='cover'
+        >
+        {/* <View style={{flex: 1}}>
+          <Image style={{width:280 , height: 70, bottom: 65, alignSelf: 'auto'}} source={require('../assets/icons/icon2.png')} />
+        </View> */}
         <Text style={styles.textBig}>Login</Text>
 				<ScrollView>
           <TextInput
@@ -90,6 +97,7 @@ class LoginScreen extends Component {
 							title="Go Back"
 						/>
 					</ScrollView>
+        </Image>
       </View>
     )
   }
@@ -102,14 +110,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#000000',
+    backgroundColor: 'transparent',
   },
   textBig: {
     fontSize: 36,
     textAlign: 'center',
     margin: 10,
     color: '#fff',
-		fontFamily: 'Roboto'
   },
   buttonStyle: {
     backgroundColor: '#6adaa8',

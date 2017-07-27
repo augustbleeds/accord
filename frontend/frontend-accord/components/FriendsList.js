@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
   },
 
   profileText:{
-    color: '#6adaa8',
+    color: '#3b9788',
     fontWeight: 'bold',
     textAlign: 'center',
     paddingTop: 20,
@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   text: {
-    color: 'white',
+    color: 'black',
     fontWeight: 'bold',
     textAlign: 'center',
   },

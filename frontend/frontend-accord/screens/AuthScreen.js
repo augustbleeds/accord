@@ -113,11 +113,11 @@ class AwesomeProject extends Component {
       <View
         style={styles.container}
         >
-        <Image
+        {/* <Image
           source ={backgroundImage}
           style={{flex:1, paddingTop: 30, width: null, height: null}}
           rezieMode='cover'
-          >
+          > */}
         <View style={{marginRight: 5, marginBottom: 40, backgroundColor: 'transparent'}}>
         <TouchableOpacity
           onPress={() => this.onGoBack() }>
@@ -137,7 +137,7 @@ class AwesomeProject extends Component {
         <TouchableHighlight style={styles.button} onPress={() => this.onPress()} underlayColor='#99d9f4'>
           <Text style={styles.buttonText}>Sign Up</Text>
         </TouchableHighlight>
-      </Image>
+      {/* </Image> */}
     </View>
   </KeyboardAwareScrollView>
     );
@@ -149,7 +149,7 @@ var styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     flex: 1,
-    backgroundColor: 'transparent',
+    backgroundColor: 'black',
   },
   buttonText: {
     fontSize: 18,
@@ -158,8 +158,8 @@ var styles = StyleSheet.create({
   },
   button: {
     height: 36,
-    backgroundColor: '#6da5a6',
-    borderColor: '#6da5a6',
+    backgroundColor: '#6adaa8',
+    borderColor: '#6adaa8',
     borderWidth: 1,
     borderRadius: 8,
     marginBottom: 10,

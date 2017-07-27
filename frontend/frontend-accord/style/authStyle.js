@@ -4,11 +4,11 @@ var templates = require('tcomb-form-native/lib/templates/bootstrap');
 
 // define a stylesheet (see lib/stylesheets/bootstrap for an example)
 // var stylesheet = {...};
-var LABEL_COLOR = '#bdbdbd';
+var LABEL_COLOR = 'white';
 var INPUT_COLOR = 'white';
 var ERROR_COLOR = '#a94442';
 var HELP_COLOR = '#ff0000';
-var BORDER_COLOR = '#bdbdbd';
+var BORDER_COLOR = 'white';
 var DISABLED_COLOR = '#777777';
 var DISABLED_BACKGROUND_COLOR = '#eeeeee';
 var FONT_SIZE = 17;
