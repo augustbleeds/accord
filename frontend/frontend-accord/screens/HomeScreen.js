@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ListView, Image } from 'react-native';
+import { Platform, View, Text, StyleSheet, ListView, Image } from 'react-native';
 
 export default function HomeScreen ({ state, style }: *) {
   return (
@@ -36,6 +36,15 @@ const styles = StyleSheet.create({
     fontSize: 30,
     textAlign: 'center',
     marginBottom: 10,
+    fontWeight:'bold',
+    ...Platform.select({
+      ios: {
+        fontFamily:'Avenir'
+      },
+      android: {
+        fontFamily: 'Roboto'
+      }
+    })
     // fontFamily: 'HelveticaNeue-BoldItalic',
   },
   text: {
@@ -43,6 +52,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginVertical: 8,
     marginHorizontal: 16,
+    ...Platform.select({
+      ios: {
+        fontFamily:'Avenir'
+      },
+      android: {
+        fontFamily: 'Roboto'
+      }
+    })
     // fontFamily: 'HelveticaNeue'
   },
   swipe: {

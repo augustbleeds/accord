@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, View, Text, StyleSheet, ListView, Image, Picker, TextInput } from 'react-native';
+import { Platform, Alert, View, Text, StyleSheet, ListView, Image, Picker, TextInput } from 'react-native';
 import { Button } from 'react-native-elements';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import ModalDropdown from 'react-native-modal-dropdown';

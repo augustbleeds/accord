@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {
+	Platform,
 	StyleSheet,
 	KeyboardAvoidingView,
 	View,
@@ -57,7 +58,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#000000',
+    backgroundColor: '#fcf6e3',
   },
   buttonStyle: {
     backgroundColor: '#6adaa8',

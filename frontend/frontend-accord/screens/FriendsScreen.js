@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ListView } from 'react-native';
+import { Platform, View, Text, StyleSheet, ListView } from 'react-native';
 import FriendsList from '../components/FriendsList';
 import UserProfile from '../components/UserProfile';
 export default class FriendsScreen extends Component {
@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#fcf6e3',
     justifyContent: 'flex-start',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    
   },
 });

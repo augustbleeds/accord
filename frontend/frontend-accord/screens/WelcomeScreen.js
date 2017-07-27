@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Text, AsyncStorage } from 'react-native';
+import { Text, AsyncStorage,Platform } from 'react-native';
 import Swipers from '../components/swiper';
 import { connect } from 'react-redux';
 import { loadStoredUserInfo } from '../actions/index';

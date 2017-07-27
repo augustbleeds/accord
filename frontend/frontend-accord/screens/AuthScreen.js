@@ -1,6 +1,6 @@
 'use strict';
 import React, { Component } from 'react';
-import { KeyboardAvoidingView, TouchableOpacity, Image, ScrollView, Alert, AppRegistry, StyleSheet, Text, View, TouchableHighlight } from 'react-native';
+import { Dimensions, KeyboardAvoidingView, Platform, TouchableOpacity, Image, ScrollView, Alert, AppRegistry, StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 // var t = require('tcomb-form-native');
 import t from '../style/authStyle';
@@ -11,6 +11,8 @@ var Form = t.form.Form;
 
 const backgroundImage = require('../assets/icons/backgroundimg.png');
 const goBackButton = require('../assets/icons/back.png');
+const SCREEN_HEIGHT = Dimensions.get('window').height;
+const SCREEN_WIDTH = Dimensions.get('window').width;
 
 
 const nickname = t.refinement(t.String, nickname => {
@@ -25,7 +27,6 @@ const Email = t.refinement(t.String, email => {
 const StrongPassword = t.refinement(t.String, password => {
   return password.length >= 6;
 });
-
 
 // here we are: define your domain model
 var Person = t.struct({
@@ -105,7 +106,7 @@ class AwesomeProject extends Component {
   render() {
     return (
       <KeyboardAwareScrollView
-          style={{ backgroundColor: '#4c69a5' }}
+          style={{ backgroundColor: '#fcf6e3' }}
           resetScrollToCoords={{ x: 0, y: 0 }}
           contentContainerStyle={styles.container}
           scrollEnabled={true}
@@ -113,31 +114,41 @@ class AwesomeProject extends Component {
       <View
         style={styles.container}
         >
-        {/* <Image
-          source ={backgroundImage}
-          style={{flex:1, paddingTop: 30, width: null, height: null}}
-          rezieMode='cover'
-          > */}
-        <View style={{marginRight: 5, marginBottom: 40, backgroundColor: 'transparent'}}>
-        <TouchableOpacity
-          onPress={() => this.onGoBack() }>
-          <Image
-            source={goBackButton}
-            style={{width: 30, height: 30}}
-            rezieMode='contain'
-            >
-            </Image>
-        </TouchableOpacity>
+          <View style={{ marginTop: 35, backgroundColor: 'transparent'}}>
+            <View>
+              <Image
+                source={require('../assets/icons/icon2.png')}
+                style={{width: 280, height: 70, alignSelf:'center'}}
+                rezieMode='contain'
+                >
+                </Image>
+            </View>
       </View>
         <Form
           ref={(form) => {this.form = form}}
           type={Person}
           options={options}
         />
-        <TouchableHighlight style={styles.button} onPress={() => this.onPress()} underlayColor='#99d9f4'>
-          <Text style={styles.buttonText}>Sign Up</Text>
-        </TouchableHighlight>
-      {/* </Image> */}
+          <TouchableHighlight
+            rezieMode='contain'
+            style={styles.button}
+            onPress={() => this.onPress()}
+            underlayColor='#99d9f4'>
+            <Text
+              style={styles.buttonText}
+              rezieMode='contain'
+              >Sign Up</Text>
+          </TouchableHighlight>
+          <TouchableHighlight
+            style={styles.button}
+            rezieMode='contain'
+            onPress={() => this.onGoBack()}
+            underlayColor='#99d9f4'>
+            <Text
+              style={styles.buttonText}
+              rezieMode='contain'
+              >Go Back</Text>
+          </TouchableHighlight>
     </View>
   </KeyboardAwareScrollView>
     );
@@ -149,22 +160,31 @@ var styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     flex: 1,
-    backgroundColor: 'black',
+    padding: 20,
+    backgroundColor: '#fcf6e3',
   },
   buttonText: {
     fontSize: 18,
     color: 'white',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    ...Platform.select({
+      ios: {
+        fontFamily:'Avenir'
+      },
+      android: {
+        fontFamily: 'Roboto'
+      }
+    })
   },
   button: {
     height: 36,
     backgroundColor: '#6adaa8',
     borderColor: '#6adaa8',
     borderWidth: 1,
-    borderRadius: 8,
+    width:120,
+    borderRadius: 15,
     marginBottom: 10,
-    alignSelf: 'stretch',
-    justifyContent: 'center'
+    marginLeft: SCREEN_WIDTH / 3,
   }
 });
 
