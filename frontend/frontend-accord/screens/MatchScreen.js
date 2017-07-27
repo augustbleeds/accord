@@ -31,6 +31,7 @@ class MatchScreen extends Component {
   }
 
   componentDidMount(){
+    console.log('debbo match screen component mounted!');
     setUpPushNotifications(this.props.user.email.split('.')[0]);
     Notifications.addListener((notification) => {
       // where we redirect them to the chatscreen
