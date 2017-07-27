@@ -10,15 +10,7 @@ import Expo, {Notifications} from 'expo';
 import listenForMatch from '../listenForMatch';
 
 
-// var config = {
-//    apiKey: "AIzaSyDkhtl4JKhb_1aHL3ookaq0iSRsXmW1Hcg",
-//    authDomain: "accord-18bdf.firebaseapp.com",
-//    databaseURL: "https://accord-18bdf.firebaseio.com",
-//    projectId: "accord-18bdf",
-//    storageBucket: "accord-18bdf.appspot.com",
-//    messagingSenderId: "986125110855"
-//  };
-// firebase.initializeApp(config);
+// config setup used to be here but has been moved to listenForMatch
 var dbRootRef = firebase.database().ref();
 const backEnd = 'https://us-central1-accord-18bdf.cloudfunctions.net/route/user/match';
 
@@ -36,9 +28,7 @@ class MatchScreen extends Component {
   }
 
   componentDidMount(){
-    console.log('debbo match screen component mounted!');
     setUpPushNotifications(this.props.user.email.split('.')[0]);
-    console.log('lemon juice');
     Notifications.addListener((notification) => {
       // where we redirect them to the chatscreen
     });

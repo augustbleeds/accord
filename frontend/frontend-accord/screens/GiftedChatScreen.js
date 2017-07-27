@@ -40,6 +40,7 @@ class ChatScreen extends Component {
   }
 
 	componentDidMount(){
+		// remove the match listen data
 		AsyncStorage.removeItem('matchListen');
 		chatBackend.sendBlurbMessage(this.props.navigation.state.params.blurb, this.state.matchedUserId, this.state.currentUserId);
 		chatBackend.loadMessages( (message) => {
