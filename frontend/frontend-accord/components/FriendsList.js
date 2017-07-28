@@ -125,7 +125,7 @@ class FriendsList extends Component {
           visible={this.state.visible}
           onRequestClose={() => this.setState({visible: false})}
           >
-            <View style={{flex: 1, backgroundColor: "#000000"}}>
+            <View style={{flex: 1, backgroundColor: "#fcf6e3"}}>
               <View style={{marginTop: 20, flex: 1}}>
               <TouchableOpacity
                 onPress={() => {this.deleteFriend()}}
@@ -136,7 +136,7 @@ class FriendsList extends Component {
                 </Text>
               </TouchableOpacity>
             </View>
-              <View style={{flex: 13, justifyContent: 'space-around', alignItems: 'center', backgroundColor: "#000000"}}>
+              <View style={{flex: 13, justifyContent: 'space-around', alignItems: 'center', backgroundColor: "#fcf6e3"}}>
                 <Text style={styles.profileText}>Profile of {this.props.currentFriend.nickname}</Text>
                 <Image style={{width:200 , height: 200, borderRadius: 100}} source={{uri: this.props.currentFriend.img}} />
                 <Text style={styles.text}>Nickname: {this.props.currentFriend.nickname}</Text>
