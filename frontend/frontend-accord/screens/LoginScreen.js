@@ -79,14 +79,16 @@ class LoginScreen extends Component {
 			</View>
 					<Text style={styles.textBig}>Login</Text>
           <TextInput
-            style={{height: 40, paddingTop: 10, textAlign: "center", color: '#FFC67C'}}
-            placeholder="Enter Email"
+						underlineColorAndroid= 'transparent'
+            style={{width: 250, height: 40, paddingTop: 10, textAlign: "center", color: '#FFC67C'}}
+            placeholder="Enter Your Email"
             placeholderTextColor="#808080"
             onChangeText={(text) => this.setState({email: text})}
           />
           <TextInput
-            style={{height: 40, paddingTop: 10, textAlign: "center", color: '#FFC67C'}}
-            placeholder="password"
+            style={{width: 250, height: 40, paddingTop: 10, textAlign: "center", color: '#FFC67C'}}
+						underlineColorAndroid= 'transparent'
+            placeholder="Enter Your Password"
             placeholderTextColor="#808080"
             secureTextEntry={true}
             onChangeText={(text) => this.setState({password: text})}

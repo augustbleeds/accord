@@ -24,10 +24,12 @@ class chatBackend {
       .set('LEAVE')
       .then(() => {
         this.sendExitMessage(matchedUserId, myUserId);
+        return firebase.database().ref(`/Message/${this.generateMessageId(myUserId, matchedUserId)}`).set(null);
       })
       .catch(() => {
         console.log('error leaving the chat...');
       });
+
 
     } else {
       firebase.database().ref(`/FriendPending/${this.generateMessageId(myUserId, matchedUserId)}/${myUserId}`)
@@ -63,7 +65,7 @@ class chatBackend {
     var newMessage = {
       to: matchedUserId,
       from: myUserId,
-      text: 'via Accord: My short blurb is ... ' + message,
+      text: "What's on My Mind: " + message,
       createdAt: firebase.database.ServerValue.TIMESTAMP,
     }
     this.messagesRef.push(newMessage);

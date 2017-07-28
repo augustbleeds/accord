@@ -15,6 +15,9 @@ var FONT_SIZE = 17;
 var FONT_WEIGHT = '500';
 
 var stylesheet = Object.freeze({
+  textinput: {
+    underlineColorAndroid: 'transparent',
+  },
   fieldset: {},
   // the style applied to the container of all inputs
   formGroup: {
@@ -76,7 +79,8 @@ var stylesheet = Object.freeze({
       borderRadius: 4,
       borderColor: BORDER_COLOR,
       borderWidth: 1,
-      marginBottom: 2
+      marginBottom: 2,
+      underlineColorAndroid: 'transparent'
     },
     // the style applied when a validation error occours
     error: {
@@ -88,7 +92,8 @@ var stylesheet = Object.freeze({
       borderRadius: 4,
       borderColor: ERROR_COLOR,
       borderWidth: 1,
-      marginBottom: 5
+      marginBottom: 5,
+
     },
     // the style applied when the textbox is not editable
     notEditable: {
