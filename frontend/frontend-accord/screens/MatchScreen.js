@@ -60,7 +60,7 @@ class MatchScreen extends Component {
     return (
       <View style={[styles.page, styles.container]}>
             <Image resizeMode="contain" style={styles.imgStyle3} source={require('../assets/icons/com.png')} />
-            <View style={{color:'white',  borderRadius: 20, borderColor: '#6adaa8'}}>
+            <View style={{color:'#6adaa8',  borderRadius: 20, borderColor: '#6adaa8'}}>
               <TextInput
                 multiline = {true}
                 numberOfLines = {4}
@@ -78,15 +78,15 @@ class MatchScreen extends Component {
                 selectedValue={this.state.topic}
                 itemStyle={styles.itemPicker}
                 onValueChange={(itemValue, itemIndex) => this.setState({topic: itemValue})}>
-                <Picker.Item label="Select a Topic" value="" />
+                <Picker.Item color='#6adaa8' label="Select a Topic" value="" />
                 {/* <Picker.Item label="Feel Sad?" value="Sad" /> */}
                 {/* <Picker.Item label="Feel Anxious?" value="Anxiety" /> */}
                 {/* <Picker.Item label="Feel Alone?" value="Alone" /> */}
                 {/* <Picker.Item label="Feel Discriminated?" value="Discrimination" /> */}
                 {/* <Picker.Item label="Relationship?" value="Relationship" /> */}
-                <Picker.Item label="Social/Relationship?" value="Relationship" />
-                <Picker.Item label="School/Work?" value="School" />
-                <Picker.Item label="Family?" value="Family" />
+                <Picker.Item color='#6adaa8' label="Social/Relationship?" value="Relationship" />
+                <Picker.Item color='#6adaa8' label="School/Work?" value="School" />
+                <Picker.Item color='#6adaa8' label="Family?" value="Family" />
               </Picker>
           <Button
             buttonStyle={styles.buttonStyle}
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
   },
   picker: {
     width: 150,
-    color: '#ffffff',
+    color: '#6adaa8',
   },
   itemPicker: {
     color: '#6adaa8'

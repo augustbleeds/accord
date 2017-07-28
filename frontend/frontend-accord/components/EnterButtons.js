@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, Text} from 'react-native';
+import { StyleSheet, Platform, View, TouchableOpacity, Text} from 'react-native';
 
 export default class Enter extends Component {
   render(){
@@ -9,7 +9,7 @@ export default class Enter extends Component {
         onPress={() => this.props.goToSignUp()}
         style={{backgroundColor: "#6ADAA8", flex: 1, borderRightWidth: 1, borderColor: '#fcf6e3',  color: '#fcf6e3', justifyContent: 'center', alignItems: 'center'}}
         >
-        <Text style={{color: 'white'}}>
+        <Text style={styles.buttonText}>
           Sign Up
         </Text>
       </TouchableOpacity>
@@ -17,7 +17,7 @@ export default class Enter extends Component {
         onPress={() => this.props.goToLogIn()}
         style={{backgroundColor: "#6ADAA8", flex: 1, borderLeftWidth: 1, borderColor: '#fcf6e3', color: '#fcf6e3', justifyContent: 'center', alignItems: 'center'}}
         >
-        <Text style={{color: 'white'}}>
+        <Text style={styles.buttonText}>
           Log In
         </Text>
       </TouchableOpacity>
@@ -25,3 +25,19 @@ export default class Enter extends Component {
     );
   }
 }
+
+var styles = StyleSheet.create({
+  buttonText: {
+    fontSize: 18,
+    color: 'white',
+    alignSelf: 'center',
+    ...Platform.select({
+      ios: {
+        fontFamily:'Avenir'
+      },
+      android: {
+        fontFamily: 'Roboto'
+      }
+    })
+  }
+});
