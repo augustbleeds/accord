@@ -28,7 +28,9 @@ class WelcomeScreen extends Component {
         const storedMatchData = await AsyncStorage.getItem('matchListen');
 
         console.log('storedUser is', storedUser);
+        console.log('of type', typeof storedUser);
         console.log('storedmatchData is', storedMatchData);
+        console.log('of type', typeof storedMatchData);
 
         if(storedUser){
           console.log('in the thingy');
