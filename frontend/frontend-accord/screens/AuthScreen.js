@@ -152,25 +152,75 @@ class AwesomeProject extends Component {
   }
 
   render() {
-    return (
-      <View style={{flex: 1}}>
-        <View style={{flex: 13}}>
-          <Animated.View
-            style={[styles.container, { paddingBottom: this.keyboardHeight, flex: 14}]}>
-            <View style={{ marginTop: 35, backgroundColor: 'transparent'}}>
-              <Animated.Image
-                source={require('../assets/icons/icon2.png')}
-                style={{width: 280, height: this.imageHeight, alignSelf:'center'}}
-                rezieMode='contain'
-                >
-                </Animated.Image>
+      if(Platform.OS === 'android') {
+        return (
+        <View style={{flex: 1}}>
+          <View style={{flex: 13}}>
+            <KeyboardAvoidingView
+              keyboardVerticalOffset={450}
+              style={[styles.container, { flex: 14}]}
+              behavior="padding"
+              >
+                <View style={{ marginTop: 35, backgroundColor: 'transparent'}}>
+                  <Image
+                    source={require('../assets/icons/icon2.png')}
+                    style={{width: 280, height: 70, alignSelf:'center'}}
+                    rezieMode='contain'
+                    >
+                    </Image>
+                  </View>
+                  <Form
+                    ref={(form) => {this.form = form}}
+                    type={Person}
+                    options={options}
+                  />
+                </KeyboardAvoidingView>
               </View>
-              <Form
-                ref={(form) => {this.form = form}}
-                type={Person}
-                options={options}
-              />
-        </Animated.View>
+              <View style={{flex: 1, backgroundColor: '#fcf6e3', flexDirection: 'row'}}>
+                <TouchableHighlight
+                  rezieMode='contain'
+                  style={styles.buttonLeft}
+                  onPress={() => this.onPress()}
+                  underlayColor='#fcf6e3'>
+                  <Text
+                    style={styles.buttonText}
+                    rezieMode='contain'
+                    >Sign Up</Text>
+                  </TouchableHighlight>
+
+                  <TouchableHighlight
+                    style={styles.buttonRight}
+                    rezieMode='contain'
+                    onPress={() => this.onGoBack()}
+                    underlayColor='#fcf6e3'>
+                    <Text
+                      style={styles.buttonText}
+                      rezieMode='contain'
+                      >Go Back</Text>
+                    </TouchableHighlight>
+                  </View>
+                </View>
+              )
+      } else {
+        return (
+        <View style={{flex: 1}}>
+          <View style={{flex: 13}}>
+            <Animated.View
+              style={[styles.container, { paddingBottom: this.keyboardHeight, flex: 14}]}>
+              <View style={{ marginTop: 35, backgroundColor: 'transparent'}}>
+                <Animated.Image
+                  source={require('../assets/icons/icon2.png')}
+                  style={{width: 280, height: this.imageHeight, alignSelf:'center'}}
+                  rezieMode='contain'
+                  >
+                  </Animated.Image>
+                </View>
+                <Form
+                  ref={(form) => {this.form = form}}
+                  type={Person}
+                  options={options}
+                />
+              </Animated.View>
             </View>
             <View style={{flex: 1, backgroundColor: '#fcf6e3', flexDirection: 'row'}}>
               <TouchableHighlight
@@ -194,9 +244,10 @@ class AwesomeProject extends Component {
                     rezieMode='contain'
                     >Go Back</Text>
                   </TouchableHighlight>
+                </View>
               </View>
-              </View>
-            );
+            )
+      }
           }
 
         }
