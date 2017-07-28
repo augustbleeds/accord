@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import setUpPushNotifications from '../services/push_notifications';
 import Expo, {Notifications} from 'expo';
 import listenForMatch from '../listenForMatch';
-
+import { matchUsersStatus } from '../actions/index';
 
 // config setup used to be here but has been moved to listenForMatch
 var dbRootRef = firebase.database().ref();
@@ -36,6 +36,11 @@ class MatchScreen extends Component {
   }
 
   fetchMatch() {
+    if (this.props.user.searching) {
+      Alert.alert('You can only have one match at a time!');
+      return;
+    }
+    var self = this;
     const endPoint = `${backEnd}/${this.state.topic}/${this.state.myUserId}`;
     fetch(endPoint, {
       method: 'POST',
@@ -46,9 +51,10 @@ class MatchScreen extends Component {
     .then((response) => response.json())
     .then((responseJson) => {
       if(responseJson.success === true) {
+        self.props.matchStatus(true); //set match status of searching to be true
         Alert.alert('You will be notified when there is a match!');
         AsyncStorage.setItem('matchListen', JSON.stringify({ myUserId: this.state.myUserId, blurb: this.state.blurb }));
-        listenForMatch(this.state.myUserId, this.state.blurb, this.props.user, this.props.navigator);
+        listenForMatch(this.state.myUserId, this.state.blurb, this.props.user, this.props.navigator, self.props.matchStatus);
       }
     })
     .catch((err) => {
@@ -147,4 +153,12 @@ const mapStateToProps = ({ user }) => {
 	return { user };
 };
 
-export default connect(mapStateToProps, null)(MatchScreen);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    matchStatus: (searching) => {
+			return matchUsersStatus(dispatch, searching);
+		}
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MatchScreen);
