@@ -1,6 +1,6 @@
 'use strict';
 import React, { Component } from 'react';
-import { Animated, Keyboard, Dimensions, KeyboardAvoidingView, Platform, TouchableOpacity, Image, ScrollView, Alert, AppRegistry, StyleSheet, Text, View, TouchableHighlight } from 'react-native';
+import { Dimensions, KeyboardAvoidingView, Platform, TouchableOpacity, Image, ScrollView, Alert, AppRegistry, StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 // var t = require('tcomb-form-native');
 import t from '../style/authStyle';
@@ -13,9 +13,6 @@ const backgroundImage = require('../assets/icons/backgroundimg.png');
 const goBackButton = require('../assets/icons/back.png');
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
-const IMAGE_HEIGHT =70;
-const IMAGE_HEIGHT_SMALL =30;
-
 
 
 const nickname = t.refinement(t.String, nickname => {
@@ -61,48 +58,7 @@ var options = {
 class AwesomeProject extends Component {
   constructor(props){
     super(props);
-
-    this.keyboardHeight = new Animated.Value(0);
-    this.imageHeight = new Animated.Value(IMAGE_HEIGHT);
-
   }
-
-  componentWillMount () {
-    this.keyboardWillShowSub = Keyboard.addListener('keyboardWillShow', this.keyboardWillShow);
-    this.keyboardWillHideSub = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide);
-  }
-
-  componentWillUnmount() {
-    this.keyboardWillShowSub.remove();
-    this.keyboardWillHideSub.remove();
-  }
-
-  keyboardWillShow = (event) => {
-   Animated.parallel([
-     Animated.timing(this.keyboardHeight, {
-       duration: event.duration,
-       toValue: event.endCoordinates.height,
-     }),
-     Animated.timing(this.imageHeight, {
-       duration: event.duration,
-       toValue: IMAGE_HEIGHT_SMALL,
-     }),
-   ]).start();
- };
-
- keyboardWillHide = (event) => {
-  Animated.parallel([
-    Animated.timing(this.keyboardHeight, {
-      duration: event.duration,
-      toValue: 0,
-    }),
-    Animated.timing(this.imageHeight, {
-      duration: event.duration,
-      toValue: IMAGE_HEIGHT,
-    }),
-  ]).start();
-};
-
 
   registerSubmit({nickname, email, gender, school, description, password}) {
 		firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -155,22 +111,26 @@ class AwesomeProject extends Component {
     return (
       <View style={{flex: 1}}>
         <View style={{flex: 13}}>
-          <Animated.View
-            style={[styles.container, { paddingBottom: this.keyboardHeight, flex: 14}]}>
+        <KeyboardAwareScrollView
+          style={{ backgroundColor: '#fcf6e3', flex: 14}}
+          resetScrollToCoords={{ x: 0, y: 0 }}
+          contentContainerStyle={styles.container}
+          scrollEnabled={true}
+          >
             <View style={{ marginTop: 35, backgroundColor: 'transparent'}}>
-              <Animated.Image
+              <Image
                 source={require('../assets/icons/icon2.png')}
-                style={{width: 280, height: this.imageHeight, alignSelf:'center'}}
+                style={{width: 280, height: 70, alignSelf:'center'}}
                 rezieMode='contain'
                 >
-                </Animated.Image>
+                </Image>
               </View>
               <Form
                 ref={(form) => {this.form = form}}
                 type={Person}
                 options={options}
               />
-        </Animated.View>
+            </KeyboardAwareScrollView>
             </View>
             <View style={{flex: 1, backgroundColor: '#fcf6e3', flexDirection: 'row'}}>
               <TouchableHighlight

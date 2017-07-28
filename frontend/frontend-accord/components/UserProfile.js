@@ -32,7 +32,8 @@ const styles = StyleSheet.create({
   mainText:{
     fontWeight: 'bold',
     textAlign: 'center',
-    color: 'black',
+    fontSize: 15,
+    color: '#6adaa8',
     ...Platform.select({
       ios: {
         fontFamily:'Avenir'
@@ -43,7 +44,8 @@ const styles = StyleSheet.create({
     })
   },
   text: {
-    color: 'black',
+    color: '#6adaa8',
+    fontSize: 15,
     fontWeight: 'bold',
     textAlign: 'center',
     ...Platform.select({

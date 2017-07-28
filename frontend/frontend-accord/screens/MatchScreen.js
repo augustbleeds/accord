@@ -67,7 +67,7 @@ class MatchScreen extends Component {
                 maxLength = {100}
                 value = {this.state.blurb}
                 onChangeText={(text) => {this.setState({blurb: text})}}
-                placeholder='...Write a short blurb here!'
+                placeholder="What's on Your Mind?"
                 placeholderTextColor="#FFC67C"
                 style={{backgroundColor:"#fcf6e3", height: 60, width: 150, fontSize: 15, color: '#FFC67C'}}
               >
