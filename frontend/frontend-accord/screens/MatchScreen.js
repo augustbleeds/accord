@@ -78,12 +78,15 @@ class MatchScreen extends Component {
                 selectedValue={this.state.topic}
                 itemStyle={styles.itemPicker}
                 onValueChange={(itemValue, itemIndex) => this.setState({topic: itemValue})}>
-                <Picker.Item label="Select one" value="" />
-                <Picker.Item label="Depression" value="Depression" />
-                <Picker.Item label="Anxiety" value="Anxiety" />
-                <Picker.Item label="Family Issues" value="Family Issues" />
-                <Picker.Item label="Relationship" value="Relationship" />
-                <Picker.Item label="School" value="School" />
+                <Picker.Item label="Select a Topic" value="" />
+                {/* <Picker.Item label="Feel Sad?" value="Sad" /> */}
+                {/* <Picker.Item label="Feel Anxious?" value="Anxiety" /> */}
+                {/* <Picker.Item label="Feel Alone?" value="Alone" /> */}
+                {/* <Picker.Item label="Feel Discriminated?" value="Discrimination" /> */}
+                {/* <Picker.Item label="Relationship?" value="Relationship" /> */}
+                <Picker.Item label="Social/Relationship?" value="Relationship" />
+                <Picker.Item label="School/Work?" value="School" />
+                <Picker.Item label="Family?" value="Family" />
               </Picker>
           <Button
             buttonStyle={styles.buttonStyle}
