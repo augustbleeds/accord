@@ -157,7 +157,7 @@ class AwesomeProject extends Component {
         <View style={{flex: 1}}>
           <View style={{flex: 13}}>
             <KeyboardAvoidingView
-              keyboardVerticalOffset={450}
+              keyboardVerticalOffset={400}
               style={[styles.container, { flex: 14}]}
               behavior="padding"
               >
