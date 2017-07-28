@@ -46,7 +46,7 @@ class MatchScreen extends Component {
     .then((response) => response.json())
     .then((responseJson) => {
       if (this.props.user.searching) {
-        Alert.alert('Your match is pending!');
+        Alert.alert('You can only have one match at a time!');
       }
       if(responseJson.success === true) {
         this.props.matchStatus(true); //set match status of searching to be true
