@@ -62,18 +62,22 @@ class AwesomeProject extends Component {
 
   registerSubmit({nickname, email, gender, school, description, password}) {
 		firebase.auth().createUserWithEmailAndPassword(email, password)
-		.then(() => {
-			return fetch('https://us-central1-accord-18bdf.cloudfunctions.net/route/register', {
+		.then((user) => {
+      return user.sendEmailVerification();
+		})
+    .then(() => {
+      return fetch('https://us-central1-accord-18bdf.cloudfunctions.net/route/register', {
 				method: 'POST',
 				headers: {
 					"Content-Type": "application/json"
 				},
 				body: JSON.stringify({nickname, password, gender, email, school, desc: description})
 			})
-		})
+    })
 		.then((response) => response.json())
 		.then((responseJson) => {
 			if(responseJson !== null) {
+        Alert.alert('Please check your inbox for a verification email');
 				this.props.navigation.navigate('Login')
 				console.log(responseJson);
 			}else{
@@ -89,7 +93,6 @@ class AwesomeProject extends Component {
 
   onPress() {
     console.log('navigation exists :O', this.props.navigation)
-    Alert.alert('pressed button');
     // call getValue() to get the values of the form
     var value = this.form.getValue();
     if (value) { // if validation fails, value will be null
@@ -129,28 +132,29 @@ class AwesomeProject extends Component {
               />
             </KeyboardAwareScrollView>
             </View>
-            <View style={{flex: 1}}>
+            <View style={{flex: 1, backgroundColor: '#fcf6e3', flexDirection: 'row'}}>
               <TouchableHighlight
                 rezieMode='contain'
-                style={styles.button}
+                style={styles.buttonLeft}
                 onPress={() => this.onPress()}
-                underlayColor='#99d9f4'>
+                underlayColor='#fcf6e3'>
                 <Text
                   style={styles.buttonText}
                   rezieMode='contain'
                   >Sign Up</Text>
                 </TouchableHighlight>
+
                 <TouchableHighlight
-                  style={styles.button}
+                  style={styles.buttonRight}
                   rezieMode='contain'
                   onPress={() => this.onGoBack()}
-                  underlayColor='#99d9f4'>
+                  underlayColor='#fcf6e3'>
                   <Text
                     style={styles.buttonText}
                     rezieMode='contain'
                     >Go Back</Text>
                   </TouchableHighlight>
-                </View>
+              </View>
               </View>
             );
           }
@@ -177,15 +181,21 @@ var styles = StyleSheet.create({
       }
     })
   },
-  button: {
-    // height: 36,
+  buttonRight: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
     backgroundColor: '#6adaa8',
-    borderColor: '#6adaa8',
-    borderWidth: 1,
-    // width:120,
-    // borderRadius: 15,
-    // marginBottom: 10,
-    // marginLeft: SCREEN_WIDTH / 3,
+    borderColor: '#fcf6e3',
+    borderLeftWidth: 1,
+  },
+  buttonLeft: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+    backgroundColor: '#6adaa8',
+    borderColor: '#fcf6e3',
+    borderRightWidth: 1,
   }
 });
 
