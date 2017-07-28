@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, Button, Image, View, Text, ScrollView, Dimensions, StyleSheet, Alert} from 'react-native';
+import { Platform, TouchableOpacity, Button, Image, View, Text, ScrollView, Dimensions, StyleSheet, Alert} from 'react-native';
 import EnterButtons from './EnterButtons'
 import Swiper from 'react-native-swiper';
 
@@ -57,11 +57,20 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     width: SCREEN_WIDTH,
-    backgroundColor: '#000000',
+    backgroundColor: '#fcf6e3',
   },
   Maintext: {
-    fontSize: 25,
-    color: '#fff',
+    fontSize: 26,
+    color: '#6ADAA8',
+    fontWeight:'bold',
+    ...Platform.select({
+      ios: {
+        fontFamily:'Avenir'
+      },
+      android: {
+        fontFamily: 'Roboto'
+      }
+    })
   },
   imgStyle: {
     justifyContent: 'flex-start',
@@ -79,9 +88,19 @@ const styles = {
     height: 230,
   },
   secondText: {
-    fontSize: 15,
-    color: '#808080',
+    fontSize: 16,
+    color: '#FAA63A',
     textAlign: 'center',
-    padding: 20
+    padding: 20,
+    // fontWeight:'bold',
+    fontStyle:'italic',
+    ...Platform.select({
+      ios: {
+        fontFamily:'Avenir'
+      },
+      android: {
+        fontFamily: 'Roboto'
+      }
+    })
   },
 };

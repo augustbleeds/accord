@@ -1,7 +1,7 @@
 import type { NavigationState } from 'react-native-tab-view/types';
 
 import React, { PureComponent } from 'react';
-import { StyleSheet, View, Dimensions } from 'react-native';
+import { StyleSheet, View, Dimensions, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { TabViewAnimated, TabBar } from 'react-native-tab-view';
 import FriendsScreen from './FriendsScreen';
@@ -118,5 +118,14 @@ const styles = StyleSheet.create({
   shadowOffset: {
     height: StyleSheet.hairlineWidth,
   },
-}
-});
+  ...Platform.select({
+    ios: {
+      fontFamily:'Avenir'
+    },
+    android: {
+      fontFamily: 'Roboto'
+    }
+  }),
+},
+
+})

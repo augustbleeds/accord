@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {
+	Platform,
 	StyleSheet,
 	KeyboardAvoidingView,
 	View,
@@ -16,7 +17,7 @@ import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { loadUserInfo } from '../actions/index';
 import * as firebase from 'firebase';
-
+const image = require('../assets/icons/sadToGo.jpg');
 
 class SettingsScreen extends Component {
   constructor(props){
@@ -40,6 +41,7 @@ class SettingsScreen extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
+
 				<Button
 					buttonStyle={styles.buttonStyle}
 					onPress={ () => this.SignOut()}
@@ -57,7 +59,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#000000',
+    backgroundColor: '#fcf6e3',
   },
   buttonStyle: {
     backgroundColor: '#6adaa8',

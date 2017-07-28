@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {AsyncStorage, Alert, View, Text, StyleSheet, ListView, Image, Picker, TextInput } from 'react-native';
+import {AsyncStorage, Platform, Alert, View, Text, StyleSheet, ListView, Image, Picker, TextInput } from 'react-native';
 import { Button } from 'react-native-elements';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import ModalDropdown from 'react-native-modal-dropdown';
@@ -67,8 +67,9 @@ class MatchScreen extends Component {
                 maxLength = {100}
                 value = {this.state.blurb}
                 onChangeText={(text) => {this.setState({blurb: text})}}
-                placeholder="Write a short blurb here about why you're here (ex: I had a terrible day because ...)"
-                style={{backgroundColor:"#6adaa8", height: 60, width: 150, fontSize: 15}}
+                placeholder='...Write a short blurb here!'
+                placeholderTextColor="#FFC67C"
+                style={{backgroundColor:"#fcf6e3", height: 60, width: 150, fontSize: 15, color: '#FFC67C'}}
               >
               </TextInput>
             </View>
@@ -86,7 +87,6 @@ class MatchScreen extends Component {
               </Picker>
           <Button
             buttonStyle={styles.buttonStyle}
-            raised
             title='MATCH'
             onPress={ () => {this.fetchMatch()}}
             >
@@ -104,15 +104,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   container: {
-    backgroundColor:'#000000',
+    backgroundColor:'#fcf6e3',
     borderRadius: 3,
   },
   picker: {
     width: 150,
-    color: '#ffffff'
+    color: '#ffffff',
   },
   itemPicker: {
-    color: '#ffffff'
+    color: '#6adaa8'
   },
   mainText: {
     fontSize: 20,
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   text: {
-    color: '#fff',
+    color: 'white',
     textAlign: 'center',
     marginVertical: 8,
     marginHorizontal: 16,
@@ -130,14 +130,6 @@ const styles = StyleSheet.create({
     bottom: 14,
     width: 230,
     height: 230,
-  },
-
-  swipe: {
-    color: '#808080',
-    textAlign: 'center',
-    fontSize: 12,
-    marginVertical: 8,
-    marginHorizontal: 16,
   },
   buttonStyle: {
     backgroundColor: '#6adaa8',

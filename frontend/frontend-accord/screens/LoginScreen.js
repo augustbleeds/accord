@@ -10,9 +10,13 @@ import {
 	Text,
 	ScrollView,
 	AsyncStorage,
+	Dimensions,
+	Platform,
 	Alert} from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import { Button } from 'react-native-elements';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 // the reducer, and Provider for connection react-redux
 import { connect } from 'react-redux';
@@ -62,18 +66,25 @@ class LoginScreen extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Image style={{width:280 , height: 70, bottom: 65, alignSelf: 'auto'}} source={require('../assets/icons/icon2.png')} />
-        <Text style={styles.textBig}>Login</Text>
-				<ScrollView>
+			<KeyboardAwareScrollView
+				style={{ backgroundColor: '#fcf6e3' }}
+				resetScrollToCoords={{ x: 0, y: 0 }}
+				contentContainerStyle={styles.container}
+				scrollEnabled={true}
+				>
+			<View style={styles.container}>
+			<View style={{backgroundColor: 'transparent'}}>
+				<Image style={{width:280 , height: 70, bottom: 65, alignSelf: 'auto'}} source={require('../assets/icons/icon2.png')} />
+			</View>
+					<Text style={styles.textBig}>Login</Text>
           <TextInput
-            style={{height: 40, paddingTop: 10, textAlign: "center", color: '#fff'}}
+            style={{height: 40, paddingTop: 10, textAlign: "center", color: '#FFC67C'}}
             placeholder="Enter Email"
             placeholderTextColor="#808080"
             onChangeText={(text) => this.setState({email: text})}
           />
           <TextInput
-            style={{height: 40, paddingTop: 10, textAlign: "center", color: '#fff'}}
+            style={{height: 40, paddingTop: 10, textAlign: "center", color: '#FFC67C'}}
             placeholder="password"
             placeholderTextColor="#808080"
             secureTextEntry={true}
@@ -89,8 +100,8 @@ class LoginScreen extends Component {
 							onPress={ () => this.goBackSubmit()}
 							title="Go Back"
 						/>
-					</ScrollView>
       </View>
+		</KeyboardAwareScrollView>
     )
   }
 }
@@ -102,13 +113,22 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#000000',
+    backgroundColor: '#fcf6e3',
   },
   textBig: {
     fontSize: 36,
     textAlign: 'center',
     margin: 10,
-    color: '#fff',
+    color: '#6adaa8',
+		fontWeight: 'bold',
+		...Platform.select({
+			ios: {
+				fontFamily:'Avenir'
+			},
+			android: {
+				fontFamily: 'Roboto'
+			}
+		})
   },
   buttonStyle: {
     backgroundColor: '#6adaa8',

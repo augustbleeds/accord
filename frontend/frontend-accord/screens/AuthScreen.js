@@ -1,12 +1,23 @@
 'use strict';
 import React, { Component } from 'react';
-import { ScrollView, Alert, AppRegistry, StyleSheet, Text, View, TouchableHighlight } from 'react-native';
+import { Dimensions, KeyboardAvoidingView, Platform, TouchableOpacity, Image, ScrollView, Alert, AppRegistry, StyleSheet, Text, View, TouchableHighlight } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 // var t = require('tcomb-form-native');
 import t from '../style/authStyle';
 import * as firebase from 'firebase';
 import stylesheet from '../style/authStyle';
 
 var Form = t.form.Form;
+
+const backgroundImage = require('../assets/icons/backgroundimg.png');
+const goBackButton = require('../assets/icons/back.png');
+const SCREEN_HEIGHT = Dimensions.get('window').height;
+const SCREEN_WIDTH = Dimensions.get('window').width;
+
+
+const nickname = t.refinement(t.String, nickname => {
+  return nickname.length <=12;
+})
 
 const Email = t.refinement(t.String, email => {
   const reg = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/; //or any other regexp
@@ -17,20 +28,15 @@ const StrongPassword = t.refinement(t.String, password => {
   return password.length >= 6;
 });
 
-
 // here we are: define your domain model
 var Person = t.struct({
-  nickname: t.String,              // a required string
+  nickname: nickname,              // a required string
   email: Email,
   gender: t.String,
   school: t.String,
   description: t.String,
   password: StrongPassword,
 });
-
-// style the form
-
-// t.form.Form.stylesheet.textbox = textbox;
 
 var options = {
   fields: {
@@ -41,6 +47,9 @@ var options = {
       password: true,
       secureTextEntry: true,
       error: 'Insert a password greater than 6 characters'
+    },
+    nickname: {
+      error: 'Nickname should be less than 12 characters'
     }
   }
 };
@@ -90,47 +99,93 @@ class AwesomeProject extends Component {
     }
   }
 
-  render() {
-    return (
-      <ScrollView contentContainerStyle={{flex: 1, backgroundColor: 'black'}}>
-      <View style={styles.container}>
-        <Form
-          ref={(form) => {this.form = form}}
-          type={Person}
-          options={options}
-        />
-        <TouchableHighlight style={styles.button} onPress={() => this.onPress()} underlayColor='#99d9f4'>
-          <Text style={styles.buttonText}>Save</Text>
-        </TouchableHighlight>
-      </View>
-    </ScrollView>
-    );
+
+  onGoBack() {
+    this.props.navigation.navigate('Welcome');
   }
 
-}
+  render() {
+    return (
+      <View style={{flex: 1}}>
+        <View style={{flex: 13}}>
+        <KeyboardAwareScrollView
+          style={{ backgroundColor: '#fcf6e3', flex: 14}}
+          resetScrollToCoords={{ x: 0, y: 0 }}
+          contentContainerStyle={styles.container}
+          scrollEnabled={true}
+          >
+            <View style={{ marginTop: 35, backgroundColor: 'transparent'}}>
+              <Image
+                source={require('../assets/icons/icon2.png')}
+                style={{width: 280, height: 70, alignSelf:'center'}}
+                rezieMode='contain'
+                >
+                </Image>
+              </View>
+              <Form
+                ref={(form) => {this.form = form}}
+                type={Person}
+                options={options}
+              />
+            </KeyboardAwareScrollView>
+            </View>
+            <View style={{flex: 1}}>
+              <TouchableHighlight
+                rezieMode='contain'
+                style={styles.button}
+                onPress={() => this.onPress()}
+                underlayColor='#99d9f4'>
+                <Text
+                  style={styles.buttonText}
+                  rezieMode='contain'
+                  >Sign Up</Text>
+                </TouchableHighlight>
+                <TouchableHighlight
+                  style={styles.button}
+                  rezieMode='contain'
+                  onPress={() => this.onGoBack()}
+                  underlayColor='#99d9f4'>
+                  <Text
+                    style={styles.buttonText}
+                    rezieMode='contain'
+                    >Go Back</Text>
+                  </TouchableHighlight>
+                </View>
+              </View>
+            );
+          }
+
+        }
 
 var styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
-    marginTop: 50,
-    flex: 1,
+    flex: 13,
     padding: 20,
-    backgroundColor: 'black',
+    backgroundColor: '#fcf6e3',
   },
   buttonText: {
     fontSize: 18,
     color: 'white',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    ...Platform.select({
+      ios: {
+        fontFamily:'Avenir'
+      },
+      android: {
+        fontFamily: 'Roboto'
+      }
+    })
   },
   button: {
-    height: 36,
+    // height: 36,
     backgroundColor: '#6adaa8',
     borderColor: '#6adaa8',
     borderWidth: 1,
-    borderRadius: 8,
-    marginBottom: 10,
-    alignSelf: 'stretch',
-    justifyContent: 'center'
+    // width:120,
+    // borderRadius: 15,
+    // marginBottom: 10,
+    // marginLeft: SCREEN_WIDTH / 3,
   }
 });
 
