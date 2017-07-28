@@ -45,4 +45,11 @@ function loadCurrentFriendInfo(dispatch, currentFriendJson){
   dispatch({ type: 'LOAD_FRIEND', payload: currentFriendJson });
 }
 
-export { loadUserInfo, loadCurrentFriendInfo, loadStoredUserInfo };
+function matchUsersStatus(dispatch, searching) {
+  dispatch({
+      type: 'MATCH_STATUS',
+      searching: searching
+  })
+}
+
+export { loadUserInfo, loadCurrentFriendInfo, loadStoredUserInfo, matchUsersStatus };
