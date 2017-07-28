@@ -60,6 +60,7 @@ class LoginScreen extends Component {
 			}
 		})
 		.catch((err) => {
+			Alert.alert(err.message);
 			console.log('Error logging in :', err);
 		});
 	}
