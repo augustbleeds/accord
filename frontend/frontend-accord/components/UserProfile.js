@@ -12,12 +12,12 @@ class UserProfile extends Component {
   render() {
     return (
       <View style={styles.profile}>
-        <Image style={{borderRadius: 75, width:150 , height: 150, top: 1, alignSelf: 'auto'}} source={{uri: this.props.user.img}} />
-        <Text style={styles.mainText}>Signed in as: {this.props.user.email}</Text>
-        <Text style={styles.text}>Nickname: {this.props.user.nickname}</Text>
-        <Text style={styles.text}>School: {this.props.user.school}</Text>
-        <Text style={styles.text}>Gender: {this.props.user.gender}</Text>
-        <Text style={styles.text}>Description: {this.props.user.desc}</Text>
+        <Image style={{borderRadius: 75, width:150 , height: 150, top: 1, alignSelf: 'center'}} source={{uri: this.props.user.img}} />
+        <Text> <Text style={styles.mainText}>Signed in as: </Text> <Text style={styles.mainText2}> {this.props.user.email} </Text> </Text>
+        <Text> <Text style={styles.text}>Nickname: </Text> <Text style={styles.text2}> {this.props.user.nickname} </Text> </Text>
+        <Text> <Text style={styles.text}>School: </Text> <Text style={styles.text2}> {this.props.user.school} </Text> </Text>
+        <Text> <Text style={styles.text}>Gender: </Text> <Text style={styles.text2}> {this.props.user.gender} </Text> </Text>
+        <Text> <Text style={styles.text}>Description:</Text> <Text style={styles.text2}>{this.props.user.desc}</Text></Text>
       </View>
     );
   }
@@ -26,12 +26,30 @@ class UserProfile extends Component {
 const styles = StyleSheet.create({
   profile: {
     justifyContent: 'space-around',
-    alignItems: 'center',
-    width: SCREEN_WIDTH * 0.7,
+    alignItems: 'flex-end',
+    width: SCREEN_WIDTH * 0.67,
   },
   mainText:{
     fontWeight: 'bold',
-    textAlign: 'center',
+    // textAlign: 'left',
+    alignItems: 'flex-end',
+    paddingHorizontal: 10,
+    fontSize: 15,
+    color: '#3b9788',
+    ...Platform.select({
+      ios: {
+        fontFamily:'Avenir'
+      },
+      android: {
+        fontFamily: 'Roboto'
+      }
+    })
+  },
+  mainText2:{
+    fontWeight: 'bold',
+    // textAlign: 'right',
+    alignItems: 'flex-end',
+    paddingHorizontal: 10,
     fontSize: 15,
     color: '#6adaa8',
     ...Platform.select({
@@ -44,10 +62,28 @@ const styles = StyleSheet.create({
     })
   },
   text: {
+    color: '#3b9788',
+    fontSize: 15,
+    alignItems: 'flex-end',
+    fontWeight: 'bold',
+    paddingHorizontal: 10,
+    // textAlign: 'left',
+    ...Platform.select({
+      ios: {
+        fontFamily:'Avenir'
+      },
+      android: {
+        fontFamily: 'Roboto'
+      }
+    })
+  },
+  text2: {
     color: '#6adaa8',
     fontSize: 15,
     fontWeight: 'bold',
-    textAlign: 'center',
+    paddingHorizontal: 10,
+    // textAlign: 'right',
+    alignItems: 'flex-end',
     ...Platform.select({
       ios: {
         fontFamily:'Avenir'
