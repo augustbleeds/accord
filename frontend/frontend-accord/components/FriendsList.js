@@ -109,7 +109,7 @@ class FriendsList extends Component {
 
   render() {
     return (
-      <View style={{width: SCREEN_WIDTH * 0.3, backgroundColor:'#FFD7A3'}}>
+      <View style={{width: SCREEN_WIDTH * 0.33, backgroundColor:'#cbddd3'}}>
         <Text style={styles.textFriends}>Your Friends</Text>
         <ListView
           {...this.props}
@@ -139,10 +139,10 @@ class FriendsList extends Component {
               <View style={{flex: 13, justifyContent: 'space-around', alignItems: 'center', backgroundColor: "#fcf6e3"}}>
                 <Text style={styles.profileText}>Profile of {this.props.currentFriend.nickname}</Text>
                 <Image style={{width:200 , height: 200, borderRadius: 100}} source={{uri: this.props.currentFriend.img}} />
-                <Text style={styles.text}>Nickname: {this.props.currentFriend.nickname}</Text>
-                <Text style={styles.text}>School: {this.props.currentFriend.school}</Text>
-                <Text style={styles.text}>Description: {this.props.currentFriend.desc}</Text>
-                <Text style={styles.text}>Gender: {this.props.currentFriend.gender}</Text>
+                <Text style={styles.text2}>Nickname: {this.props.currentFriend.nickname}</Text>
+                <Text style={styles.text2}>School: {this.props.currentFriend.school}</Text>
+                <Text style={styles.text2}>Description: {this.props.currentFriend.desc}</Text>
+                <Text style={styles.text2}>Gender: {this.props.currentFriend.gender}</Text>
               </View>
               <View style={{flex: 1, flexDirection: 'row'}}>
                 <TouchableOpacity
@@ -207,7 +207,7 @@ class FriendsList extends Component {
             marginTop: 10,
             fontWeight:'bold',
             textAlign:'center',
-            color:'black',
+            color:'#3b9788',
             ...Platform.select({
               ios: {
                 fontFamily:'Avenir'
@@ -226,7 +226,20 @@ class FriendsList extends Component {
             justifyContent: 'center',
           },
           text: {
-            color: 'black',
+            color: '#fcf6e3',
+            fontWeight: 'bold',
+            textAlign: 'center',
+            ...Platform.select({
+              ios: {
+                fontFamily:'Avenir'
+              },
+              android: {
+                fontFamily: 'Roboto'
+              }
+            })
+          },
+          text2: {
+            color: '#6adaa8',
             fontWeight: 'bold',
             textAlign: 'center',
             ...Platform.select({
@@ -239,6 +252,7 @@ class FriendsList extends Component {
             })
           },
         });
+
 
         const mapStateToProps = ({ user, currentFriend }) => {
           return { user, currentFriend };
