@@ -22,8 +22,10 @@ class WelcomeScreen extends Component {
 
   async componentDidMount(){
     try{
+      // if the reducer is not initialized
       if(JSON.stringify(this.props.user) === '{}'){
 
+        // get user info and match data (if exists)
         const storedUser = await AsyncStorage.getItem('user');
         const storedMatchData = await AsyncStorage.getItem('matchListen');
 
@@ -33,16 +35,17 @@ class WelcomeScreen extends Component {
         console.log('of type', typeof storedMatchData);
 
         if(storedUser){
-          console.log('in the thingy');
           this.props.addStoredUser(JSON.parse(storedUser));
 
-          if(!storedMatchData){
-            this.props.navigation.navigate('AllScreen');
-            return;
+          // navigate to screen
+          this.props.navigation.navigate('AllScreen');
+
+          // listen if needed (is still called even if you navigate!)
+          if(storedMatchData){
+            var matchedUserInfo = JSON.parse(storedMatchData);
+            listenForMatch(matchedUserInfo.myUserId, matchedUserInfo.blurb, this.props.user, this.props.navigation);
           }
 
-          var matchedUserInfo = JSON.parse(storedMatchData);
-          listenForMatch(matchedUserInfo.myUserId, matchedUserInfo.blurb, this.props.user, this.props.navigation);
         }
       }
 
