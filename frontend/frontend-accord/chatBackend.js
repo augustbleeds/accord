@@ -42,7 +42,6 @@ class chatBackend {
   // friends nickname
   loadMessages(callback, myUserId, matchedUserId, myNickname, friendNickname) {
     this.messagesRef = firebase.database().ref(`/Message/${this.generateMessageId(myUserId, matchedUserId)}`);
-    console.log('jay told me to put this here', this.messagesRef);
     this.messagesRef.off();
     const onReceive = (data) => {
       const message = data.val();

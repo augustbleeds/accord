@@ -52,6 +52,11 @@ class MatchScreen extends Component {
     .then((responseJson) => {
       if(responseJson.success === true) {
         self.props.matchStatus(true); //set match status of searching to be true
+        // console.log('User is', this.props.user);
+        // console.log('Searching is', this.props.user.searching);
+
+        // update AsyncStorage to searching is true
+        AsyncStorage.mergeItem('user', JSON.stringify({searching: true}));
         Alert.alert('You will be notified when there is a match!');
         AsyncStorage.setItem('matchListen', JSON.stringify({ myUserId: this.state.myUserId, blurb: this.state.blurb }));
         listenForMatch(this.state.myUserId, this.state.blurb, this.props.user, this.props.navigator, self.props.matchStatus);

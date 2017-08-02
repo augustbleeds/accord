@@ -16,7 +16,7 @@ var dbRootRef = firebase.database().ref();
 
 export default function listenForMatch(myUserId, blurb, userObj, navigator, matchUsers) {
   // set Async for homescreen
-  console.log('listenForMatch was called!');
+  // console.log('listenForMatch was called!');
 
   // listen for when this user is matched!
   firebase.database().ref(`/Match/${myUserId}`).on('value', (data) => {
@@ -24,6 +24,8 @@ export default function listenForMatch(myUserId, blurb, userObj, navigator, matc
       return;
     }
     matchUsers(false);
+    // update AsyncStorage
+    AsyncStorage.mergeItem('user', JSON.stringify({searching: false}));
     Alert.alert(`You are matched with ${data.val()}`);
 
     navigator.navigate('ChatScreen', {
