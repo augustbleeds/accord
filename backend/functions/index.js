@@ -54,7 +54,7 @@ app.post('/register', (req, res) => {
     .catch((err) => res.json(null))
 });
 
-// TODO: after authentication
+// TODO: after authentication, we haven't used this yet
 app.get('/logout', (req, res) => {
   console.log('we did logout correctly');
   res.send('Hello3');
@@ -220,7 +220,7 @@ exports.matchUsers = functions.database
 
 
   /**
-   * 2 users becoming friends
+   * 2 databse triggers monitoring the status of the anonymous relationship.
    * @type {DATABASE TRIGGER}
    */
    exports.makeFriends1 = functions.database
