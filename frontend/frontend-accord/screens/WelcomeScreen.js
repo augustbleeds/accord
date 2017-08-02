@@ -25,17 +25,25 @@ class WelcomeScreen extends Component {
       // if the reducer is not initialized
       if(JSON.stringify(this.props.user) === '{}'){
 
+        // AsyncStorage.clear()
+        //   .then(() => {
+        //     console.log('yay it cleared!');
+        //   })
+
         // get user info and match data (if exists)
         const storedUser = await AsyncStorage.getItem('user');
         const storedMatchData = await AsyncStorage.getItem('matchListen');
 
-        console.log('storedUser is', storedUser);
-        console.log('of type', typeof storedUser);
-        console.log('storedmatchData is', storedMatchData);
-        console.log('of type', typeof storedMatchData);
+        // console.log('storedUser is', storedUser);
+        // console.log('of type', typeof storedUser);
+        // console.log('storedmatchData is', storedMatchData);
+        // console.log('of type', typeof storedMatchData);
 
         if(storedUser){
           this.props.addStoredUser(JSON.parse(storedUser));
+
+          // console.log('MY USER IS', this.props.user);
+          // console.log('MY SEARCHING IS', this.props.searching);
 
           // navigate to screen
           this.props.navigation.navigate('AllScreen');
