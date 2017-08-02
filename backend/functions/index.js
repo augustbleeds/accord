@@ -299,6 +299,16 @@ exports.matchUsers = functions.database
      });
    });
 
+   /**
+    * [notifyFriendsMessage notifies friends of new chat messages]
+    * @type {DATABASE TRIGGER}
+    */
+   exports.notifyFriendsMessage = function.database
+    .ref(`/Message/{chatId}/{messageId}`)
+    .onUpdate((event) => {
+      // write code here
+    });
+
 
 
 exports.route = functions.https.onRequest(app);
