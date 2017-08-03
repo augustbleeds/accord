@@ -166,8 +166,7 @@ app.post('/user/match/:category/:id', (req, res) => {
 
 let expo = new Expo();
 
- function sendPush(pushToken) {
-   console.log('we are in sendPush function');
+ function sendMatchPush(pushToken) {
      expo.sendPushNotificationsAsync([{
        // The push token for the app user to whom you want to send the notification
        to: pushToken,
@@ -181,6 +180,22 @@ let expo = new Expo();
        console.log('error for pushing notifications', err);
      })
  }
+
+ function sendMsgPush(pushToken, nickname) {
+   expo.sendPushNotificationsAsync([{
+     to: pushToken,
+     sound: 'default',
+     body: `Accord: New message from your friend ${nickname}`,
+   }])
+   .then(() => {
+     console.log('success push msg');
+   })
+   .catch((err) => {
+     console.log('error push msg', err);
+   })
+ }
+
+
 
 /**
  * Match 2 users
@@ -224,14 +239,14 @@ exports.matchUsers = functions.database
            .then((pushToken1) => {
              console.log('in first then');
              if(pushToken1){
-               sendPush(pushToken1.val());
+               sendMatchPush(pushToken1.val());
              }
              return dbRootRef.child(`/User/${secondKey}/pushToken`).once('value');
            })
            .then((pushToken2) => {
              console.log('in second then');
              if(pushToken2){
-               sendPush(pushToken2.val())
+               sendMatchPush(pushToken2.val())
              }
            })
           .then(() => console.log(`Two users with id ${firstKey} and ${secondKey} were matched! :) `))
@@ -341,15 +356,40 @@ exports.matchUsers = functions.database
    exports.notifyFriendsMessage = functions.database
     .ref(`/Message/{chatId}/{messageId}`)
     .onCreate((event) => {
-      // console.log('IN THE TRIGGA');
+      console.log('IN THE TRIGGA');
       // get message
       const { chatId, messageId } = event.params;
       const msg = event.data.val();
 
       dbRootRef.child(`/User/${msg.to}/friends/${msg.from}`).once('value')
         .then(friendExists => {
-          // console.log('friendExists is', friendExists.val());
+
+          console.log('friendExists is', friendExists.val());
+          // something like their img url for now
           if(friendExists.val()){
+            // send push notifications to the receving friend
+            return true;
+          }
+          return false;
+        })
+        .then(needToSend => {
+          if(needToSend){
+            console.log('getting the user info')
+            return dbRootRef.child(`/User/${msg.to}`).once('value');
+          }
+          return false;
+        })
+        .then(userSnap => {
+          if(userSnap){
+            const { pushToken } = userSnap.val();
+            dbRootRef.child(`/User/${msg.from}/nickname`).once('value')
+            .then(nameSnap => {
+              console.log(`about to send the msg notification to ${pushToken} ${nameSnap.val()}`);
+              sendMsgPush(pushToken, nameSnap.val());
+            })
+            .catch((err) => {
+              console.log('weird... there was an error', err);
+            })
 
           }
         })
