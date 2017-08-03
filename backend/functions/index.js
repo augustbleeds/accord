@@ -22,10 +22,10 @@ app.post('/login', (req, res) => {
   // TODO delete
 
   var email = req.body.email.split('.')[0];
-  console.log(`Email user wants to login is ${JSON.stringify(email)}`);
+  // console.log(`Email user wants to login is ${JSON.stringify(email)}`);
   dbRootRef.child(`/User/${email}`).once('value')
     .then((userSnap) => {
-      console.log(`User Snap for ${req.body.email} is ${JSON.stringify(userSnap.val())}`);
+      // console.log(`User Snap for ${req.body.email} is ${JSON.stringify(userSnap.val())}`);
       res.json(userSnap.val())
     })
     .catch((err) => {res.json({error: err})})
@@ -65,16 +65,16 @@ app.get('/logout', (req, res) => {
  * sends back an array of objects / or empty array
  */
 app.get('/user/friends/:id', (req, res) => {
-  console.log('GETTING FRIENDS');
+  // console.log('GETTING FRIENDS');
   var currId = req.params.id;
   dbRootRef.child(`/User/${currId}/friends`).once('value')
   .then((friendEmailsSnap) => {
     // TODO: object of emails....figure out if email_ids have the .edu in them.
     var emailsObj = friendEmailsSnap.val();
-    console.log('emailsObj is', JSON.stringify(emailsObj));
+    // console.log('emailsObj is', JSON.stringify(emailsObj));
     // send back empty array
     if(!emailsObj){
-      console.log('inside of the if condition');
+      // console.log('inside of the if condition');
       res.json([]);
       return null;
     }
@@ -105,7 +105,7 @@ app.get('/user/friends/:id', (req, res) => {
  */
 //When 2 people add each other as friends
 app.post('/user/add', (req, res) => {
-  console.log('getting 2 friends')
+  // console.log('getting 2 friends')
   var myId = req.body.myId;
   var friendId = req.body.friendId;
   var updates = {};
@@ -151,10 +151,10 @@ app.post('/user/match/:category/:id', (req, res) => {
   var category = req.params.category;
   var myId = req.params.id;
   var tempRef = dbRootRef.child(`/Topic/${category}/${myId}`);
-  console.log(`The condition is : ${tempRef}`);
+  // console.log(`The condition is : ${tempRef}`);
   dbRootRef.child(`/Topic/${category}/${myId}`).set(true)
     .then((snapshot) => {
-      console.log(`User ${myId} was put in category ${category}`);
+      // console.log(`User ${myId} was put in category ${category}`);
       res.send({success: true});
     })
     .catch((err) => {
@@ -188,7 +188,7 @@ exports.matchUsers = functions.database
         // put two users in the match database! (as match1@aa : match2@bb)
         dbRootRef.child(`/Match/${firstKey}`).set(secondKey)
           .then(() => {
-            console.log('got to the last part!');
+            // console.log('got to the last part!');
             // second save
             return dbRootRef.child(`/Match/${secondKey}`).set(firstKey);
           })
@@ -229,9 +229,9 @@ exports.matchUsers = functions.database
      const pairsofUsers = event.params.pairUsers;
      dbRootRef.child(`/FriendPending/${pairsofUsers}`).once('value')
      .then(function(pairsSnap) {
-       console.log('hit my line 232');
+      //  console.log('hit my line 232');
        var pairs = pairsSnap.val();
-       console.log('pairs is', pairs);
+      //  console.log('pairs is', pairs);
        var objKeys = Object.keys(pairs);
        var first = objKeys[0];
        var second = objKeys[1];
@@ -240,13 +240,13 @@ exports.matchUsers = functions.database
          helperDeletePending(pairsofUsers);
          return;
        }
-       console.log(`PENDING FRIEND DB TRIGGER firstUser: ${first}, secondUser: ${second}`);
+      //  console.log(`PENDING FRIEND DB TRIGGER firstUser: ${first}, secondUser: ${second}`);
        if (pairs[first] === 'LEAVE' || pairs[second] === 'LEAVE') {
          return helperDeletePending(pairsofUsers);
        }else if (pairs[first] === 'CONNECT' && pairs[second] === 'CONNECT') {
          helperAddFriends(first, second)
           .then((snapshot) => {
-            console.log(`added friends! ${first} and ${second}`);
+            // console.log(`added friends! ${first} and ${second}`);
             return helperDeletePending(pairsofUsers);
           })
           .catch((err) => {
@@ -267,9 +267,9 @@ exports.matchUsers = functions.database
      const pairsofUsers = event.params.pairUsers;
      dbRootRef.child(`/FriendPending/${pairsofUsers}`).once('value')
      .then(function(pairsSnap) {
-       console.log('hit my line 232');
+      //  console.log('hit my line 232');
        var pairs = pairsSnap.val();
-       console.log('pairs is', pairs);
+      //  console.log('pairs is', pairs);
        var objKeys = Object.keys(pairs);
        var first = objKeys[0];
        var second = objKeys[1];
@@ -278,13 +278,13 @@ exports.matchUsers = functions.database
          helperDeletePending(pairsofUsers);
          return;
        }
-       console.log(`PENDING FRIEND DB TRIGGER firstUser: ${first}, secondUser: ${second}`);
+      //  console.log(`PENDING FRIEND DB TRIGGER firstUser: ${first}, secondUser: ${second}`);
        if (pairs[first] === 'LEAVE' || pairs[second] === 'LEAVE') {
          return helperDeletePending(pairsofUsers);
        }else if (pairs[first] === 'CONNECT' && pairs[second] === 'CONNECT') {
          helperAddFriends(first, second)
           .then((snapshot) => {
-            console.log(`added friends! ${first} and ${second}`);
+            // console.log(`added friends! ${first} and ${second}`);
             return helperDeletePending(pairsofUsers);
           })
           .catch((err) => {
@@ -303,10 +303,27 @@ exports.matchUsers = functions.database
     * [notifyFriendsMessage notifies friends of new chat messages]
     * @type {DATABASE TRIGGER}
     */
-   exports.notifyFriendsMessage = function.database
+   exports.notifyFriendsMessage = functions.database
     .ref(`/Message/{chatId}/{messageId}`)
-    .onUpdate((event) => {
-      // write code here
+    .onCreate((event) => {
+      // console.log('IN THE TRIGGA');
+      // get message
+      const { chatId, messageId } = event.params;
+      const msg = event.data.val();
+
+      dbRootRef.child(`/User/${msg.to}/friends/${msg.from}`).once('value')
+        .then(friendExists => {
+          // console.log('friendExists is', friendExists.val());
+          if(friendExists.val()){
+
+          }
+        })
+        .catch((err) => {
+          console.log('Error notifying friends', err);
+        })
+
+      // console.log('NOTIFY MESSAGE IS', msg);
+      // console.log('type is', typeof msg);
     });
 
 
