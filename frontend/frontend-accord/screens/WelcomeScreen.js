@@ -4,6 +4,7 @@ import Swipers from '../components/swiper';
 import { connect } from 'react-redux';
 import { loadStoredUserInfo } from '../actions/index';
 import listenForMatch from '../listenForMatch';
+import { matchUsersStatus } from '../actions/index';
 
 class WelcomeScreen extends Component {
   goToSignUp = () => {
@@ -51,7 +52,7 @@ class WelcomeScreen extends Component {
           // listen if needed (is still called even if you navigate!)
           if(storedMatchData){
             var matchedUserInfo = JSON.parse(storedMatchData);
-            listenForMatch(matchedUserInfo.myUserId, matchedUserInfo.blurb, this.props.user, this.props.navigation);
+            listenForMatch(matchedUserInfo.myUserId, matchedUserInfo.blurb, this.props.user, this.props.navigation, this.props.matchStatus);
           }
 
         }
@@ -80,7 +81,10 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		addStoredUser: (userJson) => {
 			return loadStoredUserInfo(dispatch, userJson);
-		}
+		},
+    matchStatus: (searching) => {
+      return matchUsersStatus(dispatch, searching);
+    },
 	};
 };
 
