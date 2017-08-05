@@ -6,6 +6,7 @@ const axios = require('axios')
 const quokkaURL = 'http://www.traveller.com.au/content/dam/images/g/u/n/q/h/0/image.related.articleLeadwide.620x349.gunpvd.png/1488330286332.png';
 admin.initializeApp(functions.config().firebase);
 const dbRootRef = admin.database().ref();
+const Expo = require('exponent-server-sdk');
 
 /**
  * Responds to a login request.
@@ -22,10 +23,10 @@ app.post('/login', (req, res) => {
   // TODO delete
 
   var email = req.body.email.split('.')[0];
-  console.log(`Email user wants to login is ${JSON.stringify(email)}`);
+  // console.log(`Email user wants to login is ${JSON.stringify(email)}`);
   dbRootRef.child(`/User/${email}`).once('value')
     .then((userSnap) => {
-      console.log(`User Snap for ${req.body.email} is ${JSON.stringify(userSnap.val())}`);
+      // console.log(`User Snap for ${req.body.email} is ${JSON.stringify(userSnap.val())}`);
       res.json(userSnap.val())
     })
     .catch((err) => {res.json({error: err})})
@@ -54,7 +55,7 @@ app.post('/register', (req, res) => {
     .catch((err) => res.json(null))
 });
 
-// TODO: after authentication
+// TODO: after authentication, we haven't used this yet
 app.get('/logout', (req, res) => {
   console.log('we did logout correctly');
   res.send('Hello3');
@@ -65,16 +66,16 @@ app.get('/logout', (req, res) => {
  * sends back an array of objects / or empty array
  */
 app.get('/user/friends/:id', (req, res) => {
-  console.log('GETTING FRIENDS');
+  // console.log('GETTING FRIENDS');
   var currId = req.params.id;
   dbRootRef.child(`/User/${currId}/friends`).once('value')
   .then((friendEmailsSnap) => {
     // TODO: object of emails....figure out if email_ids have the .edu in them.
     var emailsObj = friendEmailsSnap.val();
-    console.log('emailsObj is', JSON.stringify(emailsObj));
+    // console.log('emailsObj is', JSON.stringify(emailsObj));
     // send back empty array
     if(!emailsObj){
-      console.log('inside of the if condition');
+      // console.log('inside of the if condition');
       res.json([]);
       return null;
     }
@@ -105,7 +106,7 @@ app.get('/user/friends/:id', (req, res) => {
  */
 //When 2 people add each other as friends
 app.post('/user/add', (req, res) => {
-  console.log('getting 2 friends')
+  // console.log('getting 2 friends')
   var myId = req.body.myId;
   var friendId = req.body.friendId;
   var updates = {};
@@ -151,10 +152,10 @@ app.post('/user/match/:category/:id', (req, res) => {
   var category = req.params.category;
   var myId = req.params.id;
   var tempRef = dbRootRef.child(`/Topic/${category}/${myId}`);
-  console.log(`The condition is : ${tempRef}`);
+  // console.log(`The condition is : ${tempRef}`);
   dbRootRef.child(`/Topic/${category}/${myId}`).set(true)
     .then((snapshot) => {
-      console.log(`User ${myId} was put in category ${category}`);
+      // console.log(`User ${myId} was put in category ${category}`);
       res.send({success: true});
     })
     .catch((err) => {
@@ -162,6 +163,39 @@ app.post('/user/match/:category/:id', (req, res) => {
       res.json(null);
     });
 });
+
+let expo = new Expo();
+
+ function sendMatchPush(pushToken) {
+     expo.sendPushNotificationsAsync([{
+       // The push token for the app user to whom you want to send the notification
+       to: pushToken,
+       sound: 'default',
+       body: 'Accord: You have been matched with someone awesome. Open your app!',
+     }])
+     .then(() => {
+       console.log('success for pushing notifications');
+     })
+     .catch((err) => {
+       console.log('error for pushing notifications', err);
+     })
+ }
+
+ function sendMsgPush(pushToken, nickname) {
+   expo.sendPushNotificationsAsync([{
+     to: pushToken,
+     sound: 'default',
+     body: `Accord: New message from your friend ${nickname}`,
+   }])
+   .then(() => {
+     console.log('success push msg');
+   })
+   .catch((err) => {
+     console.log('error push msg', err);
+   })
+ }
+
+
 
 /**
  * Match 2 users
@@ -188,7 +222,7 @@ exports.matchUsers = functions.database
         // put two users in the match database! (as match1@aa : match2@bb)
         dbRootRef.child(`/Match/${firstKey}`).set(secondKey)
           .then(() => {
-            console.log('got to the last part!');
+            // console.log('got to the last part!');
             // second save
             return dbRootRef.child(`/Match/${secondKey}`).set(firstKey);
           })
@@ -199,6 +233,22 @@ exports.matchUsers = functions.database
             updates[`/Topic/${myTopic}/${secondKey}`] = null;
             return dbRootRef.update(updates);
           })
+          .then(() => {
+             return dbRootRef.child(`/User/${firstKey}/pushToken`).once('value');
+           })
+           .then((pushToken1) => {
+             console.log('in first then');
+             if(pushToken1){
+               sendMatchPush(pushToken1.val());
+             }
+             return dbRootRef.child(`/User/${secondKey}/pushToken`).once('value');
+           })
+           .then((pushToken2) => {
+             console.log('in second then');
+             if(pushToken2){
+               sendMatchPush(pushToken2.val())
+             }
+           })
           .then(() => console.log(`Two users with id ${firstKey} and ${secondKey} were matched! :) `))
           .catch((err) => console.log(err))
       })
@@ -220,7 +270,7 @@ exports.matchUsers = functions.database
 
 
   /**
-   * 2 users becoming friends
+   * 2 databse triggers monitoring the status of the anonymous relationship.
    * @type {DATABASE TRIGGER}
    */
    exports.makeFriends1 = functions.database
@@ -229,9 +279,9 @@ exports.matchUsers = functions.database
      const pairsofUsers = event.params.pairUsers;
      dbRootRef.child(`/FriendPending/${pairsofUsers}`).once('value')
      .then(function(pairsSnap) {
-       console.log('hit my line 232');
+      //  console.log('hit my line 232');
        var pairs = pairsSnap.val();
-       console.log('pairs is', pairs);
+      //  console.log('pairs is', pairs);
        var objKeys = Object.keys(pairs);
        var first = objKeys[0];
        var second = objKeys[1];
@@ -240,13 +290,13 @@ exports.matchUsers = functions.database
          helperDeletePending(pairsofUsers);
          return;
        }
-       console.log(`PENDING FRIEND DB TRIGGER firstUser: ${first}, secondUser: ${second}`);
+      //  console.log(`PENDING FRIEND DB TRIGGER firstUser: ${first}, secondUser: ${second}`);
        if (pairs[first] === 'LEAVE' || pairs[second] === 'LEAVE') {
          return helperDeletePending(pairsofUsers);
        }else if (pairs[first] === 'CONNECT' && pairs[second] === 'CONNECT') {
          helperAddFriends(first, second)
           .then((snapshot) => {
-            console.log(`added friends! ${first} and ${second}`);
+            // console.log(`added friends! ${first} and ${second}`);
             return helperDeletePending(pairsofUsers);
           })
           .catch((err) => {
@@ -267,9 +317,9 @@ exports.matchUsers = functions.database
      const pairsofUsers = event.params.pairUsers;
      dbRootRef.child(`/FriendPending/${pairsofUsers}`).once('value')
      .then(function(pairsSnap) {
-       console.log('hit my line 232');
+      //  console.log('hit my line 232');
        var pairs = pairsSnap.val();
-       console.log('pairs is', pairs);
+      //  console.log('pairs is', pairs);
        var objKeys = Object.keys(pairs);
        var first = objKeys[0];
        var second = objKeys[1];
@@ -278,13 +328,13 @@ exports.matchUsers = functions.database
          helperDeletePending(pairsofUsers);
          return;
        }
-       console.log(`PENDING FRIEND DB TRIGGER firstUser: ${first}, secondUser: ${second}`);
+      //  console.log(`PENDING FRIEND DB TRIGGER firstUser: ${first}, secondUser: ${second}`);
        if (pairs[first] === 'LEAVE' || pairs[second] === 'LEAVE') {
          return helperDeletePending(pairsofUsers);
        }else if (pairs[first] === 'CONNECT' && pairs[second] === 'CONNECT') {
          helperAddFriends(first, second)
           .then((snapshot) => {
-            console.log(`added friends! ${first} and ${second}`);
+            // console.log(`added friends! ${first} and ${second}`);
             return helperDeletePending(pairsofUsers);
           })
           .catch((err) => {
@@ -298,6 +348,58 @@ exports.matchUsers = functions.database
        console.log('error ', err);
      });
    });
+
+   /**
+    * [notifyFriendsMessage notifies friends of new chat messages]
+    * @type {DATABASE TRIGGER}
+    */
+   exports.notifyFriendsMessage = functions.database
+    .ref(`/Message/{chatId}/{messageId}`)
+    .onCreate((event) => {
+      console.log('IN THE TRIGGA');
+      // get message
+      const { chatId, messageId } = event.params;
+      const msg = event.data.val();
+
+      dbRootRef.child(`/User/${msg.to}/friends/${msg.from}`).once('value')
+        .then(friendExists => {
+
+          console.log('friendExists is', friendExists.val());
+          // something like their img url for now
+          if(friendExists.val()){
+            // send push notifications to the receving friend
+            return true;
+          }
+          return false;
+        })
+        .then(needToSend => {
+          if(needToSend){
+            console.log('getting the user info')
+            return dbRootRef.child(`/User/${msg.to}`).once('value');
+          }
+          return false;
+        })
+        .then(userSnap => {
+          if(userSnap){
+            const { pushToken } = userSnap.val();
+            dbRootRef.child(`/User/${msg.from}/nickname`).once('value')
+            .then(nameSnap => {
+              console.log(`about to send the msg notification to ${pushToken} ${nameSnap.val()}`);
+              sendMsgPush(pushToken, nameSnap.val());
+            })
+            .catch((err) => {
+              console.log('weird... there was an error', err);
+            })
+
+          }
+        })
+        .catch((err) => {
+          console.log('Error notifying friends', err);
+        })
+
+      // console.log('NOTIFY MESSAGE IS', msg);
+      // console.log('type is', typeof msg);
+    });
 
 
 
