@@ -67,13 +67,9 @@ class LoginScreen extends Component {
 
   render() {
     return (
-			<KeyboardAwareScrollView
-				style={{ backgroundColor: '#fcf6e3' }}
-				resetScrollToCoords={{ x: 0, y: 0 }}
-				contentContainerStyle={styles.container}
-				scrollEnabled={true}
-				>
-			<View style={styles.container}>
+			<KeyboardAvoidingView
+				behavior="padding"
+				style={styles.container}>
 			<View style={{backgroundColor: 'transparent'}}>
 				<Image style={{width:280 , height: 70, bottom: 65, alignSelf: 'auto'}} source={require('../assets/icons/icon2.png')} />
 			</View>
@@ -103,8 +99,7 @@ class LoginScreen extends Component {
 							onPress={ () => this.goBackSubmit()}
 							title="Go Back"
 						/>
-      </View>
-		</KeyboardAwareScrollView>
+		</KeyboardAvoidingView>
     )
   }
 }
