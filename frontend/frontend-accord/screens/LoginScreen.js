@@ -70,9 +70,7 @@ class LoginScreen extends Component {
 			<KeyboardAvoidingView
 				behavior="padding"
 				style={styles.container}>
-			<View style={{backgroundColor: 'transparent'}}>
 				<Image style={{width:280 , height: 70, bottom: 65, alignSelf: 'auto'}} source={require('../assets/icons/icon2.png')} />
-			</View>
 					<Text style={styles.textBig}>Login</Text>
           <TextInput
 						underlineColorAndroid= 'transparent'
