@@ -70,7 +70,10 @@ class LoginScreen extends Component {
 			<KeyboardAvoidingView
 				behavior="padding"
 				style={styles.container}>
-				<Image style={{width:280 , height: 70, bottom: 65, alignSelf: 'auto'}} source={require('../assets/icons/icon2.png')} />
+				<View style={styles.logoContainer}>
+						<Image style={{width:280 , height: 70, bottom: 65}} source={require('../assets/icons/icon2.png')} />
+				</View>
+
 					<Text style={styles.textBig}>Login</Text>
           <TextInput
 						underlineColorAndroid= 'transparent'
@@ -107,10 +110,13 @@ class LoginScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#fcf6e3',
   },
+	logoContainer: {
+		alignItems: 'center',
+		flexGrow: 1,
+		justifyContent: 'center',
+	},
   textBig: {
     fontSize: 36,
     textAlign: 'center',
