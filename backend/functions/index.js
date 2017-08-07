@@ -231,14 +231,17 @@ exports.matchUsers = functions.database
           userId: firstKey,
           event: 'Matched',
           properties: {
+            matchedUser: secondKey,
             topic: myTopic,
             createdAt: new Date(),
           }
         });
+
         analytics.track({
           userId: secondKey,
           event: 'Matched',
           properties: {
+            matchedUser: firstKey,
             topic: myTopic,
             createdAt: new Date(),
           }
@@ -287,6 +290,25 @@ exports.matchUsers = functions.database
     var updates = {};
     updates[`/User/${myId}/friends/${friendId}`] = quokkaURL;
     updates[`/User/${friendId}/friends/${myId}`] = quokkaURL;
+
+    // track the use!
+    analytics.track({
+      userId: myId,
+      event: 'Friend',
+      properties: {
+        friend: friendId,
+        createdAt: new Date(),
+      }
+    });
+    
+    analytics.track({
+      userId: friendId,
+      event: 'Friend',
+      properties: {
+        friend: myId,
+        createdAt: new Date(),
+      }
+    });
 
     return dbRootRef.update(updates);
   }
