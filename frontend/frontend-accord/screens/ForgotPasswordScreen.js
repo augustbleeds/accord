@@ -10,8 +10,31 @@ import {
 	AsyncStorage,
 	Alert} from 'react-native';
   import { Button } from 'react-native-elements';
+  import * as firebase from 'firebase';
+
+
 
   class ForgotPasswordScreen extends Component {
+    constructor(props){
+      super(props);
+      this.state = {email: ''};
+    }
+    componentDidMount(){
+      this.auth = firebase.auth();
+    }
+
+    resetPassword(emailAddress) {
+      this.auth.sendPasswordResetEmail(emailAddress).then(function() {
+        Alert.alert('Please check your inbox for reset instructions')
+      }).catch(function(error) {
+        // An error happened.
+        console.log('Reset problem', error);
+      });
+    }
+
+    goBackHome() {
+      this.props.navigation.navigate('Welcome');
+    }
     render() {
       return (
         <KeyboardAvoidingView
@@ -27,8 +50,7 @@ import {
             <TextInput
               keyboardType="email-address"
               autoCapitalize="none"
-              returnKeyType="next"
-              onSubmitEditing={() => this.passwordInput.focus() }
+              returnKeyType="go"
               underlineColorAndroid= 'transparent'
               placeholderTextColor="#34495e"
               style={styles.input}
@@ -37,12 +59,12 @@ import {
             />
             <Button
               buttonStyle={styles.buttonStyle}
-              onPress={ () => this.loginSubmit()}
+              onPress={ () => this.resetPassword(this.state.email)}
               title="Reset Password"
             />
             <Button
               buttonStyle={styles.buttonStyle}
-              onPress={ () => this.goBackSubmit()}
+              onPress={ () => this.goBackHome()}
               title="Go Back"
             />
           </View>
