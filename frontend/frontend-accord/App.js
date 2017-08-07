@@ -10,6 +10,7 @@ import FriendsScreen from './screens/FriendsScreen';
 import HomeScreen from './screens/HomeScreen';
 import FriendsChatScreen from './screens/FriendsChatScreen';
 import SettingsScreen from './screens/SettingsScreen';
+import ForgotPasswordScreen from './screens/ForgotPasswordScreen';
 
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
@@ -41,6 +42,7 @@ export default class App extends React.Component {
       Welcome: { screen: WelcomeScreen },
       Auth: { screen: AuthScreen },
       Login: { screen: LoginScreen },
+      ForgotPassword: { screen: ForgotPasswordScreen },
       AllScreen: {screen: AllScreen},
       ChatScreen: {screen: GiftedChatScreen},
       FriendsChatScreen: {screen: FriendsChatScreen},
