@@ -17,13 +17,6 @@ const analytics = new Analytics('21WZeFangJR07cj0S6subFRQ1LISyOHk', { flushAt: 1
  * 3. (front-end @ LoginScree.js conditions on the response, and handles appropriate route)
  */
 app.post('/login', (req, res) => {
-  // TODO delete
-  // admin.auth().signInWithEmailAndPassword(req.body.email, req.body.password).catch((error) => {
-  //   res.json({error: error});
-  // });
-  //var pass = req.body.password
-  // TODO delete
-
   var email = req.body.email.split('.')[0];
   // console.log(`Email user wants to login is ${JSON.stringify(email)}`);
   dbRootRef.child(`/User/${email}`).once('value')
@@ -52,6 +45,16 @@ app.post('/register', (req, res) => {
     img: quokkaURL
   };
   var email = req.body.email.split('.')[0];
+  // set up analytics
+  analytics.identify({
+    userId: email,
+    traits: {
+      nickname: req.body.nickname,
+      email: req.body.email,
+      school: req.body.school,
+      createdAt: new Date(),
+    }
+  });
   dbRootRef.child(`/User/${email}`).set(newObj)
     .then(() => {res.json(newObj)})
     .catch((err) => res.json(null))
@@ -218,13 +221,33 @@ exports.matchUsers = functions.database
         if (keysArr.length < 2) {
           return;
         }
+
         // theses are user ids
         var firstKey = keysArr[0];
         var secondKey = keysArr[1];
-        // put two users in the match database! (as match1@aa : match2@bb)
+
+        // track how many users match per day
+        analytics.track({
+          userId: firstKey,
+          event: 'Matched',
+          properties: {
+            topic: myTopic,
+            createdAt: new Date(),
+          }
+        });
+        analytics.track({
+          userId: secondKey,
+          event: 'Matched',
+          properties: {
+            topic: myTopic,
+            createdAt: new Date(),
+          }
+        });
+
+        // two users in the match database! (as match1@aa : match2@bb)
+        // first save
         dbRootRef.child(`/Match/${firstKey}`).set(secondKey)
           .then(() => {
-            // console.log('got to the last part!');
             // second save
             return dbRootRef.child(`/Match/${secondKey}`).set(firstKey);
           })
@@ -239,14 +262,12 @@ exports.matchUsers = functions.database
              return dbRootRef.child(`/User/${firstKey}/pushToken`).once('value');
            })
            .then((pushToken1) => {
-             console.log('in first then');
              if(pushToken1){
                sendMatchPush(pushToken1.val());
              }
              return dbRootRef.child(`/User/${secondKey}/pushToken`).once('value');
            })
            .then((pushToken2) => {
-             console.log('in second then');
              if(pushToken2){
                sendMatchPush(pushToken2.val())
              }
