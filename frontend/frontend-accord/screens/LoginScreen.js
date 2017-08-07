@@ -80,6 +80,7 @@ class LoginScreen extends Component {
 						returnKeyType="next"
 						onSubmitEditing={() => this.passwordInput.focus() }
 						underlineColorAndroid= 'transparent'
+						placeholderTextColor="#34495e"
 						style={styles.input}
 						placeholder="email"
 						onChangeText={(text) => this.setState({email: text})}
@@ -90,6 +91,7 @@ class LoginScreen extends Component {
 						style={styles.input}
 						underlineColorAndroid= 'transparent'
 						placeholder="password"
+						placeholderTextColor="#34495e"
 						secureTextEntry={true}
 						onChangeText={(text) => this.setState({password: text})}
 						ref={(input) => this.passwordInput = input}
