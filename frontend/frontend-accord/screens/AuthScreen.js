@@ -44,7 +44,7 @@ var Person = t.struct({
 var options = {
   fields: {
     email : {
-      error: 'Insert a valid .edu email address'
+      error: 'Insert a valid email address'
     },
     password: {
       password: true,

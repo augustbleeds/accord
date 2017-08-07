@@ -67,44 +67,47 @@ class LoginScreen extends Component {
 
   render() {
     return (
-			<KeyboardAwareScrollView
-				style={{ backgroundColor: '#fcf6e3' }}
-				resetScrollToCoords={{ x: 0, y: 0 }}
-				contentContainerStyle={styles.container}
-				scrollEnabled={true}
-				>
-			<View style={styles.container}>
-			<View style={{backgroundColor: 'transparent'}}>
-				<Image style={{width:280 , height: 70, bottom: 65, alignSelf: 'auto'}} source={require('../assets/icons/icon2.png')} />
-			</View>
-					<Text style={styles.textBig}>Login</Text>
-          <TextInput
+			<KeyboardAvoidingView
+				behavior="padding"
+				style={styles.container}>
+				<View style={styles.logoContainer}>
+					<Image style={styles.logo} source={require('../assets/icons/icon2.png')} />
+				</View>
+				<View style={{padding: 20}}>
+					<TextInput
+						keyboardType="email-address"
+						autoCapitalize="none"
+						returnKeyType="next"
+						onSubmitEditing={() => this.passwordInput.focus() }
 						underlineColorAndroid= 'transparent'
-            style={{width: 250, height: 40, paddingTop: 10, textAlign: "center", color: '#FFC67C'}}
-            placeholder="Enter Your Email"
-            placeholderTextColor="#808080"
-            onChangeText={(text) => this.setState({email: text})}
-          />
-          <TextInput
-            style={{width: 250, height: 40, paddingTop: 10, textAlign: "center", color: '#FFC67C'}}
+						placeholderTextColor="#34495e"
+						style={styles.input}
+						placeholder="email"
+						onChangeText={(text) => this.setState({email: text})}
+					/>
+					<TextInput
+						autoCapitalize="none"
+						returnKeyType="go"
+						style={styles.input}
 						underlineColorAndroid= 'transparent'
-            placeholder="Enter Your Password"
-            placeholderTextColor="#808080"
-            secureTextEntry={true}
-            onChangeText={(text) => this.setState({password: text})}
-          />
-            <Button
-              buttonStyle={styles.buttonStyle}
-              onPress={ () => this.loginSubmit()}
-              title="Log In"
-            />
-						<Button
-							buttonStyle={styles.buttonStyle}
-							onPress={ () => this.goBackSubmit()}
-							title="Go Back"
-						/>
-      </View>
-		</KeyboardAwareScrollView>
+						placeholder="password"
+						placeholderTextColor="#34495e"
+						secureTextEntry={true}
+						onChangeText={(text) => this.setState({password: text})}
+						ref={(input) => this.passwordInput = input}
+					/>
+					<Button
+						buttonStyle={styles.buttonStyle}
+						onPress={ () => this.loginSubmit()}
+						title="Log In"
+					/>
+					<Button
+						buttonStyle={styles.buttonStyle}
+						onPress={ () => this.goBackSubmit()}
+						title="Go Back"
+					/>
+				</View>
+			</KeyboardAvoidingView>
     )
   }
 }
@@ -114,28 +117,27 @@ class LoginScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fcf6e3',
+    backgroundColor: '#34495e',
   },
-  textBig: {
-    fontSize: 36,
-    textAlign: 'center',
-    margin: 10,
-    color: '#6adaa8',
-		fontWeight: 'bold',
-		...Platform.select({
-			ios: {
-				fontFamily:'Avenir'
-			},
-			android: {
-				fontFamily: 'Roboto'
-			}
-		})
-  },
+	logo: {
+		width: 280,
+		height: 70,
+	},
+	logoContainer: {
+		alignItems: 'center',
+		flexGrow: 1,
+		justifyContent: 'center',
+	},
+  input : {
+		height: 40,
+		backgroundColor: 'rgba(255,255,255,0.7)',
+		color: '#34495e',
+		paddingHorizontal: 10,
+		marginBottom: 20,
+	},
   buttonStyle: {
     backgroundColor: '#6adaa8',
-    marginTop: 15,
+		marginBottom: 10,
 		borderRadius: 10,
   }
 });
