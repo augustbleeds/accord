@@ -71,36 +71,36 @@ class LoginScreen extends Component {
 				behavior="padding"
 				style={styles.container}>
 				<View style={styles.logoContainer}>
-						<Image style={{width:280 , height: 70, bottom: 65}} source={require('../assets/icons/icon2.png')} />
+					<Image style={{width:280 , height: 70, bottom: 65}} source={require('../assets/icons/icon2.png')} />
 				</View>
-
-					<Text style={styles.textBig}>Login</Text>
-          <TextInput
+				<View style={{padding: 20}}>
+					<TextInput
 						underlineColorAndroid= 'transparent'
-            style={{width: 250, height: 40, paddingTop: 10, textAlign: "center", color: '#FFC67C'}}
-            placeholder="Enter Your Email"
-            placeholderTextColor="#808080"
-            onChangeText={(text) => this.setState({email: text})}
-          />
-          <TextInput
-            style={{width: 250, height: 40, paddingTop: 10, textAlign: "center", color: '#FFC67C'}}
+						style={styles.input}
+						placeholder="Enter Your Email"
+						placeholderTextColor="#808080"
+						onChangeText={(text) => this.setState({email: text})}
+					/>
+					<TextInput
+						style={styles.input}
 						underlineColorAndroid= 'transparent'
-            placeholder="Enter Your Password"
-            placeholderTextColor="#808080"
-            secureTextEntry={true}
-            onChangeText={(text) => this.setState({password: text})}
-          />
-            <Button
-              buttonStyle={styles.buttonStyle}
-              onPress={ () => this.loginSubmit()}
-              title="Log In"
-            />
-						<Button
-							buttonStyle={styles.buttonStyle}
-							onPress={ () => this.goBackSubmit()}
-							title="Go Back"
-						/>
-		</KeyboardAvoidingView>
+						placeholder="Enter Your Password"
+						placeholderTextColor="#808080"
+						secureTextEntry={true}
+						onChangeText={(text) => this.setState({password: text})}
+					/>
+					<Button
+						buttonStyle={styles.buttonStyle}
+						onPress={ () => this.loginSubmit()}
+						title="Log In"
+					/>
+					<Button
+						buttonStyle={styles.buttonStyle}
+						onPress={ () => this.goBackSubmit()}
+						title="Go Back"
+					/>
+				</View>
+			</KeyboardAvoidingView>
     )
   }
 }
@@ -110,31 +110,23 @@ class LoginScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fcf6e3',
+    backgroundColor: '#34495e',
   },
 	logoContainer: {
 		alignItems: 'center',
 		flexGrow: 1,
 		justifyContent: 'center',
 	},
-  textBig: {
-    fontSize: 36,
-    textAlign: 'center',
-    margin: 10,
-    color: '#6adaa8',
-		fontWeight: 'bold',
-		...Platform.select({
-			ios: {
-				fontFamily:'Avenir'
-			},
-			android: {
-				fontFamily: 'Roboto'
-			}
-		})
-  },
+  input : {
+		height: 40,
+		backgroundColor: 'rgba(255,255,255,0.7)',
+		color: '#FFF',
+		paddingHorizontal: 10,
+		marginBottom: 20,
+	},
   buttonStyle: {
     backgroundColor: '#6adaa8',
-    marginTop: 15,
+		marginBottom: 10,
 		borderRadius: 10,
   }
 });
