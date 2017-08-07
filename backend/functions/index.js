@@ -7,6 +7,8 @@ const quokkaURL = 'http://www.traveller.com.au/content/dam/images/g/u/n/q/h/0/im
 admin.initializeApp(functions.config().firebase);
 const dbRootRef = admin.database().ref();
 const Expo = require('exponent-server-sdk');
+const Analytics = require('analytics-node');
+const analytics = new Analytics('21WZeFangJR07cj0S6subFRQ1LISyOHk', { flushAt: 1 });
 
 /**
  * Responds to a login request.
