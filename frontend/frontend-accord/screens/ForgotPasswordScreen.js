@@ -25,11 +25,12 @@ import {
 
     resetPassword(emailAddress) {
       this.auth.sendPasswordResetEmail(emailAddress).then(function() {
-        Alert.alert('Please check your inbox for reset instructions')
+        Alert.alert('Please check your inbox for reset instructions');
       }).catch(function(error) {
         // An error happened.
         console.log('Reset problem', error);
       });
+      this.props.navigation.navigate('Login');
     }
 
     goBackHome() {
