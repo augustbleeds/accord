@@ -75,19 +75,24 @@ class LoginScreen extends Component {
 				</View>
 				<View style={{padding: 20}}>
 					<TextInput
+						keyboardType="email-address"
+						autoCapitalize="none"
+						returnKeyType="next"
+						onSubmitEditing={() => this.passwordInput.focus() }
 						underlineColorAndroid= 'transparent'
 						style={styles.input}
-						placeholder="Enter Your Email"
-						placeholderTextColor="#808080"
+						placeholder="email"
 						onChangeText={(text) => this.setState({email: text})}
 					/>
 					<TextInput
+						autoCapitalize="none"
+						returnKeyType="go"
 						style={styles.input}
 						underlineColorAndroid= 'transparent'
-						placeholder="Enter Your Password"
-						placeholderTextColor="#808080"
+						placeholder="password"
 						secureTextEntry={true}
 						onChangeText={(text) => this.setState({password: text})}
+						ref={(input) => this.passwordInput = input}
 					/>
 					<Button
 						buttonStyle={styles.buttonStyle}
@@ -124,7 +129,7 @@ const styles = StyleSheet.create({
   input : {
 		height: 40,
 		backgroundColor: 'rgba(255,255,255,0.7)',
-		color: '#FFF',
+		color: '#34495e',
 		paddingHorizontal: 10,
 		marginBottom: 20,
 	},
