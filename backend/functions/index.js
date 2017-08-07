@@ -300,7 +300,7 @@ exports.matchUsers = functions.database
         createdAt: new Date(),
       }
     });
-    
+
     analytics.track({
       userId: friendId,
       event: 'Friend',
@@ -441,9 +441,6 @@ exports.matchUsers = functions.database
         .catch((err) => {
           console.log('Error notifying friends', err);
         })
-
-      // console.log('NOTIFY MESSAGE IS', msg);
-      // console.log('type is', typeof msg);
     });
 
 
