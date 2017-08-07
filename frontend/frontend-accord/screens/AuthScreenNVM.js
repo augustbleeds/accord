@@ -1,6 +1,6 @@
 'use strict';
 import React, { Component } from 'react';
-import { Animated, Keyboard, Dimensions, KeyboardAvoidingView, Platform, TouchableOpacity, Image, ScrollView, Alert, AppRegistry, StyleSheet, Text, View, TouchableHighlight } from 'react-native';
+import { Dimensions, KeyboardAvoidingView, Platform, TouchableOpacity, Image, ScrollView, Alert, AppRegistry, StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 // var t = require('tcomb-form-native');
 import t from '../style/authStyle';
@@ -13,9 +13,6 @@ const backgroundImage = require('../assets/icons/backgroundimg.png');
 const goBackButton = require('../assets/icons/back.png');
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
-const IMAGE_HEIGHT =70;
-const IMAGE_HEIGHT_SMALL =30;
-
 
 
 const nickname = t.refinement(t.String, nickname => {
@@ -44,7 +41,7 @@ var Person = t.struct({
 var options = {
   fields: {
     email : {
-      error: 'Insert a valid email address'
+      error: 'Insert a valid .edu email address'
     },
     password: {
       password: true,
@@ -61,48 +58,7 @@ var options = {
 class AwesomeProject extends Component {
   constructor(props){
     super(props);
-
-    this.keyboardHeight = new Animated.Value(0);
-    this.imageHeight = new Animated.Value(IMAGE_HEIGHT);
-
   }
-
-  componentWillMount () {
-    this.keyboardWillShowSub = Keyboard.addListener('keyboardWillShow', this.keyboardWillShow);
-    this.keyboardWillHideSub = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide);
-  }
-
-  componentWillUnmount() {
-    this.keyboardWillShowSub.remove();
-    this.keyboardWillHideSub.remove();
-  }
-
-  keyboardWillShow = (event) => {
-   Animated.parallel([
-     Animated.timing(this.keyboardHeight, {
-       duration: event.duration,
-       toValue: event.endCoordinates.height,
-     }),
-     Animated.timing(this.imageHeight, {
-       duration: event.duration,
-       toValue: IMAGE_HEIGHT_SMALL,
-     }),
-   ]).start();
- };
-
- keyboardWillHide = (event) => {
-  Animated.parallel([
-    Animated.timing(this.keyboardHeight, {
-      duration: event.duration,
-      toValue: 0,
-    }),
-    Animated.timing(this.imageHeight, {
-      duration: event.duration,
-      toValue: IMAGE_HEIGHT,
-    }),
-  ]).start();
-};
-
 
   registerSubmit({nickname, email, gender, school, description, password}) {
 		firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -152,75 +108,24 @@ class AwesomeProject extends Component {
   }
 
   render() {
-      if(Platform.OS === 'android') {
-        return (
-        <View style={{flex: 1}}>
-          <View style={{flex: 13}}>
-            <KeyboardAvoidingView
-              keyboardVerticalOffset={400}
-              style={[styles.container, { flex: 14}]}
-              behavior="padding"
-              >
-                <View style={{ backgroundColor: 'transparent'}}>
-                  <Image
-                    source={require('../assets/icons/icon2.png')}
-                    style={{width: 130, height: 45, alignSelf:'center'}}
-                    rezieMode='contain'
-                    >
-                    </Image>
-                  </View>
-                  <Form
-                    ref={(form) => {this.form = form}}
-                    type={Person}
-                    options={options}
-                  />
-                </KeyboardAvoidingView>
-              </View>
-              <View style={{flex: 1, backgroundColor: '#fcf6e3', flexDirection: 'row'}}>
-                <TouchableHighlight
-                  rezieMode='contain'
-                  style={styles.buttonLeft}
-                  onPress={() => this.onPress()}
-                  underlayColor='#fcf6e3'>
-                  <Text
-                    style={styles.buttonText}
-                    rezieMode='contain'
-                    >Sign Up</Text>
-                  </TouchableHighlight>
-
-                  <TouchableHighlight
-                    style={styles.buttonRight}
-                    rezieMode='contain'
-                    onPress={() => this.onGoBack()}
-                    underlayColor='#fcf6e3'>
-                    <Text
-                      style={styles.buttonText}
-                      rezieMode='contain'
-                      >Go Back</Text>
-                    </TouchableHighlight>
-                  </View>
-                </View>
-              )
-      } else {
-        return (
-        <View style={{flex: 1}}>
-          <View style={{flex: 13}}>
-            <Animated.View
-              style={[styles.container, { paddingBottom: this.keyboardHeight, flex: 14}]}>
-              {/* <View style={{ backgroundColor: 'transparent'}}>
-                <Animated.Image
+    return (
+      <KeyboardAvoidingView
+        behavior="padding"
+        style={{flex: 1}}>
+        <View style={styles.container}>
+              {/* <View style={{ marginTop: 35, backgroundColor: 'transparent'}}>
+                <Image
                   source={require('../assets/icons/icon2.png')}
                   style={{width: 280, height: 70, alignSelf:'center'}}
                   rezieMode='contain'
                   >
-                  </Animated.Image>
+                  </Image>
                 </View> */}
                 <Form
                   ref={(form) => {this.form = form}}
                   type={Person}
                   options={options}
                 />
-              </Animated.View>
             </View>
             <View style={{flex: 1, backgroundColor: '#fcf6e3', flexDirection: 'row'}}>
               <TouchableHighlight
@@ -245,9 +150,8 @@ class AwesomeProject extends Component {
                     >Go Back</Text>
                   </TouchableHighlight>
                 </View>
-              </View>
-            )
-      }
+              </KeyboardAvoidingView>
+            );
           }
 
         }
@@ -257,7 +161,7 @@ var styles = StyleSheet.create({
     justifyContent: 'center',
     flex: 13,
     padding: 20,
-    backgroundColor: '#34495e',
+    backgroundColor: '#fcf6e3',
   },
   buttonText: {
     fontSize: 18,
@@ -277,7 +181,7 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     backgroundColor: '#6adaa8',
-    borderColor: '#34495e',
+    borderColor: '#fcf6e3',
     borderLeftWidth: 1,
   },
   buttonLeft: {
@@ -285,7 +189,7 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     backgroundColor: '#6adaa8',
-    borderColor: '#34495e',
+    borderColor: '#fcf6e3',
     borderRightWidth: 1,
   }
 });
