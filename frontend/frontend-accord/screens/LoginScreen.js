@@ -96,6 +96,12 @@ class LoginScreen extends Component {
 						onChangeText={(text) => this.setState({password: text})}
 						ref={(input) => this.passwordInput = input}
 					/>
+					<TouchableOpacity
+						onPress={() => {this.props.navigation.navigate('ForgotPassword')}}
+						style={styles.forgotPassword}
+						>
+						<Text style={{color: '#6adaa8'}}> Forgot Password? </Text>
+					</TouchableOpacity>
 					<Button
 						buttonStyle={styles.buttonStyle}
 						onPress={ () => this.loginSubmit()}
@@ -115,6 +121,10 @@ class LoginScreen extends Component {
 
 
 const styles = StyleSheet.create({
+	forgotPassword: {
+		alignItems: 'center',
+		marginBottom: 20,
+	},
   container: {
     flex: 1,
     backgroundColor: '#34495e',

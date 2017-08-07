@@ -7,7 +7,7 @@ export default class Enter extends Component {
       <View style={{backgroundColor: "#fcf6e3", flex: 1, flexDirection: 'row'}}>
       <TouchableOpacity
         onPress={() => this.props.goToSignUp()}
-        style={{backgroundColor: "#6ADAA8", flex: 1, borderRightWidth: 1, borderColor: '#fcf6e3',  color: '#fcf6e3', justifyContent: 'center', alignItems: 'center'}}
+        style={{backgroundColor:  "#6ADAA8", flex: 1, borderRightWidth: 1, borderColor: '#34495e',  color: '#fcf6e3', justifyContent: 'center', alignItems: 'center'}}
         >
         <Text style={styles.buttonText}>
           Sign Up
@@ -15,7 +15,7 @@ export default class Enter extends Component {
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => this.props.goToLogIn()}
-        style={{backgroundColor: "#6ADAA8", flex: 1, borderLeftWidth: 1, borderColor: '#fcf6e3', color: '#fcf6e3', justifyContent: 'center', alignItems: 'center'}}
+        style={{backgroundColor: "#6ADAA8", flex: 1, borderLeftWidth: 1, borderColor: '#34495e', color: '#fcf6e3', justifyContent: 'center', alignItems: 'center'}}
         >
         <Text style={styles.buttonText}>
           Log In

@@ -57,7 +57,7 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     width: SCREEN_WIDTH,
-    backgroundColor: '#fcf6e3',
+    backgroundColor: '#34495e',
   },
   Maintext: {
     fontSize: 26,

@@ -4,11 +4,11 @@ var templates = require('tcomb-form-native/lib/templates/bootstrap');
 import {Platform} from 'react-native';
 // define a stylesheet (see lib/stylesheets/bootstrap for an example)
 // var stylesheet = {...};
-var LABEL_COLOR = '#FFB65B';
+var LABEL_COLOR = '#6adaa8';
 var INPUT_COLOR = '#808080';
 var ERROR_COLOR = '#a94442';
 var HELP_COLOR = '#ff0000';
-var BORDER_COLOR = '#FFB65B';
+var BORDER_COLOR = '#6adaa8';
 var DISABLED_COLOR = '#777777';
 var DISABLED_BACKGROUND_COLOR = '#eeeeee';
 var FONT_SIZE = 17;
