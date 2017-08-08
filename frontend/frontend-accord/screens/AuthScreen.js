@@ -162,6 +162,7 @@ class AwesomeProject extends Component {
               style={[styles.container, { flex: 14}]}
               behavior="padding"
               >
+                <ScrollView>
                 <View style={{ backgroundColor: 'transparent'}}>
                   <Image
                     source={require('../assets/icons/newlogo1.png')}
@@ -175,6 +176,7 @@ class AwesomeProject extends Component {
                     type={Person}
                     options={options}
                   />
+                </ScrollView>
                 </KeyboardAvoidingView>
               </View>
               <View style={{flex: 1, backgroundColor: '#fcf6e3', flexDirection: 'row'}}>
