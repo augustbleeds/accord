@@ -14,7 +14,7 @@ function loadUserInfo(dispatch, email, password) {
         },
         body: JSON.stringify({
           email: email,
-          password: password
+          // password: password
         })
       })
     }else{
