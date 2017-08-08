@@ -22,9 +22,9 @@ const styles = StyleSheet.create({
     display: 'flex',
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: '#fcf6e3',
+    backgroundColor: '#34495e',
     justifyContent: 'flex-start',
     flexWrap: 'wrap',
-    
+
   },
 });

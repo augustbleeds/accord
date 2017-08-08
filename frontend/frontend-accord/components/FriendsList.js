@@ -109,7 +109,7 @@ class FriendsList extends Component {
 
   render() {
     return (
-      <View style={{width: SCREEN_WIDTH * 0.33, backgroundColor:'#cbddd3'}}>
+      <View style={{width: SCREEN_WIDTH * 0.33, backgroundColor:'#2c3e50'}}>
         <Text style={styles.textFriends}>Your Friends</Text>
         <ListView
           {...this.props}
@@ -125,7 +125,7 @@ class FriendsList extends Component {
           visible={this.state.visible}
           onRequestClose={() => this.setState({visible: false})}
           >
-            <View style={{flex: 1, backgroundColor: "#fcf6e3"}}>
+            <View style={{flex: 1, backgroundColor: '#34495e'}}>
               <View style={{marginTop: 20, flex: 1}}>
               <TouchableOpacity
                 onPress={() => {this.deleteFriend()}}
@@ -136,7 +136,7 @@ class FriendsList extends Component {
                 </Text>
               </TouchableOpacity>
             </View>
-              <View style={{flex: 13, justifyContent: 'space-around', alignItems: 'center', backgroundColor: "#fcf6e3"}}>
+              <View style={{flex: 13, justifyContent: 'space-around', alignItems: 'center', backgroundColor: '#34495e'}}>
                 <Text style={styles.profileText}>Profile of {this.props.currentFriend.nickname}</Text>
                 <Image style={{width:200 , height: 200, borderRadius: 100}} source={{uri: this.props.currentFriend.img}} />
                 <Text style={styles.text2}>Nickname: {this.props.currentFriend.nickname}</Text>
@@ -154,7 +154,7 @@ class FriendsList extends Component {
                       friendObj: this.props.currentFriend,
                       navigator: this.props.navigator
                     })}}
-                    style={{backgroundColor: "#6ADAA8", flex: 1, borderRightWidth: 1, color: 'white', justifyContent: 'center', alignItems: 'center'}}
+                    style={{backgroundColor: "#6ADAA8", flex: 1, borderRightWidth: 1, borderColor: '#34495e', color: 'white', justifyContent: 'center', alignItems: 'center'}}
                     >
                       <Text style={{color: 'white'}}>
                         Chat
@@ -162,7 +162,7 @@ class FriendsList extends Component {
                     </TouchableOpacity>
                     <TouchableOpacity
                       onPress={() => this.setModalVisible(!this.state.visible)}
-                      style={{backgroundColor: "red", flex: 1, borderLeftWidth: 1, color: 'white', justifyContent: 'center', alignItems: 'center'}}
+                      style={{backgroundColor: "red", flex: 1, borderLeftWidth: 1, borderColor: '#34495e', color: 'white', justifyContent: 'center', alignItems: 'center'}}
                       >
                         <Text style={{color: 'white'}}>
                           Close

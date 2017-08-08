@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import {AsyncStorage, Platform, Alert, View, Text, StyleSheet, ListView, Image, Picker, TextInput } from 'react-native';
+import {AsyncStorage, Platform, Alert, View, Text,
+  StyleSheet, ListView, Image, Picker, TextInput,
+KeyboardAvoidingView } from 'react-native';
 import { Button } from 'react-native-elements';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import ModalDropdown from 'react-native-modal-dropdown';
@@ -69,21 +71,28 @@ class MatchScreen extends Component {
 
   render(){
     return (
-      <View style={[styles.page, styles.container]}>
+      <KeyboardAvoidingView
+        behavior="padding"
+        style={styles.container}
+        >
+          <View style={styles.logoContainer}>
             <Image resizeMode="contain" style={styles.imgStyle3} source={require('../assets/icons/com.png')} />
-            <View style={{color:'#6adaa8',  borderRadius: 20, borderColor: '#6adaa8'}}>
+          </View>
+            <View style={{padding: 20}}>
               <TextInput
-                multiline = {true}
-                numberOfLines = {4}
+                underlineColorAndroid= 'transparent'
+                // multiline = {true}
+                // numberOfLines = {4}
                 maxLength = {100}
                 value = {this.state.blurb}
                 onChangeText={(text) => {this.setState({blurb: text})}}
                 placeholder="What's on Your Mind?"
-                placeholderTextColor="#FFC67C"
-                style={{backgroundColor:"#fcf6e3", height: 60, width: 150, fontSize: 15, color: '#FFC67C'}}
+                placeholderTextColor="#34495e"
+                returnKeyType="go"
+                style={styles.input}
               >
               </TextInput>
-            </View>
+
               <Picker
                 style={styles.picker}
                 selectedValue={this.state.topic}
@@ -92,7 +101,7 @@ class MatchScreen extends Component {
                 <Picker.Item color='#6adaa8' label="Select a Topic" value="" />
                 {/* <Picker.Item label="Feel Sad?" value="Sad" /> */}
                 {/* <Picker.Item label="Feel Anxious?" value="Anxiety" /> */}
-                {/* <Picker.Item label="Feel Alone?" value="Alone" /> */}
+                <Picker.Item color='#6adaa8' label="Feel Alone?" value="Alone" />
                 {/* <Picker.Item label="Feel Discriminated?" value="Discrimination" /> */}
                 {/* <Picker.Item label="Relationship?" value="Relationship" /> */}
                 <Picker.Item color='#6adaa8' label="Social/Relationship?" value="Relationship" />
@@ -105,51 +114,44 @@ class MatchScreen extends Component {
             onPress={ () => {this.fetchMatch()}}
             >
           </Button>
-      </View>
+        </View>
+      </KeyboardAvoidingView>
     );
   }
 
 }
 
 const styles = StyleSheet.create({
-  page: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+  logoContainer: {
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+  input : {
+    height: 70,
+    backgroundColor: 'rgba(255,255,255,0.7)',
+    color: '#34495e',
+    paddingHorizontal: 10,
   },
   container: {
-    backgroundColor:'#fcf6e3',
-    borderRadius: 3,
+    flex: 1,
+    backgroundColor:'#34495e',
   },
   picker: {
-    width: 150,
+    alignSelf: 'center',
+    width: 250,
     color: '#6adaa8',
   },
   itemPicker: {
     color: '#6adaa8'
   },
-  mainText: {
-    fontSize: 20,
-    textAlign: 'center',
-    color: '#fff',
-  },
-  text: {
-    color: 'white',
-    textAlign: 'center',
-    marginVertical: 8,
-    marginHorizontal: 16,
-  },
-
   imgStyle3: {
-    bottom: 14,
-    width: 230,
-    height: 230,
+    width: 150,
+    height: 150,
   },
   buttonStyle: {
     backgroundColor: '#6adaa8',
-    marginTop: 15,
     borderRadius: 10,
-    marginBottom: 15,
+    marginBottom: 25,
 
   },
 });
