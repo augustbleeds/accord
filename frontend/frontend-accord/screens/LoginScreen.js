@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
   input : {
-		height: 40,
+		height: 100,
 		backgroundColor: 'rgba(255,255,255,0.7)',
 		color: '#34495e',
 		paddingHorizontal: 10,
