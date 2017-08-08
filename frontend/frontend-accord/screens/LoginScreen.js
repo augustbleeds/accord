@@ -71,7 +71,7 @@ class LoginScreen extends Component {
 				behavior="padding"
 				style={styles.container}>
 				<View style={styles.logoContainer}>
-					<Image style={styles.logo} source={require('../assets/icons/icon2.png')} />
+					<Image style={styles.logo} source={require('../assets/icons/newlogo1.png')} />
 				</View>
 				<View style={{padding: 20}}>
 					<TextInput
@@ -130,8 +130,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#34495e',
   },
 	logo: {
-		width: 280,
-		height: 70,
+		width: 300,
+		height: 100,
 	},
 	logoContainer: {
 		alignItems: 'center',

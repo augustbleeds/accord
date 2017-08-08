@@ -145,8 +145,8 @@ const styles = StyleSheet.create({
     color: '#6adaa8'
   },
   imgStyle3: {
-    width: 150,
-    height: 150,
+    width: 200,
+    height: 200,
   },
   buttonStyle: {
     backgroundColor: '#6adaa8',

@@ -42,7 +42,7 @@ import {
           behavior="padding"
           style={styles.container}>
           <View style={styles.logoContainer}>
-            <Image style={styles.logo} source={require('../assets/icons/icon2.png')} />
+            <Image style={styles.logo} source={require('../assets/icons/newlogo1.png')} />
             <Text style={styles.title}>
               Please enter the email address you used to create your account. We will send an email with password reset instructions.
             </Text>
@@ -89,8 +89,8 @@ import {
       backgroundColor: '#34495e',
     },
   	logo: {
-  		width: 280,
-  		height: 70,
+  		width: 300,
+  		height: 100,
   	},
   	logoContainer: {
   		alignItems: 'center',

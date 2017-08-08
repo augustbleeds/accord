@@ -1,6 +1,5 @@
 import React, {Component } from 'react';
 import { Platform, Modal, Image, ListView, View, Dimensions, Text, StyleSheet, TouchableHighlight, TouchableOpacity, Alert } from 'react-native';
-import FriendsProfileBio from './FriendsProfileBio';
 import { List, ListItem, Button } from 'react-native-elements'
 const _ = require('underscore');
 import firebase from 'firebase';

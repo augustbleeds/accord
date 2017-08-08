@@ -8,7 +8,6 @@ import FriendsScreen from './FriendsScreen';
 import HomeScreen from './HomeScreen';
 import MatchScreen from './MatchScreen';
 import SettingsScreen from './SettingsScreen'
-import FriendsProfileBio from '../components/FriendsProfileBio';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
