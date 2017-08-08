@@ -45,7 +45,7 @@ var Person = t.struct({
 var options = {
   fields: {
     email : {
-      error: 'Insert a valid email address'
+      error: 'Insert a valid email address. Addresses cannot have a "." before the "@" ' 
     },
     password: {
       password: true,
