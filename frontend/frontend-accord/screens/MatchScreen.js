@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   container: {
-    backgroundColor:'#fcf6e3',
+    backgroundColor:'#34495e',
     borderRadius: 3,
   },
   picker: {
