@@ -17,7 +17,7 @@ export default class swiperStyles extends Component {
         activeDot={<View style={{backgroundColor: 'white', width: 5, height: 5, borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 50}} />}
         >
         <View style={styles.slide}>
-          <Image style={{width:260, bottom: 30, alignSelf: 'auto'}} source={require('../assets/icons/icon2.png')} />
+          <Image resizeMode="cover" style={styles.iconStyle} source={require('../assets/icons/newlogo1.png')} />
           <View><Text style={styles.Maintext}>Welcome</Text></View>
           <View><Text style={styles.secondText}>Swipe to Learn More</Text></View>
         </View>
@@ -71,6 +71,13 @@ const styles = {
         fontFamily: 'Roboto'
       }
     })
+  },
+  iconStyle: {
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    bottom: 12,
+    width: 300,
+    height: 100,
   },
   imgStyle: {
     justifyContent: 'flex-start',

@@ -45,7 +45,7 @@ var Person = t.struct({
 var options = {
   fields: {
     email : {
-      error: 'Insert a valid email address. Addresses cannot have a "." before the "@" ' 
+      error: 'Insert a valid email address. Addresses cannot have a "." before the "@" '
     },
     password: {
       password: true,
@@ -164,8 +164,8 @@ class AwesomeProject extends Component {
               >
                 <View style={{ backgroundColor: 'transparent'}}>
                   <Image
-                    source={require('../assets/icons/icon2.png')}
-                    style={{width: 130, height: 45, alignSelf:'center'}}
+                    source={require('../assets/icons/newlogo1.png')}
+                    style={{width: 300, height: 100, alignSelf:'center'}}
                     rezieMode='contain'
                     >
                     </Image>
@@ -208,14 +208,14 @@ class AwesomeProject extends Component {
           <View style={{flex: 13}}>
             <Animated.View
               style={[styles.container, { paddingBottom: this.keyboardHeight, flex: 14}]}>
-              {/* <View style={{ backgroundColor: 'transparent'}}>
+              <View style={{ backgroundColor: 'transparent'}}>
                 <Animated.Image
-                  source={require('../assets/icons/icon2.png')}
-                  style={{width: 280, height: 70, alignSelf:'center'}}
+                  source={require('../assets/icons/newlogo1.png')}
+                  style={{width: 300, height: 100, alignSelf:'center'}}
                   rezieMode='contain'
                   >
                   </Animated.Image>
-                </View> */}
+                </View>
                 <Form
                   ref={(form) => {this.form = form}}
                   type={Person}
