@@ -24,7 +24,8 @@ const nickname = t.refinement(t.String, nickname => {
 
 const Email = t.refinement(t.String, email => {
   const reg = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/; //or any other regexp
-  return reg.test(email);
+  const reg2 = /^\w+@\w+(.\w+)+$/;
+  return reg.test(email) && reg2.test(email);
 });
 
 const StrongPassword = t.refinement(t.String, password => {
@@ -44,7 +45,7 @@ var Person = t.struct({
 var options = {
   fields: {
     email : {
-      error: 'Insert a valid email address'
+      error: 'Insert a valid email address. Addresses cannot have a "." before the "@" ' 
     },
     password: {
       password: true,
