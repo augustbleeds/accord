@@ -206,6 +206,7 @@ class AwesomeProject extends Component {
         return (
         <View style={{flex: 1}}>
           <View style={{flex: 13}}>
+            <ScrollView>
             <Animated.View
               style={[styles.container, { paddingBottom: this.keyboardHeight, flex: 14}]}>
               <View style={{ backgroundColor: 'transparent'}}>
@@ -222,6 +223,7 @@ class AwesomeProject extends Component {
                   options={options}
                 />
               </Animated.View>
+            </ScrollView>
             </View>
             <View style={{flex: 1, backgroundColor: '#fcf6e3', flexDirection: 'row'}}>
               <TouchableHighlight
