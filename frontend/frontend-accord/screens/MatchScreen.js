@@ -79,8 +79,8 @@ class MatchScreen extends Component {
                 value = {this.state.blurb}
                 onChangeText={(text) => {this.setState({blurb: text})}}
                 placeholder="What's on Your Mind?"
-                placeholderTextColor="#FFC67C"
-                style={{backgroundColor:"#fcf6e3", height: 60, width: 150, fontSize: 15, color: '#FFC67C'}}
+                placeholderTextColor="#34495e"
+                style={{backgroundColor:'rgba(255,255,255,0.7)', height: 60, width: 150, fontSize: 15, color: '#34495e'}}
               >
               </TextInput>
             </View>
