@@ -109,7 +109,7 @@ class FriendsList extends Component {
 
   render() {
     return (
-      <View style={{width: SCREEN_WIDTH * 0.33, backgroundColor:'#cbddd3'}}>
+      <View style={{width: SCREEN_WIDTH * 0.33, backgroundColor:'#2c3e50'}}>
         <Text style={styles.textFriends}>Your Friends</Text>
         <ListView
           {...this.props}
