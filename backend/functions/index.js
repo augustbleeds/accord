@@ -176,7 +176,7 @@ let expo = new Expo();
        // The push token for the app user to whom you want to send the notification
        to: pushToken,
        sound: 'default',
-       body: 'Accord: You have been matched with someone awesome. Open your app!',
+       body: 'Accord: You have been matched with someone awesome. Click to chat!',
      }])
      .then(() => {
        console.log('success for pushing notifications');
