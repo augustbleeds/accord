@@ -1,7 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
-import {DrawerNavigator } from 'react-navigation';
-import slideStyles from './components/slides'
+import { StyleSheet, View, Dimensions } from 'react-native';
+import {StackNavigator} from 'react-navigation';
 import AuthScreen from './screens/AuthScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
 import LoginScreen from './screens/LoginScreen';
@@ -10,10 +9,23 @@ import GiftedChatScreen from './screens/GiftedChatScreen';
 import FriendsScreen from './screens/FriendsScreen';
 import HomeScreen from './screens/HomeScreen';
 import FriendsChatScreen from './screens/FriendsChatScreen';
+import SettingsScreen from './screens/SettingsScreen';
+import ForgotPasswordScreen from './screens/ForgotPasswordScreen';
 
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import mainReducer from './reducers/mainReducer';
+
+// import firebase from 'firebase';
+// var config = {
+//    apiKey: "AIzaSyDkhtl4JKhb_1aHL3ookaq0iSRsXmW1Hcg",
+//    authDomain: "accord-18bdf.firebaseapp.com",
+//    databaseURL: "https://accord-18bdf.firebaseio.com",
+//    projectId: "accord-18bdf",
+//    storageBucket: "accord-18bdf.appspot.com",
+//    messagingSenderId: "986125110855"
+//  };
+// firebase.initializeApp(config);
 
 const store = createStore(mainReducer);
 
@@ -26,25 +38,21 @@ const screen={
 export default class App extends React.Component {
 
   render() {
-    const MainNavigator = DrawerNavigator({
+    const MainNavigator = StackNavigator({
       Welcome: { screen: WelcomeScreen },
       Auth: { screen: AuthScreen },
       Login: { screen: LoginScreen },
+      ForgotPassword: { screen: ForgotPasswordScreen },
       AllScreen: {screen: AllScreen},
       ChatScreen: {screen: GiftedChatScreen},
-      FriendsChatScreen: {screen: FriendsChatScreen}
+      FriendsChatScreen: {screen: FriendsChatScreen},
+      SettingsScreen: {screen: SettingsScreen},
     }, {
-  tabBarOptions: {
-    showLabel: false,
-    inactiveBackgroundColor: '#000000',
-    activeBackgroundColor: '#000000',
-    showLabel: false
-  },
-  navigationOptions: {
-  drawerLockMode: 'locked-closed'
-  }
-
-    });
+    headerMode: 'none',
+    navigationOptions: ({navigation}) => ({
+      gesturesEnabled: false,
+    })
+  });
 
     return (
       <Provider store={store}>
@@ -56,18 +64,9 @@ export default class App extends React.Component {
   }
 }
 
-const styles=StyleSheet.create({
-    container:{
-        flex:1,
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: 'black',
     },
-    scrollwrap:{
-        backgroundColor:'#f3f3f3',
-    },
-    wrapper:{
-    },
-    slider:{
-        backgroundColor:'#97cae5',
-        width:screen.width,
-        height:screen.width/2,
-    },
-})
+});

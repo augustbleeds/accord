@@ -1,47 +1,91 @@
 import React, {Component} from 'react';
-import {View, Text } from 'react-native';
-import Slides from '../components/slides';
+import { Text, AsyncStorage,Platform } from 'react-native';
 import Swipers from '../components/swiper';
-import _ from 'lodash';
-import {AppLoading} from 'expo';
-const SLIDE_DATA = [
-  {text: 'Welcome to Accord', color: '#000000', image: '../assets/icons/logo1'},
-  {text: 'Some text here...', color: '#000000'},
-  {text: 'Start Chatting!', color: '#000000'}
-]
+import { connect } from 'react-redux';
+import { loadStoredUserInfo } from '../actions/index';
+import listenForMatch from '../listenForMatch';
+import { matchUsersStatus } from '../actions/index';
+
 class WelcomeScreen extends Component {
-  // state = {token: null}
-  onSlidesComplete = () => {
+  goToSignUp = () => {
     this.props.navigation.navigate('Auth');
   }
 
-  onLoginComplete = () => {
+  goToLogIn = () => {
     this.props.navigation.navigate('Login');
-
   }
-  // async componentWillMount() {
-  //   let token = await AsyncStorage.getItem('fb_token');
-  //
-  //   if(token) {
-  //     this.props.navigation.navigae('map');
-  //     this.setState({ token });
-  //
-  //   } else {
-  //     this.setState({ token: false });
-  //   }
-  // }
+
+  /**
+   * [componentDidMount gets user info and or storedMatchData from AsyncStorage
+   *  and redirects the user to the appropriate page ]
+   * @return nothing
+   */
+
+  async componentDidMount(){
+    try{
+      // if the reducer is not initialized
+      if(JSON.stringify(this.props.user) === '{}'){
+
+        // AsyncStorage.clear()
+        //   .then(() => {
+        //     console.log('yay it cleared!');
+        //   })
+
+        // get user info and match data (if exists)
+        const storedUser = await AsyncStorage.getItem('user');
+        const storedMatchData = await AsyncStorage.getItem('matchListen');
+
+        // console.log('storedUser is', storedUser);
+        // console.log('of type', typeof storedUser);
+        // console.log('storedmatchData is', storedMatchData);
+        // console.log('of type', typeof storedMatchData);
+
+        if(storedUser){
+          this.props.addStoredUser(JSON.parse(storedUser));
+
+          // console.log('MY USER IS', this.props.user);
+          // console.log('MY SEARCHING IS', this.props.searching);
+
+          // navigate to screen
+          this.props.navigation.navigate('AllScreen');
+
+          // listen if needed (is still called even if you navigate!)
+          if(storedMatchData){
+            var matchedUserInfo = JSON.parse(storedMatchData);
+            listenForMatch(matchedUserInfo.myUserId, matchedUserInfo.blurb, this.props.user, this.props.navigation, this.props.matchStatus);
+          }
+
+        }
+      }
+
+    } catch(e) {
+      console.log('Error in mount', e);
+    }
+  }
 
   render() {
-    // if(_.isNull(this.state.token)) {
-    //   return<AppLoading />;
-    // }
     return(
       <Swipers
-          onSlidesComplete={this.onSlidesComplete}
-          onLoginComplete={this.onLoginComplete}
+          goToSignUp={this.goToSignUp}
+          goToLogIn={this.goToLogIn}
        />
     )
   }
 }
 
-export default WelcomeScreen;
+const mapStateToProps = ({user}) => {
+	return {user};
+};
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		addStoredUser: (userJson) => {
+			return loadStoredUserInfo(dispatch, userJson);
+		},
+    matchStatus: (searching) => {
+      return matchUsersStatus(dispatch, searching);
+    },
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(WelcomeScreen);

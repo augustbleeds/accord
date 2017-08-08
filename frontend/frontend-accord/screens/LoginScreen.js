@@ -9,11 +9,16 @@ import {
 	TextInput,
 	Text,
 	ScrollView,
+	AsyncStorage,
+	Dimensions,
+	Platform,
 	Alert} from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import { Button } from 'react-native-elements';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-// import createStore from redux, the reducer, and Provider for connection react-redux
+// the reducer, and Provider for connection react-redux
 import { connect } from 'react-redux';
 import { loadUserInfo } from '../actions/index';
 
@@ -26,6 +31,7 @@ class LoginScreen extends Component {
       password: '',
     }
   }
+
   onRegisterComplete = () => {
     this.props.navigation.navigate('Welcome');
   }
@@ -34,6 +40,7 @@ class LoginScreen extends Component {
 		this.props.navigation.navigate('Welcome');
 	}
 
+	// set async storage and the reducer once upon login, and navigate to AllScreen
 	loginSubmit() {
 		var self = this;
 		if(!self.state.email || !self.state.password){
@@ -42,50 +49,71 @@ class LoginScreen extends Component {
 		}
 		self.props.addUser(self.state.email, self.state.password)
 		.then(() => {
-			console.log('props is', self.props);
-			if(self.props.user === null){
+			if(JSON.stringify(self.props.user) === '{}' ){
 				Alert.alert('Username or Password is incorrect. Please try again!');
+				return;
 			}else{
-				console.log('navigating!...');
-				self.props.navigation.navigate('AllScreen');
+				return AsyncStorage.setItem('user', JSON.stringify(self.props.user))
+				.then(() => {
+					this.props.navigation.navigate('AllScreen');
+				})
 			}
 		})
 		.catch((err) => {
+			Alert.alert(err.message);
 			console.log('Error logging in :', err);
 		});
 	}
 
   render() {
     return (
-      <View style={styles.container}>
-        <Image style={{width:280 , height: 70, bottom: 65, alignSelf: 'auto'}} source={require('../assets/icons/icon2.png')} />
-        <Text style={styles.textBig}>Login</Text>
-				<ScrollView>
-          <TextInput
-            style={{height: 40, paddingTop: 10, textAlign: "center", color: '#fff'}}
-            placeholder="Enter Email"
-            placeholderTextColor="#808080"
-            onChangeText={(text) => this.setState({email: text})}
-          />
-          <TextInput
-            style={{height: 40, paddingTop: 10, textAlign: "center", color: '#fff'}}
-            placeholder="password"
-            placeholderTextColor="#808080"
-            secureTextEntry={true}
-            onChangeText={(text) => this.setState({password: text})}
-          />
-            <Button
-              buttonStyle={styles.buttonStyle}
-              onPress={ () => this.loginSubmit()}
-              title="Log In"
-            />
-						<Button
-							buttonStyle={styles.buttonStyle}
-							onPress={ () => this.goBackSubmit()}
-							title="Go Back"
-						/>
-					</ScrollView>
-      </View>
+			<KeyboardAvoidingView
+				behavior="padding"
+				style={styles.container}>
+				<View style={styles.logoContainer}>
+					<Image style={styles.logo} source={require('../assets/icons/icon2.png')} />
+				</View>
+				<View style={{padding: 20}}>
+					<TextInput
+						keyboardType="email-address"
+						autoCapitalize="none"
+						returnKeyType="next"
+						onSubmitEditing={() => this.passwordInput.focus() }
+						underlineColorAndroid= 'transparent'
+						placeholderTextColor="#34495e"
+						style={styles.input}
+						placeholder="email"
+						onChangeText={(text) => this.setState({email: text})}
+					/>
+					<TextInput
+						autoCapitalize="none"
+						returnKeyType="go"
+						style={styles.input}
+						underlineColorAndroid= 'transparent'
+						placeholder="password"
+						placeholderTextColor="#34495e"
+						secureTextEntry={true}
+						onChangeText={(text) => this.setState({password: text})}
+						ref={(input) => this.passwordInput = input}
+					/>
+					<TouchableOpacity
+						onPress={() => {this.props.navigation.navigate('ForgotPassword')}}
+						style={styles.forgotPassword}
+						>
+						<Text style={{color: '#6adaa8'}}> Forgot Password? </Text>
+					</TouchableOpacity>
+					<Button
+						buttonStyle={styles.buttonStyle}
+						onPress={ () => this.loginSubmit()}
+						title="Log In"
+					/>
+					<Button
+						buttonStyle={styles.buttonStyle}
+						onPress={ () => this.goBackSubmit()}
+						title="Go Back"
+					/>
+				</View>
+			</KeyboardAvoidingView>
     )
   }
 }
@@ -93,21 +121,33 @@ class LoginScreen extends Component {
 
 
 const styles = StyleSheet.create({
+	forgotPassword: {
+		alignItems: 'center',
+		marginBottom: 20,
+	},
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#000000',
+    backgroundColor: '#34495e',
   },
-  textBig: {
-    fontSize: 36,
-    textAlign: 'center',
-    margin: 10,
-    color: '#fff',
-  },
+	logo: {
+		width: 280,
+		height: 70,
+	},
+	logoContainer: {
+		alignItems: 'center',
+		flexGrow: 1,
+		justifyContent: 'center',
+	},
+  input : {
+		height: 40,
+		backgroundColor: 'rgba(255,255,255,0.7)',
+		color: '#34495e',
+		paddingHorizontal: 10,
+		marginBottom: 20,
+	},
   buttonStyle: {
     backgroundColor: '#6adaa8',
-    marginTop: 15,
+		marginBottom: 10,
 		borderRadius: 10,
   }
 });

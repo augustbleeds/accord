@@ -1,8 +1,9 @@
 import React, {Component } from 'react';
-import { Modal, Image, ListView, View, Text, StyleSheet, TouchableHighlight, TouchableOpacity, Alert } from 'react-native';
+import { Platform, Modal, Image, ListView, View, Text, StyleSheet, TouchableHighlight, TouchableOpacity, Alert,Dimensions } from 'react-native';
 import { List, ListItem, Button } from 'react-native-elements';
 import { connect } from 'react-redux';
-
+const SCREEN_WIDTH = Dimensions.get('window').width;
+const SCREEN_HEIGHT = Dimensions.get('window').height;
 class UserProfile extends Component {
   constructor(props) {
     super(props);
@@ -10,32 +11,87 @@ class UserProfile extends Component {
 
   render() {
     return (
-      <View style={[{flex: 1, justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#000'}, styles.profile]}>
-        <Image style={{width:150 , height: 100, top: 1, alignSelf: 'auto'}} source={{uri: this.props.user.img}} />
-        <Text style={{fontWeight: 'bold', textAlign: 'center', color: '#6adaa8'}}>Signed in as: {this.props.user.email}</Text>
-        <Text style={styles.text}>Nickname: {this.props.user.nickname}</Text>
-        <Text style={styles.text}>School: {this.props.user.school}</Text>
-        <Text style={styles.text}>Gender: {this.props.user.gender}</Text>
-        <Text style={styles.text}>Description: {this.props.user.desc}</Text>
+      <View style={styles.profile}>
+        <Image style={{borderRadius: 75, width:150 , height: 150, top: 1, alignSelf: 'center'}} source={{uri: this.props.user.img}} />
+        <Text> <Text style={styles.mainText}>Signed in as: </Text> <Text style={styles.mainText2}> {this.props.user.email} </Text> </Text>
+        <Text> <Text style={styles.text}>Nickname: </Text> <Text style={styles.text2}> {this.props.user.nickname} </Text> </Text>
+        <Text> <Text style={styles.text}>School: </Text> <Text style={styles.text2}> {this.props.user.school} </Text> </Text>
+        <Text> <Text style={styles.text}>Gender: </Text> <Text style={styles.text2}> {this.props.user.gender} </Text> </Text>
+        <Text> <Text style={styles.text}>Description:</Text> <Text style={styles.text2}>{this.props.user.desc}</Text></Text>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 8,
-  },
   profile: {
-    margin: 8,
-    padding: 16,
-    alignItems: 'center',
-    flex: 1,
+    justifyContent: 'space-around',
+    alignItems: 'flex-end',
+    width: SCREEN_WIDTH * 0.67,
+  },
+  mainText:{
+    fontWeight: 'bold',
+    // textAlign: 'left',
+    alignItems: 'flex-end',
+    paddingHorizontal: 10,
+    fontSize: 15,
+    color: '#3b9788',
+    ...Platform.select({
+      ios: {
+        fontFamily:'Avenir'
+      },
+      android: {
+        fontFamily: 'Roboto'
+      }
+    })
+  },
+  mainText2:{
+    fontWeight: 'bold',
+    // textAlign: 'right',
+    alignItems: 'flex-end',
+    paddingHorizontal: 10,
+    fontSize: 15,
+    color: '#6adaa8',
+    ...Platform.select({
+      ios: {
+        fontFamily:'Avenir'
+      },
+      android: {
+        fontFamily: 'Roboto'
+      }
+    })
   },
   text: {
-    color: '#ffffff',
+    color: '#3b9788',
+    fontSize: 15,
+    alignItems: 'flex-end',
     fontWeight: 'bold',
-    textAlign: 'center',
+    paddingHorizontal: 10,
+    // textAlign: 'left',
+    ...Platform.select({
+      ios: {
+        fontFamily:'Avenir'
+      },
+      android: {
+        fontFamily: 'Roboto'
+      }
+    })
+  },
+  text2: {
+    color: '#6adaa8',
+    fontSize: 15,
+    fontWeight: 'bold',
+    paddingHorizontal: 10,
+    // textAlign: 'right',
+    alignItems: 'flex-end',
+    ...Platform.select({
+      ios: {
+        fontFamily:'Avenir'
+      },
+      android: {
+        fontFamily: 'Roboto'
+      }
+    })
   },
 });
 

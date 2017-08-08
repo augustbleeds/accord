@@ -3,7 +3,7 @@
     "name": "frontend-accord",
     "description": "An empty new project",
     "slug": "frontend-accord",
-    "privacy": "public",
+    "privacy": "private",
     "sdkVersion": "18.0.0",
     "version": "1.0.0",
     "orientation": "portrait",

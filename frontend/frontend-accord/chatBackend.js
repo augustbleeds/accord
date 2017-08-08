@@ -20,9 +20,17 @@ class chatBackend {
 
   onLeaveOrConnect(myUserId, matchedUserId, action, navigation) {
     if(action === 'LEAVE') {
-      console.log('LEAVE ME ALONE: ', action)
       firebase.database().ref(`/FriendPending/${this.generateMessageId(myUserId, matchedUserId)}/${myUserId}`)
       .set('LEAVE')
+      .then(() => {
+        this.sendExitMessage(matchedUserId, myUserId);
+        return firebase.database().ref(`/Message/${this.generateMessageId(myUserId, matchedUserId)}`).set(null);
+      })
+      .catch(() => {
+        console.log('error leaving the chat...');
+      });
+
+
     } else {
       firebase.database().ref(`/FriendPending/${this.generateMessageId(myUserId, matchedUserId)}/${myUserId}`)
       .set('CONNECT')
@@ -43,17 +51,38 @@ class chatBackend {
         createdAt: new Date(message.createdAt),
         user: {
           _id: message.from,
-          name: (message.from === myUserId) ? myNickname : friendNickname, 
+          name: (message.from === myUserId) ? myNickname : friendNickname,
         },
       });
     };
-    //either order by child or order by key
+    //LISTENS FOR MESSAGES: either order by child or order by key
     this.messagesRef.orderByChild('createdAt').on('child_added', onReceive)
+  }
+
+  sendBlurbMessage(message, matchedUserId, myUserId){
+    this.messagesRef = firebase.database().ref(`/Message/${this.generateMessageId(myUserId, matchedUserId)}`);
+    var newMessage = {
+      to: matchedUserId,
+      from: myUserId,
+      text: "What's on My Mind: " + message,
+      createdAt: firebase.database.ServerValue.TIMESTAMP,
+    }
+    this.messagesRef.push(newMessage);
+  }
+
+  sendExitMessage(matchedUserId, myUserId){
+    this.messagesRef = firebase.database().ref(`/Message/${this.generateMessageId(myUserId, matchedUserId)}`);
+    var newMessage = {
+      to: matchedUserId,
+      from: myUserId,
+      text: 'via Accord: It was a pleasure talking to you. I have left the room.',
+      createdAt: firebase.database.ServerValue.TIMESTAMP,
+    }
+    this.messagesRef.push(newMessage);
   }
 
   // send the message to the Backend
   sendMessage(message, matchedUserId, myUserId) {
-    console.log('Message to be send to firebase is: ', message);
     for (let i = 0; i < message.length; i++) {
       var newMessage = {
         to: matchedUserId,
@@ -61,7 +90,6 @@ class chatBackend {
         text: message[i].text,
         createdAt: firebase.database.ServerValue.TIMESTAMP,
       }
-      console.log('new message is ....', newMessage);
       this.messagesRef.push(newMessage);
     }
   }

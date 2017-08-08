@@ -1,12 +1,13 @@
 import type { NavigationState } from 'react-native-tab-view/types';
 
 import React, { PureComponent } from 'react';
-import { StyleSheet, View, Dimensions } from 'react-native';
+import { StyleSheet, View, Dimensions, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { TabViewAnimated, TabBar } from 'react-native-tab-view';
 import FriendsScreen from './FriendsScreen';
 import HomeScreen from './HomeScreen';
 import MatchScreen from './MatchScreen';
+import SettingsScreen from './SettingsScreen'
 import FriendsProfileBio from '../components/FriendsProfileBio';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -26,9 +27,9 @@ export default class AllScreen extends PureComponent<void, *, State> {
   state: State = {
     index: 0,
     routes: [
-      { key: '1', icon: 'ios-home', title: 'Home' },
-      { key: '2', icon: 'ios-people', title: 'Profile'  },
-      { key: '3', icon: 'md-search', title: 'Match'  },
+      { key: '1', icon: 'ios-people', title: 'Profile'  },
+      { key: '2', icon: 'md-search', title: 'Match'  },
+      { key: '3', icon: 'md-settings', title: 'Settings' },
     ],
   };
 
@@ -54,28 +55,29 @@ export default class AllScreen extends PureComponent<void, *, State> {
     );
   };
 
-
+  // state props has nothing to do with redux and everything to do with react-native-tab-view
   _renderScene = ({ route }) => {
     switch (route.key) {
       case '1':
-        return (
-          <HomeScreen
-            state={this.state}
-            navigator={this.props.navigation}
-            style={{ backgroundColor: '#000000' }}
-          />
-        );
+      return (
+        <FriendsScreen
+          state={this.state}
+          navigator={this.props.navigation}
+          style={{ backgroundColor: '#000000' }}
+        />
+      );
+
       case '2':
-        return (
-          <FriendsScreen
-            navigator={this.props.navigation}
-            state={this.state}
-            style={{ backgroundColor: '#000000' }}
-          />
-        );
+      return (
+        <MatchScreen
+          navigator={this.props.navigation}
+          state={this.state}
+          style={{ backgroundColor: '#000000' }}
+        />
+      );
       case '3':
         return (
-          <MatchScreen
+          <SettingsScreen
             navigator={this.props.navigation}
             state={this.state}
             style={{ backgroundColor: '#000000' }}
@@ -94,7 +96,6 @@ export default class AllScreen extends PureComponent<void, *, State> {
         renderScene={this._renderScene}
         renderHeader={this._renderHeader}
         onRequestChangeTab={this._handleChangeTab}
-
       />
     );
   }
@@ -117,5 +118,14 @@ const styles = StyleSheet.create({
   shadowOffset: {
     height: StyleSheet.hairlineWidth,
   },
-}
-});
+  ...Platform.select({
+    ios: {
+      fontFamily:'Avenir'
+    },
+    android: {
+      fontFamily: 'Roboto'
+    }
+  }),
+},
+
+})
