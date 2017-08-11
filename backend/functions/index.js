@@ -35,7 +35,7 @@ app.post('/login', (req, res) => {
 app.post('/register', (req, res) => {
   const newObj = {
     nickname: req.body.nickname,
-    password: req.body.password,
+    // password: req.body.password,
     gender: req.body.gender,
     email: req.body.email,
     school: req.body.school,

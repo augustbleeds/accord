@@ -26,7 +26,7 @@ export default function listenForMatch(myUserId, blurb, userObj, navigator, matc
     matchUsers(false);
     // update AsyncStorage
     AsyncStorage.mergeItem('user', JSON.stringify({searching: false}));
-    Alert.alert(`You are matched with ${data.val()}`);
+    Alert.alert(`You are matched. Happy connecting!`);
 
     navigator.navigate('ChatScreen', {
       username1: myUserId,

@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "frontend-accord",
-    "description": "An empty new project",
-    "slug": "frontend-accord",
+    "name": "Accord",
+    "description": "A way to share about your day to day life.",
+    "slug": "accordis",
     "privacy": "private",
     "sdkVersion": "18.0.0",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "primaryColor": "#cccccc",
     "icon": "./assets/icons/app.png",
@@ -16,7 +16,11 @@
     "packagerOpts": {
       "assetExts": ["ttf", "mp4"]
     },
+    "android": {
+      "package": "me.accordis"
+    },
     "ios": {
+      "bundleIdentifier": "me.accordis",
       "supportsTablet": true
     }
   }
