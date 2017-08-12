@@ -78,7 +78,7 @@ class MatchScreen extends Component {
           <View style={styles.logoContainer}>
             <Image resizeMode="contain" style={styles.imgStyle3} source={require('../assets/icons/com.png')} />
           </View>
-            <View style={{padding: 20}}>
+            <View style={{padding: 15}}>
               <TextInput
                 underlineColorAndroid= 'transparent'
                 // multiline = {true}
@@ -108,12 +108,13 @@ class MatchScreen extends Component {
                 <Picker.Item color='#6adaa8' label="School/Work?" value="School" />
                 <Picker.Item color='#6adaa8' label="Family?" value="Family" />
               </Picker>
-          <Button
-            buttonStyle={styles.buttonStyle}
-            title='MATCH'
-            onPress={ () => {this.fetchMatch()}}
-            >
-          </Button>
+
+              <Button
+                buttonStyle={styles.buttonStyle}
+                title='MATCH'
+                onPress={ () => {this.fetchMatch()}}
+                >
+              </Button>
         </View>
       </KeyboardAvoidingView>
     );
@@ -145,14 +146,13 @@ const styles = StyleSheet.create({
     color: '#6adaa8'
   },
   imgStyle3: {
-    width: 200,
-    height: 200,
+    width: 150,
+    height: 150,
   },
   buttonStyle: {
     backgroundColor: '#6adaa8',
     borderRadius: 10,
-    marginBottom: 25,
-
+    height: 30,
   },
 });
 
